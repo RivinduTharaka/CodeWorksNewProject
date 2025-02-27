@@ -195,7 +195,7 @@ function ContactHome() {
             <Grid item xs={12}>
               <Button
                 sx={{
-                  background: 'linear-gradient(45deg, #006400, #0D47A1)',
+                  background: '#0c4a93',
                   color: '#ffffff',
                   padding: '12px 40px',
                   fontSize: '1rem',
@@ -204,7 +204,7 @@ function ContactHome() {
                   textTransform: 'none',
                   fontFamily: 'Poppins, sans-serif',
                   '&:hover': {
-                    background: 'linear-gradient(45deg, #004d00, #0a2e5c)',
+                    background: '#1B0EA2',
                   },
                 }}
               >

@@ -74,7 +74,7 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
 }));
 
 const ExploreButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#0D47A1',
+  backgroundColor: '#070054',
  
   color: '#ffffff',
   fontFamily: 'Poppins, sans-serif',
@@ -89,7 +89,7 @@ const ExploreButton = styled(Button)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   '&:hover': {
-    backgroundColor: '#0D47A1',
+    backgroundColor: '#3669A6',
   },
   '& .MuiButton-endIcon': {
     marginLeft: theme.spacing(1),
@@ -155,6 +155,7 @@ const OurVendors = () => {
             <div style={{marginTop:'50px'}}></div>
         {/* Explore Button */}
         <ExploreButton
+        
 
           endIcon={<ArrowForwardIcon />}
           onClick={() => {

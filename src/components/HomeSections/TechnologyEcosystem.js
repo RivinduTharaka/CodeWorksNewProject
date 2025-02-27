@@ -72,7 +72,7 @@ const Title = styled(Typography)(({ theme }) => ({
 }));
 
 const HighlightedText = styled('span')({
-  color: '#00FF7F', // Green for "excellence, accreditation"
+  color: '#04D750', 
 });
 
 const Description = styled(Typography)(({ theme }) => ({
@@ -140,6 +140,7 @@ const TechnologyEcosystem = () => {
               whileHover="hover"
               whileTap="tap"
               viewport={{ once: true }}
+              
             >
               Train with Us
             </TrainButton>
