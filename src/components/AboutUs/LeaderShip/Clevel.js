@@ -34,8 +34,8 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 
 const Title = styled(Typography)(({ theme }) => ({
   fontSize: '2.5rem',
-  fontWeight: '800',
-  color: '#0D47A1',
+  fontWeight: '700',
+  color: '#070054',
   textAlign: 'center',
   fontFamily: 'Poppins, sans-serif',
   marginBottom: theme.spacing(2),
@@ -117,16 +117,16 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
 
 // Slider Settings
 const sliderSettings = {
-  dots: true,
+ 
   infinite: true,
-  speed: 700,
+  speed: 1700,
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
   arrows: false,
   centerMode: true,
-  centerPadding: '0px',
+  
   responsive: [
     {
       breakpoint: 1024,
