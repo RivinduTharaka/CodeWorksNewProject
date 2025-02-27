@@ -8,20 +8,22 @@ function Contact3() {
         <Box
             sx={{
                 display: 'flex',
-                minHeight: '80vh',
+                minHeight: '95vh',
                 background: 'linear-gradient(135deg, rgb(1, 87, 38), #070054)',
                 color: 'white',
                 fontFamily: 'Arial, sans-serif',
-                padding: 5,
+               
                 boxSizing: 'border-box',
                 flexDirection: { xs: 'column', md: 'row' }, // Stack on mobile, row on desktop
+                paddingLeft: { xs: 0, md: 20 }, // No padding on mobile, padding on desktop
+                paddingRight: { xs: 0, md: 20 }, // No padding on mobile, padding on desktop
             }}
         >
             {/* Left Column - 30% width */}
             <Box
                 sx={{
-                    width: { xs: '100%', md: '50%' }, // Full width on mobile, 40% on desktop
-                    padding: 1,
+                    width: { xs: '100%', md: '40%' }, // Full width on mobile, 40% on desktop
+                    padding: 2,
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
@@ -35,12 +37,12 @@ function Contact3() {
                     sx={{
                         // color: '#D81B60', 
                         fontWeight: 'bold',
-                        fontSize: '2.5rem',
+                        fontSize: '3.5rem',
                     }}
                 >
                     Connex Sri Lanka
                 </Typography>
-                <Typography variant="body1" sx={{ mb: 5 }}>
+                <Typography variant="body1" sx={{ mb: 5, fontSize: '1.2rem' }}>
                     20, Quai du Point du Jour,
                     <br />
                     Arcs de Seine, 92100
@@ -56,7 +58,7 @@ function Contact3() {
                 <Button
                     variant="outlined"
                     sx={{
-                        marginBottom: 5,
+                        marginBottom: 2,
                         borderColor: '#00eeff', // Matching the pink border color from the image
                         color: '#00eeff', // Matching pink text color
                         '&:hover': {
@@ -67,7 +69,7 @@ function Contact3() {
                         textTransform: 'none', // Remove uppercase transformation
                         padding: '8px 16px',
                         borderWidth: 2, // Slightly thicker border to match the image
-                  
+                  marginTop:2
                     }}
                 >
                     Get Directions
@@ -77,8 +79,8 @@ function Contact3() {
             {/* Right Column - 70% width with Map */}
             <Box
                 sx={{
-                    width: { xs: '100%', md: '50%' }, 
-                    
+                    width: { xs: '100%', md: '60%' }, 
+                    mt: { xs: 5, md: 0 }, // Margin top on mobile, no margin on desktop
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -91,8 +93,9 @@ function Contact3() {
                     sx={{
                         width: '100%',
                         // height: '50%',
-                        // maxHeight: '100vh',
+                        maxHeight: '100vh',
                         // objectFit: 'cover',
+                        padding: 2,
                     
                     }}
                 />

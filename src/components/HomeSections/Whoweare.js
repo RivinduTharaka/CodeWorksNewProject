@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import "./Whoweare.css";
 
-import icon1 from '../../assets/image/improvement (1).png';
+import icon1 from '../../assets/image/i1.png';
 import icon2 from "../../assets/image/community.png";
 import icon3 from "../../assets/image/globe.png";
 import icon4 from "../../assets/image/improvement (1).png";

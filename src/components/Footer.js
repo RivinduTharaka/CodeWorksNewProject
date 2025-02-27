@@ -11,13 +11,13 @@ const textColor = '#E0E0E0';
 
 // Styled Footer Container
 const FooterContainer = styled(Box)({
-  backgroundColor: '#1A407E', // Deep Blue
+  backgroundColor: '#0b1533', 
   color: textColor,
   padding: '4rem 0',
   // marginTop: '3rem',
 });
 
-// Styled Links
+// Styled Links 
 const FooterLink = styled(Link)({
   color: textColor,
   textDecoration: 'none',
