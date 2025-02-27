@@ -10,6 +10,8 @@ import Service02 from './components/Service02';
 import ContactUs from './components/ContactUs';
 import Solutions from './components/Solution/Solutions';
 import Vendor from './components/Vendors/vendor'
+import HistorySection from './components/AboutUs/History/HistorySection';
+import Leadership from './components/AboutUs/LeaderShip/Leadership';
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/solution" element={<Solutions />} />
         <Route path="/vendors" element={<Vendor />} />
+        <Route path="/history" element={<HistorySection />} />
+        <Route path="/leadership" element={<Leadership />} />
       </Routes>
       <Footer />
     </Router>
