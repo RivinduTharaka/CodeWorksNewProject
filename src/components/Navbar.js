@@ -189,12 +189,13 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery('(max-width:950px)');
   
-  // Updated isTargetPage to include '/contact'
+  // Updated isTargetPage to include '/leadership'
   const isTargetPage = location.pathname === '/' || 
                       location.pathname === '/solution' || 
                       location.pathname === '/about' ||
                       location.pathname === '/vendors' || 
-                      location.pathname === '/contact'; // Added '/contact' here
+                      location.pathname === '/contact' || 
+                      location.pathname === '/leadership'; // Added '/leadership' here
 
   useEffect(() => {
     const handleScroll = () => {
@@ -320,7 +321,7 @@ const Navbar = () => {
                             </ListItem>
                             <ListItem
                               component={Link}
-                              to="/our-history"
+                              to="/history"
                               sx={{ pl: 4, py: 1 }}
                               onClick={() => setDrawerOpen(false)}
                             >
@@ -477,7 +478,7 @@ const Navbar = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <CustomMenuItem onClick={handleAboutClose} component={Link} to="/our-history">
+                  <CustomMenuItem onClick={handleAboutClose} component={Link} to="/history">
                     Our History
                   </CustomMenuItem>
                   <CustomMenuItem onClick={handleAboutClose} component={Link} to="/why-us">
