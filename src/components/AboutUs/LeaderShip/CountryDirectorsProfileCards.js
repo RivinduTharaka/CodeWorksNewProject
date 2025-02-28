@@ -41,7 +41,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 
 const Title = styled(Typography)(({ theme }) => ({
   fontSize: '2.5rem',
-  fontWeight: '800',
+  fontWeight: '700',
   color: '#070054',
   textAlign: 'center',
   fontFamily: 'Poppins, sans-serif',
