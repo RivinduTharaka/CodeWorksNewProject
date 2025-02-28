@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   Menu,
   MenuItem,
@@ -24,6 +23,8 @@ import {
 import { styled, keyframes } from '@mui/system';
 import { useMediaQuery, createTheme, ThemeProvider } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
+import image1 from '../assets/image/logoNavbar/Connex-LogoWhite.png'; // Adjust path to your image1.png
+import image2 from '../assets/image/logoNavbar/ConnexIT.png'; // Adjust path to your image2.png
 
 // Define Light Theme with Blue Variants
 const theme = createTheme({
@@ -60,19 +61,6 @@ const CustomToolbar = styled(Toolbar)({
   margin: '0 auto',
   width: '100%',
 });
-
-const CustomTypography = styled(Typography)(({ isTargetPage, isScrolled }) => ({
-  textDecoration: 'none',
-  color: isTargetPage && !isScrolled ? '#ffffff' : theme.palette.primary.dark,
-  fontWeight: '700',
-  fontSize: '1.4rem',
-  fontFamily: "'Poppins', sans-serif",
-  letterSpacing: '0.5px',
-  cursor: 'pointer',
-  '&:hover': {
-    color: isTargetPage && !isScrolled ? '#e0e0e0' : theme.palette.primary.main,
-  },
-}));
 
 const ButtonContainer = styled('div')({
   display: 'flex',
@@ -188,14 +176,15 @@ const Navbar = () => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery('(max-width:950px)');
-  
-  // Updated isTargetPage to include '/leadership'
-  const isTargetPage = location.pathname === '/' || 
-                      location.pathname === '/solution' || 
-                      location.pathname === '/about' ||
-                      location.pathname === '/vendors' || 
-                      location.pathname === '/contact' || 
-                      location.pathname === '/leadership'; // Added '/leadership' here
+
+  const isTargetPage =
+    location.pathname === '/' ||
+    location.pathname === '/solution' ||
+    location.pathname === '/about' ||
+    location.pathname === '/vendors' ||
+    location.pathname === '/contact' ||
+    location.pathname === '/leadership' ||
+    location.pathname === '/global-coverage';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -222,15 +211,18 @@ const Navbar = () => {
     <ThemeProvider theme={theme}>
       <CustomAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
         <CustomToolbar>
-          <CustomTypography
-            sx={{ p: 2 }}
-            component={Link}
-            to="/"
-            isTargetPage={isTargetPage}
-            isScrolled={isScrolled}
-          >
-            CONNEX
-          </CustomTypography>
+          <Link to="/" style={{ padding: '16px', display: 'flex', alignItems: 'center' }}>
+            <img
+              src={isTargetPage && !isScrolled ? image1 : image2}
+              alt="CONNEX Logo"
+              style={{
+                height: '40px',
+                width: 'auto',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          </Link>
 
           {isMobile ? (
             <>
@@ -271,9 +263,6 @@ const Navbar = () => {
                       </Box>
 
                       <List sx={{ padding: '0 1.5rem' }}>
-                        <ListItem component={Link} to="/" onClick={() => setDrawerOpen(false)}>
-                          <ListItemText primary="Home" />
-                        </ListItem>
                         <ListItem component={Link} to="/solution" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="Solution" />
                         </ListItem>
@@ -377,16 +366,6 @@ const Navbar = () => {
             <ButtonContainer>
               <CustomButton
                 component={Link}
-                to="/"
-                active={location.pathname === '/'}
-                isTargetPage={isTargetPage}
-                isScrolled={isScrolled}
-              >
-                Home
-                <HoverEffect active={location.pathname === '/'} />
-              </CustomButton>
-              <CustomButton
-                component={Link}
                 to="/solution"
                 active={location.pathname === '/solution'}
                 isTargetPage={isTargetPage}
@@ -461,7 +440,7 @@ const Navbar = () => {
                   About Us
                   <HoverEffect active={location.pathname.startsWith('/about')} />
                 </CustomButton>
-                
+
                 <CustomMenu
                   id="about-menu"
                   anchorEl={aboutAnchorEl}
