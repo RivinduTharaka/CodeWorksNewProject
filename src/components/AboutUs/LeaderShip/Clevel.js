@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container, Avatar, Button } from '@mui/material';
+import { Box, Typography, Container, Avatar, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -8,7 +8,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Fade } from '@mui/material';
 
 // Sample images (replace with your actual imports)
-import leader1Image from  '../../../assets/image/Shamal.jpg'; // Replace with actual image
+import leader1Image from '../../../assets/image/Shamal.jpg'; // Replace with actual image
 import leader2Image from '../../../assets/image/Eranga.jpg';
 import leader3Image from '../../../assets/image/Rajiv.jpg';
 import leader4Image from '../../../assets/image/Rohan.jpg';
@@ -27,7 +27,7 @@ const leaders = [
 const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
   padding: theme.spacing(8, 0),
-  minHeight: '100vh',
+
   display: 'flex',
   alignItems: 'center',
 }));
@@ -71,11 +71,8 @@ const LeaderCard = styled(Box)(({ theme }) => ({
   border: '1px solid rgba(13, 71, 161, 0.2)',
   background: 'linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%)',
   '&:hover': {
-    transform: 'translateY(-6px) scale(1.02)',
-    borderColor: theme.palette.primary.main,
-  },
-  '&:hover .linkedin-btn': {
-    backgroundColor: '#0288D1', // Hover effect for button
+
+    borderColor: '#0D47A1',
   },
 }));
 
@@ -88,27 +85,26 @@ const LeaderImage = styled(Avatar)(({ theme }) => ({
   borderBottom: '1px solid rgba(13, 71, 161, 0.1)',
 }));
 
-const LinkedInButton = styled(Button)(({ theme }) => ({
+const LinkedInIconButton = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
   backgroundColor: '#0D47A1',
   color: '#ffffff',
-  fontFamily: 'Poppins, sans-serif',
-  fontWeight: '500',
-  fontSize: '0.9rem',
-  padding: theme.spacing(0.75, 2),
-  borderRadius: '20px',
-  textTransform: 'none',
-  display: 'flex',
-  alignItems: 'center',
+  padding: theme.spacing(0.5),
+  borderRadius: '50%',
   transition: 'background-color 0.3s ease-in-out',
-  '& .MuiButton-endIcon': {
-    marginLeft: theme.spacing(1),
+  '&:hover': {
+    backgroundColor: '#0288D1',
   },
 }));
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
-  mr:10,
+  mr: 10,
   '& .slick-slide': {
     padding: theme.spacing(0, 0.5), // Tight gap between cards
+    display: 'flex',
+    justifyContent: 'center', // Center-align the cards in the slider
   },
   '& .slick-list': {
     margin: theme.spacing(0, -0.5), // Reduced gap
@@ -117,16 +113,15 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
 
 // Slider Settings
 const sliderSettings = {
- 
   infinite: true,
   speed: 1700,
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 1000,
   arrows: false,
   centerMode: true,
-  
+  centerPadding: '0px', // Ensure cards are centered
   responsive: [
     {
       breakpoint: 1024,
@@ -167,6 +162,15 @@ const ConnexITBoardLeaders = () => {
                 {/* Image */}
                 <LeaderImage src={leader.image} alt={leader.name} />
 
+                {/* LinkedIn Icon (Top-Right Corner) */}
+                <LinkedInIconButton
+                  href={leader.linkedin}
+                  target="_blank"
+                  aria-label={`LinkedIn profile of ${leader.name}`}
+                >
+                  <LinkedInIcon />
+                </LinkedInIconButton>
+
                 {/* Content */}
                 <Box
                   sx={{
@@ -174,15 +178,16 @@ const ConnexITBoardLeaders = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    height: '55%',
+                    height: '40%',
                   }}
                 >
                   {/* Name */}
                   <Fade in timeout={500}>
                     <Typography
                       variant="h6"
+                      fontSize={22}
                       fontWeight="700"
-                      color="#0D47A1"
+                      color="#070054"
                       sx={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '0.5px' }}
                     >
                       {leader.name}
@@ -193,31 +198,13 @@ const ConnexITBoardLeaders = () => {
                   <Fade in timeout={700}>
                     <Typography
                       variant="body2"
+                      fontSize={25}
                       fontWeight="600"
                       color="green"
                       sx={{ fontFamily: 'Poppins, sans-serif' }}
                     >
                       {leader.designation} ({leader.shortCode})
                     </Typography>
-                  </Fade>
-
-                  {/* LinkedIn Button */}
-                  <Fade in timeout={900}>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <LinkedInButton
-                        className="linkedin-btn"
-                        href={leader.linkedin}
-                        target="_blank"
-                        endIcon={<LinkedInIcon />}
-                      >
-                        Explore with LinkedIn
-                      </LinkedInButton>
-                    </Box>
                   </Fade>
                 </Box>
               </LeaderCard>
