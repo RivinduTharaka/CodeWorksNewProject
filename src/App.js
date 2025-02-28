@@ -12,6 +12,7 @@ import Solutions from './components/Solution/Solutions';
 import Vendor from './components/Vendors/vendor'
 import HistorySection from './components/AboutUs/History/HistorySection';
 import Leadership from './components/AboutUs/LeaderShip/Leadership';
+import GlobalCoverage from './components/AboutUs/GlobalCoverage/GlobalCoverage';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/vendors" element={<Vendor />} />
         <Route path="/history" element={<HistorySection />} />
         <Route path="/leadership" element={<Leadership />} />
+        <Route path="/global-coverage" element={<GlobalCoverage />} />
       </Routes>
       <Footer />
     </Router>
