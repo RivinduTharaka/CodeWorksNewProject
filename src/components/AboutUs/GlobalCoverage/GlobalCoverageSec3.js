@@ -25,16 +25,17 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 }));
 
 const RegionContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: "#002f6c",
+  backgroundColor: "#070054",
   color: "#ffffff",
   padding: "40px",
   width: "90%",
   borderRadius: "20px",
- 
   [theme.breakpoints.down("sm")]: {
     width: "95%",
   },
 }));
+
+
 
 const RegionHeader = styled(Typography)({
   fontSize: "2.5rem",
@@ -46,19 +47,28 @@ const RegionHeader = styled(Typography)({
 });
 
 const CountryCard = styled(Card)(({ theme }) => ({
-  backgroundColor: "#003366",
-  color: "#ffffff",
+  backgroundColor: "#fffff",
+  color: "#003366",
   padding: "20px",
   borderRadius: "10px",
-  
   width: "100%",
   boxShadow: "none",
 }));
 
+// Updated IconTextRow with increased spacing between rows
 const IconTextRow = ({ icon, text }) => (
-  <Box display="flex" alignItems="center" gap="10px">
+  <Box display="flex" alignItems="center" gap="10px" sx={{ marginBottom: "15px" }}>
     {icon}
-    <Typography variant="body1" sx={{fontSize:"xs",fontFamily: "sans-serif",}}>{text}</Typography>
+    <Typography
+      variant="body1"
+      sx={{
+        fontSize: "xs",
+        fontFamily: "sans-serif",
+        lineHeight: 1.8, // Increased line height for multi-line text
+      }}
+    >
+      {text}
+    </Typography>
   </Box>
 );
 
@@ -70,7 +80,7 @@ const GlobalCoverageSec3 = () => {
         {
           name: "Sri Lanka",
           address: "286, R A De Mal Mawatha, Colombo 3, Sri Lanka 00300",
-          phone: " +94 114 693 355",
+          phone: "+94 114 693 355",
           contactUrl: "https://www.connexit.biz/SL/ContactUs",
         },
         {
@@ -162,7 +172,6 @@ Ebene Junction,
 Ebene, Quatre Bornes,
 Mauritius`,
           phone: "+23 05 942 8354",
-
           contactUrl: "https://www.connexit.biz/MU/ContactUs",
         },
       ],
@@ -191,8 +200,8 @@ Mauritius`,
                       text={country.phone}
                     />
                     <IconTextRow
-                      icon={<EmailIcon  sx={{ color: "#00aaff" }} />}
-                      text={ 
+                      icon={<EmailIcon sx={{ color: "#00aaff" }} />}
+                      text={
                         <Link
                           href={country.contactUrl}
                           target="_blank"
