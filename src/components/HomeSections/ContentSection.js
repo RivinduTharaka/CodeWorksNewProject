@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Box, Container, Typography, Grid, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import icon1 from "../../assets/image/improvement (1).png";
-import icon2 from "../../assets/image/community.png";
-import icon3 from "../../assets/image/globe.png";
-import icon4 from "../../assets/image/engineer (1).png";
+import icon1 from "../../assets/image/1 (1).png";
+import icon2 from "../../assets/image/1 (2).png";
+import icon3 from "../../assets/image/1 (3).png";
+import icon4 from "../../assets/image/1 (4).png";
 
 const WhoweareSection = ({ ref }) => {
   const [isVisible, setIsVisible] = useState(false);
