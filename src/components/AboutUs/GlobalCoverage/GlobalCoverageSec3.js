@@ -25,7 +25,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 }));
 
 const RegionContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: "#070054",
+  backgroundColor: "#002f6c",
   color: "#ffffff",
   padding: "40px",
   width: "90%",
@@ -34,8 +34,6 @@ const RegionContainer = styled(Box)(({ theme }) => ({
     width: "95%",
   },
 }));
-
-
 
 const RegionHeader = styled(Typography)({
   fontSize: "2.5rem",
@@ -47,17 +45,23 @@ const RegionHeader = styled(Typography)({
 });
 
 const CountryCard = styled(Card)(({ theme }) => ({
-  backgroundColor: "#fffff",
-  color: "#003366",
-  padding: "20px",
-  borderRadius: "10px",
-  width: "100%",
-  boxShadow: "none",
-}));
-
+    backgroundColor: "#002f6c", // 👈 White with 30% transparency
+    color: "#ffff",
+    padding: "20px",
+    borderRadius: "10px",
+    width: "100%",
+    boxShadow: "none",
+    backdropFilter: "blur(10px)", // 👈 Adds a frosted-glass effect
+  }));
+  
 // Updated IconTextRow with increased spacing between rows
 const IconTextRow = ({ icon, text }) => (
-  <Box display="flex" alignItems="center" gap="10px" sx={{ marginBottom: "15px" }}>
+  <Box
+    display="flex"
+    alignItems="center"
+    gap="10px"
+    sx={{ marginBottom: "15px" }}
+  >
     {icon}
     <Typography
       variant="body1"

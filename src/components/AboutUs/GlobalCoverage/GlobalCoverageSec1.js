@@ -1,61 +1,80 @@
-import React from 'react'
-import { Box, Typography, Button, Stack } from "@mui/material";
-import { styled } from "@mui/system";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import React from "react";
+import { Box, Typography, Container, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
-import worldMapImage from "../../../assets/image/Global-presence/GlobalCoverage.jpg"; 
-
-// Styled Components using MUI
-const Section = styled(Box)(({ theme }) => ({
-background: 'linear-gradient(135deg, rgb(1, 87, 38), #070054)',
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "60px",
-  minHeight: "80vh",
-  color: "white",
-  textAlign: "center",
-}));
-
+import { useTheme } from "@mui/material/styles";
+import video from "../../../assets/video/CNXBackgropund.mp4";
 
 const GlobalCoverageSec1 = () => {
-    
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <>
-    <Section component="section">
-        <Typography
-                variant="h1"
-                sx={{
-                  fontSize: '4rem',
-                  fontWeight: 700,
-                  marginBottom: '10px',
-                  textShadow: '0 0 10px rgba(0,0,0,0.5)',
-                  zIndex: 1, // Ensure text stays above the overlay
-                }}
-              >
-                Our Regional Offices
-              </Typography>
-          
-                <Typography
-                        variant="body1"
-                        sx={{
-                          fontSize: '18px',
-                          opacity: 0.8,
-                          zIndex: 1, // Ensure text stays above the overlay
-                          mt: '10px',
-                        }}
-                      >
-                       Expanding Borders, Strengthening Connections.
-                      </Typography>
-      </Section>
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: "90vh",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          color: "white",
+          px: 2,
+        }}
+      >
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: -1,
+          }}
+        >
+          <source src={video} type="video/mp4" />
+        </video>
 
-      
+        {/* Content Overlay */}
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <Typography
+              variant={isSmallScreen ? "h4" : isMediumScreen ? "h3" : "h2"}
+              fontWeight={900}
+              sx={{ textTransform: "uppercase", lineHeight: 1.2 }}
+              gutterBottom
+            >
+              Our Regional Offices
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "18px",
+                opacity: 0.8,
+                mt: "10px",
+              }}
+            >
+              Expanding Borders, Strengthening Connections.
+            </Typography>
+
+          </motion.div>
+        </Container>
+      </Box>
     </>
-  )
-}
+  );
+};
 
-export default GlobalCoverageSec1
+export default GlobalCoverageSec1;

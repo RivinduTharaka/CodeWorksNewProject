@@ -4,7 +4,7 @@ import { styled } from "@mui/system";
 
 // Styled Components
 const LeftColumn = styled(Box)(({ theme }) => ({
-  backgroundColor: "#0a192f", // Dark Blue background
+  backgroundColor: "#001F3F", // Dark Blue background
   color: "white",
   display: "flex",
   flexDirection: "column",

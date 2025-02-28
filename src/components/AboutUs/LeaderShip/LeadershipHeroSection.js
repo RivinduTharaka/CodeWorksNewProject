@@ -1,7 +1,9 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import video from "../../../assets/video/CNXBackgropund.mp4";
 
+// Styled Neon Effect
 const NeonLinesOverlay = styled('div')({
   position: 'absolute',
   top: 0,
@@ -20,42 +22,62 @@ function LeadershipHeroSection() {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, rgb(1, 87, 38), #070054)',
-        height: '80vh',
-        color: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
-        padding: '20px',
-        position: 'relative',
-        overflow: 'hidden', // Ensures the neon lines stay within bounds
+        position: "relative",
+        width: "100%",
+        height: "80vh",
+        color: "white",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "20px",
+        overflow: "hidden", // Ensures the neon lines stay within bounds
       }}
     >
-      <Typography
-        variant="h1"
-        sx={{
-          fontSize: '4rem',
-          fontWeight: 700,
-          marginBottom: '10px',
-          textShadow: '0 0 10px rgba(0,0,0,0.5)',
-          zIndex: 1, // Ensure text stays above the overlay
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1,
         }}
       >
-        Our Leadership Team
-      </Typography>
-      <Typography
-        variant="body1"
-        sx={{
-          fontSize: '18px',
-          opacity: 0.8,
-          zIndex: 1, // Ensure text stays above the overlay
-          mt: '10px',
-        }}
-      >
-        Agile, centre-weighted leadership team and inherent structure.
-      </Typography>
+        <source src={video} type="video/mp4" />
+      </video>
+
+      {/* Content Overlay */}
+      <Box sx={{ position: "relative", zIndex: 1 }}>
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: '4rem',
+            fontWeight: 700,
+            marginBottom: '10px',
+            textShadow: '0 0 10px rgba(0,0,0,0.5)',
+          }}
+        >
+          Our Leadership Team
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            fontSize: '18px',
+            opacity: 0.8,
+            mt: '10px',
+          }}
+        >
+          Agile, centre-weighted leadership team and inherent structure.
+        </Typography>
+      </Box>
 
       {/* Neon-like lines effect */}
       <NeonLinesOverlay />
