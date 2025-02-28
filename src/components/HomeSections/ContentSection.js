@@ -60,7 +60,7 @@ const WhoweareSection = ({ ref }) => {
           variant={isMobile ? "h4" : "h2"}
           sx={{
             fontWeight: 700,
-            color: "#00ccff",
+            color: "#fffff",
             mb: 2,
           }}
         >
