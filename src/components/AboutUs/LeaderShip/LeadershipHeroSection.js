@@ -24,7 +24,7 @@ function LeadershipHeroSection() {
       sx={{
         position: "relative",
         width: "100%",
-        height: "80vh",
+        height: "90vh",
         color: "white",
         display: "flex",
         flexDirection: "column",
