@@ -10,9 +10,8 @@ const BlogDetails = () => {
   if (!blog) {
     return <Container sx={{ py: 12}}><Typography variant="h6" sx={{ textAlign: "center", mt: 5 }}>Blog not found.</Typography></Container>;
   }
-
   return (
-    <Container sx={{ py: 10}}>
+    <Container sx={{ py: 15}}>
       <Box sx={{ maxWidth: "800px", mx: "auto", textAlign: "left" }}>
         <Typography variant="h4" fontWeight="bold">{blog.title}</Typography>
         <Typography variant="subtitle2" sx={{ color: "gray", mt: 1 }}>
