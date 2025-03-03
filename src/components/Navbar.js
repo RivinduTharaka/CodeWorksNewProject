@@ -19,12 +19,12 @@ import {
   Close as CloseIcon,
   ExpandMore,
   ExpandLess,
-} from "@mui/icons-material";
-import { styled, keyframes } from "@mui/system";
-import { useMediaQuery, createTheme, ThemeProvider } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
-import image1 from "../assets/image/logoNavbar/Connex-LogoWhite.png"; // Adjust path to your image1.png
-import image2 from "../assets/image/logoNavbar/ConnexIT.png"; // Adjust path to your image2.png
+} from '@mui/icons-material';
+import { styled, keyframes } from '@mui/system';
+import { useMediaQuery, createTheme, ThemeProvider } from '@mui/material';
+import { motion, AnimatePresence } from 'framer-motion';
+import image1 from '../assets/image/logoNavbar/Connex-LogoWhite.png';
+import image2 from '../assets/image/logoNavbar/ConnexIT.png';
 
 // Define Light Theme with Blue Variants
 const theme = createTheme({
@@ -177,20 +177,24 @@ const drawerVariants = {
 const Navbar = () => {
   const location = useLocation();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
-  const [newsAnchorEl, setNewsAnchorEl] = useState(null);
+  const [eventsAnchorEl, setEventsAnchorEl] = useState(null);
+  const [newsAnchorEl, setNewsAnchorEl] = useState(null); // Added state for News dropdown
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
-    location.pathname === "/" ||
-    location.pathname === "/solution" ||
-    location.pathname === "/about" ||
-    location.pathname === "/vendors" ||
-    location.pathname === "/contact" ||
-    location.pathname === "/leadership" ||
-    location.pathname === "/global-coverage";
+    location.pathname === '/' ||
+    location.pathname === '/solution' ||
+    location.pathname === '/about' ||
+    location.pathname === '/vendors' ||
+    location.pathname === '/contact' ||
+    location.pathname === '/leadership' ||
+    location.pathname === '/global-coverage' ||
+    location.pathname === '/events' ||
+    location.pathname === '/trainings';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -213,18 +217,19 @@ const Navbar = () => {
     setAboutAnchorEl(null);
   };
 
+  const handleEventsHover = (event) => {
+    setEventsAnchorEl(event.currentTarget);
+  };
+
+  const handleEventsClose = () => {
+    setEventsAnchorEl(null);
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <CustomAppBar
-        position="fixed"
-        isTargetPage={isTargetPage}
-        isScrolled={isScrolled}
-      >
+      <CustomAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
         <CustomToolbar>
-          <Link
-            to="/"
-            style={{ padding: "16px", display: "flex", alignItems: "center" }}
-          >
+          <Link to="/" style={{ padding: "16px", display: "flex", alignItems: "center" }}>
             <img
               src={isTargetPage && !isScrolled ? image1 : image2}
               alt="CONNEX Logo"
@@ -244,10 +249,7 @@ const Navbar = () => {
                   <MenuIcon
                     sx={{
                       fontSize: 30,
-                      color:
-                        isTargetPage && !isScrolled
-                          ? "#ffffff"
-                          : theme.palette.primary.dark,
+                      color: isTargetPage && !isScrolled ? "#ffffff" : theme.palette.primary.dark,
                     }}
                   />
                 </IconButton>
@@ -272,89 +274,80 @@ const Navbar = () => {
                         flexDirection: "column",
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          padding: 2,
-                        }}
-                      >
+                      <Box sx={{ display: "flex", justifyContent: "flex-end", padding: 2 }}>
                         <IconButton onClick={() => setDrawerOpen(false)}>
-                          <CloseIcon
-                            sx={{ color: theme.palette.primary.dark }}
-                          />
+                          <CloseIcon sx={{ color: theme.palette.primary.dark }} />
                         </IconButton>
                       </Box>
 
                       <List sx={{ padding: "0 1.5rem" }}>
-                        <ListItem
-                          component={Link}
-                          to="/solution"
-                          onClick={() => setDrawerOpen(false)}
-                        >
+                        <ListItem component={Link} to="/solution" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="Solution" />
                         </ListItem>
-                        <ListItem
-                          component={Link}
-                          to="/vendors"
-                          onClick={() => setDrawerOpen(false)}
-                        >
+                        <ListItem component={Link} to="/vendors" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="Vendors" />
                         </ListItem>
-                        <ListItem
-                          component={Link}
-                          to="/services"
-                          onClick={() => setDrawerOpen(false)}
-                        >
+                        <ListItem component={Link} to="/services" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="Services" />
                         </ListItem>
+
+                        {/* Events & Webinars Submenu */}
                         <ListItem
-                          component={Link}
-                          to="/events"
-                          onClick={() => setDrawerOpen(false)}
+                          button
+                          onClick={() => setEventsSubmenuOpen(!eventsSubmenuOpen)}
+                          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                         >
-                          <ListItemText primary="Events & Webinars" />
+                          <ListItemText
+                            primary="Events & Webinars"
+                            sx={{ fontSize: '1.1rem', fontWeight: '600', color: theme.palette.primary.dark }}
+                          />
+                          {eventsSubmenuOpen ? (
+                            <ExpandLess sx={{ color: theme.palette.primary.main }} />
+                          ) : (
+                            <ExpandMore sx={{ color: theme.palette.primary.main }} />
+                          )}
                         </ListItem>
-                        <ListItem
-                          component={Link}
-                          to="/resources"
-                          onClick={() => setDrawerOpen(false)}
-                        >
+                        <Collapse in={eventsSubmenuOpen} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            <ListItem
+                              component={Link}
+                              to="/events"
+                              sx={{ pl: 4, py: 1 }}
+                              onClick={() => setDrawerOpen(false)}
+                            >
+                              <ListItemText primary="Events" />
+                            </ListItem>
+                            <ListItem
+                              component={Link}
+                              to="/trainings"
+                              sx={{ pl: 4, py: 1 }}
+                              onClick={() => setDrawerOpen(false)}
+                            >
+                              <ListItemText primary="Trainings" />
+                            </ListItem>
+                          </List>
+                        </Collapse>
+
+                        <ListItem component={Link} to="/resources" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="Resources" />
                         </ListItem>
-                        <ListItem
-                          component={Link}
-                          to="/news"
-                          onClick={() => setDrawerOpen(false)}
-                        >
+                        <ListItem component={Link} to="/news" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="News" />
                         </ListItem>
 
                         <ListItem
                           button
                           onClick={() => setSubmenuOpen(!submenuOpen)}
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                          }}
+                          sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                         >
                           <ListItemText
                             primary="About Us"
-                            sx={{
-                              fontSize: "1.1rem",
-                              fontWeight: "600",
-                              color: theme.palette.primary.dark,
-                            }}
+                            sx={{ fontSize: "1.1rem", fontWeight: "600", color: theme.palette.primary.dark }}
                           />
                           {submenuOpen ? (
-                            <ExpandLess
-                              sx={{ color: theme.palette.primary.main }}
-                            />
+                            <ExpandLess sx={{ color: theme.palette.primary.main }} />
                           ) : (
-                            <ExpandMore
-                              sx={{ color: theme.palette.primary.main }}
-                            />
+                            <ExpandMore sx={{ color: theme.palette.primary.main }} />
                           )}
                         </ListItem>
 
@@ -367,14 +360,6 @@ const Navbar = () => {
                               onClick={() => setDrawerOpen(false)}
                             >
                               <ListItemText primary="About Us" />
-                            </ListItem>
-                            <ListItem
-                              component={Link}
-                              to="/history"
-                              sx={{ pl: 4, py: 1 }}
-                              onClick={() => setDrawerOpen(false)}
-                            >
-                              <ListItemText primary="Our History" />
                             </ListItem>
                             <ListItem
                               component={Link}
@@ -413,11 +398,7 @@ const Navbar = () => {
 
                         <Divider sx={{ my: 1 }} />
 
-                        <ListItem
-                          component={Link}
-                          to="/contact"
-                          onClick={() => setDrawerOpen(false)}
-                        >
+                        <ListItem component={Link} to="/contact" onClick={() => setDrawerOpen(false)}>
                           <ListItemText primary="Contact Us" />
                         </ListItem>
                       </List>
@@ -458,16 +439,49 @@ const Navbar = () => {
                 Services
                 <HoverEffect active={location.pathname === "/services"} />
               </CustomButton>
-              <CustomButton
-                component={Link}
-                to="/events"
-                active={location.pathname === "/events"}
-                isTargetPage={isTargetPage}
-                isScrolled={isScrolled}
+
+              {/* Events & Webinars Dropdown */}
+              <div
+                onMouseEnter={handleEventsHover}
+                onMouseLeave={handleEventsClose}
+                style={{ position: 'relative' }}
               >
-                Events & Webinars
-                <HoverEffect active={location.pathname === "/events"} />
-              </CustomButton>
+                <CustomButton
+                  component={Link}
+                  to="/events"
+                  active={location.pathname === '/events' || location.pathname === '/trainings'}
+                  isTargetPage={isTargetPage}
+                  isScrolled={isScrolled}
+                >
+                  Events & Webinars
+                  <HoverEffect active={location.pathname === '/events' || location.pathname === '/trainings'} />
+                </CustomButton>
+
+                <CustomMenu
+                  id="events-menu"
+                  anchorEl={eventsAnchorEl}
+                  keepMounted
+                  open={Boolean(eventsAnchorEl)}
+                  onClose={handleEventsClose}
+                  disableScrollLock
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                >
+                  <CustomMenuItem onClick={handleEventsClose} component={Link} to="/events">
+                    Events
+                  </CustomMenuItem>
+                  <CustomMenuItem onClick={handleEventsClose} component={Link} to="/trainings">
+                    Trainings
+                  </CustomMenuItem>
+                </CustomMenu>
+              </div>
+
               <CustomButton
                 component={Link}
                 to="/resources"
@@ -542,9 +556,7 @@ const Navbar = () => {
                   isScrolled={isScrolled}
                 >
                   About Us
-                  <HoverEffect
-                    active={location.pathname.startsWith("/about")}
-                  />
+                  <HoverEffect active={location.pathname.startsWith("/about")} />
                 </CustomButton>
 
                 <CustomMenu
@@ -563,49 +575,22 @@ const Navbar = () => {
                     horizontal: "left",
                   }}
                 >
-                  <CustomMenuItem
-                    onClick={handleAboutClose}
-                    component={Link}
-                    to="/history"
-                  >
-                    Our History
-                  </CustomMenuItem>
-                  <CustomMenuItem
-                    onClick={handleAboutClose}
-                    component={Link}
-                    to="/why-us"
-                  >
+                  <CustomMenuItem onClick={handleAboutClose} component={Link} to="/why-us">
                     Why Us
                   </CustomMenuItem>
-                  <CustomMenuItem
-                    onClick={handleAboutClose}
-                    component={Link}
-                    to="/global-coverage"
-                  >
+                  <CustomMenuItem onClick={handleAboutClose} component={Link} to="/global-coverage">
                     Global Coverage
                   </CustomMenuItem>
-                  <CustomMenuItem
-                    onClick={handleAboutClose}
-                    component={Link}
-                    to="/leadership"
-                  >
+                  <CustomMenuItem onClick={handleAboutClose} component={Link} to="/leadership">
                     Leadership
                   </CustomMenuItem>
-                  <CustomMenuItem
-                    onClick={handleAboutClose}
-                    component={Link}
-                    to="/careers"
-                  >
+                  <CustomMenuItem onClick={handleAboutClose} component={Link} to="/careers">
                     Careers
                   </CustomMenuItem>
                 </CustomMenu>
               </div>
 
-              <ContactButton
-                component={Link}
-                to="/contact"
-                isScrolled={isScrolled}
-              >
+              <ContactButton component={Link} to="/contact" isScrolled={isScrolled}>
                 Contact Us
               </ContactButton>
             </ButtonContainer>

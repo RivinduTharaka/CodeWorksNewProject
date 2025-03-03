@@ -1,9 +1,15 @@
 import React from 'react'
+import Event1 from "./EventsNews1";
+import Event2 from "./EventsNews2";
 
-function Events&News() {
+function EventsNews() {
   return (
-    <div>Events&News</div>
+<>
+<Event1/>
+<Event2/>
+
+</>
   )
 }
 
-export default Events&News
+export default EventsNews

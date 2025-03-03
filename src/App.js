@@ -14,6 +14,7 @@ import HistorySection from './components/AboutUs/History/HistorySection';
 import Leadership from './components/AboutUs/LeaderShip/Leadership';
 import GlobalCoverage from './components/AboutUs/GlobalCoverage/GlobalCoverage';
 import { Blogs } from './components/News/Blogs/Blogs';
+import EventsNews from './components/EventsNews/EventsNews';
 
 const App = () => {
   return (
@@ -34,6 +35,8 @@ const App = () => {
 
         {/* News */}
         <Route path="/blog" element={<Blogs />} />
+        <Route path="/events" element={<EventsNews />} />
+
       </Routes>
       <Footer />
     </Router>
