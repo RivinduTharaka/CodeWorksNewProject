@@ -14,7 +14,8 @@ import HistorySection from './components/AboutUs/History/HistorySection';
 import Leadership from './components/AboutUs/LeaderShip/Leadership';
 import GlobalCoverage from './components/AboutUs/GlobalCoverage/GlobalCoverage';
 import { Blogs } from './components/News/Blogs/Blogs';
-import EventsNews from './components/EventsNews/EventsNews';
+import EventsNews from './components/Evnt/EventsNews/EventsNews';
+import Trainings from './components/Evnt/Trainings/Trainings';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         {/* News */}
         <Route path="/blog" element={<Blogs />} />
         <Route path="/events" element={<EventsNews />} />
+        <Route path="/trainings" element={<Trainings />} />
 
       </Routes>
       <Footer />

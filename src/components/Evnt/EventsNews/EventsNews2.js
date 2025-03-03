@@ -6,11 +6,11 @@ import { createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 
 // Import images for the events and the arrow
-import zeroTrustImage from '../../assets/image/Dilshan_Silva.jpg';
-import fortinetEventImage from '../../assets/image/Shamal.jpg';
-import fortinetEventImage1 from '../../assets/image/aboutsec3.jpg';
-import fortinetEventImage2 from '../../assets/image/p7.jpg';
-import arrowImage from '../../assets/image/down-arrow.png';
+import zeroTrustImage from '../../../assets/image/Dilshan_Silva.jpg';
+import fortinetEventImage from '../../../assets/image/Shamal.jpg';
+import fortinetEventImage1 from '../../../assets/image/aboutsec3.jpg';
+import fortinetEventImage2 from '../../../assets/image/p7.jpg';
+import arrowImage from '../../../assets/image/down-arrow.png';
 
 // Use the same theme as Navbar
 const theme = createTheme({
