@@ -178,13 +178,14 @@ const Navbar = () => {
   const location = useLocation();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [eventsAnchorEl, setEventsAnchorEl] = useState(null);
-  const [newsAnchorEl, setNewsAnchorEl] = useState(null); // Added state for News dropdown
+  const [newsAnchorEl, setNewsAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery("(max-width:950px)");
 
+  // Updated isTargetPage to include /blog and /press-&-media
   const isTargetPage =
     location.pathname === '/' ||
     location.pathname === '/solution' ||
@@ -194,7 +195,9 @@ const Navbar = () => {
     location.pathname === '/leadership' ||
     location.pathname === '/global-coverage' ||
     location.pathname === '/events' ||
-    location.pathname === '/trainings';
+    location.pathname === '/trainings' ||
+    location.pathname === '/blog' ||        // Added Blog
+    location.pathname === '/press-&-media'; // Added Press & Media
 
   useEffect(() => {
     const handleScroll = () => {
