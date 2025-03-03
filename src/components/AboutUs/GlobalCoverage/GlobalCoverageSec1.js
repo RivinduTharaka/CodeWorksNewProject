@@ -53,8 +53,16 @@ const GlobalCoverageSec1 = () => {
           >
             <Typography
               variant={isSmallScreen ? "h4" : isMediumScreen ? "h3" : "h2"}
-              fontWeight={900}
-              sx={{ textTransform: "uppercase", lineHeight: 1.2 }}
+              fontWeight={700}
+              sx={{fontSize: '4rem',
+                fontWeight: '700',
+                color: '#ffffff',
+                marginBottom: theme.spacing(2),
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', // Added for better readability on video
+                marginBottom: theme.spacing(2),
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '2.5rem',
+                }, }}
               gutterBottom
             >
               Our Regional Offices
@@ -62,14 +70,21 @@ const GlobalCoverageSec1 = () => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: "18px",
-                opacity: 0.8,
-                mt: "10px",
+                fontSize: "1rem",
+                fontWeight: "400",
+                color: "#ffffff",
+                maxWidth: "800px",
+                margin: "0 auto",
+                lineHeight: "1.6",
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.5)", // Added for better readability on video
+                [theme.breakpoints.down("sm")]: {
+                  fontSize: "0.9rem",
+                  maxWidth: "90%",
+                },
               }}
             >
               Expanding Borders, Strengthening Connections.
             </Typography>
-
           </motion.div>
         </Container>
       </Box>

@@ -16,6 +16,8 @@ import GlobalCoverage from './components/AboutUs/GlobalCoverage/GlobalCoverage';
 import { Blogs } from './components/News/Blogs/Blogs';
 import EventsNews from './components/Evnt/EventsNews/EventsNews';
 import Trainings from './components/Evnt/Trainings/Trainings';
+// import  {Blogs} from './components/News/Blogs/Blogs';
+import BlogDetails from './components/News/Blogs/BlogDetails';
 
 const App = () => {
   return (
@@ -38,6 +40,9 @@ const App = () => {
         <Route path="/blog" element={<Blogs />} />
         <Route path="/events" element={<EventsNews />} />
         <Route path="/trainings" element={<Trainings />} />
+        <Route path="/blog/:title" element={<BlogDetails />} />
+        
+
 
       </Routes>
       <Footer />
