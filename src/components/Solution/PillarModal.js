@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   Box,
@@ -16,10 +16,11 @@ import CategoryIcon from "@mui/icons-material/Category";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
+import Swal from 'sweetalert2'; // Import SweetAlert2 for error handling
 
 // Styled component for the modal box
 const StyledModalBox = styled(Box)(({ theme }) => ({
-    position: "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -52,15 +53,52 @@ const StyledModalBox = styled(Box)(({ theme }) => ({
 const PillarModal = ({ open, onClose, pillar }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [selectedSubCategory, setSelectedSubCategory] = useState(
-    pillar?.subCategories?.[0] || null
-  );
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+
+  // Use useEffect to set/reset selectedSubCategory based on modal state
+  useEffect(() => {
+    if (open && pillar?.subCategories?.length > 0) {
+      // When the modal opens, set the first subcategory as the default
+      setSelectedSubCategory(pillar.subCategories[0]);
+    }
+
+    // Cleanup function: Reset selectedSubCategory when the modal closes
+    return () => {
+      setSelectedSubCategory(null); // Clear the selected subcategory (and thus vendors)
+    };
+  }, [open, pillar]); // Runs when `open` or `pillar` changes
+
+  // Handle vendor click to redirect to their website
+  const handleVendorClick = (vendor) => {
+    if (vendor.website) {
+      window.open(vendor.website, "_blank");
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "Website Unavailable",
+        text: `No website available for ${vendor.name}.`,
+      });
+    }
+  };
+
+  // Display empty state if no pillar data
+  if (!pillar) {
+    return (
+      <Modal open={open} onClose={onClose}>
+        <StyledModalBox sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Typography variant="h6" color="textSecondary">
+            No pillar data available.
+          </Typography>
+        </StyledModalBox>
+      </Modal>
+    );
+  }
 
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalBox
         sx={{
-          display: isMobile ? "flex" : "flex", // Ensure flex for both
+          display: isMobile ? "flex" : "flex",
           flexDirection: isMobile ? "column" : "row",
         }}
       >
@@ -75,7 +113,7 @@ const PillarModal = ({ open, onClose, pillar }) => {
             alignItems: "flex-start",
             borderRight: isMobile ? "none" : "1px solid #e0e0e0",
             borderBottom: isMobile ? "1px solid #e0e0e0" : "none",
-            flexShrink: 0, // Prevent shrinking on mobile
+            flexShrink: 0,
           }}
         >
           <Typography
@@ -142,13 +180,13 @@ const PillarModal = ({ open, onClose, pillar }) => {
         {/* Main Content - Vendors Section */}
         <Box
           sx={{
-            flex: isMobile ? "none" : 1, // Remove flex growth on mobile
+            flex: isMobile ? "none" : 1,
             width: isMobile ? "100%" : "auto",
             padding: isMobile ? 2 : 4,
             display: "flex",
             flexDirection: "column",
             backgroundColor: "#fff",
-            flexShrink: 0, // Prevent shrinking on mobile
+            flexShrink: 0,
           }}
         >
           {/* Modal Header */}
@@ -171,51 +209,48 @@ const PillarModal = ({ open, onClose, pillar }) => {
           </Box>
 
           {/* Vendor Grid */}
-          <Grid container spacing={3}>
-            {selectedSubCategory?.vendors?.map((vendor, idx) => (
-              <Grid item xs={6} sm={4} md={3} key={idx}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    textAlign: "center",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    padding: 2,
-                    borderRadius: "16px",
-                    background: "rgba(0, 0, 0, 0.02)",
-                    "&:hover": {
-                      transform: "scale(1.05)",
-                    },
-                  }}
-                  onClick={() => window.open(`/${vendor.name.toLowerCase()}`, "_blank")}
-                >
-                  <Avatar
-                    src={vendor.logo}
-                    alt={vendor.name}
+          {selectedSubCategory ? (
+            <Grid container spacing={3}>
+              {selectedSubCategory.vendors.map((vendor, idx) => (
+                <Grid item xs={6} sm={4} md={3} key={idx}>
+                  <Box
                     sx={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "12px",
-                      mb: 1.5,
-                      border: "2px solid #e0e0e0",
-                      transition: "border-color 0.3s ease",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      textAlign: "center",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      padding: 2,
+                      borderRadius: "16px",
+                      background: "rgba(0, 0, 0, 0.02)",
+                      "&:hover": {
+                        transform: "scale(1.05)",
+                      },
                     }}
-                  />
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      fontWeight: "medium",
-                      color: "#34495e",
-                    }}
+                    onClick={() => handleVendorClick(vendor)}
                   >
-                    {vendor.name}
-                  </Typography>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
+                    <Avatar
+                      src={vendor.logo}
+                      alt={vendor.name}
+                      sx={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "12px",
+                        mb: 1.5,
+                        border: "2px solid #e0e0e0",
+                        transition: "border-color 0.3s ease",
+                      }}
+                    />
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <Typography variant="body1" color="textSecondary" sx={{ textAlign: "center", mt: 3 }}>
+              Please select a subcategory to view vendors.
+            </Typography>
+          )}
         </Box>
       </StyledModalBox>
     </Modal>

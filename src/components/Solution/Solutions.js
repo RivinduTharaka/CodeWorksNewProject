@@ -21,77 +21,266 @@ import Vendor4 from '../../assets/image/download (4).jpg';
 import Vendor5 from '../../assets/image/download (5).jpg';
 import backgroundVideo from '../../assets/video/tech.mp4';
 
+// Updated pillars data with website URLs for each vendor
 const pillars = [
   {
+    id: "1", // Added ID for potential database fetching
     title: 'Perimeter and Internal Security',
     image: piilor1,
     description: 'Safeguard your physical and digital boundaries with advanced security solutions.',
     subCategories: [
-      { name: 'Physical Security', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor2', logo: Vendor2 }] },
-      { name: 'Network Security', vendors: [{ name: 'Vendor3', logo: Vendor3 }, { name: 'Vendor4', logo: Vendor4 }] },
-      { name: 'Intrusion Detection', vendors: [{ name: 'Vendor5', logo: Vendor5 }, { name: 'Vendor1', logo: Vendor1 }] },
-      { name: 'Access Control', vendors: [{ name: 'Vendor2', logo: Vendor2 }, { name: 'Vendor3', logo: Vendor3 }] },
-      { name: 'Video Surveillance', vendors: [{ name: 'Vendor4', logo: Vendor4 }, { name: 'Vendor5', logo: Vendor5 }] },
+      {
+        name: 'Physical Security',
+        vendors: [
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+          { name: 'Hikvision', logo: Vendor2, website: 'https://www.hikvision.com' },
+        ],
+      },
+      {
+        name: 'Network Security',
+        vendors: [
+          { name: 'Palo Alto Networks', logo: Vendor3, website: 'https://www.paloaltonetworks.com' },
+          { name: 'Fortinet', logo: Vendor4, website: 'https://www.fortinet.com' },
+        ],
+      },
+      {
+        name: 'Intrusion Detection',
+        vendors: [
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+        ],
+      },
+      {
+        name: 'Access Control',
+        vendors: [
+          { name: 'Hikvision', logo: Vendor2, website: 'https://www.hikvision.com' },
+          { name: 'Palo Alto Networks', logo: Vendor3, website: 'https://www.paloaltonetworks.com' },
+        ],
+      },
+      {
+        name: 'Video Surveillance',
+        vendors: [
+          { name: 'Fortinet', logo: Vendor4, website: 'https://www.fortinet.com' },
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+        ],
+      },
     ],
   },
   {
+    id: "2",
     title: 'Cyber Security Governance & Compliance',
     image: piilor2,
     description: 'Ensure compliance and governance with robust cybersecurity frameworks.',
     subCategories: [
-      { name: 'Risk Management', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor5', logo: Vendor5 },{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor5', logo: Vendor5 }] },
-      { name: 'Compliance Audits', vendors: [{ name: 'Vendor2', logo: Vendor2 }, { name: 'Vendor3', logo: Vendor3 }] },
-      { name: 'Policy Enforcement', vendors: [{ name: 'Vendor4', logo: Vendor4 }, { name: 'Vendor5', logo: Vendor5 }] },
-      { name: 'Security Training', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor2', logo: Vendor2 }] },
-      { name: 'Incident Response', vendors: [{ name: 'Vendor3', logo: Vendor3 }, { name: 'Vendor4', logo: Vendor4 }] },
+      {
+        name: 'Risk Management',
+        vendors: [
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+        ],
+      },
+      {
+        name: 'Compliance Audits',
+        vendors: [
+          { name: 'Hikvision', logo: Vendor2, website: 'https://www.hikvision.com' },
+          { name: 'Palo Alto Networks', logo: Vendor3, website: 'https://www.paloaltonetworks.com' },
+        ],
+      },
+      {
+        name: 'Policy Enforcement',
+        vendors: [
+          { name: 'Fortinet', logo: Vendor4, website: 'https://www.fortinet.com' },
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+        ],
+      },
+      {
+        name: 'Security Training',
+        vendors: [
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+          { name: 'Hikvision', logo: Vendor2, website: 'https://www.hikvision.com' },
+        ],
+      },
+      {
+        name: 'Incident Response',
+        vendors: [
+          { name: 'Palo Alto Networks', logo: Vendor3, website: 'https://www.paloaltonetworks.com' },
+          { name: 'Fortinet', logo: Vendor4, website: 'https://www.fortinet.com' },
+        ],
+      },
     ],
   },
   {
+    id: "3",
     title: 'Authentication & Identity Management',
     image: piilor3,
     description: 'Secure access with cutting-edge identity and authentication tools.',
     subCategories: [
-      { name: 'Multi-Factor Authentication', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor2', logo: Vendor2 }] },
-      { name: 'Single Sign-On', vendors: [{ name: 'Vendor3', logo: Vendor3 }, { name: 'Vendor4', logo: Vendor4 }] },
-      { name: 'Biometric Security', vendors: [{ name: 'Vendor5', logo: Vendor5 }, { name: 'Vendor1', logo: Vendor1 }] },
-      { name: 'Identity Governance', vendors: [{ name: 'Vendor2', logo: Vendor2 }, { name: 'Vendor3', logo: Vendor3 }] },
-      { name: 'Privileged Access Management', vendors: [{ name: 'Vendor4', logo: Vendor4 }, { name: 'Vendor5', logo: Vendor5 }] },
+      {
+        name: 'Multi-Factor Authentication',
+        vendors: [
+          { name: 'Okta', logo: Vendor1, website: 'https://www.okta.com' },
+          { name: 'Duo Security', logo: Vendor2, website: 'https://duo.com' },
+        ],
+      },
+      {
+        name: 'Single Sign-On',
+        vendors: [
+          { name: 'Ping Identity', logo: Vendor3, website: 'https://www.pingidentity.com' },
+          { name: 'OneLogin', logo: Vendor4, website: 'https://www.onelogin.com' },
+        ],
+      },
+      {
+        name: 'Biometric Security',
+        vendors: [
+          { name: 'NEC', logo: Vendor5, website: 'https://www.nec.com' },
+          { name: 'Okta', logo: Vendor1, website: 'https://www.okta.com' },
+        ],
+      },
+      {
+        name: 'Identity Governance',
+        vendors: [
+          { name: 'Duo Security', logo: Vendor2, website: 'https://duo.com' },
+          { name: 'Ping Identity', logo: Vendor3, website: 'https://www.pingidentity.com' },
+        ],
+      },
+      {
+        name: 'Privileged Access Management',
+        vendors: [
+          { name: 'OneLogin', logo: Vendor4, website: 'https://www.onelogin.com' },
+          { name: 'NEC', logo: Vendor5, website: 'https://www.nec.com' },
+        ],
+      },
     ],
   },
   {
+    id: "4",
     title: 'Security Management',
     image: piilor4,
     description: 'Proactively manage threats with comprehensive security strategies.',
     subCategories: [
-      { name: 'Threat Intelligence', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor3', logo: Vendor3 }] },
-      { name: 'Vulnerability Management', vendors: [{ name: 'Vendor2', logo: Vendor2 }, { name: 'Vendor4', logo: Vendor4 }] },
-      { name: 'Security Analytics', vendors: [{ name: 'Vendor5', logo: Vendor5 }, { name: 'Vendor1', logo: Vendor1 }] },
-      { name: 'Incident Management', vendors: [{ name: 'Vendor3', logo: Vendor3 }, { name: 'Vendor2', logo: Vendor2 }] },
-      { name: 'Policy & Compliance', vendors: [{ name: 'Vendor4', logo: Vendor4 }, { name: 'Vendor5', logo: Vendor5 }] },
+      {
+        name: 'Threat Intelligence',
+        vendors: [
+          { name: 'FireEye', logo: Vendor1, website: 'https://www.fireeye.com' },
+          { name: 'Palo Alto Networks', logo: Vendor3, website: 'https://www.paloaltonetworks.com' },
+        ],
+      },
+      {
+        name: 'Vulnerability Management',
+        vendors: [
+          { name: 'Tenable', logo: Vendor2, website: 'https://www.tenable.com' },
+          { name: 'Qualys', logo: Vendor4, website: 'https://www.qualys.com' },
+        ],
+      },
+      {
+        name: 'Security Analytics',
+        vendors: [
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+          { name: 'FireEye', logo: Vendor1, website: 'https://www.fireeye.com' },
+        ],
+      },
+      {
+        name: 'Incident Management',
+        vendors: [
+          { name: 'Palo Alto Networks', logo: Vendor3, website: 'https://www.paloaltonetworks.com' },
+          { name: 'Tenable', logo: Vendor2, website: 'https://www.tenable.com' },
+        ],
+      },
+      {
+        name: 'Policy & Compliance',
+        vendors: [
+          { name: 'Qualys', logo: Vendor4, website: 'https://www.qualys.com' },
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+        ],
+      },
     ],
   },
   {
+    id: "5",
     title: 'Endpoint Security',
     image: piilor5,
     description: 'Protect every device with top-tier endpoint security solutions.',
     subCategories: [
-      { name: 'Antivirus Protection', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor2', logo: Vendor2 }] },
-      { name: 'Endpoint Detection & Response', vendors: [{ name: 'Vendor3', logo: Vendor3 }, { name: 'Vendor4', logo: Vendor4 }] },
-      { name: 'Mobile Security', vendors: [{ name: 'Vendor5', logo: Vendor5 }, { name: 'Vendor1', logo: Vendor1 }] },
-      { name: 'Device Encryption', vendors: [{ name: 'Vendor2', logo: Vendor2 }, { name: 'Vendor3', logo: Vendor3 }] },
-      { name: 'Patch Management', vendors: [{ name: 'Vendor4', logo: Vendor4 }, { name: 'Vendor5', logo: Vendor5 }] },
+      {
+        name: 'Antivirus Protection',
+        vendors: [
+          { name: 'Symantec', logo: Vendor1, website: 'https://www.symantec.com' },
+          { name: 'McAfee', logo: Vendor2, website: 'https://www.mcafee.com' },
+        ],
+      },
+      {
+        name: 'Endpoint Detection & Response',
+        vendors: [
+          { name: 'CrowdStrike', logo: Vendor3, website: 'https://www.crowdstrike.com' },
+          { name: 'Carbon Black', logo: Vendor4, website: 'https://www.carbonblack.com' },
+        ],
+      },
+      {
+        name: 'Mobile Security',
+        vendors: [
+          { name: 'Lookout', logo: Vendor5, website: 'https://www.lookout.com' },
+          { name: 'Symantec', logo: Vendor1, website: 'https://www.symantec.com' },
+        ],
+      },
+      {
+        name: 'Device Encryption',
+        vendors: [
+          { name: 'McAfee', logo: Vendor2, website: 'https://www.mcafee.com' },
+          { name: 'CrowdStrike', logo: Vendor3, website: 'https://www.crowdstrike.com' },
+        ],
+      },
+      {
+        name: 'Patch Management',
+        vendors: [
+          { name: 'Carbon Black', logo: Vendor4, website: 'https://www.carbonblack.com' },
+          { name: 'Lookout', logo: Vendor5, website: 'https://www.lookout.com' },
+        ],
+      },
     ],
   },
   {
+    id: "6",
     title: 'Networking',
     image: piilor6,
     description: 'Enhance connectivity with secure and scalable networking solutions.',
     subCategories: [
-      { name: 'Network Infrastructure', vendors: [{ name: 'Vendor1', logo: Vendor1 }, { name: 'Vendor3', logo: Vendor3 }] },
-      { name: 'Cloud Networking', vendors: [{ name: 'Vendor2', logo: Vendor2 }, { name: 'Vendor4', logo: Vendor4 }] },
-      { name: 'SD-WAN', vendors: [{ name: 'Vendor5', logo: Vendor5 }, { name: 'Vendor1', logo: Vendor1 }] },
-      { name: 'Network Monitoring', vendors: [{ name: 'Vendor3', logo: Vendor3 }, { name: 'Vendor2', logo: Vendor2 }] },
-      { name: 'Wireless Security', vendors: [{ name: 'Vendor4', logo: Vendor4 }, { name: 'Vendor5', logo: Vendor5 }] },
+      {
+        name: 'Network Infrastructure',
+        vendors: [
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+          { name: 'Arista Networks', logo: Vendor3, website: 'https://www.arista.com' },
+        ],
+      },
+      {
+        name: 'Cloud Networking',
+        vendors: [
+          { name: 'Juniper Networks', logo: Vendor2, website: 'https://www.juniper.net' },
+          { name: 'VMware', logo: Vendor4, website: 'https://www.vmware.com' },
+        ],
+      },
+      {
+        name: 'SD-WAN',
+        vendors: [
+          { name: 'Silver Peak', logo: Vendor5, website: 'https://www.silver-peak.com' },
+          { name: 'Cisco', logo: Vendor1, website: 'https://www.cisco.com' },
+        ],
+      },
+      {
+        name: 'Network Monitoring',
+        vendors: [
+          { name: 'Arista Networks', logo: Vendor3, website: 'https://www.arista.com' },
+          { name: 'Juniper Networks', logo: Vendor2, website: 'https://www.juniper.net' },
+        ],
+      },
+      {
+        name: 'Wireless Security',
+        vendors: [
+          { name: 'VMware', logo: Vendor4, website: 'https://www.vmware.com' },
+          { name: 'Silver Peak', logo: Vendor5, website: 'https://www.silver-peak.com' },
+        ],
+      },
     ],
   },
 ];
