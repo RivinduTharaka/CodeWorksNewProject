@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 // Import your vendor images (replace with your actual image paths)
 import Vendor1 from '../../assets/image/download (1).jpg';
@@ -53,9 +54,9 @@ const VendorImage = styled('img')(({ theme }) => ({
   width: '100%',
   height: 'auto',
   cursor: 'pointer',
-  maxWidth: '200px', // Increased size for logos
+  maxWidth: '200px',
   margin: '0 auto',
-  padding: theme.spacing(1), // Reduced padding
+  padding: theme.spacing(1),
   borderRadius: '8px',
   transition: 'transform 0.3s ease-in-out',
   '&:hover': {
@@ -63,40 +64,31 @@ const VendorImage = styled('img')(({ theme }) => ({
   },
 }));
 
-// Custom styles for the carousel to reduce gaps
 const CarouselContainer = styled(Box)(({ theme }) => ({
   '& .slick-slide': {
-    padding: theme.spacing(0, 1), // Reduce horizontal gap between slides
+    padding: theme.spacing(0, 1),
   },
   '& .slick-list': {
-    margin: theme.spacing(0, -1), // Adjust negative margin to compensate for padding
+    margin: theme.spacing(0, -1),
   },
 }));
 
 const ExploreButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#070054',
- 
-  color: '#ffffff',
+  backgroundColor: '#ffffff',
+  border: '2px solid #070054',
   fontFamily: 'Poppins, sans-serif',
   fontWeight: '600',
+  color: '#070054',
   position: 'absolute',
-  bottom: theme.spacing(4),
+  bottom: theme.spacing(3),
   left: '50%',
   transform: 'translateX(-50%)',
   padding: theme.spacing(1.5, 3),
-  borderRadius: '50px',
   textTransform: 'none',
   display: 'flex',
   alignItems: 'center',
   '&:hover': {
-    backgroundColor: '#3669A6',
-  },
-  '& .MuiButton-endIcon': {
-    marginLeft: theme.spacing(1),
-    transition: 'transform 0.3s ease-in-out',
-  },
-  '&:hover .MuiButton-endIcon': {
-    transform: 'translateX(5px)',
+    backgroundColor: '#f0f0f5',
   },
 }));
 
@@ -133,6 +125,8 @@ const carouselSettings = {
 };
 
 const OurVendors = () => {
+  const navigate = useNavigate(); // Hook for navigation
+
   return (
     <SectionContainer>
       <Container maxWidth="lg">
@@ -152,16 +146,12 @@ const OurVendors = () => {
             ))}
           </Slider>
         </CarouselContainer>
-            <div style={{marginTop:'50px'}}></div>
+        <div style={{ marginTop: '40px' }}></div>
+
         {/* Explore Button */}
         <ExploreButton
-        
-
           endIcon={<ArrowForwardIcon />}
-          onClick={() => {
-            // Add your button click handler logic here
-            console.log('Explore Our Vendors button clicked');
-          }}
+          onClick={() => navigate('/vendors')} // Redirect to Vendors page
         >
           Explore Our Vendors
         </ExploreButton>

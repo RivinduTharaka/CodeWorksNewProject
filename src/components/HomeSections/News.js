@@ -53,6 +53,8 @@ const NewsCard = styled(motion.div)({
   justifyContent: 'flex-start',
   backgroundColor: '#ffffff',
   height: 400,
+  maxHeight: 400,
+  minHeight: 400,
   borderRadius: '16px',
   overflow: 'hidden',
   boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.05)',
