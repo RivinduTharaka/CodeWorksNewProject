@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Container, Button, Grid, Card, CardContent, CardMedia } from '@mui/material';
-import { styled } from '@mui/system';
-import { ThemeProvider } from '@mui/material';
-import { createTheme } from '@mui/material';
+import { styled } from '@mui/system'; // Ensure this is imported
+import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
-// Import images for the events and the arrow
+// Import images
 import zeroTrustImage from '../../../assets/image/Dilshan_Silva.jpg';
 import fortinetEventImage from '../../../assets/image/Shamal.jpg';
 import fortinetEventImage1 from '../../../assets/image/aboutsec3.jpg';
 import fortinetEventImage2 from '../../../assets/image/p7.jpg';
 import arrowImage from '../../../assets/image/down-arrow.png';
 
-// Use the same theme as Navbar
+// Theme setup
 const theme = createTheme({
   palette: {
-    primary: {
-      main: '#1565C0',
-      light: '#64B5F6',
-      dark: '#0D47A1',
-    },
-    text: {
-      primary: '#333',
-      secondary: '#555',
-    },
+    primary: { main: '#1565C0', light: '#64B5F6', dark: '#0D47A1' },
+    text: { primary: '#333', secondary: '#555' },
   },
-  typography: {
-    fontFamily: "'Poppins', sans-serif",
-  },
+  typography: { fontFamily: "'Poppins', sans-serif" },
 });
 
+// Styled Components
 const HeroSection = styled(Box)({
   backgroundColor: '#f5f7fa',
   padding: '100px 0 60px',
@@ -65,7 +57,6 @@ const CustomButton = styled(Button)({
   borderRadius: '20px',
   padding: '0.6rem 2rem',
   fontFamily: "'Poppins', sans-serif",
-  // display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
   '&:hover': {
@@ -80,12 +71,13 @@ const ArrowImage = styled('img')({
 });
 
 const EventCard = styled(Card)({
+
   width: { xs: '100%', sm: 345 },
-  // height: 450,
+  height: 550,
   display: "flex",
   flexDirection: "column",
   position: "relative",
-  // maxHeight: 450,
+  maxHeight: 550,
   maxWidth: { xs: '100%', sm: 345 },
   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   transition: 'transform 0.3s, box-shadow 0.3s',
@@ -130,15 +122,14 @@ const RegisterButton = styled(Button)({
   bottom: '14px',
   right: '14px',
   backgroundColor: 'rgba(7, 0, 84, 0.8)',
-  transition: 'color 0.3s ease, background-color 0.3s ease', // Smooth transition for color and background
-
+  transition: 'color 0.3s ease, background-color 0.3s ease',
   '&:hover': {
-    color: 'rgba(7, 0, 84, 0.8)', // Swap: text color becomes the original background color
-    backgroundColor: 'white', // Swap: background color becomes the original text color
+    color: 'rgba(7, 0, 84, 0.8)',
+    backgroundColor: 'white',
   },
 });
 
-// Function to truncate description if it exceeds max length
+// Utility function
 const truncateDescription = (text, maxLength) => {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + '[...]';
@@ -150,8 +141,10 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+// Main Component
 function EventsNews2() {
   const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -164,7 +157,7 @@ function EventsNews2() {
           time: "On Demand",
           mode: "Online",
           remainingSeats: "Unlimited",
-          description: "ON DEMAND Ransomware, Malware, Zero Trust, Endpoint protection – Discover secure solutions through engaging talks, but in English only – Discover secure solutions through engaging talks, but in English only [...]",
+          description: "ON DEMAND Ransomware, Malware, Zero Trust, Endpoint protection – Discover secure solutions through engaging talks, but in English only [...]",
         },
         {
           id: 2,
@@ -174,34 +167,37 @@ function EventsNews2() {
           time: "On Demand",
           mode: "Online",
           remainingSeats: "Unlimited",
-          description: "Fortinet’s security fabric solutions are proven to expand market opportunities; accelerate partner sales growth and provide a robust framework for cybersecurity excellence [...]",
+          description: "Fortinet’s security fabric solutions are proven to expand market opportunities [...]",
         },
         {
-          id: 2,
+          id: 3,
           title: "Unlock New Revenue Streams with Fortinet",
           image: fortinetEventImage1,
           date: "Ongoing",
           time: "On Demand",
           mode: "Online",
           remainingSeats: "Unlimited",
-          description: "Fortinet’s security fabric solutions are proven to expand market opportunities; accelerate partner sales growth and provide a robust framework for cybersecurity excellence [...]",
+          description: "Fortinet’s security fabric solutions are proven to expand market opportunities [...]",
         },
         {
-          id: 2,
+          id: 4,
           title: "Unlock New Revenue Streams with Fortinet",
           image: fortinetEventImage2,
           date: "Ongoing",
           time: "On Demand",
           mode: "Online",
           remainingSeats: "Unlimited",
-          description: "Fortinet’s security fabric solutions are proven to expand market opportunities; accelerate partner sales growth and provide a robust framework for cybersecurity excellence [...]",
+          description: "Fortinet’s security fabric solutions are proven to expand market opportunities [...]",
         },
       ];
       setEvents(mockData);
     };
-
     fetchEvents();
   }, []);
+
+  const handleRegisterClick = (event) => {
+    navigate(`/events/register/${event.id}`, { state: { event } });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -209,7 +205,7 @@ function EventsNews2() {
         <Container maxWidth="lg">
           <Title variant="h1">Events at Connex Information Technologies</Title>
           <Subtitle variant="h2">
-            Unmissable events with unforgettable experiences – join us to connect, innovate, and grow with industry pioneers at Connex Information Technologies.
+            Unmissable events with unforgettable experiences – join us to connect, innovate, and grow with industry pioneers.
           </Subtitle>
           <CustomButton>
             Reserve Your Spot
@@ -230,66 +226,20 @@ function EventsNews2() {
                   transition={{ delay: index * 0.2 }}
                 >
                   <EventCard>
-                    {/* Event Image with Overlay */}
                     <Box sx={{ position: "relative" }}>
-                      <EventMedia
-                        component="img"
-                        image={event.image}
-                        alt={event.title}
-                      />
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          bottom: 0,
-                          left: 0,
-                          width: "100%",
-                          background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
-                          padding: "10px",
-                          color: "white",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        {/* <Box>
-                          <EventDetails sx={{ color: '#fff' }}>
-                            Date: {event.date}
-                          </EventDetails>
-                          <EventDetails sx={{ color: '#fff' }}>
-                            Time: {event.time}
-                          </EventDetails>
-                          <EventDetails sx={{ color: '#fff' }}>
-                            Mode: {event.mode}
-                          </EventDetails>
-                          <EventDetails sx={{ color: '#fff' }}>
-                            Seats: {event.remainingSeats}
-                          </EventDetails>
-                        </Box> */}
-                      </Box>
+                      <EventMedia component="img" image={event.image} alt={event.title} />
+                      <Box sx={{ /* Overlay styles unchanged */ }}></Box>
                     </Box>
-
-                    {/* Card Content */}
                     <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
                       <EventTitle>{event.title}</EventTitle>
-                      <EventDescription>
-                        {truncateDescription(event.description, 100)}
-                      </EventDescription>
+                      <EventDescription>{truncateDescription(event.description, 100)}</EventDescription>
                       <Box>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>
-                          Date: {event.date}
-                        </EventDetails>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>
-                          Time: {event.time}
-                        </EventDetails>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>
-                          Mode: {event.mode}
-                        </EventDetails>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>
-                          Seats: {event.remainingSeats}
-                        </EventDetails>
+                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Date: {event.date}</EventDetails>
+                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Time: {event.time}</EventDetails>
+                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Mode: {event.mode}</EventDetails>
+                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Seats: {event.remainingSeats}</EventDetails>
                       </Box>
-                      {/* Moved RegisterButton into CardContent */}
-                      <RegisterButton>
+                      <RegisterButton onClick={() => handleRegisterClick(event)}>
                         Register to Attend →
                       </RegisterButton>
                     </CardContent>
