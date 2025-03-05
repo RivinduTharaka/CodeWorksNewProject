@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Typography, Grid, Box, useMediaQuery } from '@mui/material';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import { useTheme } from '@mui/material/styles';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PillarCard from './PillarCard';
 import PillarModal from './PillarModal';
@@ -122,6 +123,8 @@ const pillars = [
         vendors: [
           { name: 'Okta', logo: Vendor1, website: 'https://www.okta.com' },
           { name: 'Duo Security', logo: Vendor2, website: 'https://duo.com' },
+          { name: 'Splunk', logo: Vendor5, website: 'https://www.splunk.com' },
+
         ],
       },
       {
@@ -290,7 +293,12 @@ const Solutions = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [selectedPillar, setSelectedPillar] = useState(null);
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the component mounts
+  }, []);
+
   return (
+
     <>
       <Solution1 />
       <motion.div

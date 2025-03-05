@@ -186,6 +186,8 @@ const CountAnimation = ({ start, end, suffix }) => {
     }
   }, [inView, start, end]);
 
+
+
   return (
     <div ref={ref}>
       <StatsText>{count}{suffix}</StatsText>
@@ -193,7 +195,13 @@ const CountAnimation = ({ start, end, suffix }) => {
   );
 };
 
+
+
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the component mounts
+  }, []);
+
   return (
     <>
       {/* Hero Section */}

@@ -6,16 +6,33 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 // Import your vendor images (replace with your actual image paths)
-import Vendor1 from '../../assets/image/download (1).jpg';
-import Vendor2 from '../../assets/image/download (2).jpg';
-import Vendor3 from '../../assets/image/download (3).jpg';
-import Vendor4 from '../../assets/image/download (4).jpg';
-import Vendor5 from '../../assets/image/download (5).jpg';
+// First slider images
+import Vendor1_1 from '../../assets/image/download (1).jpg';
+import Vendor1_2 from '../../assets/image/download (2).jpg';
+import Vendor1_3 from '../../assets/image/download (3).jpg';
+import Vendor1_4 from '../../assets/image/download (4).jpg';
+import Vendor1_5 from '../../assets/image/download (5).jpg';
 
-// Vendor images array
-const vendors = [Vendor1, Vendor2, Vendor3, Vendor4, Vendor5];
+// Second slider images
+import Vendor2_1 from '../../assets/image/download (1).jpg';
+import Vendor2_2 from '../../assets/image/download (2).jpg';
+import Vendor2_3 from '../../assets/image/download (3).jpg';
+import Vendor2_4 from '../../assets/image/download (4).jpg';
+import Vendor2_5 from '../../assets/image/download (5).jpg';
 
-// Styled Components
+// Third slider images
+import Vendor3_1 from '../../assets/image/download (1).jpg';
+import Vendor3_2 from '../../assets/image/download (2).jpg';
+import Vendor3_3 from '../../assets/image/download (3).jpg';
+import Vendor3_4 from '../../assets/image/download (4).jpg';
+import Vendor3_5 from '../../assets/image/download (5).jpg';
+
+// Vendor images arrays
+const vendorsFirstSlider = [Vendor1_1, Vendor1_2, Vendor1_3, Vendor1_4, Vendor1_5];
+const vendorsSecondSlider = [Vendor2_1, Vendor2_2, Vendor2_3, Vendor2_4, Vendor2_5];
+const vendorsThirdSlider = [Vendor3_1, Vendor3_2, Vendor3_3, Vendor3_4, Vendor3_5];
+
+// Styled Components (unchanged)
 const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
   padding: theme.spacing(4, 0),
@@ -46,7 +63,7 @@ const VendorImage = styled('img')(({ theme }) => ({
   },
 }));
 
-// Slider Settings for each row
+// Slider Settings (unchanged)
 const sliderSettingsRightToLeft = {
   dots: false,
   infinite: true,
@@ -96,7 +113,6 @@ function VendorSlider() {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           textAlign: 'center',
-          
           letterSpacing: '-0.5px',
           textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
           transition: 'all 0.3s ease-in-out',
@@ -140,7 +156,7 @@ function VendorSlider() {
         {/* First Slider (Right to Left) */}
         <SliderContainer>
           <Slider {...sliderSettingsRightToLeft}>
-            {vendors.map((vendor, index) => (
+            {vendorsFirstSlider.map((vendor, index) => (
               <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
               </Box>
@@ -152,7 +168,7 @@ function VendorSlider() {
         {/* Second Slider (Left to Right) */}
         <SliderContainer>
           <Slider {...sliderSettingsLeftToRight}>
-            {vendors.map((vendor, index) => (
+            {vendorsSecondSlider.map((vendor, index) => (
               <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
               </Box>
@@ -164,7 +180,7 @@ function VendorSlider() {
         {/* Third Slider (Right to Left) */}
         <SliderContainer>
           <Slider {...sliderSettingsRightToLeft}>
-            {vendors.map((vendor, index) => (
+            {vendorsThirdSlider.map((vendor, index) => (
               <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
               </Box>
