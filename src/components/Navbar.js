@@ -26,16 +26,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../assets/image/logoNavbar/ConnexIT.png';
 
-// Country Flags Array with Global option
+// Import flag images from local folder
+import globalFlag from '../assets/image/flag/internet.png'; // Global (UN flag)
+import usaFlag from '../assets/image/flag/australia.png';
+import ukFlag from '../assets/image/flag/bangladesh.png';
+import canadaFlag from '../assets/image/flag/sri-lanka.png';
+import australiaFlag from '../assets/image/flag/singapore.png';
+import indiaFlag from '../assets/image/flag/india.png';
+import germanyFlag from '../assets/image/flag/maldives.png';
+import franceFlag from '../assets/image/flag/mauritius.png';
+
+// Country Flags Array with local imports
 const countries = [
-  { name: "Global", flag: "https://flagcdn.com/w20/un.png" },
-  { name: "USA", flag: "https://flagcdn.com/w20/us.png" },
-  { name: "UK", flag: "https://flagcdn.com/w20/gb.png" },
-  { name: "Canada", flag: "https://flagcdn.com/w20/ca.png" },
-  { name: "Australia", flag: "https://flagcdn.com/w20/au.png" },
-  { name: "India", flag: "https://flagcdn.com/w20/in.png" },
-  { name: "Germany", flag: "https://flagcdn.com/w20/de.png" },
-  { name: "France", flag: "https://flagcdn.com/w20/fr.png" },
+  { name: "Global", flag: globalFlag },
+  { name: "USA", flag: usaFlag },
+  { name: "UK", flag: ukFlag },
+  { name: "Canada", flag: canadaFlag },
+  { name: "Australia", flag: australiaFlag },
+  { name: "India", flag: indiaFlag },
+  { name: "Germany", flag: germanyFlag },
+  { name: "France", flag: franceFlag },
 ];
 
 // Define Futuristic Theme
@@ -174,8 +184,8 @@ const FuturisticMenu = styled(Menu)({
     boxShadow: "0 0 15px rgba(0, 212, 255, 0.3)",
     padding: "0.5rem 0",
     animation: `${slideIn} 0.3s ease-in-out`,
-    width: "155px",
-    maxHeight: "250px",
+    // width: "155px",
+    // maxHeight: "250px",
     overflowY: countries.length > 5 ? "auto" : "hidden",
     "&::-webkit-scrollbar": {
       width: "4px",
@@ -448,7 +458,7 @@ const Navbar = () => {
                                   sx={{ pl: 4, py: 1 }}
                                   onClick={() => handleCountrySelect(country)}
                                 >
-                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px" }} />
+                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "20px", height: "15px", borderRadius: "2px" }} />
                                   <ListItemText
                                     primary={country.name}
                                     primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
