@@ -26,18 +26,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../assets/image/logoNavbar/ConnexIT.png';
 
-// Country Flags
-const flagUSA = "https://flagcdn.com/w20/us.png";
-const flagUK = "https://flagcdn.com/w20/gb.png";
-const flagCanada = "https://flagcdn.com/w20/ca.png";
-const flagAustralia = "https://flagcdn.com/w20/au.png";
-const flagIndia = "https://flagcdn.com/w20/in.png";
+// Country Flags Array with Global option
+const countries = [
+  { name: "Global", flag: "https://flagcdn.com/w20/un.png" },
+  { name: "USA", flag: "https://flagcdn.com/w20/us.png" },
+  { name: "UK", flag: "https://flagcdn.com/w20/gb.png" },
+  { name: "Canada", flag: "https://flagcdn.com/w20/ca.png" },
+  { name: "Australia", flag: "https://flagcdn.com/w20/au.png" },
+  { name: "India", flag: "https://flagcdn.com/w20/in.png" },
+  { name: "Germany", flag: "https://flagcdn.com/w20/de.png" },
+  { name: "France", flag: "https://flagcdn.com/w20/fr.png" },
+];
 
 // Define Futuristic Theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#00D4FF", // Neon Cyan
+      main: "#00D4FF",
       light: "#64FFDA",
       dark: "#0288D1",
     },
@@ -107,7 +112,7 @@ const NeonHoverEffect = styled("span")(({ active }) => ({
 
 const FuturisticButton = styled(Button)(({ isTargetPage, isScrolled, active }) => ({
   color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
-  fontSize: "0.8rem",
+  fontSize: "0.9rem",
   fontWeight: "500",
   textTransform: "none",
   fontFamily: "'Orbitron', sans-serif",
@@ -163,14 +168,28 @@ const ContactButton = styled(Button)(({ isScrolled, isContactPage }) => ({
 
 const FuturisticMenu = styled(Menu)({
   "& .MuiPaper-root": {
-    background: "rgba(15, 32, 39, 0.9)",
+    background: "rgba(15, 32, 39, 0.4)",
     backdropFilter: "blur(10px)",
-    border: "1px solid #00D4FF",
     borderRadius: "10px",
     boxShadow: "0 0 15px rgba(0, 212, 255, 0.3)",
     padding: "0.5rem 0",
     animation: `${slideIn} 0.3s ease-in-out`,
-    width: "180px",
+    width: "155px",
+    maxHeight: "250px",
+    overflowY: countries.length > 5 ? "auto" : "hidden",
+    "&::-webkit-scrollbar": {
+      width: "4px",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "rgba(15, 32, 39, 0.8)",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: "#00D4FF",
+      borderRadius: "3px",
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: "#0288D1",
+    },
   },
 });
 
@@ -178,7 +197,7 @@ const FuturisticMenuItem = styled(MenuItem)({
   display: "flex",
   alignItems: "center",
   gap: "0.8rem",
-  fontSize: "0.75rem",
+  fontSize: "0.9rem",
   fontFamily: "'Orbitron', sans-serif",
   color: "#E0E0E0",
   padding: "0.8rem 1rem",
@@ -198,7 +217,7 @@ const FuturisticMenuItem = styled(MenuItem)({
     },
   },
   "& img": {
-    width: "20px",
+    width: "30px",
     height: "20px",
     borderRadius: "2px",
   },
@@ -233,10 +252,13 @@ const Navbar = () => {
   const [newsAnchorEl, setNewsAnchorEl] = useState(null);
   const [countryAnchorEl, setCountryAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [countriesSubmenuOpen, setCountriesSubmenuOpen] = useState(false);
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
   const [servicesSubmenuOpen, setServicesSubmenuOpen] = useState(false);
+  const [newsSubmenuOpen, setNewsSubmenuOpen] = useState(false);
+  const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Default to Global
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
@@ -248,12 +270,13 @@ const Navbar = () => {
     location.pathname === '/trainings' ||
     location.pathname === '/marketing-consultation' ||
     location.pathname === '/channel-professional-services' ||
-    location.pathname === '/blogs' ||
+    location.pathname === '/blog' ||
     location.pathname === '/press-&-media' ||
     location.pathname === '/why-us' ||
     location.pathname === '/global-coverage' ||
     location.pathname === '/leadership' ||
-    location.pathname === '/careers';
+    location.pathname === '/careers' ||
+    location.pathname === '/about';
 
   const isContactPage = location.pathname === '/contact';
 
@@ -278,12 +301,20 @@ const Navbar = () => {
     setAboutAnchorEl(null);
   };
 
+  const handleAboutClick = (event) => {
+    setAboutAnchorEl(event.currentTarget);
+  };
+
   const handleEventsHover = (event) => {
     setEventsAnchorEl(event.currentTarget);
   };
 
   const handleEventsClose = () => {
     setEventsAnchorEl(null);
+  };
+
+  const handleEventsClick = (event) => {
+    setEventsAnchorEl(event.currentTarget);
   };
 
   const handleServicesHover = (event) => {
@@ -294,6 +325,10 @@ const Navbar = () => {
     setServicesAnchorEl(null);
   };
 
+  const handleServicesClick = (event) => {
+    setServicesAnchorEl(event.currentTarget);
+  };
+
   const handleNewsHover = (event) => {
     setNewsAnchorEl(event.currentTarget);
   };
@@ -302,12 +337,23 @@ const Navbar = () => {
     setNewsAnchorEl(null);
   };
 
+  const handleNewsClick = (event) => {
+    setNewsAnchorEl(event.currentTarget);
+  };
+
   const handleCountryHover = (event) => {
     setCountryAnchorEl(event.currentTarget);
   };
 
   const handleCountryClose = () => {
     setCountryAnchorEl(null);
+  };
+
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setCountryAnchorEl(null);
+    setCountriesSubmenuOpen(false);
+    setDrawerOpen(false);
   };
 
   return (
@@ -378,41 +424,37 @@ const Navbar = () => {
 
                           <ListItem
                             button
-                            onClick={() => setSubmenuOpen(!submenuOpen)}
+                            onClick={() => setCountriesSubmenuOpen(!countriesSubmenuOpen)}
                             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                           >
-                            <ListItemText
-                              primary="Countries"
-                              primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
-                            />
-                            {submenuOpen ? (
+                            <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "20px", height: "15px", borderRadius: "2px" }} />
+                              <ListItemText
+                                primary="Countries"
+                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                              />
+                            </Box>
+                            {countriesSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
                             ) : (
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={submenuOpen} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                              <ListItem sx={{ pl: 4, py: 1 }} onClick={() => setDrawerOpen(false)}>
-                                <img src={flagUSA} alt="USA Flag" style={{ marginRight: "10px" }} />
-                                <ListItemText primary="USA" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem sx={{ pl: 4, py: 1 }} onClick={() => setDrawerOpen(false)}>
-                                <img src={flagUK} alt="UK Flag" style={{ marginRight: "10px" }} />
-                                <ListItemText primary="UK" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem sx={{ pl: 4, py: 1 }} onClick={() => setDrawerOpen(false)}>
-                                <img src={flagCanada} alt="Canada Flag" style={{ marginRight: "10px" }} />
-                                <ListItemText primary="Canada" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem sx={{ pl: 4, py: 1 }} onClick={() => setDrawerOpen(false)}>
-                                <img src={flagAustralia} alt="Australia Flag" style={{ marginRight: "10px" }} />
-                                <ListItemText primary="Australia" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem sx={{ pl: 4, py: 1 }} onClick={() => setDrawerOpen(false)}>
-                                <img src={flagIndia} alt="India Flag" style={{ marginRight: "10px" }} />
-                                <ListItemText primary="India" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
+                          <Collapse in={countriesSubmenuOpen} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding sx={{ maxHeight: "300px", overflowY: "auto" }}>
+                              {countries.map((country) => (
+                                <ListItem
+                                  key={country.name}
+                                  sx={{ pl: 4, py: 1 }}
+                                  onClick={() => handleCountrySelect(country)}
+                                >
+                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px" }} />
+                                  <ListItemText
+                                    primary={country.name}
+                                    primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
+                                  />
+                                </ListItem>
+                              ))}
                             </List>
                           </Collapse>
 
@@ -500,24 +542,24 @@ const Navbar = () => {
 
                           <ListItem
                             button
-                            onClick={() => setSubmenuOpen(!submenuOpen)}
+                            onClick={() => setNewsSubmenuOpen(!newsSubmenuOpen)}
                             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                           >
                             <ListItemText
                               primary="News"
                               primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                             />
-                            {submenuOpen ? (
+                            {newsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
                             ) : (
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={submenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse in={newsSubmenuOpen} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/blogs"
+                                to="/blog"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -536,21 +578,29 @@ const Navbar = () => {
 
                           <ListItem
                             button
-                            onClick={() => setSubmenuOpen(!submenuOpen)}
+                            onClick={() => setAboutSubmenuOpen(!aboutSubmenuOpen)}
                             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                           >
                             <ListItemText
                               primary="About Us"
                               primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                             />
-                            {submenuOpen ? (
+                            {aboutSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
                             ) : (
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={submenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse in={aboutSubmenuOpen} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
+                              <ListItem
+                                component={Link}
+                                to="/about"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="About Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
                               <ListItem
                                 component={Link}
                                 to="/why-us"
@@ -595,70 +645,6 @@ const Navbar = () => {
               </>
             ) : (
               <ButtonContainer>
-                <div
-                  onMouseEnter={handleCountryHover}
-                  onMouseLeave={handleCountryClose}
-                  style={{ position: "relative" }}
-                >
-                  <DropdownButton
-                    active={false}
-                    isTargetPage={isTargetPage}
-                    isScrolled={isScrolled}
-                    isOpen={Boolean(countryAnchorEl)}
-                  >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-                        Countries
-                        <ExpandMore
-                          sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
-                            textShadow: "0 0 5px #00D4FF",
-                          }}
-                        />
-                      </Box>
-                      <NeonHoverEffect active={false} />
-                    </Box>
-                  </DropdownButton>
-
-                  <FuturisticMenu
-                    id="country-menu"
-                    anchorEl={countryAnchorEl}
-                    keepMounted
-                    open={Boolean(countryAnchorEl)}
-                    onClose={handleCountryClose}
-                    disableScrollLock
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                  >
-                    <FuturisticMenuItem onClick={handleCountryClose}>
-                      <img src={flagUSA} alt="USA Flag" />
-                      USA
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleCountryClose}>
-                      <img src={flagUK} alt="UK Flag" />
-                      UK
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleCountryClose}>
-                      <img src={flagCanada} alt="Canada Flag" />
-                      Canada
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleCountryClose}>
-                      <img src={flagAustralia} alt="Australia Flag" />
-                      Australia
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleCountryClose}>
-                      <img src={flagIndia} alt="India Flag" />
-                      India
-                    </FuturisticMenuItem>
-                  </FuturisticMenu>
-                </div>
-
                 <FuturisticButton
                   component={Link}
                   to="/solution"
@@ -687,12 +673,11 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    component={Link}
-                    to="/events"
                     active={location.pathname === "/events" || location.pathname === "/trainings"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
+                    onClick={handleEventsClick}
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
@@ -739,8 +724,6 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    component={Link}
-                    to="/services"
                     active={
                       location.pathname === "/marketing-consultation" ||
                       location.pathname === "/channel-professional-services"
@@ -748,6 +731,7 @@ const Navbar = () => {
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(servicesAnchorEl)}
+                    onClick={handleServicesClick}
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
@@ -799,12 +783,11 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    component={Link}
-                    to="/news"
-                    active={location.pathname === "/blogs" || location.pathname === "/press-&-media"}
+                    active={location.pathname === "/blog" || location.pathname === "/press-&-media"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
+                    onClick={handleNewsClick}
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
@@ -816,7 +799,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/blogs" || location.pathname === "/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/press-&-media"} />
                     </Box>
                   </DropdownButton>
 
@@ -836,7 +819,7 @@ const Navbar = () => {
                       horizontal: "left",
                     }}
                   >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/blogs">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/blog">
                       Blogs
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/press-&-media">
@@ -851,9 +834,8 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    component={Link}
-                    to="/about"
                     active={
+                      location.pathname === "/about" ||
                       location.pathname === "/why-us" ||
                       location.pathname === "/global-coverage" ||
                       location.pathname === "/leadership" ||
@@ -862,6 +844,7 @@ const Navbar = () => {
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(aboutAnchorEl)}
+                    onClick={handleAboutClick}
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
@@ -875,6 +858,7 @@ const Navbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
+                          location.pathname === "/about" ||
                           location.pathname === "/why-us" ||
                           location.pathname === "/global-coverage" ||
                           location.pathname === "/leadership" ||
@@ -900,6 +884,9 @@ const Navbar = () => {
                       horizontal: "left",
                     }}
                   >
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/about">
+                      About Us
+                    </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/why-us">
                       Why Us
                     </FuturisticMenuItem>
@@ -912,6 +899,60 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/careers">
                       Careers
                     </FuturisticMenuItem>
+                  </FuturisticMenu>
+                </div>
+
+                <div
+                  onMouseEnter={handleCountryHover}
+                  onMouseLeave={handleCountryClose}
+                  style={{ position: "relative" }}
+                >
+                  <DropdownButton
+                    active={false}
+                    isTargetPage={isTargetPage}
+                    isScrolled={isScrolled}
+                    isOpen={Boolean(countryAnchorEl)}
+                  >
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "20px", height: "15px", borderRadius: "2px" }} />
+                        Countries
+                        <ExpandMore
+                          sx={{
+                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                            textShadow: "0 0 5px #00D4FF",
+                          }}
+                        />
+                      </Box>
+                      <NeonHoverEffect active={false} />
+                    </Box>
+                  </DropdownButton>
+
+                  <FuturisticMenu
+                    id="country-menu"
+                    anchorEl={countryAnchorEl}
+                    keepMounted
+                    open={Boolean(countryAnchorEl)}
+                    onClose={handleCountryClose}
+                    disableScrollLock
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                  >
+                    {countries.map((country) => (
+                      <FuturisticMenuItem
+                        key={country.name}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <img src={country.flag} alt={`${country.name} Flag`} />
+                        {country.name}
+                      </FuturisticMenuItem>
+                    ))}
                   </FuturisticMenu>
                 </div>
 
