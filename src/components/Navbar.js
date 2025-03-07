@@ -184,9 +184,6 @@ const FuturisticMenu = styled(Menu)({
     boxShadow: "0 0 15px rgba(0, 212, 255, 0.3)",
     padding: "0.5rem 0",
     animation: `${slideIn} 0.3s ease-in-out`,
-    // width: "155px",
-    // maxHeight: "250px",
-    overflowY: countries.length > 5 ? "auto" : "hidden",
     "&::-webkit-scrollbar": {
       width: "4px",
     },
@@ -438,7 +435,7 @@ const Navbar = () => {
                             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                           >
                             <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "20px", height: "15px", borderRadius: "2px" }} />
+                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
                               <ListItemText
                                 primary="Countries"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
@@ -451,14 +448,34 @@ const Navbar = () => {
                             )}
                           </ListItem>
                           <Collapse in={countriesSubmenuOpen} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding sx={{ maxHeight: "300px", overflowY: "auto" }}>
+                            <List
+                              component="div"
+                              disablePadding
+                              sx={{
+                                maxHeight: "250px", // Fixed max height for mobile view
+                                overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
+                                "&::-webkit-scrollbar": {
+                                  width: "4px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                  background: "rgba(15, 32, 39, 0.8)",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                  background: "#00D4FF",
+                                  borderRadius: "3px",
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                  background: "#0288D1",
+                                },
+                              }}
+                            >
                               {countries.map((country) => (
                                 <ListItem
                                   key={country.name}
                                   sx={{ pl: 4, py: 1 }}
                                   onClick={() => handleCountrySelect(country)}
                                 >
-                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "20px", height: "15px", borderRadius: "2px" }} />
+                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
                                   <ListItemText
                                     primary={country.name}
                                     primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
@@ -925,7 +942,7 @@ const Navbar = () => {
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "20px", height: "15px", borderRadius: "2px" }} />
+                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "25px", height: "25px", borderRadius: "2px" }} />
                         Countries
                         <ExpandMore
                           sx={{
@@ -953,13 +970,20 @@ const Navbar = () => {
                       vertical: "top",
                       horizontal: "left",
                     }}
+                    PaperProps={{
+                      style: {
+                        maxHeight: "250px", // Fixed max height for desktop view
+                        overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
+                        width: "200px", // Fixed width for consistency
+                      },
+                    }}
                   >
                     {countries.map((country) => (
                       <FuturisticMenuItem
                         key={country.name}
                         onClick={() => handleCountrySelect(country)}
                       >
-                        <img src={country.flag} alt={`${country.name} Flag`} />
+                        <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
                         {country.name}
                       </FuturisticMenuItem>
                     ))}
