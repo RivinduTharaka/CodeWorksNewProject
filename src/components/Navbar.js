@@ -737,7 +737,7 @@ const Navbar = () => {
                     }}
                   >
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
-                      Events
+                      Events | Webinars
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/trainings">
                       Trainings
