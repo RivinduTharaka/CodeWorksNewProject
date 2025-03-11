@@ -5,32 +5,29 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-// Import your vendor images (replace with your actual image paths)
-// First slider images
-import Vendor1_1 from '../../assets/image/download (1).jpg';
-import Vendor1_2 from '../../assets/image/download (2).jpg';
-import Vendor1_3 from '../../assets/image/download (3).jpg';
-import Vendor1_4 from '../../assets/image/download (4).jpg';
-import Vendor1_5 from '../../assets/image/download (5).jpg';
+// Import all vendor images into a single array (replace with actual image paths)
+import Vendor1 from '../../assets/image/download (1).jpg';
+import Vendor2 from '../../assets/image/download (2).jpg';
+import Vendor3 from '../../assets/image/download (3).jpg';
+import Vendor4 from '../../assets/image/download (4).jpg';
+import Vendor5 from '../../assets/image/download (5).jpg';
+import Vendor6 from '../../assets/image/download (1).jpg';
+import Vendor7 from '../../assets/image/download (2).jpg';
+import Vendor8 from '../../assets/image/download (3).jpg';
+import Vendor9 from '../../assets/image/download (4).jpg';
+import Vendor10 from '../../assets/image/download (5).jpg';
+import Vendor11 from '../../assets/image/download (1).jpg';
+import Vendor12 from '../../assets/image/download (2).jpg';
+import Vendor13 from '../../assets/image/download (3).jpg';
+import Vendor14 from '../../assets/image/download (4).jpg';
+import Vendor15 from '../../assets/image/download (5).jpg';
 
-// Second slider images
-import Vendor2_1 from '../../assets/image/download (1).jpg';
-import Vendor2_2 from '../../assets/image/download (2).jpg';
-import Vendor2_3 from '../../assets/image/download (3).jpg';
-import Vendor2_4 from '../../assets/image/download (4).jpg';
-import Vendor2_5 from '../../assets/image/download (5).jpg';
-
-// Third slider images
-import Vendor3_1 from '../../assets/image/download (1).jpg';
-import Vendor3_2 from '../../assets/image/download (2).jpg';
-import Vendor3_3 from '../../assets/image/download (3).jpg';
-import Vendor3_4 from '../../assets/image/download (4).jpg';
-import Vendor3_5 from '../../assets/image/download (5).jpg';
-
-// Vendor images arrays
-const vendorsFirstSlider = [Vendor1_1, Vendor1_2, Vendor1_3, Vendor1_4, Vendor1_5];
-const vendorsSecondSlider = [Vendor2_1, Vendor2_2, Vendor2_3, Vendor2_4, Vendor2_5];
-const vendorsThirdSlider = [Vendor3_1, Vendor3_2, Vendor3_3, Vendor3_4, Vendor3_5];
+// Single array of all vendors
+const vendors = [
+  Vendor1, Vendor2, Vendor3, Vendor4, Vendor5,
+  Vendor6, Vendor7, Vendor8, Vendor9, Vendor10,
+  Vendor11, Vendor12, Vendor13, Vendor14, Vendor15,
+];
 
 // Styled Components (unchanged)
 const SectionContainer = styled(Box)(({ theme }) => ({
@@ -101,6 +98,15 @@ const sliderSettingsLeftToRight = {
 };
 
 function VendorSlider() {
+  // Calculate the number of sliders needed (5 vendors per slider)
+  const vendorsPerSlider = 5;
+  const totalSliders = Math.ceil(vendors.length / vendorsPerSlider);
+
+  // Function to get the slider settings based on index (alternate direction)
+  const getSliderSettings = (index) => {
+    return index % 2 === 0 ? sliderSettingsRightToLeft : sliderSettingsLeftToRight;
+  };
+
   return (
     <SectionContainer>
       <Typography
@@ -153,40 +159,27 @@ function VendorSlider() {
       </Typography>
 
       <Container maxWidth="lg">
-        {/* First Slider (Right to Left) */}
-        <SliderContainer>
-          <Slider {...sliderSettingsRightToLeft}>
-            {vendorsFirstSlider.map((vendor, index) => (
-              <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
-              </Box>
-            ))}
-          </Slider>
-        </SliderContainer>
-        <Divider sx={{ width: '100%', mb: 2 }} />
+        {/* Dynamically generate sliders */}
+        {Array.from({ length: totalSliders }).map((_, sliderIndex) => {
+          // Slice the vendors array for the current slider
+          const startIndex = sliderIndex * vendorsPerSlider;
+          const currentVendors = vendors.slice(startIndex, startIndex + vendorsPerSlider);
 
-        {/* Second Slider (Left to Right) */}
-        <SliderContainer>
-          <Slider {...sliderSettingsLeftToRight}>
-            {vendorsSecondSlider.map((vendor, index) => (
-              <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
-              </Box>
-            ))}
-          </Slider>
-        </SliderContainer>
-        <Divider sx={{ width: '100%', mb: 2 }} />
-
-        {/* Third Slider (Right to Left) */}
-        <SliderContainer>
-          <Slider {...sliderSettingsRightToLeft}>
-            {vendorsThirdSlider.map((vendor, index) => (
-              <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
-              </Box>
-            ))}
-          </Slider>
-        </SliderContainer>
+          return (
+            <React.Fragment key={sliderIndex}>
+              <SliderContainer>
+                <Slider {...getSliderSettings(sliderIndex)}>
+                  {currentVendors.map((vendor, index) => (
+                    <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <VendorImage src={vendor} alt={`Vendor ${startIndex + index + 1}`} />
+                    </Box>
+                  ))}
+                </Slider>
+              </SliderContainer>
+              {sliderIndex < totalSliders - 1 && <Divider sx={{ width: '100%', mb: 2 }} />}
+            </React.Fragment>
+          );
+        })}
       </Container>
     </SectionContainer>
   );
