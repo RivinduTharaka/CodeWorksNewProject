@@ -39,8 +39,19 @@ const Title = styled(Typography)(({ theme }) => ({
   color: '#ffffff',
   marginBottom: theme.spacing(2),
   textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', // Added for better readability on video
+  animation: 'fadeInSlideUp 1s ease-out forwards', // Animation added
   [theme.breakpoints.down('sm')]: {
     fontSize: '2.5rem',
+  },
+  '@keyframes fadeInSlideUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(50px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
   },
 }));
 
@@ -52,9 +63,22 @@ const Description = styled(Typography)(({ theme }) => ({
   margin: '0 auto',
   lineHeight: '1.6',
   textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)', // Added for better readability on video
+  animation: 'fadeInSlideUp 1s ease-out forwards', // Animation added
+  animationDelay: '0.3s', // Slight delay for staggered effect
+  opacity: 0, // Initial state for animation
   [theme.breakpoints.down('sm')]: {
     fontSize: '0.9rem',
     maxWidth: '90%',
+  },
+  '@keyframes fadeInSlideUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(50px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
   },
 }));
 

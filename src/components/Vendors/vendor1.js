@@ -32,8 +32,8 @@ const Title = styled('div')(({ theme }) => ({
   textAlign: 'center',
   textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', // Improves readability on video
   marginBottom: '1rem', // Space between title and subtitle
-  // lineHeight: '1.2', // Uncomment if needed
   fontSize: '4rem', // Default font size (used for xl and above)
+  animation: 'fadeInSlideUp 1s ease-out forwards', // Animation added
   [theme.breakpoints.down('xl')]: {
     fontSize: '4rem', // Large screens (1200px - 1536px)
   },
@@ -45,6 +45,16 @@ const Title = styled('div')(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     fontSize: '3rem', // Mobile (0px - 600px)
+  },
+  '@keyframes fadeInSlideUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(50px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
   },
 }));
 
@@ -58,6 +68,19 @@ const Subtitle = styled('div')({
   textAlign: 'center',
   textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)', // Improves readability on video
   maxWidth: '80%', // Prevent overflow on smaller screens
+  animation: 'fadeInSlideUp 1s ease-out forwards', // Animation added
+  animationDelay: '0.3s', // Slight delay for staggered effect
+  opacity: 0, // Initial state for animation
+  '@keyframes fadeInSlideUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(50px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
+  },
 });
 
 function Vendor1() {
