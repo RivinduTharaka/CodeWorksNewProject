@@ -52,7 +52,7 @@ const Footer = () => {
           {/* Company Info */}
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" fontWeight="bold" gutterBottom>
-              Connex360
+              Connex IT
             </Typography>
             <Typography variant="body2" sx={{ maxWidth: '280px', lineHeight: 1.6 }}>
               Transforming businesses with innovative smart solutions & digital transformation services.
@@ -100,7 +100,7 @@ const Footer = () => {
             </Box>
             <Box display="flex" alignItems="center">
               <Email sx={{ color: primaryColor, mr: 1 }} />
-              <Typography variant="body2">info@connex360.com</Typography>
+              <Typography variant="body2">info@connexit.com</Typography>
             </Box>
 
             {/* Social Media */}
