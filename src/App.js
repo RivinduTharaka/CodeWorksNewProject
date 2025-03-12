@@ -19,6 +19,7 @@ import Trainings from './components/Evnt/Trainings/Trainings';
 // import  {Blogs} from './components/News/Blogs/Blogs';
 import BlogDetails from './components/News/Blogs/BlogDetails';
 import RegisterEvent from './components/Evnt/EventsNews/RegisterEvent';
+import WhyUs from './components/AboutUs/WhyUs/WhyUs';
 
 const App = () => {
   return (
@@ -43,6 +44,8 @@ const App = () => {
         <Route path="/trainings" element={<Trainings />} />
         <Route path="/blog/:title" element={<BlogDetails />} />
         <Route path="/events/register/:id" element={<RegisterEvent />} />
+        
+        <Route path="/why-us" element={<WhyUs />} />
 
 
       </Routes>
