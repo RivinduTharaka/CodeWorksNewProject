@@ -85,10 +85,9 @@ const TrainingCard = styled(Card)({
 });
 
 const TrainingMedia = styled(CardMedia)({
-  width: '100%', // Ensure the image takes the full width of the card
-  height: 260, // Fixed height to fit within the card's 380px total height (leaving space for CardContent)
-  
-  padding: '8px', // Add padding to the image
+  width: '100%',
+  height: 260,
+  padding: '8px',
 });
 
 const TrainingTitle = styled(Typography)({
@@ -177,6 +176,7 @@ const ModalDetails = styled(Box)({
 const ModalDetailText = styled(Typography)(({ theme }) => ({
   fontSize: '1rem',
   color: theme.palette.text.primary,
+  marginBottom: '8px', // Added margin for spacing between lines
   [theme.breakpoints.down('sm')]: {
     fontSize: '0.85rem',
   },
@@ -191,7 +191,7 @@ const CustomInput = styled(Input)({
     borderBottom: '1px solid #000',
   },
   '&:after': {
-    borderBottom: '2px solid rgb(5, 59, 12)', // Red underline for focus (like "First Name")
+    borderBottom: '2px solid rgb(5, 59, 12)',
   },
 });
 
@@ -213,12 +213,8 @@ const cardVariants = {
 // Mock function to simulate database submission
 const submitToDatabase = async (data) => {
   try {
-    // Simulate a delay for the API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Simulate a random success or failure (for demo purposes)
-    const isSuccess = Math.random() > 0.2; // 80% chance of success
-
+    const isSuccess = Math.random() > 0.2;
     if (isSuccess) {
       return { success: true, message: 'Registration successful!' };
     } else {
@@ -260,6 +256,7 @@ function Trainings2() {
           mode: "In-classroom",
           date: "Mar 17, 2025",
           duration: "4 Days",
+          sessionTime: "9:00 AM - 5:00 PM",
           description: "This training provides an in-depth understanding of configuring advanced Web Application Firewalls (WAF) to protect against sophisticated cyber threats. Hands-on labs included.",
         },
         {
@@ -272,6 +269,7 @@ function Trainings2() {
           mode: "In-classroom",
           date: "Mar 17, 2025",
           duration: "4 Days",
+          sessionTime: "9:00 AM - 5:00 PM",
           description: "Explore advanced Fortinet security solutions with expert-led sessions, focusing on firewall configuration and network security optimization.",
         },
         {
@@ -284,6 +282,7 @@ function Trainings2() {
           mode: "In-classroom",
           date: "Mar 17, 2025",
           duration: "4 Days",
+          sessionTime: "9:00 AM - 5:00 PM",
           description: "A foundational course covering network security basics, including protocols, encryption, and threat detection techniques.",
         },
         {
@@ -296,6 +295,7 @@ function Trainings2() {
           mode: "In-classroom",
           date: "Mar 17, 2025",
           duration: "4 Days",
+          sessionTime: "9:00 AM - 5:00 PM",
           description: "Learn to identify, analyze, and mitigate cybersecurity threats using real-world scenarios and advanced analytical tools.",
         },
       ];
@@ -305,9 +305,9 @@ function Trainings2() {
   }, []);
 
   const handleOpenModal = (training) => {
+    console.log("Selected Training:", training); // Debug log to check data
     setSelectedTraining(training);
     setOpenModal(true);
-    // Reset form data when opening modal
     setFormData({
       name: '',
       email: '',
@@ -326,7 +326,6 @@ function Trainings2() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (formErrors[name]) {
       setFormErrors((prev) => ({ ...prev, [name]: '' }));
     }
@@ -349,36 +348,26 @@ function Trainings2() {
 
   const handleRegisterClick = async (training) => {
     if (validateForm()) {
-      // Close the modal immediately when Register is clicked
       handleCloseModal();
-
       try {
-        // Simulate submitting data to the database
         const response = await submitToDatabase({ ...formData, trainingId: training.id });
-
         if (response.success) {
-          // Show success SweetAlert over the closed popup
           await Swal.fire({
             icon: 'success',
             title: 'Success!',
             text: response.message,
             confirmButtonText: 'OK',
-            timer: 3000, // Auto-close after 3 seconds
+            timer: 3000,
             timerProgressBar: true,
             didOpen: () => {
               const popup = Swal.getPopup();
               if (popup) {
-                popup.style.zIndex = '1500'; // Ensure SweetAlert is above other elements
+                popup.style.zIndex = '1500';
               }
             },
           });
-
-          // Reload the page to "redirect" to the training page
           window.location.reload();
-          // Alternatively, if the training page is at a specific route like '/trainings', you can use:
-          // window.location.href = '/trainings';
         } else {
-          // Show error SweetAlert over the closed popup
           await Swal.fire({
             icon: 'error',
             title: 'Error!',
@@ -387,13 +376,12 @@ function Trainings2() {
             didOpen: () => {
               const popup = Swal.getPopup();
               if (popup) {
-                popup.style.zIndex = '1500'; // Ensure SweetAlert is above other elements
+                popup.style.zIndex = '1500';
               }
             },
           });
         }
       } catch (error) {
-        // Show error SweetAlert for unexpected errors
         await Swal.fire({
           icon: 'error',
           title: 'Error!',
@@ -402,7 +390,7 @@ function Trainings2() {
           didOpen: () => {
             const popup = Swal.getPopup();
             if (popup) {
-              popup.style.zIndex = '1500'; // Ensure SweetAlert is above other elements
+              popup.style.zIndex = '1500';
             }
           },
         });
@@ -437,7 +425,7 @@ function Trainings2() {
                   transition={{ delay: index * 0.2 }}
                 >
                   <TrainingCard>
-                    <Box sx={{ position: "relative", height: '260px' }}> {/* Fixed height for image container */}
+                    <Box sx={{ position: "relative", height: '260px' }}>
                       <TrainingMedia component="img" image={training.image} alt={training.title} />
                     </Box>
                     <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
@@ -463,21 +451,27 @@ function Trainings2() {
         <ModalContent>
           <ModalHeader>
             <ModalLogo src={f5Logo} alt="F5 Logo" />
-            <ModalTitle>{selectedTraining?.title}</ModalTitle>
+            <ModalTitle>{selectedTraining?.title || 'Training Title'}</ModalTitle>
           </ModalHeader>
           <Box>
-            <ModalDescription>{selectedTraining?.description}</ModalDescription>
-            <ModalDetailText sx={{ mb: 1 }}>{selectedTraining?.subject}</ModalDetailText>
+            <ModalDescription>{selectedTraining?.description || 'No description available'}</ModalDescription>
+            <ModalDetailText sx={{ mb: 1 }}>{selectedTraining?.subject || 'Subject not specified'}</ModalDetailText>
             <ModalDetails>
               <RoomIcon sx={{ fontSize: '20px', color: theme.palette.text.primary }} />
               <ModalDetailText>
-                {selectedTraining?.language} – {selectedTraining?.location} – {selectedTraining?.mode}
+                {selectedTraining?.language || 'N/A'} – {selectedTraining?.location || 'N/A'} – {selectedTraining?.mode || 'N/A'}
               </ModalDetailText>
             </ModalDetails>
             <ModalDetailText>
-              {selectedTraining?.date} – {selectedTraining?.duration}
+              Start Date: {selectedTraining?.date || 'N/A'}
             </ModalDetailText>
-
+            <ModalDetailText>
+              Duration: {selectedTraining?.duration || 'N/A'}
+            </ModalDetailText>
+            <ModalDetailText>
+              Daily Session Time: {selectedTraining?.sessionTime || 'Not specified'}
+            </ModalDetailText>
+            <hr />
             {/* Form Fields */}
             <Box sx={{ mt: 2 }}>
               <FormLabel>First Name:<span className="required"> *</span></FormLabel>
@@ -517,6 +511,8 @@ function Trainings2() {
                   {formErrors.contactNumber && <Typography color="error">{formErrors.contactNumber}</Typography>}
                 </Box>
               </Box>
+
+
 
               <FormLabel>Email:</FormLabel>
               <CustomInput
