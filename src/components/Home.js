@@ -214,7 +214,7 @@ const Home = () => {
           <TypewriterText>
             <Typewriter
               options={{
-                strings: ['#EMPOWERING-Technology'],
+                strings: ['#empoweringtechnology'],
                 autoStart: true,
                 loop: true,
                 delay: 80,
