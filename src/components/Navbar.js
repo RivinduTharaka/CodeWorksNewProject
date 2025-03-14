@@ -274,9 +274,10 @@ const Navbar = () => {
     location.pathname === '/vendors' ||
     location.pathname === '/contact' ||
     location.pathname === '/events' ||
-    location.pathname === '/trainings' ||
-    location.pathname === '/marketing-consultation' ||
-    location.pathname === '/channel-professional-services' ||
+    location.pathname === '/workshops' ||
+    location.pathname === '/technical-support' ||
+    location.pathname === '/professional-services' || // New path
+    location.pathname === '/trainings' || // Reverted to original path
     location.pathname === '/blog' ||
     location.pathname === '/press-&-media' ||
     location.pathname === '/why-us' ||
@@ -502,7 +503,7 @@ const Navbar = () => {
                                 primary="Events & Webinars"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/trainings'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/workshops'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -522,11 +523,11 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/trainings"
+                                to="/workshops"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Trainings" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText primary="Workshops" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
                             </List>
                           </Collapse>
@@ -536,10 +537,19 @@ const Navbar = () => {
                             onClick={() => setServicesSubmenuOpen(!servicesSubmenuOpen)}
                             sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                           >
-                            <ListItemText
-                              primary="Services"
-                              primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
-                            />
+                            <MobileNavLinkContainer>
+                              <ListItemText
+                                primary="Services"
+                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                              />
+                              <MobileNeonHoverEffect
+                                active={
+                                  location.pathname === '/technical-support' ||
+                                  location.pathname === '/professional-services' ||
+                                  location.pathname === '/trainings'
+                                }
+                              />
+                            </MobileNavLinkContainer>
                             {servicesSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
                             ) : (
@@ -550,19 +560,27 @@ const Navbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/marketing-consultation"
+                                to="/technical-support"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Marketing Consultation" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText primary="Technical Support" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/channel-professional-services"
+                                to="/professional-services"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Channel Professional Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText primary="Professional Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/trainings"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="Trainings" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
                             </List>
                           </Collapse>
@@ -628,7 +646,6 @@ const Navbar = () => {
                               >
                                 <ListItemText primary="About Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
-
                               <ListItem
                                 component={Link}
                                 to="/why-us"
@@ -637,7 +654,6 @@ const Navbar = () => {
                               >
                                 <ListItemText primary="Why Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
-                            
                               <ListItem
                                 component={Link}
                                 to="/global-coverage"
@@ -702,7 +718,7 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/events" || location.pathname === "/trainings"}
+                    active={location.pathname === "/events" || location.pathname === "/workshops"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -718,7 +734,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/trainings"} />
+                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/workshops"} />
                     </Box>
                   </DropdownButton>
 
@@ -741,8 +757,8 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/trainings">
-                      Trainings
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/workshops">
+                      Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
                 </div>
@@ -754,8 +770,9 @@ const Navbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/marketing-consultation" ||
-                      location.pathname === "/channel-professional-services"
+                      location.pathname === "/technical-support" ||
+                      location.pathname === "/professional-services" ||
+                      location.pathname === "/trainings"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -774,8 +791,9 @@ const Navbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/marketing-consultation" ||
-                          location.pathname === "/channel-professional-services"
+                          location.pathname === "/technical-support" ||
+                          location.pathname === "/professional-services" ||
+                          location.pathname === "/trainings"
                         }
                       />
                     </Box>
@@ -797,11 +815,14 @@ const Navbar = () => {
                       horizontal: "left",
                     }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/marketing-consultation">
-                      Marketing Consultation
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/technical-support">
+                      Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/channel-professional-services">
-                      Channel Professional Services
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/professional-services">
+                      Professional Services
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/trainings">
+                      Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
                 </div>
@@ -916,11 +937,9 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/about">
                       About Us
                     </FuturisticMenuItem>
-
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/why-us">
                       Why Us
                     </FuturisticMenuItem>
-                
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
