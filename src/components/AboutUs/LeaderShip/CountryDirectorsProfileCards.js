@@ -23,11 +23,11 @@ import japanFlag from '../../../assets/image/OIP (5).jpg';
 
 // Director Data
 const directors = [
-  { name: 'John Doe', designation: 'Country Director', country: 'USA', image: director1Image, countryFlag: usaFlag, linkedin: 'https://linkedin.com/in/johndoe' },
-  { name: 'Jane Smith', designation: 'Country Director', country: 'UK', image: director2Image, countryFlag: ukFlag, linkedin: 'https://linkedin.com/in/janesmith' },
-  { name: 'Ravi Patel', designation: 'Country Director', country: 'India', image: director3Image, countryFlag: indiaFlag, linkedin: 'https://linkedin.com/in/ravipatel' },
-  { name: 'Anna Müller', designation: 'Country Director', country: 'Germany', image: director4Image, countryFlag: germanyFlag, linkedin: 'https://linkedin.com/in/annamueller' },
-  { name: 'Hiro Tanaka', designation: 'Country Director', country: 'Japan', image: director5Image, countryFlag: japanFlag, linkedin: 'https://linkedin.com/in/hirotanaka' },
+  { name: 'Shamal Aberathne', designation: 'Country Director ', country: 'USA', image: director1Image, countryFlag: usaFlag, linkedin: 'https://linkedin.com/in/johndoe' },
+  { name: 'Rohan Samaraweera ', designation: 'Country Director', country: 'UK', image: director2Image, countryFlag: ukFlag, linkedin: 'https://linkedin.com/in/janesmith' },
+  { name: 'Eranga Wickramasinghe', designation: 'Country Director', country: 'India', image: director3Image, countryFlag: indiaFlag, linkedin: 'https://linkedin.com/in/ravipatel' },
+  { name: 'Dilshan De Silva', designation: 'Country Director', country: 'Germany', image: director4Image, countryFlag: germanyFlag, linkedin: 'https://linkedin.com/in/annamueller' },
+  { name: 'Suresh Wijesinghe', designation: 'Country Director', country: 'Japan', image: director5Image, countryFlag: japanFlag, linkedin: 'https://linkedin.com/in/hirotanaka' },
 ];
 
 // Styled Components
@@ -65,15 +65,14 @@ const Description = styled(Typography)(({ theme }) => ({
   },
 }));
 
-// Wider Director Card (No Shadows)
+// Fixed Height and Width Director Card (No Shadows)
 const DirectorCard = styled(Box)(({ theme }) => ({
   position: 'relative',
   cursor: 'pointer',
   borderRadius: '16px',
   overflow: 'hidden',
-  height: '400px', // Increased height to match wider width
-  width: '100%',
-  maxWidth: '320px', // Increased width from 260px to 320px
+  height: '400px',
+  width: '250px', 
   transition: 'all 0.4s ease-in-out',
   border: '1px solid rgba(13, 71, 161, 0.2)',
   background: 'linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%)',
@@ -85,7 +84,7 @@ const DirectorCard = styled(Box)(({ theme }) => ({
 
 const DirectorImage = styled(Avatar)(({ theme }) => ({
   width: '100%',
-  height: '50%', // Adjusted height to match the wider card
+  height: '200px', // Fixed height (50% of card height)
   objectFit: 'cover',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
@@ -93,7 +92,8 @@ const DirectorImage = styled(Avatar)(({ theme }) => ({
 }));
 
 const CountryFlag = styled(Avatar)(({ theme }) => ({
-  height: '40px',
+  width: '40px',   // Fixed width
+  height: '30px',  // Fixed height
   margin: theme.spacing(1, 'auto'),
   borderRadius: '8px', // Square with slight rounding
   objectFit: 'cover',
@@ -120,20 +120,19 @@ const LinkedInIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
-  p: 2,
+  padding: theme.spacing(2),
   '& .slick-slide': {
-    padding: theme.spacing(0, 1), // Slightly increased padding to accommodate wider cards
+    padding: theme.spacing(0, 1),
     display: 'flex',
     justifyContent: 'center', // Center-align the cards in the slider
   },
   '& .slick-list': {
-    margin: theme.spacing(0, -1), // Adjusted margin to match padding and reduce gaps
+    margin: theme.spacing(0, -1),
   },
 }));
 
-// Updated Slider Settings for Wider Cards
+// Updated Slider Settings for Fixed-Size Cards
 const sliderSettings = {
-  // dots: true,
   infinite: true,
   speed: 700,
   slidesToShow: 4,
@@ -141,8 +140,7 @@ const sliderSettings = {
   autoplay: true,
   autoplaySpeed: 3000,
   arrows: false,
-  // centerMode: true,
-  centerPadding: '0px', // Adjusted to ensure wider cards are centered
+  centerPadding: '0px',
   responsive: [
     {
       breakpoint: 1024,
@@ -182,77 +180,79 @@ const CountryDirectorsProfileCards = () => {
         <CarouselContainer sx={{ p: 5 }}>
           <Slider {...sliderSettings}>
             {directors.map((director, index) => (
-              <DirectorCard sx={{ mt: 2 }} key={index}>
-                {/* Image */}
-                <DirectorImage src={director.image} alt={director.name} />
+              <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <DirectorCard>
+                  {/* Image */}
+                  <DirectorImage src={director.image} alt={director.name} />
 
-                {/* LinkedIn Icon (Top-Right Corner) */}
-                <LinkedInIconButton
-                  href={director.linkedin}
-                  target="_blank"
-                  aria-label={`LinkedIn profile of ${director.name}`}
-                >
-                  <LinkedInIcon />
-                </LinkedInIconButton>
+                  {/* LinkedIn Icon (Top-Right Corner) */}
+                  <LinkedInIconButton
+                    href={director.linkedin}
+                    target="_blank"
+                    aria-label={`LinkedIn profile of ${director.name}`}
+                  >
+                    <LinkedInIcon />
+                  </LinkedInIconButton>
 
-                {/* Content */}
-                <Box
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    height: '50%', // Adjusted height to match the wider card
-                  }}
-                >
-                  {/* Name */}
-                  <Fade in timeout={500}>
-                    <Typography
-                      variant="h6"
-                      fontWeight="700"
-                      color="#0D47A1"
-                      sx={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '0.5px' }}
-                    >
-                      {director.name}
-                    </Typography>
-                  </Fade>
-
-                  {/* Designation and Country */}
-                  <Fade in timeout={700}>
-                    <Box>
+                  {/* Content */}
+                  <Box
+                    sx={{
+                      p: 2,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      height: '200px', // Fixed height (remaining 50% of card height)
+                    }}
+                  >
+                    {/* Name */}
+                    <Fade in timeout={500}>
                       <Typography
-                        variant="body2"
-                        fontWeight="600"
-                        color="green"
-                        sx={{ fontFamily: 'Poppins, sans-serif' }}
+                        variant="h6"
+                        fontWeight="700"
+                        color="#0D47A1"
+                        sx={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '0.5px' }}
                       >
-                        {director.designation}
+                        {director.name}
                       </Typography>
-                      <Typography
-                        variant="body2"
-                        fontWeight="400"
-                        color="#666"
-                        sx={{ fontFamily: 'Poppins, sans-serif', mt: 0.5 }}
-                      >
-                        {director.country}
-                      </Typography>
-                    </Box>
-                  </Fade>
+                    </Fade>
 
-                  {/* Animated Flag */}
-                  <Fade in timeout={900}>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        mt: 1,
-                      }}
-                    >
-                      <CountryFlag src={director.countryFlag} alt={`${director.country} Flag`} />
-                    </Box>
-                  </Fade>
-                </Box>
-              </DirectorCard>
+                    {/* Designation and Country */}
+                    <Fade in timeout={700}>
+                      <Box>
+                        <Typography
+                          variant="body2"
+                          fontWeight="600"
+                          color="green"
+                          sx={{ fontFamily: 'Poppins, sans-serif' }}
+                        >
+                          {director.designation}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          fontWeight="400"
+                          color="#666"
+                          sx={{ fontFamily: 'Poppins, sans-serif', mt: 0.5 }}
+                        >
+                          {director.country}
+                        </Typography>
+                      </Box>
+                    </Fade>
+
+                    {/* Animated Flag */}
+                    <Fade in timeout={900}>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          mt: 1,
+                        }}
+                      >
+                        <CountryFlag src={director.countryFlag} alt={`${director.country} Flag`} />
+                      </Box>
+                    </Fade>
+                  </Box>
+                </DirectorCard>
+              </Box>
             ))}
           </Slider>
         </CarouselContainer>

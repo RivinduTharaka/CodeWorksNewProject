@@ -16,11 +16,11 @@ import leader5Image from '../../../assets/image/OIP.jpg';
 
 // Leader Data for Connex IT (no flags)
 const leaders = [
-  { name: 'John Doe', designation: 'Chief Marketing Officer', shortCode: 'CMO', image: leader1Image, linkedin: 'https://linkedin.com/in/johndoe' },
-  { name: 'Jane Smith', designation: 'Chief Technology Officer', shortCode: 'CTO', image: leader2Image, linkedin: 'https://linkedin.com/in/janesmith' },
-  { name: 'Ravi Patel', designation: 'Chief Financial Officer', shortCode: 'CFO', image: leader3Image, linkedin: 'https://linkedin.com/in/ravipatel' },
-  { name: 'Anna Müller', designation: 'Chief Operating Officer', shortCode: 'COO', image: leader4Image, linkedin: 'https://linkedin.com/in/annamueller' },
-  { name: 'Hiro Tanaka', designation: 'Chief Executive Officer', shortCode: 'CEO', image: leader5Image, linkedin: 'https://linkedin.com/in/hirotanaka' },
+  { name: 'Shamal Aberathne', designation: 'Chief Marketing Officer', shortCode: 'CMO', image: leader1Image, linkedin: 'https://linkedin.com/in/johndoe' },
+  { name: 'Rohan Samaraweera', designation: 'Chief Technology Officer', shortCode: 'CTO', image: leader2Image, linkedin: 'https://linkedin.com/in/janesmith' },
+  { name: 'Eranga Wickramasinghe', designation: 'Chief Revenue Officer', shortCode: 'CFO', image: leader3Image, linkedin: 'https://linkedin.com/in/ravipatel' },
+  { name: 'Dilshan De Silva', designation: 'Chief Operating Officer', shortCode: 'COO', image: leader4Image, linkedin: 'https://linkedin.com/in/annamueller' },
+  { name: 'Suresh Wijesinghe', designation: 'Chief Executive Officer', shortCode: 'CEO', image: leader5Image, linkedin: 'https://linkedin.com/in/hirotanaka' },
 ];
 
 // Styled Components
@@ -198,7 +198,7 @@ const ConnexITBoardLeaders = () => {
                   <Fade in timeout={700}>
                     <Typography
                       variant="body2"
-                      fontSize={25}
+                      fontSize={20}
                       fontWeight="600"
                       color="green"
                       sx={{ fontFamily: 'Poppins, sans-serif' }}
