@@ -278,7 +278,6 @@ function RegisterEvent() {
                           <MenuItem value="Mr">Mr</MenuItem>
                           <MenuItem value="Ms">Ms</MenuItem>
                           <MenuItem value="Mrs">Mrs</MenuItem>
-                          <MenuItem value="Dr">Dr</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
