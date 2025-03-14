@@ -14,7 +14,8 @@ import {
 } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
-import Swal from 'sweetalert2'; // Ensure this import works after installation
+import Swal from 'sweetalert2';
+import ReactCountryFlag from 'react-country-flag'; // Import for country flags
 
 // Reuse the same theme with premium adjustments
 const theme = createTheme({
@@ -26,13 +27,8 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "'Montserrat', 'Poppins', sans-serif",
-    h4: {
-      fontWeight: 700,
-      letterSpacing: '0.5px',
-    },
-    body1: {
-      letterSpacing: '0.3px',
-    },
+    h4: { fontWeight: 700, letterSpacing: '0.5px' },
+    body1: { letterSpacing: '0.3px' },
   },
   components: {
     MuiTextField: {
@@ -41,12 +37,8 @@ const theme = createTheme({
           '& .MuiOutlinedInput-root': {
             borderRadius: '8px',
             transition: 'all 0.3s ease',
-            '&:hover fieldset': {
-              borderColor: 'black',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: 'black',
-            },
+            '&:hover fieldset': { borderColor: 'black' },
+            '&.Mui-focused fieldset': { borderColor: 'black' },
           },
         },
       },
@@ -55,27 +47,29 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: '8px',
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'black',
-          },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'black',
-          },
+          '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'black' },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: 'black' },
         },
       },
     },
     MuiButton: {
       styleOverrides: {
-        root: {
-          borderRadius: '8px',
-          textTransform: 'none',
-          fontWeight: 600,
-          padding: '12px 24px',
-        },
+        root: { borderRadius: '8px', textTransform: 'none', fontWeight: 600, padding: '12px 24px' },
       },
     },
   },
 });
+
+// Sample country data with codes (expand as needed)
+const countries = [
+  { name: 'United States', code: 'US', dialCode: '+1' },
+  { name: 'United Kingdom', code: 'GB', dialCode: '+44' },
+  { name: 'Canada', code: 'CA', dialCode: '+1' },
+  { name: 'Australia', code: 'AU', dialCode: '+61' },
+  { name: 'India', code: 'IN', dialCode: '+91' },
+  { name: 'Germany', code: 'DE', dialCode: '+49' },
+  { name: 'France', code: 'FR', dialCode: '+33' },
+];
 
 function RegisterEvent() {
   const { id } = useParams();
@@ -89,7 +83,8 @@ function RegisterEvent() {
     companyName: '',
     email: '',
     contactNumber: '',
-    province: '',
+    countryCode: '+1', // Default to US
+    country: 'United States', // Default country
     city: '',
   });
 
@@ -99,18 +94,28 @@ function RegisterEvent() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (name === 'countryCode') {
+      // Find the first country that matches the selected country code
+      const selectedCountry = countries.find((country) => country.dialCode === value);
+      setFormData((prev) => ({
+        ...prev,
+        countryCode: value,
+        country: selectedCountry ? selectedCountry.name : prev.country, // Update country if found
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if seats are available
-    if (event.remainingSeats === "0" || event.remainingSeats === "Unlimited") {
-      if (event.remainingSeats !== "Unlimited") {
+    if (event.remainingSeats === '0' || event.remainingSeats === 'Unlimited') {
+      if (event.remainingSeats !== 'Unlimited') {
         Swal.fire({
-          icon: "error",
-          title: "No Seats are currently available",
+          icon: 'error',
+          title: 'No Seats are currently available',
           showConfirmButton: false,
           timer: 1500,
         });
@@ -118,7 +123,6 @@ function RegisterEvent() {
       }
     }
 
-    // Show loading alert
     Swal.fire({
       icon: 'info',
       title: 'Submitting...',
@@ -131,31 +135,26 @@ function RegisterEvent() {
     });
 
     try {
-      // Simulate API call (replace with actual API call to your database)
       const response = await new Promise((resolve, reject) => {
         setTimeout(() => {
-          // Simulate success (80% chance) or failure (20% chance)
           const isSuccess = Math.random() > 0.2;
           if (isSuccess) {
             resolve({ success: true });
           } else {
             reject(new Error('Submission failed'));
           }
-        }, 2000); // Simulate 2-second delay
+        }, 2000);
       });
 
-      // Close the loading alert
       Swal.close();
 
-      // Show success alert
       if (response.success) {
         Swal.fire({
-          title: "Submitted Successfully!",
-          icon: "success",
+          title: 'Submitted Successfully!',
+          icon: 'success',
           draggable: true,
         });
 
-        // Reset form after successful submission
         setFormData({
           title: '',
           name: '',
@@ -163,15 +162,13 @@ function RegisterEvent() {
           companyName: '',
           email: '',
           contactNumber: '',
-          province: '',
+          countryCode: '+1',
+          country: 'United States',
           city: '',
         });
       }
     } catch (error) {
-      // Close the loading alert
       Swal.close();
-
-      // Show failure alert
       alert('Failed to submit the form.');
     }
   };
@@ -179,7 +176,7 @@ function RegisterEvent() {
   if (!event) {
     return (
       <Container sx={{ py: 12 }}>
-        <Typography variant="h6" sx={{ textAlign: "center", mt: 5, color: theme.palette.text.secondary }}>
+        <Typography variant="h6" sx={{ textAlign: 'center', mt: 5, color: theme.palette.text.secondary }}>
           Event not found.
         </Typography>
       </Container>
@@ -189,18 +186,14 @@ function RegisterEvent() {
   return (
     <ThemeProvider theme={theme}>
       <Container sx={{ py: 15, background: 'linear-gradient(180deg, #F5F6FA 0%, #FFFFFF 100%)' }}>
-        <Box sx={{ maxWidth: "1200px", mx: "auto" }}>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+        <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <Typography
               variant="h4"
               sx={{
                 mb: 6,
-                textAlign: "center",
-                background: "linear-gradient(90deg, #1A237E, rgb(2, 61, 26))",
+                textAlign: 'center',
+                background: 'linear-gradient(90deg, #1A237E, rgb(2, 61, 26))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 700,
@@ -213,23 +206,15 @@ function RegisterEvent() {
           <Grid container spacing={5}>
             {/* Left Side: Event Image and Details */}
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
                 <Box
                   sx={{
-                    height: {
-                      xs: '200px',
-                      sm: '250px',
-                      md: '350px',
-                    },
+                    height: { xs: '200px', sm: '250px', md: '350px' },
                     width: '100%',
                     backgroundImage: `url(${event.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    borderRadius: "12px",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: '12px',
                     boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
                     position: 'relative',
                     overflow: 'hidden',
@@ -245,40 +230,20 @@ function RegisterEvent() {
                     },
                   }}
                 />
-                <Typography
-                  variant="body1"
-                  sx={{
-                    mt: 4,
-                    lineHeight: 1.8,
-                    color: theme.palette.text.primary,
-                    fontSize: '1.1rem',
-                  }}
-                >
+                <Typography variant="body1" sx={{ mt: 4, lineHeight: 1.8, color: theme.palette.text.primary, fontSize: '1.1rem' }}>
                   {event.description}
                 </Typography>
                 <Box sx={{ mt: 2 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: theme.palette.text.secondary, mb: 1 }}
-                  >
+                  <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
                     <strong>Date:</strong> {event.date}
                   </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: theme.palette.text.secondary, mb: 1 }}
-                  >
+                  <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
                     <strong>Time:</strong> {event.time}
                   </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: theme.palette.text.secondary, mb: 1 }}
-                  >
+                  <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
                     <strong>Mode:</strong> {event.mode}
                   </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ color: theme.palette.text.secondary, mb: 1 }}
-                  >
+                  <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
                     <strong>Remaining Seats:</strong> {event.remainingSeats}
                   </Typography>
                 </Box>
@@ -287,11 +252,7 @@ function RegisterEvent() {
 
             {/* Right Side: Registration Form */}
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
+              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
                 <Box
                   component="form"
                   onSubmit={handleSubmit}
@@ -305,15 +266,7 @@ function RegisterEvent() {
                     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
                   }}
                 >
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      mb: 1,
-                      color: theme.palette.primary.main,
-                      fontWeight: 600,
-                      textAlign: 'center',
-                    }}
-                  >
+                  <Typography variant="h6" sx={{ mb: 1, color: theme.palette.primary.main, fontWeight: 600, textAlign: 'center' }}>
                     Registration Details
                   </Typography>
 
@@ -321,13 +274,7 @@ function RegisterEvent() {
                     <Grid item xs={12} sm={6}>
                       <FormControl fullWidth>
                         <InputLabel sx={{ fontWeight: 500 }}>Title</InputLabel>
-                        <Select
-                          name="title"
-                          value={formData.title}
-                          onChange={handleChange}
-                          label="Title"
-                          required
-                        >
+                        <Select name="title" value={formData.title} onChange={handleChange} label="Title" required>
                           <MenuItem value="Mr">Mr</MenuItem>
                           <MenuItem value="Ms">Ms</MenuItem>
                           <MenuItem value="Mrs">Mrs</MenuItem>
@@ -389,7 +336,44 @@ function RegisterEvent() {
                       />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    {/* Country Code with Flags and Contact Number */}
+                    <Grid item xs={12} sm={4}>
+                      <FormControl fullWidth>
+                        <InputLabel sx={{ fontWeight: 500 }}>Code</InputLabel>
+                        <Select
+                          name="countryCode"
+                          value={formData.countryCode}
+                          onChange={handleChange}
+                          label="Code"
+                          required
+                          renderValue={(selected) => {
+                            const country = countries.find((c) => c.dialCode === selected);
+                            return (
+                              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <ReactCountryFlag
+                                  countryCode={country.code}
+                                  svg
+                                  style={{ width: '20px', marginRight: '8px' }}
+                                />
+                                {selected}
+                              </Box>
+                            );
+                          }}
+                        >
+                          {countries.map((country) => (
+                            <MenuItem key={country.code} value={country.dialCode}>
+                              <ReactCountryFlag
+                                countryCode={country.code}
+                                svg
+                                style={{ width: '20px', marginRight: '8px' }}
+                              />
+                              {country.dialCode}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={8}>
                       <TextField
                         fullWidth
                         label="Contact Number"
@@ -403,24 +387,27 @@ function RegisterEvent() {
                       />
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    {/* Country Dropdown */}
+                    <Grid item xs={12}>
                       <FormControl fullWidth>
-                        <InputLabel sx={{ fontWeight: 500 }}>Province</InputLabel>
+                        <InputLabel sx={{ fontWeight: 500 }}>Country</InputLabel>
                         <Select
-                          name="province"
-                          value={formData.province}
+                          name="country"
+                          value={formData.country}
                           onChange={handleChange}
-                          label="Province"
+                          label="Country"
                           required
                         >
-                          <MenuItem value="Western">Western</MenuItem>
-                          <MenuItem value="Central">Central</MenuItem>
-                          <MenuItem value="Southern">Southern</MenuItem>
+                          {countries.map((country) => (
+                            <MenuItem key={country.code} value={country.name}>
+                              {country.name}
+                            </MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                       <TextField
                         fullWidth
                         label="City"
