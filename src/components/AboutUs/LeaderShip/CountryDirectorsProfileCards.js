@@ -173,7 +173,7 @@ const CountryDirectorsProfileCards = () => {
     <SectionContainer>
       <Container maxWidth="lg">
         {/* Section Title */}
-        <Title>Our Country Directors</Title>
+        <Title>Board of Directors</Title>
         <Description>
           Meet the Exceptional Leaders Guiding Our Global Vision.
         </Description>

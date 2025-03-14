@@ -149,7 +149,7 @@ const ConnexITBoardLeaders = () => {
     <SectionContainer>
       <Container maxWidth="lg">
         {/* Section Title */}
-        <Title>Connex IT Leadership Team</Title>
+        <Title>Management Team </Title>
         <Description>
           Meet the Visionary C-Level Leaders Driving Connex IT Forward.
         </Description>

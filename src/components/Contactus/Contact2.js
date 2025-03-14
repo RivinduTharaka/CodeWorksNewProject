@@ -177,8 +177,8 @@ function Contact2() {
               mb: 2,
             }}
           >
-            Let us know how we can help
-          </Typography>
+            Let us know how we can assist you
+          </Typography> 
           <Typography
             variant="body1"
             sx={{
