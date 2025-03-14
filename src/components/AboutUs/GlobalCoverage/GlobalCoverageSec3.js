@@ -6,69 +6,103 @@ import {
   Card,
   CardContent,
   Link,
-  Container,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from "@mui/icons-material/Email";
+import {
+  EmailOutlined,
+  LocationOnOutlined,
+  PhoneOutlined,
+} from "@mui/icons-material";
 
 // Styled Components
 const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: "#ffffff",
-  padding: "40px 0",
+  padding: theme.spacing(4, 0),
   display: "flex",
   flexDirection: "column",
-  gap: "20px",
+  gap: theme.spacing(2),
   alignItems: "center",
-  fontFamily: "YourFontFamily, sans-serif",
+  fontFamily: "Montserrat, Arial, sans-serif",
 }));
 
 const RegionContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: "#002f6c",
+  backgroundColor: "#002158",
   color: "#ffffff",
-  padding: "40px",
+  padding: theme.spacing(3),
   width: "90%",
-  borderRadius: "20px",
+  borderRadius: theme.shape.borderRadius * 2,
   [theme.breakpoints.down("sm")]: {
     width: "95%",
+    padding: theme.spacing(2),
   },
 }));
 
-const RegionHeader = styled(Typography)({
-  fontSize: "2.5rem",
-  fontWeight: "bold",
+const RegionHeader = styled(Typography)(({ theme }) => ({
+  fontSize: "clamp(2rem, 5vw, 3rem)", // Responsive font size
+  fontWeight: 700,
   color: "#00aaff",
   textAlign: "left",
-  marginBottom: "20px",
-  paddingLeft: "10px",
-});
+  marginBottom: theme.spacing(1.5),
+  paddingLeft: theme.spacing(1),
+  fontFamily: "Montserrat, Arial, sans-serif",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    fontSize: "clamp(2rem, 4.5vw, 2.8rem)",
+  },
+  [theme.breakpoints.up("lg")]: {
+    fontSize: "3rem",
+  },
+}));
 
 const CountryCard = styled(Card)(({ theme }) => ({
-    backgroundColor: "#002f6c", // 👈 White with 30% transparency
-    color: "#ffff",
-    padding: "20px",
-    borderRadius: "10px",
-    width: "100%",
-    boxShadow: "none",
-    backdropFilter: "blur(10px)", // 👈 Adds a frosted-glass effect
-  }));
-  
-// Updated IconTextRow with increased spacing between rows
+  backgroundColor: "#002158",
+  color: "#ffffff",
+  padding: theme.spacing(2),
+  width: "100%",
+  boxShadow: "none",
+  borderRadius: theme.shape.borderRadius,
+  display: "flex",
+  flexDirection: "column",
+  transition: "transform 0.2s ease-in-out",
+  "&:hover": {
+    transform: "scale(1.02)", // Slight zoom effect on hover
+  },
+  [theme.breakpoints.down("sm")]: {
+    padding: theme.spacing(1.5),
+  },
+}));
+
+const CardContentStyled = styled(CardContent)(({ theme }) => ({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  minHeight: "300px", // Increased to accommodate longer content
+  [theme.breakpoints.down("sm")]: {
+    minHeight: "280px", // Slightly smaller on mobile
+  },
+}));
+
 const IconTextRow = ({ icon, text }) => (
   <Box
     display="flex"
     alignItems="center"
-    gap="10px"
-    sx={{ marginBottom: "15px" }}
+    gap={1}
+    sx={{ marginBottom: theme => theme.spacing(1.5) }}
   >
     {icon}
     <Typography
-      variant="body1"
+      variant="body2"
       sx={{
-        fontSize: "xs",
-        fontFamily: "sans-serif",
-        lineHeight: 1.8, // Increased line height for multi-line text
+        fontSize: "0.95rem",
+        fontWeight: 400,
+        fontFamily: "Montserrat, Arial, sans-serif",
+        lineHeight: 1.6,
+        // color: "#b5c4c7",
+        overflowWrap: "break-word", // Ensure long text wraps
       }}
     >
       {text}
@@ -89,42 +123,33 @@ const GlobalCoverageSec3 = () => {
         },
         {
           name: "Cambodia",
-          address: `11F-12, Morgan Tower,
-Sopheakmongkul Street,
-Village 14, Sangkat Tonle Bassac,
-Khan Chamkarmon, Phnom Penh, Cambodia`,
+          address: `11F-12, Morgan Tower, Sopheakmongkul Street, Village 14, Sangkat Tonle Bassac, Khan Chamkarmon, Phnom Penh, Cambodia`,
           phone: "+85586677044",
           contactUrl: "https://www.connexit.biz/kh/ContactUs",
         },
         {
           name: "Singapore",
-          address:
-            "60, Paya Lebar Road, #06-39, Paya Lebar Square, Singapore 409051",
+          address: "60, Paya Lebar Road, #06-39, Paya Lebar Square, Singapore 409051",
           phone: "+6567278910",
-          contactUrl: "https://www.connexit.biz/SL/ContactUs",
+          contactUrl: "https://www.connexit.biz/SG/ContactUs",
         },
         {
           name: "Brunei",
-          address: `Connex Information Technologies Sdn Bhd
-Unit B20, Block B, First Floor, Bangunan HABZA,
-Simpang 150, Kg Kiulap, Bandar Seri Begawan BE1518
-Negara Brunei Darussalam.`,
+          address: `Unit B20, Block B, First Floor, Bangunan HABZA, Simpang 150, Kg Kiulap, Bandar Seri Begawan BE1518, Negara Brunei Darussalam`,
           phone: "+673 223 3575",
           contactUrl: "https://www.connexit.biz/BRN/ContactUs",
         },
         {
           name: "Thailand",
-          address: `184/79, Forum Tower Building, 17th Floor, Ratchadaphisek Road,
-Huai Khwang, Bangkok 10310`,
+          address: `184/79, Forum Tower Building, 17th Floor, Ratchadaphisek Road, Huai Khwang, Bangkok 10310`,
           phone: "+66612700590",
           contactUrl: "https://www.connexit.biz/TH/ContactUs",
         },
         {
           name: "India",
-          address: `220 3rd Double Rd Domlur Indiranagar, 2nd Phase,
-Domlur Bangalore North Bangalore KA 560071, India`,
+          address: `220 3rd Double Rd Domlur Indiranagar, 2nd Phase, Domlur Bangalore North Bangalore KA 560071, India`,
           phone: "+91 789 933 9059",
-          contactUrl: "https://www.connexit.biz/SL/ContactUs",
+          contactUrl: "https://www.connexit.biz/IN/ContactUs",
         },
         {
           name: "Nepal",
@@ -145,8 +170,7 @@ Domlur Bangalore North Bangalore KA 560071, India`,
         },
         {
           name: "New Zealand",
-          address:
-            "CONNEX INFORMATION TECHNOLOGIES LIMITED,Plimmer Towers , 2-6 Glimmer Terrace,Wellington, 6011",
+          address: "Plimmer Towers, 2-6 Glimmer Terrace, Wellington, 6011",
           phone: "0226892981",
           contactUrl: "https://www.connexit.co.nz/ContactUs",
         },
@@ -157,12 +181,9 @@ Domlur Bangalore North Bangalore KA 560071, India`,
       countries: [
         {
           name: "Dubai",
-          address: `P.O. BOX: 410714
-Office 10, 806, 8th Floor,
-Opal Tower, Business Bay,
-Dubai, UAE`,
+          address: `P.O. BOX: 410714, Office 10, 806, 8th Floor, Opal Tower, Business Bay, Dubai, UAE`,
           phone: "+4 424 9988",
-          contactUrl: "https://www.connexit.biz/uae/ContactUs",
+          contactUrl: "https://www.connexit.biz/UAE/ContactUs",
         },
       ],
     },
@@ -171,10 +192,7 @@ Dubai, UAE`,
       countries: [
         {
           name: "Mauritius",
-          address: `Office C-03,
-Ebene Junction,
-Ebene, Quatre Bornes,
-Mauritius`,
+          address: `Office C-03, Ebene Junction, Ebene, Quatre Bornes, Mauritius`,
           phone: "+23 05 942 8354",
           contactUrl: "https://www.connexit.biz/MU/ContactUs",
         },
@@ -187,36 +205,44 @@ Mauritius`,
       {regionData.map((region) => (
         <RegionContainer key={region.region}>
           <RegionHeader>{region.region}</RegionHeader>
-          <Grid container spacing={3} justifyContent="flex-start">
+          <Grid container spacing={2} justifyContent="flex-start" alignItems="stretch">
             {region.countries.map((country) => (
               <Grid item key={country.name} xs={12} sm={6} md={4}>
                 <CountryCard>
-                  <CardContent>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
-                      {country.name}
-                    </Typography>
-                    <IconTextRow
-                      icon={<LocationOnIcon sx={{ color: "#00aaff" }} />}
-                      text={country.address}
-                    />
-                    <IconTextRow
-                      icon={<PhoneIcon sx={{ color: "#00aaff" }} />}
-                      text={country.phone}
-                    />
-                    <IconTextRow
-                      icon={<EmailIcon sx={{ color: "#00aaff" }} />}
-                      text={
-                        <Link
-                          href={country.contactUrl}
-                          target="_blank"
-                          underline="hover"
-                          sx={{ color: "#00aaff" }}
-                        >
-                          Contact Us Form
-                        </Link>
-                      }
-                    />
-                  </CardContent>
+                  <CardContentStyled>
+                    <Box>
+                      <Typography
+                        variant="h5"
+                        fontWeight={700}
+                        gutterBottom
+                        sx={{ color: "#00aaff", fontSize: "1.5rem" }}
+                      >
+                        {country.name}
+                      </Typography>
+                      <IconTextRow
+                        icon={<LocationOnOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
+                        text={country.address}
+                      />
+                      <IconTextRow
+                        icon={<PhoneOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
+                        text={country.phone}
+                      />
+                      <IconTextRow
+                        icon={<EmailOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
+                        text={
+                          <Link
+                            href={country.contactUrl}
+                            target="_blank"
+                            underline="hover"
+                            sx={{ color: "#00aaff", fontSize: "0.95rem" }}
+                          >
+                            Contact Us Form
+                          </Link>
+                        }
+                      />
+                    </Box>
+                    <Divider sx={{ borderColor: "#b5c4c7", marginTop: theme => theme.spacing(1) }} />
+                  </CardContentStyled>
                 </CountryCard>
               </Grid>
             ))}
