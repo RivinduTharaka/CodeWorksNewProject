@@ -23,7 +23,7 @@ const WhoweareSection = ({ ref }) => {
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the section is visible
+        threshold: 0.1,
       }
     );
 
@@ -31,7 +31,6 @@ const WhoweareSection = ({ ref }) => {
       observer.observe(sectionRef.current);
     }
 
-    // Cleanup
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
@@ -44,12 +43,12 @@ const WhoweareSection = ({ ref }) => {
       ref={(node) => {
         sectionRef.current = node;
         if (ref) {
-          ref.current = node; // Preserve the original ref if provided
+          ref.current = node;
         }
       }}
       id="about"
       sx={{
-        background: '#0a192f',  // Changed from gradient to solid color
+        background: '#0a192f',
         color: "#ffffff",
         py: { xs: 4, md: 6 },
         textAlign: "center",
@@ -87,18 +86,19 @@ const WhoweareSection = ({ ref }) => {
             mx: "auto",
             color: "#e0f7fa",
             mb: 5,
-          }}
+  }}
         >
-          Connex Information Technologies is a leading technology distributor specializing in
-          cutting-edge solutions, including distribution, consultancy, training, and TAC support.
-          With a decade of expertise, Connex thrives on adapting to the ever-changing world,
-          building strong relationships with clients and partners to meet dynamic market needs.
-          Their commitment to innovation, integrity, and partnership drives mutual growth and
-          sets new industry benchmarks.
+          A premier value-added IT distributor, delivering next-generation technologies and
+          cutting-edge digital solutions. With deep industry expertise and specialised training, we
+          empower our partners with scalable, Top-tier solutions to drive innovation and
+          accelerate growth. From advanced infrastructure and cybersecurity to cloud computing
+          and AI-driven solutions, we provide the technology, expertise, and support businesses
+          need to stay ahead in a rapidly evolving digital world. At Connex, we don’t just enable
+          success—we committed to redefine it.
         </Typography>
 
         <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={2.4}>
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <Box
                 component="img"
@@ -114,12 +114,12 @@ const WhoweareSection = ({ ref }) => {
                 variant={isMobile ? "body2" : "body1"}
                 sx={{ fontWeight: 600, color: "#ffffff" }}
               >
-                Driving Growth <br /> and Innovation
+                Founded  <br /> in 2014
               </Typography>
             </Box>
           </Grid>
 
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={2.4}>
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <Box
                 component="img"
@@ -140,7 +140,7 @@ const WhoweareSection = ({ ref }) => {
             </Box>
           </Grid>
 
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={2.4}>
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <Box
                 component="img"
@@ -156,12 +156,12 @@ const WhoweareSection = ({ ref }) => {
                 variant={isMobile ? "body2" : "body1"}
                 sx={{ fontWeight: 600, color: "#ffffff" }}
               >
-                Offices in <br /> 14 countries
+                15 <br />  countries
               </Typography>
             </Box>
           </Grid>
 
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={2.4}>
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <Box
                 component="img"
@@ -177,7 +177,28 @@ const WhoweareSection = ({ ref }) => {
                 variant={isMobile ? "body2" : "body1"}
                 sx={{ fontWeight: 600, color: "#ffffff" }}
               >
-                1:2 ratio of technical <br /> engineers to sales
+                70+ <br /> global vendors
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item xs={6} md={2.4}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <Box
+                component="img"
+                src={icon2}
+                alt="Offices Icon"
+                sx={{
+                  width: { xs: 50, md: 90 },
+                  height: { xs: 50, md: 90 },
+                  mb: 2,
+                }}
+              />
+              <Typography
+                variant={isMobile ? "body2" : "body1"}
+                sx={{ fontWeight: 600, color: "#ffffff" }}
+              >
+                350+ <br /> employees 
               </Typography>
             </Box>
           </Grid>
@@ -188,7 +209,7 @@ const WhoweareSection = ({ ref }) => {
           sx={{
             fontStyle: "italic",
             color: "rgba(255, 255, 255, 0.7)",
-            mt: 3,
+            mt: 10,
           }}
         >
           *Statistics based on the global Connex Information Technologies group

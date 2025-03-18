@@ -142,7 +142,7 @@ const TechnologyEcosystem = () => {
               viewport={{ once: true }}
               
             >
-              Train with Us
+            Upskill Today 
             </TrainButton>
           </motion.div>
         </Container>

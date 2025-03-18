@@ -143,7 +143,7 @@ const TextContainer = styled(Container)({
 });
 
 const MainText = styled(Typography)({
-  fontSize: '3.2rem',
+  fontSize: '2.6rem',
   fontWeight: '700',
   color: '#ffffff',
   animation: `${fadeIn} 1s ease-in-out`,
@@ -214,7 +214,7 @@ const Home = () => {
           <TypewriterText>
             <Typewriter
               options={{
-                strings: ['#empoweringtechnology'],
+                strings: ['#EmpoweringTechnology  '],
                 autoStart: true,
                 loop: true,
                 delay: 80,
@@ -224,11 +224,12 @@ const Home = () => {
           </TypewriterText>
 
           <MainText>
-            Connecting the World Through Reliable Distribution
+          Driving Innovation, Amplifying Value - Globally Trusted 
+          Technology Distributor 
           </MainText>
 
           <SubText>
-            Empowering the journey towards a secure and innovative digital future
+          Connecting the World Through Reliable Distribution 
           </SubText>
         </TextContainer>
       </HeroSection>

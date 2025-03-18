@@ -99,18 +99,18 @@ const CardDescription = styled(Typography)({
 
 // Styled Button (Premium Look)
 const MoreNewsButton = styled(Button)({
-    backgroundColor: '#ffffff', // White background
-    border: '2px solid #006400', // Dark green border
-    color: '#006400', // Dark green text
-    padding: '0.5rem 2.5rem',
-    fontSize: '1.1rem',
-    fontWeight: '600',
-    textTransform: 'none',
-    fontFamily: 'Poppins, sans-serif',
-    '&:hover': {
-      color: '#004d00', // Darker green text on hover for contrast
-    },
-  });
+  backgroundColor: '#ffffff', // White background
+  border: '2px solid #006400', // Dark green border
+  color: '#006400', // Dark green text
+  padding: '0.5rem 2.5rem',
+  fontSize: '1.1rem',
+  fontWeight: '600',
+  textTransform: 'none',
+  fontFamily: 'Poppins, sans-serif',
+  '&:hover': {
+    color: '#004d00', // Darker green text on hover for contrast
+  },
+});
 
 const NewsSection = () => {
   // News Data
@@ -143,15 +143,18 @@ const NewsSection = () => {
       <Container maxWidth="lg">
         {/* Centered Section Title */}
         <motion.div variants={fadeInVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <SectionTitle>Latest News</SectionTitle>
+          <SectionTitle>At the Forefront</SectionTitle>
         </motion.div>
 
         {/* Section Subtitle (Description) */}
         <motion.div variants={fadeInVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <SectionSubtitle>
-            Stay updated with the latest news and announcements from Connex Information Technologies. Explore how we are
-            driving innovation, building partnerships, and expanding our global presence to deliver cutting-edge
-            solutions.
+            Stay updated with the newest updates, events, workshops, webinars, and so much more!
+            A value-driven global leader in technology ecosystems.
+            Driving innovation and trust with Revolutionary advancements/ Next-generation solutions,
+            seamless integration and expert-driven value to empower businesses and shape a smarter,
+            connected future.
+
           </SectionSubtitle>
         </motion.div>
 
