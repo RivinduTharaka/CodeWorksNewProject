@@ -149,11 +149,7 @@ const NewsSection = () => {
         {/* Section Subtitle (Description) */}
         <motion.div variants={fadeInVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <SectionSubtitle>
-            Stay updated with the newest updates, events, workshops, webinars, and so much more!
-            A value-driven global leader in technology ecosystems.
-            Driving innovation and trust with Revolutionary advancements/ Next-generation solutions,
-            seamless integration and expert-driven value to empower businesses and shape a smarter,
-            connected future.
+          Stay updated with the newest updates, events, workshops, webinars, and so much more! 
 
           </SectionSubtitle>
         </motion.div>

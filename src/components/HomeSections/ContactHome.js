@@ -177,7 +177,8 @@ function ContactHome() {
               mb: 2,
             }}
           >
-            Let us know how we can help
+            Your needs, our expertise 
+            Let’s connect!
           </Typography>
           <Typography
             variant="body1"
@@ -190,8 +191,9 @@ function ContactHome() {
               mb: 4,
             }}
           >
-            Whether you need a quote, advice, want to become a partner, or want to take advantage of our global services, we are here to help.
-          </Typography>
+           Need a solution? We’ve got you covered! Connect with us, and let’s innovate, integrate, and 
+           elevate your success together.
+           </Typography>
         </div>
 
         {/* Right Column */}

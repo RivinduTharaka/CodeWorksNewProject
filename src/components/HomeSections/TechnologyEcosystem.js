@@ -23,7 +23,7 @@ const buttonVariants = {
 // Styled Components
 const SectionContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
-  minHeight: '70vh', 
+  minHeight: '70vh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -72,7 +72,7 @@ const Title = styled(Typography)(({ theme }) => ({
 }));
 
 const HighlightedText = styled('span')({
-  color: '#04D750', 
+  color: '#04D750',
 });
 
 const Description = styled(Typography)(({ theme }) => ({
@@ -131,8 +131,10 @@ const TechnologyEcosystem = () => {
               Specialist technical <HighlightedText>excellence, accreditation</HighlightedText> and training
             </Title>
             <Description>
-              Our expert technical training achieves continuously high pass rates. We provide partners and customers with the accredited skills and knowledge they require onsite or remotely.
-            </Description>
+              Advance your expertise with our industry-leading training programs, designed to deliver
+              cutting-edge knowledge and practical skills. As a trusted value-added distributor, we
+              provide tailored solutions to help professionals upskill, reskill, and stay at the forefront
+              of the evolving technology landscape.   </Description>
             <TrainButton
               variants={buttonVariants}
               initial="hidden"
@@ -140,9 +142,9 @@ const TechnologyEcosystem = () => {
               whileHover="hover"
               whileTap="tap"
               viewport={{ once: true }}
-              
+
             >
-            Upskill Today 
+              Upskill Today
             </TrainButton>
           </motion.div>
         </Container>

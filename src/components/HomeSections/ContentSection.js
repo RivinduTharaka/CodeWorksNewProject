@@ -204,16 +204,7 @@ const WhoweareSection = ({ ref }) => {
           </Grid>
         </Grid>
 
-        <Typography
-          variant="caption"
-          sx={{
-            fontStyle: "italic",
-            color: "rgba(255, 255, 255, 0.7)",
-            mt: 10,
-          }}
-        >
-          *Statistics based on the global Connex Information Technologies group
-        </Typography>
+       
       </Container>
     </Box>
   );

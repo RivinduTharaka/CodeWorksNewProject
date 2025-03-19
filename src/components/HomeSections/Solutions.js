@@ -40,7 +40,7 @@ const Solutions = forwardRef((_, ref) => {
               color: "white",
             }}
           >
-            A world-leading <br />
+            A value-driven  <br /> global leader in <br />
             <span style={{ color: "#000000" }}>technology ecosystem</span>
           </Typography>
         </Box>
@@ -51,16 +51,14 @@ const Solutions = forwardRef((_, ref) => {
             variant={isMobile ? "body2" : "body1"}
             sx={{
               fontSize: { xs: "1rem", md: "1.2rem" },
-              lineHeight: 1.8,
+              lineHeight: 2,
               marginBottom: 3,
               color: "white",
             }}
           >
-            Our mission is to enable a seamless, trusted digital future powered
-            by a best-in-class technology portfolio. By combining innovation
-            with trusted market leaders, we deliver optimized cybersecurity and
-            digital infrastructure solutions tailored to evolving business
-            needs.
+            Driving innovation and trust with Revolutionary advancements/ Next-generation solutions,
+            seamless integration and expert-driven value to empower businesses and shape a smarter,
+            connected future.
           </Typography>
           <Button
             onClick={handleButtonClick}
