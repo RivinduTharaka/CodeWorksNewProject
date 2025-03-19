@@ -426,65 +426,7 @@ const Navbar = () => {
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
-                          <ListItem component={Link} to="/contact" onClick={() => setDrawerOpen(false)}>
-                            <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                          </ListItem>
-
-                          <ListItem
-                            button
-                            onClick={() => setCountriesSubmenuOpen(!countriesSubmenuOpen)}
-                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                          >
-                            <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
-                              <ListItemText
-                                primary="Countries"
-                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
-                              />
-                            </Box>
-                            {countriesSubmenuOpen ? (
-                              <ExpandLess sx={{ color: "#00D4FF" }} />
-                            ) : (
-                              <ExpandMore sx={{ color: "#00D4FF" }} />
-                            )}
-                          </ListItem>
-                          <Collapse in={countriesSubmenuOpen} timeout="auto" unmountOnExit>
-                            <List
-                              component="div"
-                              disablePadding
-                              sx={{
-                                maxHeight: "250px", // Fixed max height for mobile view
-                                overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
-                                "&::-webkit-scrollbar": {
-                                  width: "4px",
-                                },
-                                "&::-webkit-scrollbar-track": {
-                                  background: "rgba(15, 32, 39, 0.8)",
-                                },
-                                "&::-webkit-scrollbar-thumb": {
-                                  background: "#00D4FF",
-                                  borderRadius: "3px",
-                                },
-                                "&::-webkit-scrollbar-thumb:hover": {
-                                  background: "#0288D1",
-                                },
-                              }}
-                            >
-                              {countries.map((country) => (
-                                <ListItem
-                                  key={country.name}
-                                  sx={{ pl: 4, py: 1 }}
-                                  onClick={() => handleCountrySelect(country)}
-                                >
-                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
-                                  <ListItemText
-                                    primary={country.name}
-                                    primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
-                                  />
-                                </ListItem>
-                              ))}
-                            </List>
-                          </Collapse>
+                          
 
                           <ListItem component={Link} to="/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
@@ -680,6 +622,68 @@ const Navbar = () => {
                               </ListItem>
                             </List>
                           </Collapse>
+
+                          <ListItem component={Link} to="/contact" onClick={() => setDrawerOpen(false)}>
+                            <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          </ListItem>
+
+                          <ListItem
+                            button
+                            onClick={() => setCountriesSubmenuOpen(!countriesSubmenuOpen)}
+                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                          >
+                            <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
+                              <ListItemText
+                                primary="Countries"
+                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                              />
+                            </Box>
+                            {countriesSubmenuOpen ? (
+                              <ExpandLess sx={{ color: "#00D4FF" }} />
+                            ) : (
+                              <ExpandMore sx={{ color: "#00D4FF" }} />
+                            )}
+                          </ListItem>
+                          <Collapse in={countriesSubmenuOpen} timeout="auto" unmountOnExit>
+                            <List
+                              component="div"
+                              disablePadding
+                              sx={{
+                                maxHeight: "250px", // Fixed max height for mobile view
+                                overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
+                                "&::-webkit-scrollbar": {
+                                  width: "4px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                  background: "rgba(15, 32, 39, 0.8)",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                  background: "#00D4FF",
+                                  borderRadius: "3px",
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                  background: "#0288D1",
+                                },
+                              }}
+                            >
+                              {countries.map((country) => (
+                                <ListItem
+                                  key={country.name}
+                                  sx={{ pl: 4, py: 1 }}
+                                  onClick={() => handleCountrySelect(country)}
+                                >
+                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
+                                  <ListItemText
+                                    primary={country.name}
+                                    primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
+                                  />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </Collapse>
+
+
 
                           <Divider sx={{ my: 1, background: "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))" }} />
                         </List>
