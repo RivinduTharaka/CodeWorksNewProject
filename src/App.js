@@ -17,30 +17,30 @@ import Leadership from './components/Global/AboutUs/LeaderShip/Leadership';
 import GlobalCoverage from './components/Global/AboutUs/GlobalCoverage/GlobalCoverage';
 import { Blogs } from './components/Global/News/Blogs/Blogs';
 import EventsNews from './components/Global/Evnt/EventsNews/EventsNews';
-import Trainings from './components/Global/Evnt/Trainings/Trainings';
+import Trainings from './components/Global/Servicess/Trainings/Trainings';
 import BlogDetails from './components/Global/News/Blogs/BlogDetails';
 import RegisterEvent from './components/Global/Evnt/EventsNews/RegisterEvent';
 import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 
 // Sri Lanka Components
-import SLNavbar from './components/Global/Navbar'; // Assuming SLNavbar is different
-import SLFooter from './components/Global/Footer'; // Assuming SLFooter is different
-import SLHome from './components/Global/Home';
-import SLAboutUs from './components/Global/About';
-import SLServices from './components/Global/Services';
-import SLService01 from './components/Global/Service01';
-import SLService02 from './components/Global/Service02';
-import SLContactUs from './components/Global/ContactUs';
-import SLSolutions from './components/Global/Solution/Solutions';
-import SLVendor from './components/Global/Vendors/vendor';
-import SLHistorySection from './components/Global/AboutUs/History/HistorySection';
-import SLLeadership from './components/Global/AboutUs/LeaderShip/Leadership';
-import SLGlobalCoverage from './components/Global/AboutUs/GlobalCoverage/GlobalCoverage';
-import SLEventsNews from './components/Global/Evnt/EventsNews/EventsNews';
-import SLTrainings from './components/Global/Evnt/Trainings/Trainings';
-import SLBlogDetails from './components/Global/News/Blogs/BlogDetails';
-import SLRegisterEvent from './components/Global/Evnt/EventsNews/RegisterEvent';
-import SLWhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
+import SLNavbar from './components/SriLanka/Navbar'; // Assuming SLNavbar is different
+import SLFooter from './components/SriLanka/Footer'; // Assuming SLFooter is different
+import SLHome from './components/SriLanka/Home';
+import SLAboutUs from './components/SriLanka/About';
+import SLServices from './components/SriLanka/Services';
+import SLService01 from './components/SriLanka/Service01';
+import SLService02 from './components/SriLanka/Service02';
+import SLContactUs from './components/SriLanka/ContactUs';
+import SLSolutions from './components/SriLanka/Solution/Solutions';
+import SLVendor from './components/SriLanka/Vendors/vendor';
+import SLHistorySection from './components/SriLanka/AboutUs/History/HistorySection';
+import SLLeadership from './components/SriLanka/AboutUs/LeaderShip/Leadership';
+import SLGlobalCoverage from './components/SriLanka/AboutUs/GlobalCoverage/GlobalCoverage';
+import SLEventsNews from './components/SriLanka/Evnt/EventsNews/EventsNews';
+import SLTrainings from './components/SriLanka/Evnt/Trainings/Trainings';
+import SLBlogDetails from './components/SriLanka/News/Blogs/BlogDetails';
+import SLRegisterEvent from './components/SriLanka/Evnt/EventsNews/RegisterEvent';
+import SLWhyUs from './components/SriLanka/AboutUs/WhyUs/WhyUs';
 
 // Layouts for Global and Sri Lanka
 const GlobalLayout = ({ children }) => (

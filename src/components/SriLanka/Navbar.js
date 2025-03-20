@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -27,25 +27,25 @@ import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
 // Import flag images from local folder
-import globalFlag from '../../assets/image/flag/internet.png'; // Global (UN flag)
+import globalFlag from '../../assets/image/flag/internet.png'; // Global
 import usaFlag from '../../assets/image/flag/australia.png';
 import ukFlag from '../../assets/image/flag/bangladesh.png';
-import canadaFlag from '../../assets/image/flag/sri-lanka.png';
+import sriLankaFlag from '../../assets/image/flag/sri-lanka.png'; // Sri Lanka
 import australiaFlag from '../../assets/image/flag/singapore.png';
 import indiaFlag from '../../assets/image/flag/india.png';
 import germanyFlag from '../../assets/image/flag/maldives.png';
 import franceFlag from '../../assets/image/flag/mauritius.png';
 
-// Country Flags Array with local imports
+// Country Flags Array with routes
 const countries = [
-  { name: "Global", flag: globalFlag },
-  { name: "USA", flag: usaFlag },
-  { name: "UK", flag: ukFlag },
-  { name: "Canada", flag: canadaFlag },
-  { name: "Australia", flag: australiaFlag },
-  { name: "India", flag: indiaFlag },
-  { name: "Germany", flag: germanyFlag },
-  { name: "France", flag: franceFlag },
+  { name: "Global", flag: globalFlag, route: "/" },
+  { name: "USA", flag: usaFlag, route: "/USA" },
+  { name: "UK", flag: ukFlag, route: "/UK" },
+  { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
+  { name: "Australia", flag: australiaFlag, route: "/Australia" },
+  { name: "India", flag: indiaFlag, route: "/India" },
+  { name: "Germany", flag: germanyFlag, route: "/Germany" },
+  { name: "France", flag: franceFlag, route: "/France" },
 ];
 
 // Define Futuristic Theme
@@ -251,8 +251,9 @@ const MobileNeonHoverEffect = styled("span")(({ active }) => ({
   marginTop: "2px",
 }));
 
-const Navbar = () => {
+const SLNavbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [eventsAnchorEl, setEventsAnchorEl] = useState(null);
   const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
@@ -265,103 +266,75 @@ const Navbar = () => {
   const [newsSubmenuOpen, setNewsSubmenuOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Default to Global
+  
+  // Default to Sri Lanka for the SL Navbar
+  const [selectedCountry, setSelectedCountry] = useState(() => {
+    const currentPath = location.pathname.split('/')[1] || '';
+    return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
+  });
+
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
-    location.pathname === '/' ||
-    location.pathname === '/solution' ||
-    location.pathname === '/vendors' ||
-    location.pathname === '/contact' ||
-    location.pathname === '/events' ||
-    location.pathname === '/workshops' ||
-    location.pathname === '/technical-support' ||
-    location.pathname === '/professional-services' || // New path
-    location.pathname === '/trainings' || // Reverted to original path
-    location.pathname === '/blog' ||
-    location.pathname === '/press-&-media' ||
-    location.pathname === '/why-us' ||
-    location.pathname === '/global-coverage' ||
-    location.pathname === '/leadership' ||
-    location.pathname === '/careers' ||
-    location.pathname === '/about';
+    location.pathname === '/SL' ||
+    location.pathname === '/SL/solution' ||
+    location.pathname === '/SL/vendors' ||
+    location.pathname === '/SL/contact' ||
+    location.pathname === '/SL/events' ||
+    location.pathname === '/SL/workshops' ||
+    location.pathname === '/SL/technical-support' ||
+    location.pathname === '/SL/professional-services' ||
+    location.pathname === '/SL/trainings' ||
+    location.pathname === '/SL/blog' ||
+    location.pathname === '/SL/press-&-media' ||
+    location.pathname === '/SL/why-us' ||
+    location.pathname === '/SL/global-coverage' ||
+    location.pathname === '/SL/leadership' ||
+    location.pathname === '/SL/careers' ||
+    location.pathname === '/SL/about';
 
-  const isContactPage = location.pathname === '/contact';
+  const isContactPage = location.pathname === '/SL/contact';
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleAboutHover = (event) => {
-    setAboutAnchorEl(event.currentTarget);
-  };
+  useEffect(() => {
+    const currentPath = location.pathname.split('/')[1] || '';
+    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
+    setSelectedCountry(matchedCountry);
+  }, [location.pathname]);
 
-  const handleAboutClose = () => {
-    setAboutAnchorEl(null);
-  };
+  const handleAboutHover = (event) => setAboutAnchorEl(event.currentTarget);
+  const handleAboutClose = () => setAboutAnchorEl(null);
+  const handleAboutClick = (event) => setAboutAnchorEl(event.currentTarget);
 
-  const handleAboutClick = (event) => {
-    setAboutAnchorEl(event.currentTarget);
-  };
+  const handleEventsHover = (event) => setEventsAnchorEl(event.currentTarget);
+  const handleEventsClose = () => setEventsAnchorEl(null);
+  const handleEventsClick = (event) => setEventsAnchorEl(event.currentTarget);
 
-  const handleEventsHover = (event) => {
-    setEventsAnchorEl(event.currentTarget);
-  };
+  const handleServicesHover = (event) => setServicesAnchorEl(event.currentTarget);
+  const handleServicesClose = () => setServicesAnchorEl(null);
+  const handleServicesClick = (event) => setServicesAnchorEl(event.currentTarget);
 
-  const handleEventsClose = () => {
-    setEventsAnchorEl(null);
-  };
+  const handleNewsHover = (event) => setNewsAnchorEl(event.currentTarget);
+  const handleNewsClose = () => setNewsAnchorEl(null);
+  const handleNewsClick = (event) => setNewsAnchorEl(event.currentTarget);
 
-  const handleEventsClick = (event) => {
-    setEventsAnchorEl(event.currentTarget);
-  };
-
-  const handleServicesHover = (event) => {
-    setServicesAnchorEl(event.currentTarget);
-  };
-
-  const handleServicesClose = () => {
-    setServicesAnchorEl(null);
-  };
-
-  const handleServicesClick = (event) => {
-    setServicesAnchorEl(event.currentTarget);
-  };
-
-  const handleNewsHover = (event) => {
-    setNewsAnchorEl(event.currentTarget);
-  };
-
-  const handleNewsClose = () => {
-    setNewsAnchorEl(null);
-  };
-
-  const handleNewsClick = (event) => {
-    setNewsAnchorEl(event.currentTarget);
-  };
-
-  const handleCountryHover = (event) => {
-    setCountryAnchorEl(event.currentTarget);
-  };
-
-  const handleCountryClose = () => {
-    setCountryAnchorEl(null);
-  };
+  const handleCountryHover = (event) => setCountryAnchorEl(event.currentTarget);
+  const handleCountryClose = () => setCountryAnchorEl(null);
 
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setCountryAnchorEl(null);
     setCountriesSubmenuOpen(false);
     setDrawerOpen(false);
+    navigate(country.route); // Navigate to the selected country's route
   };
 
   return (
@@ -373,7 +346,7 @@ const Navbar = () => {
       >
         <FuturisticAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
           <FuturisticToolbar>
-            <Link to="/" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
+            <Link to="/SL" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
               <motion.img
                 src={isTargetPage && !isScrolled ? image1 : image2}
                 alt="CONNEX Logo"
@@ -426,12 +399,10 @@ const Navbar = () => {
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
-                          
-
-                          <ListItem component={Link} to="/solution" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/SL/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
-                          <ListItem component={Link} to="/vendors" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/SL/vendors" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -445,7 +416,7 @@ const Navbar = () => {
                                 primary="Events & Webinars"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/workshops'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/SL/events' || location.pathname === '/SL/workshops'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -457,7 +428,7 @@ const Navbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/events"
+                                to="/SL/events"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -465,7 +436,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/workshops"
+                                to="/SL/workshops"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -486,9 +457,9 @@ const Navbar = () => {
                               />
                               <MobileNeonHoverEffect
                                 active={
-                                  location.pathname === '/technical-support' ||
-                                  location.pathname === '/professional-services' ||
-                                  location.pathname === '/trainings'
+                                  location.pathname === '/SL/technical-support' ||
+                                  location.pathname === '/SL/professional-services' ||
+                                  location.pathname === '/SL/trainings'
                                 }
                               />
                             </MobileNavLinkContainer>
@@ -502,7 +473,7 @@ const Navbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/technical-support"
+                                to="/SL/technical-support"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -510,7 +481,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/professional-services"
+                                to="/SL/professional-services"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -518,7 +489,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/trainings"
+                                to="/SL/trainings"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -546,7 +517,7 @@ const Navbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/blog"
+                                to="/SL/blog"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -554,7 +525,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/press-&-media"
+                                to="/SL/press-&-media"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -582,7 +553,7 @@ const Navbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/about"
+                                to="/SL/about"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -590,7 +561,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/why-us"
+                                to="/SL/why-us"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -598,7 +569,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/global-coverage"
+                                to="/SL/global-coverage"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -606,7 +577,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/leadership"
+                                to="/SL/leadership"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -614,7 +585,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/careers"
+                                to="/SL/careers"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -623,7 +594,7 @@ const Navbar = () => {
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/contact" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/SL/contact" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -650,21 +621,12 @@ const Navbar = () => {
                               component="div"
                               disablePadding
                               sx={{
-                                maxHeight: "250px", // Fixed max height for mobile view
-                                overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
-                                "&::-webkit-scrollbar": {
-                                  width: "4px",
-                                },
-                                "&::-webkit-scrollbar-track": {
-                                  background: "rgba(15, 32, 39, 0.8)",
-                                },
-                                "&::-webkit-scrollbar-thumb": {
-                                  background: "#00D4FF",
-                                  borderRadius: "3px",
-                                },
-                                "&::-webkit-scrollbar-thumb:hover": {
-                                  background: "#0288D1",
-                                },
+                                maxHeight: "250px",
+                                overflowY: countries.length > 5 ? "auto" : "hidden",
+                                "&::-webkit-scrollbar": { width: "4px" },
+                                "&::-webkit-scrollbar-track": { background: "rgba(15, 32, 39, 0.8)" },
+                                "&::-webkit-scrollbar-thumb": { background: "#00D4FF", borderRadius: "3px" },
+                                "&::-webkit-scrollbar-thumb:hover": { background: "#0288D1" },
                               }}
                             >
                               {countries.map((country) => (
@@ -683,8 +645,6 @@ const Navbar = () => {
                             </List>
                           </Collapse>
 
-
-
                           <Divider sx={{ my: 1, background: "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))" }} />
                         </List>
                       </motion.div>
@@ -696,24 +656,24 @@ const Navbar = () => {
               <ButtonContainer>
                 <FuturisticButton
                   component={Link}
-                  to="/solution"
-                  active={location.pathname === "/solution"}
+                  to="/SL/solution"
+                  active={location.pathname === "/SL/solution"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Solutions
-                  <NeonHoverEffect active={location.pathname === "/solution"} />
+                  <NeonHoverEffect active={location.pathname === "/SL/solution"} />
                 </FuturisticButton>
 
                 <FuturisticButton
                   component={Link}
-                  to="/vendors"
-                  active={location.pathname === "/vendors"}
+                  to="/SL/vendors"
+                  active={location.pathname === "/SL/vendors"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Vendors
-                  <NeonHoverEffect active={location.pathname === "/vendors"} />
+                  <NeonHoverEffect active={location.pathname === "/SL/vendors"} />
                 </FuturisticButton>
 
                 <div
@@ -722,7 +682,7 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/events" || location.pathname === "/workshops"}
+                    active={location.pathname === "/SL/events" || location.pathname === "/SL/workshops"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -738,7 +698,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/workshops"} />
+                      <NeonHoverEffect active={location.pathname === "/SL/events" || location.pathname === "/SL/workshops"} />
                     </Box>
                   </DropdownButton>
 
@@ -749,19 +709,13 @@ const Navbar = () => {
                     open={Boolean(eventsAnchorEl)}
                     onClose={handleEventsClose}
                     disableScrollLock
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/SL/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/workshops">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/SL/workshops">
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -774,9 +728,9 @@ const Navbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/technical-support" ||
-                      location.pathname === "/professional-services" ||
-                      location.pathname === "/trainings"
+                      location.pathname === "/SL/technical-support" ||
+                      location.pathname === "/SL/professional-services" ||
+                      location.pathname === "/SL/trainings"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -795,9 +749,9 @@ const Navbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/technical-support" ||
-                          location.pathname === "/professional-services" ||
-                          location.pathname === "/trainings"
+                          location.pathname === "/SL/technical-support" ||
+                          location.pathname === "/SL/professional-services" ||
+                          location.pathname === "/SL/trainings"
                         }
                       />
                     </Box>
@@ -810,22 +764,16 @@ const Navbar = () => {
                     open={Boolean(servicesAnchorEl)}
                     onClose={handleServicesClose}
                     disableScrollLock
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/technical-support">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/technical-support">
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/professional-services">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/professional-services">
                       Professional Services
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/trainings">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/trainings">
                       Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -837,7 +785,7 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/blog" || location.pathname === "/press-&-media"}
+                    active={location.pathname === "/SL/blog" || location.pathname === "/SL/press-&-media"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
@@ -853,7 +801,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/SL/blog" || location.pathname === "/SL/press-&-media"} />
                     </Box>
                   </DropdownButton>
 
@@ -864,19 +812,13 @@ const Navbar = () => {
                     open={Boolean(newsAnchorEl)}
                     onClose={handleNewsClose}
                     disableScrollLock
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/blog">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/SL/blog">
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/press-&-media">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/SL/press-&-media">
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -889,11 +831,11 @@ const Navbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/about" ||
-                      location.pathname === "/why-us" ||
-                      location.pathname === "/global-coverage" ||
-                      location.pathname === "/leadership" ||
-                      location.pathname === "/careers"
+                      location.pathname === "/SL/about" ||
+                      location.pathname === "/SL/why-us" ||
+                      location.pathname === "/SL/global-coverage" ||
+                      location.pathname === "/SL/leadership" ||
+                      location.pathname === "/SL/careers"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -912,11 +854,11 @@ const Navbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/about" ||
-                          location.pathname === "/why-us" ||
-                          location.pathname === "/global-coverage" ||
-                          location.pathname === "/leadership" ||
-                          location.pathname === "/careers"
+                          location.pathname === "/SL/about" ||
+                          location.pathname === "/SL/why-us" ||
+                          location.pathname === "/SL/global-coverage" ||
+                          location.pathname === "/SL/leadership" ||
+                          location.pathname === "/SL/careers"
                         }
                       />
                     </Box>
@@ -929,28 +871,22 @@ const Navbar = () => {
                     open={Boolean(aboutAnchorEl)}
                     onClose={handleAboutClose}
                     disableScrollLock
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/about">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/why-us">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/why-us">
                       Why Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/global-coverage">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/leadership">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/careers">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/careers">
                       Careers
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -989,19 +925,13 @@ const Navbar = () => {
                     open={Boolean(countryAnchorEl)}
                     onClose={handleCountryClose}
                     disableScrollLock
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
                     PaperProps={{
                       style: {
-                        maxHeight: "250px", // Fixed max height for desktop view
-                        overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
-                        width: "200px", // Fixed width for consistency
+                        maxHeight: "250px",
+                        overflowY: countries.length > 5 ? "auto" : "hidden",
+                        width: "200px",
                       },
                     }}
                   >
@@ -1019,7 +949,7 @@ const Navbar = () => {
 
                 <ContactButton 
                   component={Link} 
-                  to="/contact" 
+                  to="/SL/contact" 
                   isScrolled={isScrolled} 
                   isContactPage={isContactPage}
                 >
@@ -1034,4 +964,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default SLNavbar;

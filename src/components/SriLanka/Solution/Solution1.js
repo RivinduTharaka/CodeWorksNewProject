@@ -95,7 +95,7 @@ const Solution1 = () => {
       </VideoBackground>
       <Container maxWidth="lg">
         <ContentWrapper>
-          <Title>World-Leading <br/> Digital Infrastructure Solutions</Title>
+          <Title>World-Leading <br/> Digital Infrastructure Solutions </Title>
           <Description>
             Security is paramount, but 'trust' is more than this. No trust. No transformation.
           </Description>
