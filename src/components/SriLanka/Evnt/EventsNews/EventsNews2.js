@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Container, Button, Grid, Card, CardContent, CardMedia } from '@mui/material';
-import { styled } from '@mui/system'; // Ensure this is imported
+import { styled } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +71,6 @@ const ArrowImage = styled('img')({
 });
 
 const EventCard = styled(Card)({
-
   width: { xs: '100%', sm: 345 },
   height: 550,
   display: "flex",
@@ -81,10 +80,7 @@ const EventCard = styled(Card)({
   maxWidth: { xs: '100%', sm: 345 },
   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   transition: 'transform 0.3s, box-shadow 0.3s',
-  '&:hover': {
-    // transform: 'scale(1.03)',
-    // boxShadow: '0 8px 20px rgba(5, 43, 85, 0.2)',
-  },
+  '&:hover': {},
 });
 
 const EventMedia = styled(CardMedia)({
@@ -196,7 +192,7 @@ function EventsNews2() {
   }, []);
 
   const handleRegisterClick = (event) => {
-    navigate(`/events/register/${event.id}`, { state: { event } });
+    navigate(`/SL/events/register/${event.id}`, { state: { event } });
   };
 
   return (

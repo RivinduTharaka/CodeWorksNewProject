@@ -15,9 +15,9 @@ import {
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
-import ReactCountryFlag from 'react-country-flag'; // Import for country flags
+import ReactCountryFlag from 'react-country-flag';
 
-// Reuse the same theme with premium adjustments
+// Theme setup
 const theme = createTheme({
   palette: {
     primary: { main: '#1A237E', light: '#3F51B5', dark: '#0D1B2A' },
@@ -60,7 +60,7 @@ const theme = createTheme({
   },
 });
 
-// Sample country data with codes (expand as needed)
+// Sample country data with codes
 const countries = [
   { name: 'United States', code: 'US', dialCode: '+1' },
   { name: 'United Kingdom', code: 'GB', dialCode: '+44' },
@@ -83,8 +83,8 @@ function RegisterEvent() {
     companyName: '',
     email: '',
     contactNumber: '',
-    countryCode: '+1', // Default to US
-    country: 'United States', // Default country
+    countryCode: '+1',
+    country: 'United States',
     city: '',
   });
 
@@ -96,12 +96,11 @@ function RegisterEvent() {
     const { name, value } = e.target;
 
     if (name === 'countryCode') {
-      // Find the first country that matches the selected country code
       const selectedCountry = countries.find((country) => country.dialCode === value);
       setFormData((prev) => ({
         ...prev,
         countryCode: value,
-        country: selectedCountry ? selectedCountry.name : prev.country, // Update country if found
+        country: selectedCountry ? selectedCountry.name : prev.country,
       }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
@@ -335,7 +334,6 @@ function RegisterEvent() {
                       />
                     </Grid>
 
-                    {/* Country Code with Flags and Contact Number */}
                     <Grid item xs={12} sm={4}>
                       <FormControl fullWidth>
                         <InputLabel sx={{ fontWeight: 500 }}>Code</InputLabel>
@@ -386,7 +384,6 @@ function RegisterEvent() {
                       />
                     </Grid>
 
-                    {/* Country Dropdown */}
                     <Grid item xs={12}>
                       <FormControl fullWidth>
                         <InputLabel sx={{ fontWeight: 500 }}>Country</InputLabel>
