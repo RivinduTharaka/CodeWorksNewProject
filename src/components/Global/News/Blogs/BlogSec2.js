@@ -148,7 +148,7 @@ const BlogSec2 = () => {
                     variant="body2"
                     sx={{
                       color: "text.secondary",
-                      overflow: "hidden",
+                      overflow: "hidden", 
                       textOverflow: "ellipsis",
                       display: "-webkit-box",
                       WebkitLineClamp: 3,

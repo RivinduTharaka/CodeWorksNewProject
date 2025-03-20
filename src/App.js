@@ -37,10 +37,12 @@ import SLHistorySection from './components/SriLanka/AboutUs/History/HistorySecti
 import SLLeadership from './components/SriLanka/AboutUs/LeaderShip/Leadership';
 import SLGlobalCoverage from './components/SriLanka/AboutUs/GlobalCoverage/GlobalCoverage';
 import SLEventsNews from './components/SriLanka/Evnt/EventsNews/EventsNews';
-import SLTrainings from './components/SriLanka/Evnt/Trainings/Trainings';
+import SLTrainings from './components/SriLanka/Solution/Trainings/Trainings';
 import SLBlogDetails from './components/SriLanka/News/Blogs/BlogDetails';
 import SLRegisterEvent from './components/SriLanka/Evnt/EventsNews/RegisterEvent';
 import SLWhyUs from './components/SriLanka/AboutUs/WhyUs/WhyUs';
+import { SLBlogs } from './components/SriLanka/News/Blogs/Blogs';
+
 
 // Layouts for Global and Sri Lanka
 const GlobalLayout = ({ children }) => (
@@ -209,6 +211,14 @@ const App = () => {
           element={
             <SriLankaLayout>
               <SLService02 />
+            </SriLankaLayout>
+          }
+        />
+        <Route
+          path="/SL/blog"
+          element={
+            <SriLankaLayout>
+              <SLBlogs />
             </SriLankaLayout>
           }
         />

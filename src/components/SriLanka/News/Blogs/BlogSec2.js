@@ -1,5 +1,16 @@
 import React from "react";
-import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, CardActions, Button, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
@@ -9,8 +20,10 @@ const blogData = [
   {
     id: 1,
     title: "The Future of AI",
-    description: "Explore how AI is transforming industries and shaping the future of technology.Explore how AI is transforming industries and shaping the future of technology.Explore how AI is transforming industries and shaping the future of technology.",
-    image: "https://www.mindinventory.com/blog/wp-content/uploads/2024/02/ai-technology-trends.webp",
+    description:
+      "Explore how AI is transforming industries and shaping the future of technology.Explore how AI is transforming industries and shaping the future of technology.Explore how AI is transforming industries and shaping the future of technology.",
+    image:
+      "https://www.mindinventory.com/blog/wp-content/uploads/2024/02/ai-technology-trends.webp",
     author: "Olivia Rhye",
     date: "20 Jan 2022",
     category: "Design",
@@ -19,24 +32,28 @@ const blogData = [
   {
     id: 2,
     title: "Cloud Computing Trends",
-    description: "Discover the latest advancements in cloud computing and how businesses are leveraging them.",
-    image: "https://media.licdn.com/dms/image/v2/D5612AQGcwhYREbZ9BA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1695193456420?e=2147483647&v=beta&t=VxcxFKwMjp9uK-wZnGPPsOScCdopxuvWrQpBUp1GYuQ",
+    description:
+      "Discover the latest advancements in cloud computing and how businesses are leveraging them.",
+    image:
+      "https://media.licdn.com/dms/image/v2/D5612AQGcwhYREbZ9BA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1695193456420?e=2147483647&v=beta&t=VxcxFKwMjp9uK-wZnGPPsOScCdopxuvWrQpBUp1GYuQ",
     author: "John Doe",
     date: "10 Feb 2023",
     category: "Technology",
-    content: "Full article content about AI trends and its future impact...",
-
+    content: "Full article content about cloud computing trends...",
   },
   {
     id: 3,
     title: "Cybersecurity Best Practices",
-    description: "Learn essential cybersecurity tips to protect your data and stay safe online.",
-    image: "https://assets.bizclikmedia.net/580/c51068cac67d1d76553cdc9666e1080f:9775d5ea0aece926871e68f020aff8ca/gettyimages-1296090038-20-283-29-jpg.webp",
+    description:
+      "Learn essential cybersecurity tips to protect your data and stay safe online.",
+    image:
+      "https://assets.bizclikmedia.net/580/c51068cac67d1d76553cdc9666e1080f:9775d5ea0aece926871e68f020aff8ca/gettyimages-1296090038-20-283-29-jpg.webp",
     author: "Jane Smith",
     date: "5 Mar 2023",
     category: "Cybersecurity",
-    content: "Full article content about AI trends and its future impact...",
-  },{
+    content: "Full article content about cybersecurity best practices...",
+  },
+  {
     id: 4,
     title: "Cybersecurity Best Practices",
     description:
@@ -58,18 +75,17 @@ const blogData = [
     author: "Olivia Rhye",
     date: "20 Jan 2022",
     category: "Design",
+    content: "Full article content about AI trends and its future impact...",
   },
-
 ];
 
-const BlogSec2 = () => {
+const SLBlogSec2 = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Container sx={{ py: 8 }}>
-
       <Grid container spacing={4} justifyContent="center">
         {blogData.map((blog, index) => (
           <Grid item xs={12} sm={6} md={4} key={blog.id}>
@@ -160,11 +176,18 @@ const BlogSec2 = () => {
                 </CardContent>
 
                 {/* Card Actions */}
-                <CardActions sx={{pb: 2 }}>
-                <Button
+                <CardActions sx={{ pb: 2 }}>
+                  <Button
                     size="small"
-                    sx={{ color: "#3669A6", fontWeight: "bold", px: 3, display: "flex", alignItems: "center", gap: "8px" }}
-                    onClick={() => navigate(`/blog/${blog.title}`, { state: { blog } })}
+                    sx={{
+                      color: "#3669A6",
+                      fontWeight: "bold",
+                      px: 3,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                    onClick={() => navigate(`/SL/blog/${blog.title}`, { state: { blog } })}
                   >
                     Read More →
                   </Button>
@@ -178,4 +201,4 @@ const BlogSec2 = () => {
   );
 };
 
-export default BlogSec2;
+export default SLBlogSec2;
