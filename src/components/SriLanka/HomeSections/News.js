@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, Grid, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 // Import Material-UI Icons
 import { ArrowForward } from '@mui/icons-material';
@@ -71,7 +72,6 @@ const CardImage = styled(Box)({
   width: '100%',
   height: '200px',
   objectFit: 'cover',
-
 });
 
 // Card Content Styling
@@ -113,6 +113,8 @@ const MoreNewsButton = styled(Button)({
 });
 
 const NewsSection = () => {
+  const navigate = useNavigate(); // Hook for navigation
+
   // News Data
   const newsData = [
     {
@@ -138,6 +140,11 @@ const NewsSection = () => {
     },
   ];
 
+  // Handler to navigate to /SL/blog
+  const handleExploreMoreClick = () => {
+    navigate('/SL/blog');
+  };
+
   return (
     <SectionContainer>
       <Container maxWidth="lg">
@@ -149,8 +156,7 @@ const NewsSection = () => {
         {/* Section Subtitle (Description) */}
         <motion.div variants={fadeInVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <SectionSubtitle>
-          Stay updated with the newest updates, events, workshops, webinars, and so much more! 
-
+            Stay updated with the newest updates, events, workshops, webinars, and so much more!
           </SectionSubtitle>
         </motion.div>
 
@@ -179,8 +185,9 @@ const NewsSection = () => {
             variant="contained"
             endIcon={<ArrowForward />}
             component={motion.div}
+            onClick={handleExploreMoreClick} // Add onClick handler
           >
-            Explore More News
+            Explore More
           </MoreNewsButton>
         </Box>
       </Container>
