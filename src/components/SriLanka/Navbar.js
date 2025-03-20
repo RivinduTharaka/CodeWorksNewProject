@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -27,25 +27,25 @@ import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
 // Import flag images from local folder
-import globalFlag from '../../assets/image/flag/internet.png'; // Global
+import globalFlag from '../../assets/image/flag/internet.png'; // Global (UN flag)
 import usaFlag from '../../assets/image/flag/australia.png';
 import ukFlag from '../../assets/image/flag/bangladesh.png';
-import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
+import canadaFlag from '../../assets/image/flag/sri-lanka.png';
 import australiaFlag from '../../assets/image/flag/singapore.png';
 import indiaFlag from '../../assets/image/flag/india.png';
 import germanyFlag from '../../assets/image/flag/maldives.png';
 import franceFlag from '../../assets/image/flag/mauritius.png';
 
-// Country Flags Array with local imports and routes
+// Country Flags Array with local imports
 const countries = [
-  { name: "Global", flag: globalFlag, route: "/" },
-  { name: "USA", flag: usaFlag, route: "/USA" },
-  { name: "UK", flag: ukFlag, route: "/UK" },
-  { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
-  { name: "Australia", flag: australiaFlag, route: "/Australia" },
-  { name: "India", flag: indiaFlag, route: "/India" },
-  { name: "Germany", flag: germanyFlag, route: "/Germany" },
-  { name: "France", flag: franceFlag, route: "/France" },
+  { name: "Global", flag: globalFlag },
+  { name: "USA", flag: usaFlag },
+  { name: "UK", flag: ukFlag },
+  { name: "Canada", flag: canadaFlag },
+  { name: "Australia", flag: australiaFlag },
+  { name: "India", flag: indiaFlag },
+  { name: "Germany", flag: germanyFlag },
+  { name: "France", flag: franceFlag },
 ];
 
 // Define Futuristic Theme
@@ -253,7 +253,6 @@ const MobileNeonHoverEffect = styled("span")(({ active }) => ({
 
 const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [eventsAnchorEl, setEventsAnchorEl] = useState(null);
   const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
@@ -266,13 +265,7 @@ const Navbar = () => {
   const [newsSubmenuOpen, setNewsSubmenuOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
-  // Determine initial selected country based on current route
-  const [selectedCountry, setSelectedCountry] = useState(() => {
-    const currentPath = location.pathname.split('/')[1] || '';
-    return countries.find(country => country.route === `/${currentPath}`) || countries[0]; // Default to Global
-  });
-
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Default to Global
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
@@ -283,8 +276,8 @@ const Navbar = () => {
     location.pathname === '/events' ||
     location.pathname === '/workshops' ||
     location.pathname === '/technical-support' ||
-    location.pathname === '/professional-services' ||
-    location.pathname === '/trainings' ||
+    location.pathname === '/professional-services' || // New path
+    location.pathname === '/trainings' || // Reverted to original path
     location.pathname === '/blog' ||
     location.pathname === '/press-&-media' ||
     location.pathname === '/why-us' ||
@@ -297,45 +290,78 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Update selected country when location changes
-  useEffect(() => {
-    const currentPath = location.pathname.split('/')[1] || '';
-    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries[0];
-    setSelectedCountry(matchedCountry);
-  }, [location.pathname]);
+  const handleAboutHover = (event) => {
+    setAboutAnchorEl(event.currentTarget);
+  };
 
-  const handleAboutHover = (event) => setAboutAnchorEl(event.currentTarget);
-  const handleAboutClose = () => setAboutAnchorEl(null);
-  const handleAboutClick = (event) => setAboutAnchorEl(event.currentTarget);
+  const handleAboutClose = () => {
+    setAboutAnchorEl(null);
+  };
 
-  const handleEventsHover = (event) => setEventsAnchorEl(event.currentTarget);
-  const handleEventsClose = () => setEventsAnchorEl(null);
-  const handleEventsClick = (event) => setEventsAnchorEl(event.currentTarget);
+  const handleAboutClick = (event) => {
+    setAboutAnchorEl(event.currentTarget);
+  };
 
-  const handleServicesHover = (event) => setServicesAnchorEl(event.currentTarget);
-  const handleServicesClose = () => setServicesAnchorEl(null);
-  const handleServicesClick = (event) => setServicesAnchorEl(event.currentTarget);
+  const handleEventsHover = (event) => {
+    setEventsAnchorEl(event.currentTarget);
+  };
 
-  const handleNewsHover = (event) => setNewsAnchorEl(event.currentTarget);
-  const handleNewsClose = () => setNewsAnchorEl(null);
-  const handleNewsClick = (event) => setNewsAnchorEl(event.currentTarget);
+  const handleEventsClose = () => {
+    setEventsAnchorEl(null);
+  };
 
-  const handleCountryHover = (event) => setCountryAnchorEl(event.currentTarget);
-  const handleCountryClose = () => setCountryAnchorEl(null);
+  const handleEventsClick = (event) => {
+    setEventsAnchorEl(event.currentTarget);
+  };
+
+  const handleServicesHover = (event) => {
+    setServicesAnchorEl(event.currentTarget);
+  };
+
+  const handleServicesClose = () => {
+    setServicesAnchorEl(null);
+  };
+
+  const handleServicesClick = (event) => {
+    setServicesAnchorEl(event.currentTarget);
+  };
+
+  const handleNewsHover = (event) => {
+    setNewsAnchorEl(event.currentTarget);
+  };
+
+  const handleNewsClose = () => {
+    setNewsAnchorEl(null);
+  };
+
+  const handleNewsClick = (event) => {
+    setNewsAnchorEl(event.currentTarget);
+  };
+
+  const handleCountryHover = (event) => {
+    setCountryAnchorEl(event.currentTarget);
+  };
+
+  const handleCountryClose = () => {
+    setCountryAnchorEl(null);
+  };
 
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setCountryAnchorEl(null);
     setCountriesSubmenuOpen(false);
     setDrawerOpen(false);
-    navigate(country.route); // Navigate to the country's route
   };
 
   return (
@@ -400,6 +426,8 @@ const Navbar = () => {
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
+                          
+
                           <ListItem component={Link} to="/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
@@ -622,12 +650,21 @@ const Navbar = () => {
                               component="div"
                               disablePadding
                               sx={{
-                                maxHeight: "250px",
-                                overflowY: countries.length > 5 ? "auto" : "hidden",
-                                "&::-webkit-scrollbar": { width: "4px" },
-                                "&::-webkit-scrollbar-track": { background: "rgba(15, 32, 39, 0.8)" },
-                                "&::-webkit-scrollbar-thumb": { background: "#00D4FF", borderRadius: "3px" },
-                                "&::-webkit-scrollbar-thumb:hover": { background: "#0288D1" },
+                                maxHeight: "250px", // Fixed max height for mobile view
+                                overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
+                                "&::-webkit-scrollbar": {
+                                  width: "4px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                  background: "rgba(15, 32, 39, 0.8)",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                  background: "#00D4FF",
+                                  borderRadius: "3px",
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                  background: "#0288D1",
+                                },
                               }}
                             >
                               {countries.map((country) => (
@@ -645,6 +682,8 @@ const Navbar = () => {
                               ))}
                             </List>
                           </Collapse>
+
+
 
                           <Divider sx={{ my: 1, background: "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))" }} />
                         </List>
@@ -710,8 +749,14 @@ const Navbar = () => {
                     open={Boolean(eventsAnchorEl)}
                     onClose={handleEventsClose}
                     disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                   >
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
                       Events | Webinars
@@ -765,8 +810,14 @@ const Navbar = () => {
                     open={Boolean(servicesAnchorEl)}
                     onClose={handleServicesClose}
                     disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                   >
                     <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/technical-support">
                       Technical Support
@@ -813,8 +864,14 @@ const Navbar = () => {
                     open={Boolean(newsAnchorEl)}
                     onClose={handleNewsClose}
                     disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                   >
                     <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/blog">
                       Blogs
@@ -872,8 +929,14 @@ const Navbar = () => {
                     open={Boolean(aboutAnchorEl)}
                     onClose={handleAboutClose}
                     disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                   >
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/about">
                       About Us
@@ -926,13 +989,19 @@ const Navbar = () => {
                     open={Boolean(countryAnchorEl)}
                     onClose={handleCountryClose}
                     disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
                     PaperProps={{
                       style: {
-                        maxHeight: "250px",
-                        overflowY: countries.length > 5 ? "auto" : "hidden",
-                        width: "200px",
+                        maxHeight: "250px", // Fixed max height for desktop view
+                        overflowY: countries.length > 5 ? "auto" : "hidden", // Scroll if more than 5 countries
+                        width: "200px", // Fixed width for consistency
                       },
                     }}
                   >
