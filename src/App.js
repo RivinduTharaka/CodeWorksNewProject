@@ -1,25 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import AboutUs from './components/About';
-import Services from './components/Services';
-import Service01 from './components/Service01';
-import Service02 from './components/Service02';
-import ContactUs from './components/ContactUs';
-import Solutions from './components/Solution/Solutions';
-import Vendor from './components/Vendors/vendor'
-import HistorySection from './components/AboutUs/History/HistorySection';
-import Leadership from './components/AboutUs/LeaderShip/Leadership';
-import GlobalCoverage from './components/AboutUs/GlobalCoverage/GlobalCoverage';
-import { Blogs } from './components/News/Blogs/Blogs';
-import EventsNews from './components/Evnt/EventsNews/EventsNews';
-import Trainings from './components/Evnt/Trainings/Trainings';
-// import  {Blogs} from './components/News/Blogs/Blogs';
-import BlogDetails from './components/News/Blogs/BlogDetails';
-import RegisterEvent from './components/Evnt/EventsNews/RegisterEvent';
-import WhyUs from './components/AboutUs/WhyUs/WhyUs';
+import Navbar from './components/Global/Navbar';
+import Footer from './components/Global/Footer';
+import Home from './components/Global/Home';
+import AboutUs from './components/Global/About';
+import Services from './components/Global/Services';
+import Service01 from './components/Global/Service01';
+import Service02 from './components/Global/Service02';
+import ContactUs from './components/Global/ContactUs';
+import Solutions from './components/Global/Solution/Solutions';
+import Vendor from './components/Global/Vendors/vendor'
+import HistorySection from './components/Global/AboutUs/History/HistorySection';
+import Leadership from './components/Global/AboutUs/LeaderShip/Leadership';
+import GlobalCoverage from './components/Global/AboutUs/GlobalCoverage/GlobalCoverage';
+import { Blogs } from './components/Global/News/Blogs/Blogs';
+import EventsNews from './components/Global/Evnt/EventsNews/EventsNews';
+import Trainings from './components/Global/Evnt/Trainings/Trainings';
+// import  {Blogs} from './components/Global/News/Blogs/Blogs';
+import BlogDetails from './components/Global/News/Blogs/BlogDetails';
+import RegisterEvent from './components/Global/Evnt/EventsNews/RegisterEvent';
+import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 
 const App = () => {
   return (
