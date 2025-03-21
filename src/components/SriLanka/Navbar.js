@@ -26,26 +26,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
-// Import flag images from local folder
-import globalFlag from '../../assets/image/flag/internet.png'; // Global
-import usaFlag from '../../assets/image/flag/australia.png';
-import ukFlag from '../../assets/image/flag/bangladesh.png';
-import sriLankaFlag from '../../assets/image/flag/sri-lanka.png'; // Sri Lanka
-import australiaFlag from '../../assets/image/flag/singapore.png';
+// Import flag images for the countries
+import globalFlag from '../../assets/image/flag/internet.png'; // Connex Global (assuming a globe/internet icon)
+import australiaFlag from '../../assets/image/flag/australia.png';
+import bangladeshFlag from '../../assets/image/flag/bangladesh.png';
+import bruneiFlag from '../../assets/image/flag/brunei.png';
+import cambodiaFlag from '../../assets/image/flag/cambodia.png';
 import indiaFlag from '../../assets/image/flag/india.png';
-import germanyFlag from '../../assets/image/flag/maldives.png';
-import franceFlag from '../../assets/image/flag/mauritius.png';
+import maldivesFlag from '../../assets/image/flag/maldives.png';
+import mauritiusFlag from '../../assets/image/flag/mauritius.png';
+import nepalFlag from '../../assets/image/flag/nepal.png';
+import singaporeFlag from '../../assets/image/flag/singapore.png';
+import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
+import thailandFlag from '../../assets/image/flag/thailand.png';
+import uaeFlag from '../../assets/image/flag/uae.png';
+import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // Added New Zealand flag
 
-// Country Flags Array with routes
+// Updated Country Flags Array with specified routes, including New Zealand
 const countries = [
-  { name: "Global", flag: globalFlag, route: "/" },
-  { name: "USA", flag: usaFlag, route: "/USA" },
-  { name: "UK", flag: ukFlag, route: "/UK" },
+  { name: "Connex Global", flag: globalFlag, route: "/" },
+  { name: "Australia", flag: australiaFlag, route: "/au" },
+  { name: "Bangladesh", flag: bangladeshFlag, route: "/bgd" },
+  { name: "Brunei", flag: bruneiFlag, route: "/brn" },
+  { name: "Cambodia", flag: cambodiaFlag, route: "/kh" },
+  { name: "India", flag: indiaFlag, route: "/in" },
+  { name: "Maldives", flag: maldivesFlag, route: "/mv" },
+  { name: "Mauritius", flag: mauritiusFlag, route: "/mu" },
+  { name: "Nepal", flag: nepalFlag, route: "/npl" },
+  { name: "New Zealand", flag: newZealandFlag, route: "/nz" }, // Added New Zealand
+  { name: "Singapore", flag: singaporeFlag, route: "/sg" },
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
-  { name: "Australia", flag: australiaFlag, route: "/Australia" },
-  { name: "India", flag: indiaFlag, route: "/India" },
-  { name: "Germany", flag: germanyFlag, route: "/Germany" },
-  { name: "France", flag: franceFlag, route: "/France" },
+  { name: "Thailand", flag: thailandFlag, route: "/th" },
+  { name: "UAE", flag: uaeFlag, route: "/uae" },
 ];
 
 // Define Futuristic Theme
