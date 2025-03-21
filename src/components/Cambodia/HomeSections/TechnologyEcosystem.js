@@ -3,8 +3,6 @@ import { Box, Typography, Container, Button, useMediaQuery } from '@mui/material
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
 import CNXBackgropund from '../../../assets/video/CNXBackgropund.mp4';
-
-// Import useTheme here
 import { useTheme } from '@mui/material/styles';
 
 // Scroll Animation Variants
@@ -30,6 +28,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   color: 'white',
   fontFamily: 'Poppins, sans-serif',
   padding: theme.spacing(4, 0),
+  overflow: 'hidden', // Prevent overflow or interaction outside the container
 }));
 
 const VideoBackground = styled('video')({
@@ -40,6 +39,7 @@ const VideoBackground = styled('video')({
   height: '100%',
   objectFit: 'cover',
   zIndex: 1,
+  pointerEvents: 'none', // Disable any user interaction with the video
 });
 
 const Overlay = styled(Box)({
@@ -48,7 +48,7 @@ const Overlay = styled(Box)({
   left: 0,
   width: '100%',
   height: '100%',
-  background: 'rgba(0, 0, 0, 0.3)', // Optional overlay for better text visibility
+  background: 'rgba(0, 0, 0, 0.3)', // Overlay for better text visibility
   zIndex: 2,
 });
 
@@ -62,7 +62,7 @@ const ContentWrapper = styled(Box)(({ theme }) => ({
 const Title = styled(Typography)(({ theme }) => ({
   fontSize: '3rem',
   fontWeight: '700',
-  color: 'white', // Purple for "Specialist technical" and "training"
+  color: 'white',
   textAlign: 'center',
   fontFamily: 'Poppins, sans-serif',
   marginBottom: theme.spacing(2),
@@ -92,49 +92,57 @@ const Description = styled(Typography)(({ theme }) => ({
 }));
 
 const TrainButton = styled(motion(Button))(({ theme }) => ({
-  backgroundColor: "transparent",
-  color: "white",
-  border: "2px solid white",
-  padding: { xs: "10px 20px", md: "12px 50px" },
-  fontSize: { xs: "0.875rem", md: "0.8rem" },
-  fontWeight: "bold",
-  textTransform: "uppercase",
-  width: { xs: "auto", md: "300px" },
-  textAlign: "center",
-  transition: "all 0.3s ease-in-out",
-  "&:hover": {
-    backgroundColor: "white",
-    color: "#053701",
-    borderColor: "white", // Ensure border color stays white on hover
+  backgroundColor: 'transparent',
+  color: 'white',
+  border: '2px solid white',
+  padding: { xs: '10px 20px', md: '12px 50px' }, // Responsive padding
+  fontSize: { xs: '0.875rem', md: '0.8rem' }, // Responsive font size
+  fontWeight: 'bold',
+  textTransform: 'uppercase',
+  width: { xs: 'auto', md: '300px' }, // Responsive width
+  textAlign: 'center',
+  transition: 'all 0.3s ease-in-out',
+  '&:hover': {
+    backgroundColor: 'white',
+    color: '#053701',
+    borderColor: 'white',
   },
 }));
 
 const TechnologyEcosystem = () => {
-  const theme = useTheme(); // Now this will work since useTheme is imported
+  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <SectionContainer>
-      {/* Video Background - You can import and add your video here */}
-      <VideoBackground autoPlay muted loop>
+      {/* Video Background */}
+      <VideoBackground
+        autoPlay
+        muted
+        loop
+        playsInline // Ensures it plays inline on mobile devices without popping up
+        controls={false} // Explicitly disable controls
+      >
         <source src={CNXBackgropund} type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
 
-      {/* Overlay for text visibility (optional) */}
+      {/* Overlay for text visibility */}
       <Overlay />
 
+      {/* Content */}
       <ContentWrapper>
         <Container maxWidth="md">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <Title>
+            <Title variants={fadeInVariants}>
               Specialist technical <HighlightedText>excellence, accreditation</HighlightedText> and training
             </Title>
-            <Description>
+            <Description variants={fadeInVariants}>
               Advance your expertise with our industry-leading training programs, designed to deliver
               cutting-edge knowledge and practical skills. As a trusted value-added distributor, we
               provide tailored solutions to help professionals upskill, reskill, and stay at the forefront
-              of the evolving technology landscape.   </Description>
+              of the evolving technology landscape.
+            </Description>
             <TrainButton
               variants={buttonVariants}
               initial="hidden"
@@ -142,7 +150,6 @@ const TechnologyEcosystem = () => {
               whileHover="hover"
               whileTap="tap"
               viewport={{ once: true }}
-
             >
               Upskill Today
             </TrainButton>
