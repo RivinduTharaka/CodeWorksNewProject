@@ -27,25 +27,37 @@ import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
 // Import flag images from local folder
-import globalFlag from '../../assets/image/flag/internet.png'; // Global
-import usaFlag from '../../assets/image/flag/australia.png';
-import ukFlag from '../../assets/image/flag/bangladesh.png';
+import globalFlag from '../../assets/image/flag/internet.png'; // Connex Global
+import australiaFlag from '../../assets/image/flag/australia.png'; // Australia
+import bangladeshFlag from '../../assets/image/flag/bangladesh.png'; // Bangladesh
+import bruneiFlag from '../../assets/image/flag/brunei.png'; // Brunei
+import cambodiaFlag from '../../assets/image/flag/cambodia.png'; // Cambodia
+import indiaFlag from '../../assets/image/flag/india.png'; // India
+import maldivesFlag from '../../assets/image/flag/maldives.png'; // Maldives
+import mauritiusFlag from '../../assets/image/flag/mauritius.png'; // Mauritius
+import nepalFlag from '../../assets/image/flag/nepal.png'; // Nepal
+import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // New Zealand
+import singaporeFlag from '../../assets/image/flag/singapore.png'; // Singapore
 import sriLankaFlag from '../../assets/image/flag/sri-lanka.png'; // Sri Lanka
-import australiaFlag from '../../assets/image/flag/singapore.png';
-import indiaFlag from '../../assets/image/flag/india.png';
-import germanyFlag from '../../assets/image/flag/maldives.png';
-import franceFlag from '../../assets/image/flag/mauritius.png';
+import thailandFlag from '../../assets/image/flag/thailand.png'; // Thailand
+import uaeFlag from '../../assets/image/flag/uae.png'; // UAE
 
 // Country Flags Array with routes
 const countries = [
-  { name: "Global", flag: globalFlag, route: "/" },
-  { name: "USA", flag: usaFlag, route: "/USA" },
-  { name: "UK", flag: ukFlag, route: "/UK" },
+  { name: "Connex Global", flag: globalFlag, route: "/" },
+  { name: "Australia", flag: australiaFlag, route: "/au" },
+  { name: "Bangladesh", flag: bangladeshFlag, route: "/bgd" },
+  { name: "Brunei", flag: bruneiFlag, route: "/brn" },
+  { name: "Cambodia", flag: cambodiaFlag, route: "/kh" },
+  { name: "India", flag: indiaFlag, route: "/in" },
+  { name: "Maldives", flag: maldivesFlag, route: "/mv" },
+  { name: "Mauritius", flag: mauritiusFlag, route: "/mu" },
+  { name: "Nepal", flag: nepalFlag, route: "/npl" },
+  { name: "New Zealand", flag: newZealandFlag, route: "/nz" },
+  { name: "Singapore", flag: singaporeFlag, route: "/sg" },
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
-  { name: "Australia", flag: australiaFlag, route: "/Australia" },
-  { name: "India", flag: indiaFlag, route: "/India" },
-  { name: "Germany", flag: germanyFlag, route: "/Germany" },
-  { name: "France", flag: franceFlag, route: "/France" },
+  { name: "Thailand", flag: thailandFlag, route: "/th" },
+  { name: "UAE", flag: uaeFlag, route: "/uae" },
 ];
 
 // Define Futuristic Theme
@@ -251,7 +263,7 @@ const MobileNeonHoverEffect = styled("span")(({ active }) => ({
   marginTop: "2px",
 }));
 
-const SLNavbar = () => {
+const KHNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
@@ -266,34 +278,34 @@ const SLNavbar = () => {
   const [newsSubmenuOpen, setNewsSubmenuOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
-  // Default to Sri Lanka for the SL Navbar
+
+  // Default to Cambodia for the KH Navbar
   const [selectedCountry, setSelectedCountry] = useState(() => {
     const currentPath = location.pathname.split('/')[1] || '';
-    return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
+    return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Cambodia");
   });
 
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
-    location.pathname === '/SL' ||
-    location.pathname === '/SL/solution' ||
-    location.pathname === '/SL/vendors' ||
-    location.pathname === '/SL/contact' ||
-    location.pathname === '/SL/events' ||
-    location.pathname === '/SL/workshops' ||
-    location.pathname === '/SL/technical-support' ||
-    location.pathname === '/SL/professional-services' ||
-    location.pathname === '/SL/trainings' ||
-    location.pathname === '/SL/blog' ||
-    location.pathname === '/SL/press-&-media' ||
-    location.pathname === '/SL/why-us' ||
-    location.pathname === '/SL/global-coverage' ||
-    location.pathname === '/SL/leadership' ||
-    location.pathname === '/SL/careers' ||
-    location.pathname === '/SL/about';
+    location.pathname === '/kh' ||
+    location.pathname === '/kh/solution' ||
+    location.pathname === '/kh/vendors' ||
+    location.pathname === '/kh/contact' ||
+    location.pathname === '/kh/events' ||
+    location.pathname === '/kh/workshops' ||
+    location.pathname === '/kh/technical-support' ||
+    location.pathname === '/kh/professional-services' ||
+    location.pathname === '/kh/trainings' ||
+    location.pathname === '/kh/blog' ||
+    location.pathname === '/kh/press-&-media' ||
+    location.pathname === '/kh/why-us' ||
+    location.pathname === '/kh/global-coverage' ||
+    location.pathname === '/kh/leadership' ||
+    location.pathname === '/kh/careers' ||
+    location.pathname === '/kh/about';
 
-  const isContactPage = location.pathname === '/SL/contact';
+  const isContactPage = location.pathname === '/kh/contact';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -306,7 +318,7 @@ const SLNavbar = () => {
 
   useEffect(() => {
     const currentPath = location.pathname.split('/')[1] || '';
-    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
+    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Cambodia");
     setSelectedCountry(matchedCountry);
   }, [location.pathname]);
 
@@ -346,7 +358,7 @@ const SLNavbar = () => {
       >
         <FuturisticAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
           <FuturisticToolbar>
-            <Link to="/SL" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
+            <Link to="/kh" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
               <motion.img
                 src={isTargetPage && !isScrolled ? image1 : image2}
                 alt="CONNEX Logo"
@@ -399,10 +411,10 @@ const SLNavbar = () => {
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
-                          <ListItem component={Link} to="/SL/solution" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/kh/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
-                          <ListItem component={Link} to="/SL/vendors" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/kh/vendors" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -416,7 +428,7 @@ const SLNavbar = () => {
                                 primary="Events & Webinars"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/SL/events' || location.pathname === '/SL/workshops'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/kh/events' || location.pathname === '/kh/workshops'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -428,7 +440,7 @@ const SLNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/SL/events"
+                                to="/kh/events"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -436,7 +448,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/workshops"
+                                to="/kh/workshops"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -457,9 +469,9 @@ const SLNavbar = () => {
                               />
                               <MobileNeonHoverEffect
                                 active={
-                                  location.pathname === '/SL/technical-support' ||
-                                  location.pathname === '/SL/professional-services' ||
-                                  location.pathname === '/SL/trainings'
+                                  location.pathname === '/kh/technical-support' ||
+                                  location.pathname === '/kh/professional-services' ||
+                                  location.pathname === '/kh/trainings'
                                 }
                               />
                             </MobileNavLinkContainer>
@@ -473,7 +485,7 @@ const SLNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/SL/technical-support"
+                                to="/kh/technical-support"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -481,7 +493,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/professional-services"
+                                to="/kh/professional-services"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -489,7 +501,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/trainings"
+                                to="/kh/trainings"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -517,7 +529,7 @@ const SLNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/SL/blog"
+                                to="/kh/blog"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -525,7 +537,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/press-&-media"
+                                to="/kh/press-&-media"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -553,7 +565,7 @@ const SLNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/SL/about"
+                                to="/kh/about"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -561,7 +573,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/why-us"
+                                to="/kh/why-us"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -569,7 +581,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/global-coverage"
+                                to="/kh/global-coverage"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -577,7 +589,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/leadership"
+                                to="/kh/leadership"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -585,7 +597,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/careers"
+                                to="/kh/careers"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -594,7 +606,7 @@ const SLNavbar = () => {
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/SL/contact" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/kh/contact" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -656,24 +668,24 @@ const SLNavbar = () => {
               <ButtonContainer>
                 <FuturisticButton
                   component={Link}
-                  to="/SL/solution"
-                  active={location.pathname === "/SL/solution"}
+                  to="/kh/solution"
+                  active={location.pathname === "/kh/solution"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Solutions
-                  <NeonHoverEffect active={location.pathname === "/SL/solution"} />
+                  <NeonHoverEffect active={location.pathname === "/kh/solution"} />
                 </FuturisticButton>
 
                 <FuturisticButton
                   component={Link}
-                  to="/SL/vendors"
-                  active={location.pathname === "/SL/vendors"}
+                  to="/kh/vendors"
+                  active={location.pathname === "/kh/vendors"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Vendors
-                  <NeonHoverEffect active={location.pathname === "/SL/vendors"} />
+                  <NeonHoverEffect active={location.pathname === "/kh/vendors"} />
                 </FuturisticButton>
 
                 <div
@@ -682,7 +694,7 @@ const SLNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/SL/events" || location.pathname === "/SL/workshops"}
+                    active={location.pathname === "/kh/events" || location.pathname === "/kh/workshops"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -698,7 +710,7 @@ const SLNavbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/SL/events" || location.pathname === "/SL/workshops"} />
+                      <NeonHoverEffect active={location.pathname === "/kh/events" || location.pathname === "/kh/workshops"} />
                     </Box>
                   </DropdownButton>
 
@@ -712,10 +724,10 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/SL/events">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/SL/workshops">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh/workshops">
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -728,9 +740,9 @@ const SLNavbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/SL/technical-support" ||
-                      location.pathname === "/SL/professional-services" ||
-                      location.pathname === "/SL/trainings"
+                      location.pathname === "/kh/technical-support" ||
+                      location.pathname === "/kh/professional-services" ||
+                      location.pathname === "/kh/trainings"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -749,9 +761,9 @@ const SLNavbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/SL/technical-support" ||
-                          location.pathname === "/SL/professional-services" ||
-                          location.pathname === "/SL/trainings"
+                          location.pathname === "/kh/technical-support" ||
+                          location.pathname === "/kh/professional-services" ||
+                          location.pathname === "/kh/trainings"
                         }
                       />
                     </Box>
@@ -767,13 +779,13 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/technical-support">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/technical-support">
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/professional-services">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/professional-services">
                       Professional Services
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/trainings">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/trainings">
                       Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -785,7 +797,7 @@ const SLNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/SL/blog" || location.pathname === "/SL/press-&-media"}
+                    active={location.pathname === "/kh/blog" || location.pathname === "/kh/press-&-media"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
@@ -801,7 +813,7 @@ const SLNavbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/SL/blog" || location.pathname === "/SL/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/kh/blog" || location.pathname === "/kh/press-&-media"} />
                     </Box>
                   </DropdownButton>
 
@@ -815,10 +827,10 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/SL/blog">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh/blog">
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/SL/press-&-media">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh/press-&-media">
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -831,11 +843,11 @@ const SLNavbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/SL/about" ||
-                      location.pathname === "/SL/why-us" ||
-                      location.pathname === "/SL/global-coverage" ||
-                      location.pathname === "/SL/leadership" ||
-                      location.pathname === "/SL/careers"
+                      location.pathname === "/kh/about" ||
+                      location.pathname === "/kh/why-us" ||
+                      location.pathname === "/kh/global-coverage" ||
+                      location.pathname === "/kh/leadership" ||
+                      location.pathname === "/kh/careers"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -854,11 +866,11 @@ const SLNavbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/SL/about" ||
-                          location.pathname === "/SL/why-us" ||
-                          location.pathname === "/SL/global-coverage" ||
-                          location.pathname === "/SL/leadership" ||
-                          location.pathname === "/SL/careers"
+                          location.pathname === "/kh/about" ||
+                          location.pathname === "/kh/why-us" ||
+                          location.pathname === "/kh/global-coverage" ||
+                          location.pathname === "/kh/leadership" ||
+                          location.pathname === "/kh/careers"
                         }
                       />
                     </Box>
@@ -874,19 +886,19 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/about">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/why-us">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/why-us">
                       Why Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/global-coverage">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/leadership">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/careers">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/careers">
                       Careers
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -949,7 +961,7 @@ const SLNavbar = () => {
 
                 <ContactButton 
                   component={Link} 
-                  to="/SL/contact" 
+                  to="/kh/contact" 
                   isScrolled={isScrolled} 
                   isContactPage={isContactPage}
                 >
@@ -964,4 +976,4 @@ const SLNavbar = () => {
   );
 };
 
-export default SLNavbar;
+export default KHNavbar;

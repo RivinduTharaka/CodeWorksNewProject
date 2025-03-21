@@ -26,8 +26,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
-// Import flag images for the countries
-import globalFlag from '../../assets/image/flag/internet.png';
+// Import flag images for the countries (matching SLNavbar)
+import globalFlag from '../../assets/image/flag/internet.png'; // Connex Global
 import australiaFlag from '../../assets/image/flag/australia.png';
 import bangladeshFlag from '../../assets/image/flag/bangladesh.png';
 import bruneiFlag from '../../assets/image/flag/brunei.png';
@@ -40,9 +40,9 @@ import singaporeFlag from '../../assets/image/flag/singapore.png';
 import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
 import thailandFlag from '../../assets/image/flag/thailand.png';
 import uaeFlag from '../../assets/image/flag/uae.png';
-import newZealandFlag from '../../assets/image/flag/new-zealand (1).png';
+import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // Added New Zealand flag
 
-// Updated Country Flags Array with specified routes
+// Updated Country Flags Array with specified routes (matching SLNavbar)
 const countries = [
   { name: "Connex Global", flag: globalFlag, route: "/" },
   { name: "Australia", flag: australiaFlag, route: "/au" },
@@ -279,6 +279,7 @@ const Navbar = () => {
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   
+  // Determine initial selected country based on current route
   const [selectedCountry, setSelectedCountry] = useState(() => {
     const currentPath = location.pathname.split('/')[1] || '';
     return countries.find(country => country.route === `/${currentPath}`) || countries[0]; // Default to Connex Global
@@ -315,6 +316,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Update selected country when location changes
   useEffect(() => {
     const currentPath = location.pathname.split('/')[1] || '';
     const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries[0];
@@ -345,7 +347,7 @@ const Navbar = () => {
     setCountryAnchorEl(null);
     setCountriesSubmenuOpen(false);
     setDrawerOpen(false);
-    navigate(country.route);
+    navigate(country.route); // Navigate to the country's route
   };
 
   return (
@@ -392,27 +394,24 @@ const Navbar = () => {
                         style={{
                           position: "fixed",
                           top: 0,
-                          right: 0,
+                          right: 10,
                           width: "75%",
                           height: "100vh",
-                          maxHeight: "100vh",
                           background: "rgba(15, 32, 39, 0.9)",
                           backdropFilter: "blur(10px)",
                           boxShadow: "-4px 0 12px rgba(0, 212, 255, 0.5)",
                           zIndex: 1300,
                           display: "flex",
                           flexDirection: "column",
-                          overflowY: "auto",
-                          overflowX: "hidden",
                         }}
                       >
-                        <Box sx={{ display: "flex", justifyContent: "flex-end", padding: 2, position: "sticky", top: 0, background: "inherit", zIndex: 1 }}>
+                        <Box sx={{ display: "flex", justifyContent: "flex-end", padding: 2 }}>
                           <IconButton onClick={() => setDrawerOpen(false)}>
                             <CloseIcon sx={{ color: "#FFFFFF", textShadow: "0 0 5px #00D4FF" }} />
                           </IconButton>
                         </Box>
 
-                        <List sx={{ padding: "0 1.5rem", flexGrow: 1 }}>
+                        <List sx={{ padding: "0 1.5rem" }}>
                           <ListItem component={Link} to="/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
@@ -635,7 +634,12 @@ const Navbar = () => {
                               component="div"
                               disablePadding
                               sx={{
-                                maxHeight: "none", // Allow natural expansion within scrollable drawer
+                                maxHeight: "250px",
+                                overflowY: countries.length > 5 ? "auto" : "hidden",
+                                "&::-webkit-scrollbar": { width: "4px" },
+                                "&::-webkit-scrollbar-track": { background: "rgba(15, 32, 39, 0.8)" },
+                                "&::-webkit-scrollbar-thumb": { background: "#00D4FF", borderRadius: "3px" },
+                                "&::-webkit-scrollbar-thumb:hover": { background: "#0288D1" },
                               }}
                             >
                               {countries.map((country) => (
