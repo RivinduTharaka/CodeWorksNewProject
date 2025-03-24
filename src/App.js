@@ -37,10 +37,11 @@ import SLHistorySection from './components/SriLanka/AboutUs/History/HistorySecti
 import SLLeadership from './components/SriLanka/AboutUs/LeaderShip/Leadership';
 import SLGlobalCoverage from './components/SriLanka/AboutUs/GlobalCoverage/GlobalCoverage';
 import SLEventsNews from './components/SriLanka/Evnt/EventsNews/EventsNews';
-import SLTrainings from './components/SriLanka/Solution/Trainings/Trainings';
+import SLTrainings from './components/SriLanka/Servicess/Trainings/Trainings';
 import SLBlogDetails from './components/SriLanka/News/Blogs/BlogDetails';
 import SLRegisterEvent from './components/SriLanka/Evnt/EventsNews/RegisterEvent';
 import SLWhyUs from './components/SriLanka/AboutUs/WhyUs/WhyUs';
+import SLPortal from './components/SriLanka/Portal/Portal';
 import { SLBlogs } from './components/SriLanka/News/Blogs/Blogs';
 
 // Cambodia Components
@@ -58,7 +59,7 @@ import CamHistorySection from './components/Cambodia/AboutUs/History/HistorySect
 import CamLeadership from './components/Cambodia/AboutUs/LeaderShip/Leadership';
 import CamGlobalCoverage from './components/Cambodia/AboutUs/GlobalCoverage/GlobalCoverage';
 import CamEventsNews from './components/Cambodia/Evnt/EventsNews/EventsNews';
-import CamTrainings from './components/Cambodia/Solution/Trainings/Trainings';
+import CamTrainings from './components/Cambodia/Servicess/Trainings/Trainings';
 import CamBlogDetails from './components/Cambodia/News/Blogs/BlogDetails';
 import CamRegisterEvent from './components/Cambodia/Evnt/EventsNews/RegisterEvent';
 import CamWhyUs from './components/Cambodia/AboutUs/WhyUs/WhyUs';
@@ -130,6 +131,7 @@ const App = () => {
         <Route path="/SL/blog/:title" element={<SriLankaLayout><SLBlogDetails /></SriLankaLayout>} />
         <Route path="/SL/events/register/:id" element={<SriLankaLayout><SLRegisterEvent /></SriLankaLayout>} />
         <Route path="/SL/why-us" element={<SriLankaLayout><SLWhyUs /></SriLankaLayout>} />
+        <Route path="/SL/portal" element={<SriLankaLayout><SLPortal /></SriLankaLayout>} />
 
         {/* Cambodia Routes */}
         <Route path="/kh" element={<CambodiaLayout><CamHome /></CambodiaLayout>} />
@@ -149,6 +151,7 @@ const App = () => {
         <Route path="/kh/blog/:title" element={<CambodiaLayout><CamBlogDetails /></CambodiaLayout>} />
         <Route path="/kh/events/register/:id" element={<CambodiaLayout><CamRegisterEvent /></CambodiaLayout>} />
         <Route path="/kh/why-us" element={<CambodiaLayout><CamWhyUs /></CambodiaLayout>} />
+       
       </Routes>
     </Router>
   );
