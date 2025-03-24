@@ -20,7 +20,7 @@ function Portal2() {
             src={IMAGE2} // Ensure the image is in the public folder
             alt="Handshake"
             sx={{
-              width: '100%',
+              width: '90%',
               height: '50vh',
               borderRadius: 3,
               boxShadow: 5,
@@ -30,7 +30,7 @@ function Portal2() {
 
         {/* Right Text Content */}
         <Grid item xs={12} md={6}>
-          <Typography variant="h4" component="h2" fontWeight="bold" color="black" gutterBottom>
+          <Typography variant="h4" component="h3" fontWeight="bold" color="black" gutterBottom>
             Let's Grow Together — Unlock Your Potential with Connex
           </Typography>
           <Typography variant="body1" color="#3b5778" paragraph>

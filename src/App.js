@@ -64,6 +64,7 @@ import CamBlogDetails from './components/Cambodia/News/Blogs/BlogDetails';
 import CamRegisterEvent from './components/Cambodia/Evnt/EventsNews/RegisterEvent';
 import CamWhyUs from './components/Cambodia/AboutUs/WhyUs/WhyUs';
 import { CamBlogs } from './components/Cambodia/News/Blogs/Blogs';
+import CamPortal from './components/Cambodia/Portal/Portal';
 
 // Layouts for Global, Sri Lanka, and Cambodia
 const GlobalLayout = ({ children }) => (
@@ -151,6 +152,7 @@ const App = () => {
         <Route path="/kh/blog/:title" element={<CambodiaLayout><CamBlogDetails /></CambodiaLayout>} />
         <Route path="/kh/events/register/:id" element={<CambodiaLayout><CamRegisterEvent /></CambodiaLayout>} />
         <Route path="/kh/why-us" element={<CambodiaLayout><CamWhyUs /></CambodiaLayout>} />
+        <Route path="/kh/portal" element={<CambodiaLayout><CamPortal /></CambodiaLayout>} />
        
       </Routes>
     </Router>
