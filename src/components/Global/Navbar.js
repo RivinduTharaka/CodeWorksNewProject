@@ -299,7 +299,6 @@ const Navbar = () => {
     location.pathname === '/trainings' ||
     location.pathname === '/blog' ||
     location.pathname === '/press-&-media' ||
-    location.pathname === '/why-us' ||
     location.pathname === '/global-coverage' ||
     location.pathname === '/leadership' ||
     location.pathname === '/careers' ||
@@ -572,14 +571,7 @@ const Navbar = () => {
                               >
                                 <ListItemText primary="About Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
-                              <ListItem
-                                component={Link}
-                                to="/why-us"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Why Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
+                              
                               <ListItem
                                 component={Link}
                                 to="/global-coverage"
@@ -845,7 +837,7 @@ const Navbar = () => {
                   <DropdownButton
                     active={
                       location.pathname === "/about" ||
-                      location.pathname === "/why-us" ||
+              
                       location.pathname === "/global-coverage" ||
                       location.pathname === "/leadership" ||
                       location.pathname === "/careers"
@@ -868,7 +860,7 @@ const Navbar = () => {
                       <NeonHoverEffect
                         active={
                           location.pathname === "/about" ||
-                          location.pathname === "/why-us" ||
+                        
                           location.pathname === "/global-coverage" ||
                           location.pathname === "/leadership" ||
                           location.pathname === "/careers"
@@ -890,9 +882,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/why-us">
-                      Why Us
-                    </FuturisticMenuItem>
+                   
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
