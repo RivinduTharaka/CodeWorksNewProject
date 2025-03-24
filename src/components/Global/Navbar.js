@@ -172,8 +172,8 @@ const ContactButton = styled(Button)(({ isScrolled, isContactPage }) => ({
   background: isContactPage
     ? "linear-gradient(45deg, rgb(0, 97, 27), rgb(3, 87, 0))"
     : isScrolled
-    ? "linear-gradient(45deg, #00D4FF, #0288D1)"
-    : "linear-gradient(45deg, rgba(0, 212, 255, 0.8), rgba(2, 136, 209, 0.8))",
+    ? "linear-gradient(45deg, #1a9fd9, #24b24c)"
+    : "linear-gradient(45deg, #24b24c , #1a9fd9 )",
   color: "#FFFFFF",
   fontSize: "0.9rem",
   fontWeight: "500",
