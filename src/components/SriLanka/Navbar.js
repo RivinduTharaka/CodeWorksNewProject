@@ -27,7 +27,7 @@ import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
 // Import flag images for the countries
-import globalFlag from '../../assets/image/flag/internet.png'; // Connex Global (assuming a globe/internet icon)
+import globalFlag from '../../assets/image/flag/internet.png';
 import australiaFlag from '../../assets/image/flag/australia.png';
 import bangladeshFlag from '../../assets/image/flag/bangladesh.png';
 import bruneiFlag from '../../assets/image/flag/brunei.png';
@@ -40,9 +40,9 @@ import singaporeFlag from '../../assets/image/flag/singapore.png';
 import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
 import thailandFlag from '../../assets/image/flag/thailand.png';
 import uaeFlag from '../../assets/image/flag/uae.png';
-import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // Added New Zealand flag
+import newZealandFlag from '../../assets/image/flag/new-zealand (1).png';
 
-// Updated Country Flags Array with specified routes, including New Zealand
+// Updated Country Flags Array with specified routes
 const countries = [
   { name: "Connex Global", flag: globalFlag, route: "/" },
   { name: "Australia", flag: australiaFlag, route: "/au" },
@@ -53,7 +53,7 @@ const countries = [
   { name: "Maldives", flag: maldivesFlag, route: "/mv" },
   { name: "Mauritius", flag: mauritiusFlag, route: "/mu" },
   { name: "Nepal", flag: nepalFlag, route: "/npl" },
-  { name: "New Zealand", flag: newZealandFlag, route: "/nz" }, // Added New Zealand
+  { name: "New Zealand", flag: newZealandFlag, route: "/nz" },
   { name: "Singapore", flag: singaporeFlag, route: "/sg" },
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
   { name: "Thailand", flag: thailandFlag, route: "/th" },
@@ -99,7 +99,7 @@ const slideIn = keyframes`
 
 // Styled Components for Futuristic Navbar
 const FuturisticAppBar = styled(AppBar)(({ isTargetPage, isScrolled }) => ({
-  background: isTargetPage && !isScrolled 
+  background: isTargetPage && !isScrolled
     ? "linear-gradient(90deg, rgba(15, 32, 39, 0.8) 0%, rgba(32, 58, 67, 0.8) 50%, rgba(44, 83, 100, 0.8) 100%)"
     : "linear-gradient(90deg, #0F2027 0%, #203A43 50%, #2C5364 100%)",
   boxShadow: "0 0 15px rgba(0, 212, 255, 0.5)",
@@ -168,10 +168,8 @@ const DropdownButton = styled(FuturisticButton)(({ isOpen }) => ({
   },
 }));
 
-const ContactButton = styled(Button)(({ isScrolled, isContactPage }) => ({
-  background: isContactPage
-    ? "linear-gradient(45deg, rgb(0, 97, 27), rgb(3, 87, 0))"
-    : isScrolled
+const PortalButton = styled(Button)(({ isScrolled }) => ({
+  background: isScrolled
     ? "linear-gradient(45deg, #00D4FF, #0288D1)"
     : "linear-gradient(45deg, rgba(0, 212, 255, 0.8), rgba(2, 136, 209, 0.8))",
   color: "#FFFFFF",
@@ -278,8 +276,7 @@ const SLNavbar = () => {
   const [newsSubmenuOpen, setNewsSubmenuOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
-  // Default to Sri Lanka for the SL Navbar
+
   const [selectedCountry, setSelectedCountry] = useState(() => {
     const currentPath = location.pathname.split('/')[1] || '';
     return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
@@ -299,13 +296,10 @@ const SLNavbar = () => {
     location.pathname === '/SL/trainings' ||
     location.pathname === '/SL/blog' ||
     location.pathname === '/SL/press-&-media' ||
-    location.pathname === '/SL/why-us' ||
     location.pathname === '/SL/global-coverage' ||
     location.pathname === '/SL/leadership' ||
     location.pathname === '/SL/careers' ||
     location.pathname === '/SL/about';
-
-  const isContactPage = location.pathname === '/SL/contact';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -346,7 +340,7 @@ const SLNavbar = () => {
     setCountryAnchorEl(null);
     setCountriesSubmenuOpen(false);
     setDrawerOpen(false);
-    navigate(country.route); // Navigate to the selected country's route
+    navigate(country.route);
   };
 
   return (
@@ -573,14 +567,6 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/why-us"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Why Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem
-                                component={Link}
                                 to="/SL/global-coverage"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
@@ -603,11 +589,19 @@ const SLNavbar = () => {
                               >
                                 <ListItemText primary="Careers" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/SL/contact"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/SL/contact" onClick={() => setDrawerOpen(false)}>
-                            <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          <ListItem component={Link} to="/SL/portal" onClick={() => setDrawerOpen(false)}>
+                            <ListItemText primary="Portal Login" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
                           <ListItem
@@ -844,10 +838,10 @@ const SLNavbar = () => {
                   <DropdownButton
                     active={
                       location.pathname === "/SL/about" ||
-                      location.pathname === "/SL/why-us" ||
                       location.pathname === "/SL/global-coverage" ||
                       location.pathname === "/SL/leadership" ||
-                      location.pathname === "/SL/careers"
+                      location.pathname === "/SL/careers" ||
+                      location.pathname === "/SL/contact"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -867,10 +861,10 @@ const SLNavbar = () => {
                       <NeonHoverEffect
                         active={
                           location.pathname === "/SL/about" ||
-                          location.pathname === "/SL/why-us" ||
                           location.pathname === "/SL/global-coverage" ||
                           location.pathname === "/SL/leadership" ||
-                          location.pathname === "/SL/careers"
+                          location.pathname === "/SL/careers" ||
+                          location.pathname === "/SL/contact"
                         }
                       />
                     </Box>
@@ -889,9 +883,6 @@ const SLNavbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/why-us">
-                      Why Us
-                    </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
@@ -900,6 +891,9 @@ const SLNavbar = () => {
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/careers">
                       Careers
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/contact">
+                      Contact Us
                     </FuturisticMenuItem>
                   </FuturisticMenu>
                 </div>
@@ -959,14 +953,13 @@ const SLNavbar = () => {
                   </FuturisticMenu>
                 </div>
 
-                <ContactButton 
-                  component={Link} 
-                  to="/SL/contact" 
-                  isScrolled={isScrolled} 
-                  isContactPage={isContactPage}
+                <PortalButton
+                  component={Link}
+                  to="/SL/portal"
+                  isScrolled={isScrolled}
                 >
-                  Contact Us
-                </ContactButton>
+                  Portal Login
+                </PortalButton>
               </ButtonContainer>
             )}
           </FuturisticToolbar>

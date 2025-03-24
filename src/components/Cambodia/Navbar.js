@@ -27,20 +27,20 @@ import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
 import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
 
 // Import flag images from local folder
-import globalFlag from '../../assets/image/flag/internet.png'; // Connex Global
-import australiaFlag from '../../assets/image/flag/australia.png'; // Australia
-import bangladeshFlag from '../../assets/image/flag/bangladesh.png'; // Bangladesh
-import bruneiFlag from '../../assets/image/flag/brunei.png'; // Brunei
-import cambodiaFlag from '../../assets/image/flag/cambodia.png'; // Cambodia
-import indiaFlag from '../../assets/image/flag/india.png'; // India
-import maldivesFlag from '../../assets/image/flag/maldives.png'; // Maldives
-import mauritiusFlag from '../../assets/image/flag/mauritius.png'; // Mauritius
-import nepalFlag from '../../assets/image/flag/nepal.png'; // Nepal
-import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // New Zealand
-import singaporeFlag from '../../assets/image/flag/singapore.png'; // Singapore
-import sriLankaFlag from '../../assets/image/flag/sri-lanka.png'; // Sri Lanka
-import thailandFlag from '../../assets/image/flag/thailand.png'; // Thailand
-import uaeFlag from '../../assets/image/flag/uae.png'; // UAE
+import globalFlag from '../../assets/image/flag/internet.png';
+import australiaFlag from '../../assets/image/flag/australia.png';
+import bangladeshFlag from '../../assets/image/flag/bangladesh.png';
+import bruneiFlag from '../../assets/image/flag/brunei.png';
+import cambodiaFlag from '../../assets/image/flag/cambodia.png';
+import indiaFlag from '../../assets/image/flag/india.png';
+import maldivesFlag from '../../assets/image/flag/maldives.png';
+import mauritiusFlag from '../../assets/image/flag/mauritius.png';
+import nepalFlag from '../../assets/image/flag/nepal.png';
+import newZealandFlag from '../../assets/image/flag/new-zealand (1).png';
+import singaporeFlag from '../../assets/image/flag/singapore.png';
+import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
+import thailandFlag from '../../assets/image/flag/thailand.png';
+import uaeFlag from '../../assets/image/flag/uae.png';
 
 // Country Flags Array with routes
 const countries = [
@@ -168,10 +168,8 @@ const DropdownButton = styled(FuturisticButton)(({ isOpen }) => ({
   },
 }));
 
-const ContactButton = styled(Button)(({ isScrolled, isContactPage }) => ({
-  background: isContactPage
-    ? "linear-gradient(45deg, rgb(0, 97, 27), rgb(3, 87, 0))"
-    : isScrolled
+const PortalButton = styled(Button)(({ isScrolled }) => ({
+  background: isScrolled
     ? "linear-gradient(45deg, #00D4FF, #0288D1)"
     : "linear-gradient(45deg, rgba(0, 212, 255, 0.8), rgba(2, 136, 209, 0.8))",
   color: "#FFFFFF",
@@ -279,7 +277,6 @@ const KHNavbar = () => {
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Default to Cambodia for the KH Navbar
   const [selectedCountry, setSelectedCountry] = useState(() => {
     const currentPath = location.pathname.split('/')[1] || '';
     return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Cambodia");
@@ -299,13 +296,10 @@ const KHNavbar = () => {
     location.pathname === '/kh/trainings' ||
     location.pathname === '/kh/blog' ||
     location.pathname === '/kh/press-&-media' ||
-    location.pathname === '/kh/why-us' ||
     location.pathname === '/kh/global-coverage' ||
     location.pathname === '/kh/leadership' ||
     location.pathname === '/kh/careers' ||
     location.pathname === '/kh/about';
-
-  const isContactPage = location.pathname === '/kh/contact';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -346,7 +340,7 @@ const KHNavbar = () => {
     setCountryAnchorEl(null);
     setCountriesSubmenuOpen(false);
     setDrawerOpen(false);
-    navigate(country.route); // Navigate to the selected country's route
+    navigate(country.route);
   };
 
   return (
@@ -573,14 +567,6 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/why-us"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Why Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem
-                                component={Link}
                                 to="/kh/global-coverage"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
@@ -603,11 +589,19 @@ const KHNavbar = () => {
                               >
                                 <ListItemText primary="Careers" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/kh/contact"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/kh/contact" onClick={() => setDrawerOpen(false)}>
-                            <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          <ListItem component={Link} to="/kh/portal" onClick={() => setDrawerOpen(false)}>
+                            <ListItemText primary="Portal Login" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
                           <ListItem
@@ -657,7 +651,9 @@ const KHNavbar = () => {
                             </List>
                           </Collapse>
 
-                          <Divider sx={{ my: 1, background: "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))" }} />
+                
+
+                          <Divider sx={{ my: 1, background: "linear-gradient(90deg,rgb(217, 232, 235), rgb(213, 238, 220))" }} />
                         </List>
                       </motion.div>
                     )}
@@ -844,10 +840,10 @@ const KHNavbar = () => {
                   <DropdownButton
                     active={
                       location.pathname === "/kh/about" ||
-                      location.pathname === "/kh/why-us" ||
                       location.pathname === "/kh/global-coverage" ||
                       location.pathname === "/kh/leadership" ||
-                      location.pathname === "/kh/careers"
+                      location.pathname === "/kh/careers" ||
+                      location.pathname === "/kh/contact"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -867,10 +863,10 @@ const KHNavbar = () => {
                       <NeonHoverEffect
                         active={
                           location.pathname === "/kh/about" ||
-                          location.pathname === "/kh/why-us" ||
                           location.pathname === "/kh/global-coverage" ||
                           location.pathname === "/kh/leadership" ||
-                          location.pathname === "/kh/careers"
+                          location.pathname === "/kh/careers" ||
+                          location.pathname === "/kh/contact"
                         }
                       />
                     </Box>
@@ -889,9 +885,6 @@ const KHNavbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/why-us">
-                      Why Us
-                    </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
@@ -900,6 +893,9 @@ const KHNavbar = () => {
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/careers">
                       Careers
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/contact">
+                      Contact Us
                     </FuturisticMenuItem>
                   </FuturisticMenu>
                 </div>
@@ -959,14 +955,13 @@ const KHNavbar = () => {
                   </FuturisticMenu>
                 </div>
 
-                <ContactButton 
+                <PortalButton 
                   component={Link} 
-                  to="/kh/contact" 
-                  isScrolled={isScrolled} 
-                  isContactPage={isContactPage}
+                  to="/kh/portal" 
+                  isScrolled={isScrolled}
                 >
-                  Contact Us
-                </ContactButton>
+                  Portal Login
+                </PortalButton>
               </ButtonContainer>
             )}
           </FuturisticToolbar>
