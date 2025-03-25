@@ -196,24 +196,24 @@ const App = () => {
         <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
         {/* B Routes */}
-        <Route path="/bgd" element={<AustraliaLayout><AUHome /></AustraliaLayout>} />
-        <Route path="/bgd/about" element={<AustraliaLayout><AUAboutUs /></AustraliaLayout>} />
-        <Route path="/bgd/services" element={<AustraliaLayout><AUServices /></AustraliaLayout>} />
-        <Route path="/bgd/service01" element={<AustraliaLayout><AUService01 /></AustraliaLayout>} />
-        <Route path="/bgd/service02" element={<AustraliaLayout><AUService02 /></AustraliaLayout>} />
-        <Route path="/bgd/contact" element={<AustraliaLayout><AUContactUs /></AustraliaLayout>} />
-        <Route path="/bgd/solution" element={<AustraliaLayout><AUSolutions /></AustraliaLayout>} />
-        <Route path="/bgd/vendors" element={<AustraliaLayout><AUVendor /></AustraliaLayout>} />
-        <Route path="/bgd/history" element={<AustraliaLayout><AUHistorySection /></AustraliaLayout>} />
-        <Route path="/bgd/leadership" element={<AustraliaLayout><AULeadership /></AustraliaLayout>} />
-        <Route path="/bgd/global-coverage" element={<AustraliaLayout><AUGlobalCoverage /></AustraliaLayout>} />
-        <Route path="/bgd/blog" element={<AustraliaLayout><AUBlogs /></AustraliaLayout>} />
-        <Route path="/bgd/events" element={<AustraliaLayout><AUEventsNews /></AustraliaLayout>} />
-        <Route path="/bgd/trainings" element={<AustraliaLayout><AUTrainings /></AustraliaLayout>} />
-        <Route path="/bgd/blog/:title" element={<AustraliaLayout><AUBlogDetails /></AustraliaLayout>} />
-        <Route path="/bgd/events/register/:id" element={<AustraliaLayout><AURegisterEvent /></AustraliaLayout>} />
-        <Route path="/bgd/why-us" element={<AustraliaLayout><AUWhyUs /></AustraliaLayout>} />
-        <Route path="/bgd/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
+        <Route path="/bgd" element={<BangladeshLayout><AUHome /></BangladeshLayout>} />
+        <Route path="/bgd/about" element={<BangladeshLayout><AUAboutUs /></BangladeshLayout>} />
+        <Route path="/bgd/services" element={<BangladeshLayout><AUServices /></BangladeshLayout>} />
+        <Route path="/bgd/service01" element={<BangladeshLayout><AUService01 /></BangladeshLayout>} />
+        <Route path="/bgd/service02" element={<BangladeshLayout><AUService02 /></BangladeshLayout>} />
+        <Route path="/bgd/contact" element={<BangladeshLayout><AUContactUs /></BangladeshLayout>} />
+        <Route path="/bgd/solution" element={<BangladeshLayout><AUSolutions /></BangladeshLayout>} />
+        <Route path="/bgd/vendors" element={<BangladeshLayout><AUVendor /></BangladeshLayout>} />
+        <Route path="/bgd/history" element={<BangladeshLayout><AUHistorySection /></BangladeshLayout>} />
+        <Route path="/bgd/leadership" element={<BangladeshLayout><AULeadership /></BangladeshLayout>} />
+        <Route path="/bgd/global-coverage" element={<BangladeshLayout><AUGlobalCoverage /></BangladeshLayout>} />
+        <Route path="/bgd/blog" element={<BangladeshLayout><AUBlogs /></BangladeshLayout>} />
+        <Route path="/bgd/events" element={<BangladeshLayout><AUEventsNews /></BangladeshLayout>} />
+        <Route path="/bgd/trainings" element={<BangladeshLayout><AUTrainings /></BangladeshLayout>} />
+        <Route path="/bgd/blog/:title" element={<BangladeshLayout><AUBlogDetails /></BangladeshLayout>} />
+        <Route path="/bgd/events/register/:id" element={<BangladeshLayout><AURegisterEvent /></BangladeshLayout>} />
+        <Route path="/bgd/why-us" element={<BangladeshLayout><AUWhyUs /></BangladeshLayout>} />
+        <Route path="/bgd/portal" element={<BangladeshLayout><AUPortal /></BangladeshLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
