@@ -154,6 +154,50 @@ import CamWhyUs from './components/Cambodia/AboutUs/WhyUs/WhyUs';
 import { CamBlogs } from './components/Cambodia/News/Blogs/Blogs';
 import CamPortal from './components/Cambodia/Portal/Portal';
 
+// Malaysia Components
+import MyNavbar from './components/Malaysia/Navbar';
+import MyFooter from './components/Malaysia/Footer';
+import MyHome from './components/Malaysia/Home';
+import MyAboutUs from './components/Malaysia/About';
+import MyServices from './components/Malaysia/Services';
+import MyService01 from './components/Malaysia/Service01';
+import MyService02 from './components/Malaysia/Service02';
+import MyContactUs from './components/Malaysia/ContactUs';
+import MySolutions from './components/Malaysia/Solution/Solutions';
+import MyVendor from './components/Malaysia/Vendors/vendor';
+import MyHistorySection from './components/Malaysia/AboutUs/History/HistorySection';
+import MyLeadership from './components/Malaysia/AboutUs/LeaderShip/Leadership';
+import MyGlobalCoverage from './components/Malaysia/AboutUs/GlobalCoverage/GlobalCoverage';
+import MyEventsNews from './components/Malaysia/Evnt/EventsNews/EventsNews';
+import MyTrainings from './components/Malaysia/Servicess/Trainings/Trainings';
+import MyBlogDetails from './components/Malaysia/News/Blogs/BlogDetails';
+import MyRegisterEvent from './components/Malaysia/Evnt/EventsNews/RegisterEvent';
+import MyWhyUs from './components/Malaysia/AboutUs/WhyUs/WhyUs';
+import { MyBlogs } from './components/Malaysia/News/Blogs/Blogs';
+import MyPortal from './components/Malaysia/Portal/Portal';
+
+// Bhutan Components
+import BtNavbar from './components/Bhutan/Navbar';
+import BtFooter from './components/Bhutan/Footer';
+import BtHome from './components/Bhutan/Home';
+import BtAboutUs from './components/Bhutan/About';
+import BtServices from './components/Bhutan/Services';
+import BtService01 from './components/Bhutan/Service01';
+import BtService02 from './components/Bhutan/Service02';
+import BtContactUs from './components/Bhutan/ContactUs';
+import BtSolutions from './components/Bhutan/Solution/Solutions';
+import BtVendor from './components/Bhutan/Vendors/vendor';
+import BtHistorySection from './components/Bhutan/AboutUs/History/HistorySection';
+import BtLeadership from './components/Bhutan/AboutUs/LeaderShip/Leadership';
+import BtGlobalCoverage from './components/Bhutan/AboutUs/GlobalCoverage/GlobalCoverage';
+import BtEventsNews from './components/Bhutan/Evnt/EventsNews/EventsNews';
+import BtTrainings from './components/Bhutan/Servicess/Trainings/Trainings';
+import BtBlogDetails from './components/Bhutan/News/Blogs/BlogDetails';
+import BtRegisterEvent from './components/Bhutan/Evnt/EventsNews/RegisterEvent';
+import BtWhyUs from './components/Bhutan/AboutUs/WhyUs/WhyUs';
+import { BtBlogs } from './components/Bhutan/News/Blogs/Blogs';
+import BtPortal from './components/Bhutan/Portal/Portal';
+
 // Maldives Components
 import MvNavbar from './components/Maldives/Navbar';
 import MvFooter from './components/Maldives/Footer';
@@ -386,6 +430,22 @@ const NepalLayout = ({ children }) => (
     <NplNavbar />
     {children}
     <NplFooter />
+  </>
+);
+
+const MalaysiaLayout = ({ children }) => (
+  <>
+    <MyNavbar />
+    {children}
+    <MyFooter />
+  </>
+);
+
+const BhutanLayout = ({ children }) => (
+  <>
+    <BtNavbar />
+    {children}
+    <BtFooter />
   </>
 );
 
@@ -663,6 +723,47 @@ const App = () => {
         <Route path="/sg/events/register/:id" element={<SingaporeLayout><SgRegisterEvent /></SingaporeLayout>} />
         <Route path="/sg/why-us" element={<SingaporeLayout><SgWhyUs /></SingaporeLayout>} />
         <Route path="/sg/portal" element={<SingaporeLayout><SgPortal /></SingaporeLayout>} />
+
+        {/* Malaysia Routes */}
+        <Route path="/my" element={<MalaysiaLayout><MyHome /></MalaysiaLayout>} />
+        <Route path="/my/about" element={<MalaysiaLayout><MyAboutUs /></MalaysiaLayout>} />
+        <Route path="/my/services" element={<MalaysiaLayout><MyServices /></MalaysiaLayout>} />
+        <Route path="/my/service01" element={<MalaysiaLayout><MyService01 /></MalaysiaLayout>} />
+        <Route path="/my/service02" element={<MalaysiaLayout><MyService02 /></MalaysiaLayout>} />
+        <Route path="/my/contact" element={<MalaysiaLayout><MyContactUs /></MalaysiaLayout>} />
+        <Route path="/my/solution" element={<MalaysiaLayout><MySolutions /></MalaysiaLayout>} />
+        <Route path="/my/vendors" element={<MalaysiaLayout><MyVendor /></MalaysiaLayout>} />
+        <Route path="/my/history" element={<MalaysiaLayout><MyHistorySection /></MalaysiaLayout>} />
+        <Route path="/my/leadership" element={<MalaysiaLayout><MyLeadership /></MalaysiaLayout>} />
+        <Route path="/my/global-coverage" element={<MalaysiaLayout><MyGlobalCoverage /></MalaysiaLayout>} />
+        <Route path="/my/blog" element={<MalaysiaLayout><MyBlogs /></MalaysiaLayout>} />
+        <Route path="/my/events" element={<MalaysiaLayout><MyEventsNews /></MalaysiaLayout>} />
+        <Route path="/my/trainings" element={<MalaysiaLayout><MyTrainings /></MalaysiaLayout>} />
+        <Route path="/my/blog/:title" element={<MalaysiaLayout><MyBlogDetails /></MalaysiaLayout>} />
+        <Route path="/my/events/register/:id" element={<MalaysiaLayout><MyRegisterEvent /></MalaysiaLayout>} />
+        <Route path="/my/why-us" element={<MalaysiaLayout><MyWhyUs /></MalaysiaLayout>} />
+        <Route path="/my/portal" element={<MalaysiaLayout><MyPortal /></MalaysiaLayout>} />
+
+
+        {/* Bhutan Routes */}
+        <Route path="/bt" element={<BhutanLayout><BtHome /></BhutanLayout>} />
+        <Route path="/bt/about" element={<BhutanLayout><BtAboutUs /></BhutanLayout>} />
+        <Route path="/bt/services" element={<BhutanLayout><BtServices /></BhutanLayout>} />
+        <Route path="/bt/service01" element={<BhutanLayout><BtService01 /></BhutanLayout>} />
+        <Route path="/bt/service02" element={<BhutanLayout><BtService02 /></BhutanLayout>} />
+        <Route path="/bt/contact" element={<BhutanLayout><BtContactUs /></BhutanLayout>} />
+        <Route path="/bt/solution" element={<BhutanLayout><BtSolutions /></BhutanLayout>} />
+        <Route path="/bt/vendors" element={<BhutanLayout><BtVendor /></BhutanLayout>} />
+        <Route path="/bt/history" element={<BhutanLayout><BtHistorySection /></BhutanLayout>} />
+        <Route path="/bt/leadership" element={<BhutanLayout><BtLeadership /></BhutanLayout>} />
+        <Route path="/bt/global-coverage" element={<BhutanLayout><BtGlobalCoverage /></BhutanLayout>} />
+        <Route path="/bt/blog" element={<BhutanLayout><BtBlogs /></BhutanLayout>} />
+        <Route path="/bt/events" element={<BhutanLayout><BtEventsNews /></BhutanLayout>} />
+        <Route path="/bt/trainings" element={<BhutanLayout><BtTrainings /></BhutanLayout>} />
+        <Route path="/bt/blog/:title" element={<BhutanLayout><BtBlogDetails /></BhutanLayout>} />
+        <Route path="/bt/events/register/:id" element={<BhutanLayout><BtRegisterEvent /></BhutanLayout>} />
+        <Route path="/bt/why-us" element={<BhutanLayout><BtWhyUs /></BhutanLayout>} />
+        <Route path="/bt/portal" element={<BhutanLayout><BtPortal /></BhutanLayout>} />
 
         {/* Thailand Routes */}
         <Route path="/th" element={<ThailandLayout><ThHome /></ThailandLayout>} />
