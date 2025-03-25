@@ -151,7 +151,7 @@ const OurVendors = () => {
         {/* Explore Button */}
         <ExploreButton
           endIcon={<ArrowForwardIcon />}
-          onClick={() => navigate('/kh/vendors')} // Redirect to Vendors page
+          onClick={() => navigate('/bgd/vendors')} // Redirect to Vendors page
         >
           Explore Our Vendors
         </ExploreButton>
