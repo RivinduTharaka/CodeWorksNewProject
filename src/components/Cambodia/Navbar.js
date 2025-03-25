@@ -612,7 +612,7 @@ const KHNavbar = () => {
                             <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                               <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
                               <ListItemText
-                                primary="Countries"
+                                primary={selectedCountry.name}
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
                             </Box>
@@ -641,7 +641,7 @@ const KHNavbar = () => {
                                   sx={{ pl: 4, py: 1 }}
                                   onClick={() => handleCountrySelect(country)}
                                 >
-                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
+                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "20px", borderRadius: "2px" }} />
                                   <ListItemText
                                     primary={country.name}
                                     primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
@@ -650,8 +650,6 @@ const KHNavbar = () => {
                               ))}
                             </List>
                           </Collapse>
-
-                
 
                           <Divider sx={{ my: 1, background: "linear-gradient(90deg,rgb(217, 232, 235), rgb(213, 238, 220))" }} />
                         </List>
@@ -913,8 +911,8 @@ const KHNavbar = () => {
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "25px", height: "25px", borderRadius: "2px" }} />
-                        Countries
+                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
+                        {selectedCountry.name}
                         <ExpandMore
                           sx={{
                             color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
