@@ -66,6 +66,28 @@ import BgdWhyUs from './components/Bangladesh/AboutUs/WhyUs/WhyUs';
 import { BgdBlogs } from './components/Bangladesh/News/Blogs/Blogs';
 import BgdPortal from './components/Bangladesh/Portal/Portal';
 
+// Brunei Components
+import BrnNavbar from './components/Brunei/Navbar';
+import BrnFooter from './components/Brunei/Footer';
+import BrnHome from './components/Brunei/Home';
+import BrnAboutUs from './components/Brunei/About';
+import BrnServices from './components/Brunei/Services';
+import BrnService01 from './components/Brunei/Service01';
+import BrnService02 from './components/Brunei/Service02';
+import BrnContactUs from './components/Brunei/ContactUs';
+import BrnSolutions from './components/Brunei/Solution/Solutions';
+import BrnVendor from './components/Brunei/Vendors/vendor';
+import BrnHistorySection from './components/Brunei/AboutUs/History/HistorySection';
+import BrnLeadership from './components/Brunei/AboutUs/LeaderShip/Leadership';
+import BrnGlobalCoverage from './components/Brunei/AboutUs/GlobalCoverage/GlobalCoverage';
+import BrnEventsNews from './components/Brunei/Evnt/EventsNews/EventsNews';
+import BrnTrainings from './components/Brunei/Servicess/Trainings/Trainings';
+import BrnBlogDetails from './components/Brunei/News/Blogs/BlogDetails';
+import BrnRegisterEvent from './components/Brunei/Evnt/EventsNews/RegisterEvent';
+import BrnWhyUs from './components/Brunei/AboutUs/WhyUs/WhyUs';
+import { BrnBlogs } from './components/Brunei/News/Blogs/Blogs';
+import BrnPortal from './components/Brunei/Portal/Portal';
+
 // Sri Lanka Components
 import SLNavbar from './components/SriLanka/Navbar';
 import SLFooter from './components/SriLanka/Footer';
@@ -110,7 +132,7 @@ import CamWhyUs from './components/Cambodia/AboutUs/WhyUs/WhyUs';
 import { CamBlogs } from './components/Cambodia/News/Blogs/Blogs';
 import CamPortal from './components/Cambodia/Portal/Portal';
 
-// Layouts for Global, Australia, Sri Lanka, and Cambodia
+// Layouts for Global, Australia, Bangladesh, Brunei, Sri Lanka, and Cambodia
 const GlobalLayout = ({ children }) => (
   <>
     <Navbar />
@@ -135,6 +157,13 @@ const BangladeshLayout = ({ children }) => (
   </>
 );
 
+const BruneiLayout = ({ children }) => (
+  <>
+    <BrnNavbar />
+    {children}
+    <BrnFooter />
+  </>
+);
 
 const SriLankaLayout = ({ children }) => (
   <>
@@ -195,8 +224,8 @@ const App = () => {
         <Route path="/au/why-us" element={<AustraliaLayout><AUWhyUs /></AustraliaLayout>} />
         <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
-        {/* B Routes */}
-        <Route path="/bgd" element={<BangladeshLayout><Home /></BangladeshLayout>} />
+        {/* Bangladesh Routes */}
+        <Route path="/bgd" element={<BangladeshLayout><BgdHome /></BangladeshLayout>} />
         <Route path="/bgd/about" element={<BangladeshLayout><BgdAboutUs /></BangladeshLayout>} />
         <Route path="/bgd/services" element={<BangladeshLayout><BgdServices /></BangladeshLayout>} />
         <Route path="/bgd/service01" element={<BangladeshLayout><BgdService01 /></BangladeshLayout>} />
@@ -214,6 +243,26 @@ const App = () => {
         <Route path="/bgd/events/register/:id" element={<BangladeshLayout><BgdRegisterEvent /></BangladeshLayout>} />
         <Route path="/bgd/why-us" element={<BangladeshLayout><BgdWhyUs /></BangladeshLayout>} />
         <Route path="/bgd/portal" element={<BangladeshLayout><BgdPortal /></BangladeshLayout>} />
+
+        {/* Brunei Routes */}
+        <Route path="/brn" element={<BruneiLayout><BrnHome /></BruneiLayout>} />
+        <Route path="/brn/about" element={<BruneiLayout><BrnAboutUs /></BruneiLayout>} />
+        <Route path="/brn/services" element={<BruneiLayout><BrnServices /></BruneiLayout>} />
+        <Route path="/brn/service01" element={<BruneiLayout><BrnService01 /></BruneiLayout>} />
+        <Route path="/brn/service02" element={<BruneiLayout><BrnService02 /></BruneiLayout>} />
+        <Route path="/brn/contact" element={<BruneiLayout><BrnContactUs /></BruneiLayout>} />
+        <Route path="/brn/solution" element={<BruneiLayout><BrnSolutions /></BruneiLayout>} />
+        <Route path="/brn/vendors" element={<BruneiLayout><BrnVendor /></BruneiLayout>} />
+        <Route path="/brn/history" element={<BruneiLayout><BrnHistorySection /></BruneiLayout>} />
+        <Route path="/brn/leadership" element={<BruneiLayout><BrnLeadership /></BruneiLayout>} />
+        <Route path="/brn/global-coverage" element={<BruneiLayout><BrnGlobalCoverage /></BruneiLayout>} />
+        <Route path="/brn/blog" element={<BruneiLayout><BrnBlogs /></BruneiLayout>} />
+        <Route path="/brn/events" element={<BruneiLayout><BrnEventsNews /></BruneiLayout>} />
+        <Route path="/brn/trainings" element={<BruneiLayout><BrnTrainings /></BruneiLayout>} />
+        <Route path="/brn/blog/:title" element={<BruneiLayout><BrnBlogDetails /></BruneiLayout>} />
+        <Route path="/brn/events/register/:id" element={<BruneiLayout><BrnRegisterEvent /></BruneiLayout>} />
+        <Route path="/brn/why-us" element={<BruneiLayout><BrnWhyUs /></BruneiLayout>} />
+        <Route path="/brn/portal" element={<BruneiLayout><BrnPortal /></BruneiLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
