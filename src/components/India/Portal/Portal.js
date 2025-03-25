@@ -1,8 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material'; // Import MUI components
+import { useEffect } from 'react'; // Import the useEffect hook
 
 
 function Portal() {
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to top when the component mounts
+      }, []);
   return (
     <Box sx={{ backgroundColor: '#132742', minHeight: '100vh' }}>
    
