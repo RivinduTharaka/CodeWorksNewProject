@@ -154,7 +154,51 @@ import CamWhyUs from './components/Cambodia/AboutUs/WhyUs/WhyUs';
 import { CamBlogs } from './components/Cambodia/News/Blogs/Blogs';
 import CamPortal from './components/Cambodia/Portal/Portal';
 
-// Layouts for Global, Australia, Bangladesh, Brunei, Sri Lanka, and Cambodia
+// Maldives Components
+import MvNavbar from './components/Maldives/Navbar';
+import MvFooter from './components/Maldives/Footer';
+import MvHome from './components/Maldives/Home';
+import MvAboutUs from './components/Maldives/About';
+import MvServices from './components/Maldives/Services';
+import MvService01 from './components/Maldives/Service01';
+import MvService02 from './components/Maldives/Service02';
+import MvContactUs from './components/Maldives/ContactUs';
+import MvSolutions from './components/Maldives/Solution/Solutions';
+import MvVendor from './components/Maldives/Vendors/vendor';
+import MvHistorySection from './components/Maldives/AboutUs/History/HistorySection';
+import MvLeadership from './components/Maldives/AboutUs/LeaderShip/Leadership';
+import MvGlobalCoverage from './components/Maldives/AboutUs/GlobalCoverage/GlobalCoverage';
+import MvEventsNews from './components/Maldives/Evnt/EventsNews/EventsNews';
+import MvTrainings from './components/Maldives/Servicess/Trainings/Trainings';
+import MvBlogDetails from './components/Maldives/News/Blogs/BlogDetails';
+import MvRegisterEvent from './components/Maldives/Evnt/EventsNews/RegisterEvent';
+import MvWhyUs from './components/Maldives/AboutUs/WhyUs/WhyUs';
+import { MvBlogs } from './components/Maldives/News/Blogs/Blogs';
+import MvPortal from './components/Maldives/Portal/Portal';
+
+// Mauritius Components
+import MuNavbar from './components/Mauritius/Navbar';
+import MuFooter from './components/Mauritius/Footer';
+import MuHome from './components/Mauritius/Home';
+import MuAboutUs from './components/Mauritius/About';
+import MuServices from './components/Mauritius/Services';
+import MuService01 from './components/Mauritius/Service01';
+import MuService02 from './components/Mauritius/Service02';
+import MuContactUs from './components/Mauritius/ContactUs';
+import MuSolutions from './components/Mauritius/Solution/Solutions';
+import MuVendor from './components/Mauritius/Vendors/vendor';
+import MuHistorySection from './components/Mauritius/AboutUs/History/HistorySection';
+import MuLeadership from './components/Mauritius/AboutUs/LeaderShip/Leadership';
+import MuGlobalCoverage from './components/Mauritius/AboutUs/GlobalCoverage/GlobalCoverage';
+import MuEventsNews from './components/Mauritius/Evnt/EventsNews/EventsNews';
+import MuTrainings from './components/Mauritius/Servicess/Trainings/Trainings';
+import MuBlogDetails from './components/Mauritius/News/Blogs/BlogDetails';
+import MuRegisterEvent from './components/Mauritius/Evnt/EventsNews/RegisterEvent';
+import MuWhyUs from './components/Mauritius/AboutUs/WhyUs/WhyUs';
+import { MuBlogs } from './components/Mauritius/News/Blogs/Blogs';
+import MuPortal from './components/Mauritius/Portal/Portal';
+
+// Layouts for Global, Australia, Bangladesh, Brunei, Sri Lanka, Cambodia, Maldives, and Mauritius
 const GlobalLayout = ({ children }) => (
   <>
     <Navbar />
@@ -195,7 +239,6 @@ const IndiaLayout = ({ children }) => (
   </>
 );
 
-
 const SriLankaLayout = ({ children }) => (
   <>
     <SLNavbar />
@@ -209,6 +252,22 @@ const CambodiaLayout = ({ children }) => (
     <CamNavbar />
     {children}
     <CamFooter />
+  </>
+);
+
+const MaldivesLayout = ({ children }) => (
+  <>
+    <MvNavbar />
+    {children}
+    <MvFooter />
+  </>
+);
+
+const MauritiusLayout = ({ children }) => (
+  <>
+    <MuNavbar />
+    {children}
+    <MuFooter />
   </>
 );
 
@@ -296,24 +355,24 @@ const App = () => {
         <Route path="/brn/portal" element={<BruneiLayout><BrnPortal /></BruneiLayout>} />
 
         {/* India Routes */}
-        <Route path="/In" element={<IndiaLayout><InHome /></IndiaLayout>} />
-        <Route path="/In/about" element={<IndiaLayout><InAboutUs /></IndiaLayout>} />
-        <Route path="/In/services" element={<IndiaLayout><InServices /></IndiaLayout>} />
-        <Route path="/In/service01" element={<IndiaLayout><InService01 /></IndiaLayout>} />
-        <Route path="/In/service02" element={<IndiaLayout><InService02 /></IndiaLayout>} />
-        <Route path="/In/contact" element={<IndiaLayout><InContactUs /></IndiaLayout>} />
-        <Route path="/In/solution" element={<IndiaLayout><InSolutions /></IndiaLayout>} />
-        <Route path="/In/vendors" element={<IndiaLayout><InVendor /></IndiaLayout>} />
-        <Route path="/In/history" element={<IndiaLayout><InHistorySection /></IndiaLayout>} />
-        <Route path="/In/leadership" element={<IndiaLayout><InLeadership /></IndiaLayout>} />
-        <Route path="/In/global-coverage" element={<IndiaLayout><InGlobalCoverage /></IndiaLayout>} />
-        <Route path="/In/blog" element={<IndiaLayout><InBlogs /></IndiaLayout>} />
-        <Route path="/In/events" element={<IndiaLayout><InEventsNews /></IndiaLayout>} />
-        <Route path="/In/trainings" element={<IndiaLayout><InTrainings /></IndiaLayout>} />
-        <Route path="/In/blog/:title" element={<IndiaLayout><InBlogDetails /></IndiaLayout>} />
-        <Route path="/In/events/register/:id" element={<IndiaLayout><InRegisterEvent /></IndiaLayout>} />
-        <Route path="/In/why-us" element={<IndiaLayout><InWhyUs /></IndiaLayout>} />
-        <Route path="/In/portal" element={<IndiaLayout><InPortal /></IndiaLayout>} />
+        <Route path="/in" element={<IndiaLayout><InHome /></IndiaLayout>} />
+        <Route path="/in/about" element={<IndiaLayout><InAboutUs /></IndiaLayout>} />
+        <Route path="/in/services" element={<IndiaLayout><InServices /></IndiaLayout>} />
+        <Route path="/in/service01" element={<IndiaLayout><InService01 /></IndiaLayout>} />
+        <Route path="/in/service02" element={<IndiaLayout><InService02 /></IndiaLayout>} />
+        <Route path="/in/contact" element={<IndiaLayout><InContactUs /></IndiaLayout>} />
+        <Route path="/in/solution" element={<IndiaLayout><InSolutions /></IndiaLayout>} />
+        <Route path="/in/vendors" element={<IndiaLayout><InVendor /></IndiaLayout>} />
+        <Route path="/in/history" element={<IndiaLayout><InHistorySection /></IndiaLayout>} />
+        <Route path="/in/leadership" element={<IndiaLayout><InLeadership /></IndiaLayout>} />
+        <Route path="/in/global-coverage" element={<IndiaLayout><InGlobalCoverage /></IndiaLayout>} />
+        <Route path="/in/blog" element={<IndiaLayout><InBlogs /></IndiaLayout>} />
+        <Route path="/in/events" element={<IndiaLayout><InEventsNews /></IndiaLayout>} />
+        <Route path="/in/trainings" element={<IndiaLayout><InTrainings /></IndiaLayout>} />
+        <Route path="/in/blog/:title" element={<IndiaLayout><InBlogDetails /></IndiaLayout>} />
+        <Route path="/in/events/register/:id" element={<IndiaLayout><InRegisterEvent /></IndiaLayout>} />
+        <Route path="/in/why-us" element={<IndiaLayout><InWhyUs /></IndiaLayout>} />
+        <Route path="/in/portal" element={<IndiaLayout><InPortal /></IndiaLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
@@ -354,7 +413,46 @@ const App = () => {
         <Route path="/kh/events/register/:id" element={<CambodiaLayout><CamRegisterEvent /></CambodiaLayout>} />
         <Route path="/kh/why-us" element={<CambodiaLayout><CamWhyUs /></CambodiaLayout>} />
         <Route path="/kh/portal" element={<CambodiaLayout><CamPortal /></CambodiaLayout>} />
-       
+
+        {/* Maldives Routes */}
+        <Route path="/mv" element={<MaldivesLayout><MvHome /></MaldivesLayout>} />
+        <Route path="/mv/about" element={<MaldivesLayout><MvAboutUs /></MaldivesLayout>} />
+        <Route path="/mv/services" element={<MaldivesLayout><MvServices /></MaldivesLayout>} />
+        <Route path="/mv/service01" element={<MaldivesLayout><MvService01 /></MaldivesLayout>} />
+        <Route path="/mv/service02" element={<MaldivesLayout><MvService02 /></MaldivesLayout>} />
+        <Route path="/mv/contact" element={<MaldivesLayout><MvContactUs /></MaldivesLayout>} />
+        <Route path="/mv/solution" element={<MaldivesLayout><MvSolutions /></MaldivesLayout>} />
+        <Route path="/mv/vendors" element={<MaldivesLayout><MvVendor /></MaldivesLayout>} />
+        <Route path="/mv/history" element={<MaldivesLayout><MvHistorySection /></MaldivesLayout>} />
+        <Route path="/mv/leadership" element={<MaldivesLayout><MvLeadership /></MaldivesLayout>} />
+        <Route path="/mv/global-coverage" element={<MaldivesLayout><MvGlobalCoverage /></MaldivesLayout>} />
+        <Route path="/mv/blog" element={<MaldivesLayout><MvBlogs /></MaldivesLayout>} />
+        <Route path="/mv/events" element={<MaldivesLayout><MvEventsNews /></MaldivesLayout>} />
+        <Route path="/mv/trainings" element={<MaldivesLayout><MvTrainings /></MaldivesLayout>} />
+        <Route path="/mv/blog/:title" element={<MaldivesLayout><MvBlogDetails /></MaldivesLayout>} />
+        <Route path="/mv/events/register/:id" element={<MaldivesLayout><MvRegisterEvent /></MaldivesLayout>} />
+        <Route path="/mv/why-us" element={<MaldivesLayout><MvWhyUs /></MaldivesLayout>} />
+        <Route path="/mv/portal" element={<MaldivesLayout><MvPortal /></MaldivesLayout>} />
+
+        {/* Mauritius Routes */}
+        <Route path="/mu" element={<MauritiusLayout><MuHome /></MauritiusLayout>} />
+        <Route path="/mu/about" element={<MauritiusLayout><MuAboutUs /></MauritiusLayout>} />
+        <Route path="/mu/services" element={<MauritiusLayout><MuServices /></MauritiusLayout>} />
+        <Route path="/mu/service01" element={<MauritiusLayout><MuService01 /></MauritiusLayout>} />
+        <Route path="/mu/service02" element={<MauritiusLayout><MuService02 /></MauritiusLayout>} />
+        <Route path="/mu/contact" element={<MauritiusLayout><MuContactUs /></MauritiusLayout>} />
+        <Route path="/mu/solution" element={<MauritiusLayout><MuSolutions /></MauritiusLayout>} />
+        <Route path="/mu/vendors" element={<MauritiusLayout><MuVendor /></MauritiusLayout>} />
+        <Route path="/mu/history" element={<MauritiusLayout><MuHistorySection /></MauritiusLayout>} />
+        <Route path="/mu/leadership" element={<MauritiusLayout><MuLeadership /></MauritiusLayout>} />
+        <Route path="/mu/global-coverage" element={<MauritiusLayout><MuGlobalCoverage /></MauritiusLayout>} />
+        <Route path="/mu/blog" element={<MauritiusLayout><MuBlogs /></MauritiusLayout>} />
+        <Route path="/mu/events" element={<MauritiusLayout><MuEventsNews /></MauritiusLayout>} />
+        <Route path="/mu/trainings" element={<MauritiusLayout><MuTrainings /></MauritiusLayout>} />
+        <Route path="/mu/blog/:title" element={<MauritiusLayout><MuBlogDetails /></MauritiusLayout>} />
+        <Route path="/mu/events/register/:id" element={<MauritiusLayout><MuRegisterEvent /></MauritiusLayout>} />
+        <Route path="/mu/why-us" element={<MauritiusLayout><MuWhyUs /></MauritiusLayout>} />
+        <Route path="/mu/portal" element={<MauritiusLayout><MuPortal /></MauritiusLayout>} />
       </Routes>
     </Router>
   );
