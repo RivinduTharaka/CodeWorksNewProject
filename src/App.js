@@ -44,6 +44,28 @@ import AUWhyUs from './components/Australia/AboutUs/WhyUs/WhyUs';
 import { AUBlogs } from './components/Australia/News/Blogs/Blogs';
 import AUPortal from './components/Australia/Portal/Portal';
 
+// Bangladesh Components
+import BgdNavbar from './components/Bangladesh/Navbar';
+import BgdFooter from './components/Bangladesh/Footer';
+import BgdHome from './components/Bangladesh/Home';
+import BgdAboutUs from './components/Bangladesh/About';
+import BgdServices from './components/Bangladesh/Services';
+import BgdService01 from './components/Bangladesh/Service01';
+import BgdService02 from './components/Bangladesh/Service02';
+import BgdContactUs from './components/Bangladesh/ContactUs';
+import BgdSolutions from './components/Bangladesh/Solution/Solutions';
+import BgdVendor from './components/Bangladesh/Vendors/vendor';
+import BgdHistorySection from './components/Bangladesh/AboutUs/History/HistorySection';
+import BgdLeadership from './components/Bangladesh/AboutUs/LeaderShip/Leadership';
+import BgdGlobalCoverage from './components/Bangladesh/AboutUs/GlobalCoverage/GlobalCoverage';
+import BgdEventsNews from './components/Bangladesh/Evnt/EventsNews/EventsNews';
+import BgdTrainings from './components/Bangladesh/Servicess/Trainings/Trainings';
+import BgdBlogDetails from './components/Bangladesh/News/Blogs/BlogDetails';
+import BgdRegisterEvent from './components/Bangladesh/Evnt/EventsNews/RegisterEvent';
+import BgdWhyUs from './components/Bangladesh/AboutUs/WhyUs/WhyUs';
+import { BgdBlogs } from './components/Bangladesh/News/Blogs/Blogs';
+import BgdPortal from './components/Bangladesh/Portal/Portal';
+
 // Sri Lanka Components
 import SLNavbar from './components/SriLanka/Navbar';
 import SLFooter from './components/SriLanka/Footer';
@@ -105,6 +127,15 @@ const AustraliaLayout = ({ children }) => (
   </>
 );
 
+const BangladeshLayout = ({ children }) => (
+  <>
+    <BgdNavbar />
+    {children}
+    <BgdFooter />
+  </>
+);
+
+
 const SriLankaLayout = ({ children }) => (
   <>
     <SLNavbar />
@@ -163,6 +194,26 @@ const App = () => {
         <Route path="/au/events/register/:id" element={<AustraliaLayout><AURegisterEvent /></AustraliaLayout>} />
         <Route path="/au/why-us" element={<AustraliaLayout><AUWhyUs /></AustraliaLayout>} />
         <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
+
+        {/* B Routes */}
+        <Route path="/bgd" element={<AustraliaLayout><AUHome /></AustraliaLayout>} />
+        <Route path="/bgd/about" element={<AustraliaLayout><AUAboutUs /></AustraliaLayout>} />
+        <Route path="/bgd/services" element={<AustraliaLayout><AUServices /></AustraliaLayout>} />
+        <Route path="/bgd/service01" element={<AustraliaLayout><AUService01 /></AustraliaLayout>} />
+        <Route path="/bgd/service02" element={<AustraliaLayout><AUService02 /></AustraliaLayout>} />
+        <Route path="/bgd/contact" element={<AustraliaLayout><AUContactUs /></AustraliaLayout>} />
+        <Route path="/bgd/solution" element={<AustraliaLayout><AUSolutions /></AustraliaLayout>} />
+        <Route path="/bgd/vendors" element={<AustraliaLayout><AUVendor /></AustraliaLayout>} />
+        <Route path="/bgd/history" element={<AustraliaLayout><AUHistorySection /></AustraliaLayout>} />
+        <Route path="/bgd/leadership" element={<AustraliaLayout><AULeadership /></AustraliaLayout>} />
+        <Route path="/bgd/global-coverage" element={<AustraliaLayout><AUGlobalCoverage /></AustraliaLayout>} />
+        <Route path="/bgd/blog" element={<AustraliaLayout><AUBlogs /></AustraliaLayout>} />
+        <Route path="/bgd/events" element={<AustraliaLayout><AUEventsNews /></AustraliaLayout>} />
+        <Route path="/bgd/trainings" element={<AustraliaLayout><AUTrainings /></AustraliaLayout>} />
+        <Route path="/bgd/blog/:title" element={<AustraliaLayout><AUBlogDetails /></AustraliaLayout>} />
+        <Route path="/bgd/events/register/:id" element={<AustraliaLayout><AURegisterEvent /></AustraliaLayout>} />
+        <Route path="/bgd/why-us" element={<AustraliaLayout><AUWhyUs /></AustraliaLayout>} />
+        <Route path="/bgd/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
