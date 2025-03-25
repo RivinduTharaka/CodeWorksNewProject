@@ -19,28 +19,28 @@ import {
   Close as CloseIcon,
   ExpandMore,
   ExpandLess,
-} from '@mui/icons-material';
-import { styled, keyframes } from '@mui/system';
-import { useMediaQuery, createTheme, ThemeProvider } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
-import image1 from '../../assets/image/logoNavbar/Connex-LogoWhite.png';
-import image2 from '../../assets/image/logoNavbar/ConnexIT.png';
+} from "@mui/icons-material";
+import { styled, keyframes } from "@mui/system";
+import { useMediaQuery, createTheme, ThemeProvider } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
+import image1 from "../../assets/image/logoNavbar/Connex-LogoWhite.png";
+import image2 from "../../assets/image/logoNavbar/ConnexIT.png";
 
 // Import flag images for the countries
-import globalFlag from '../../assets/image/flag/internet.png';
-import australiaFlag from '../../assets/image/flag/australia.png';
-import bangladeshFlag from '../../assets/image/flag/bangladesh.png';
-import bruneiFlag from '../../assets/image/flag/brunei.png';
-import cambodiaFlag from '../../assets/image/flag/cambodia.png';
-import indiaFlag from '../../assets/image/flag/india.png';
-import maldivesFlag from '../../assets/image/flag/maldives.png';
-import mauritiusFlag from '../../assets/image/flag/mauritius.png';
-import nepalFlag from '../../assets/image/flag/nepal.png';
-import singaporeFlag from '../../assets/image/flag/singapore.png';
-import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
-import thailandFlag from '../../assets/image/flag/thailand.png';
-import uaeFlag from '../../assets/image/flag/uae.png';
-import newZealandFlag from '../../assets/image/flag/new-zealand (1).png';
+import globalFlag from "../../assets/image/flag/internet.png";
+import australiaFlag from "../../assets/image/flag/australia.png";
+import bangladeshFlag from "../../assets/image/flag/bangladesh.png";
+import bruneiFlag from "../../assets/image/flag/brunei.png";
+import cambodiaFlag from "../../assets/image/flag/cambodia.png";
+import indiaFlag from "../../assets/image/flag/india.png";
+import maldivesFlag from "../../assets/image/flag/maldives.png";
+import mauritiusFlag from "../../assets/image/flag/mauritius.png";
+import nepalFlag from "../../assets/image/flag/nepal.png";
+import singaporeFlag from "../../assets/image/flag/singapore.png";
+import sriLankaFlag from "../../assets/image/flag/sri-lanka.png";
+import thailandFlag from "../../assets/image/flag/thailand.png";
+import uaeFlag from "../../assets/image/flag/uae.png";
+import newZealandFlag from "../../assets/image/flag/new-zealand (1).png";
 
 // Updated Country Flags Array with specified routes
 const countries = [
@@ -99,9 +99,10 @@ const slideIn = keyframes`
 
 // Styled Components for Futuristic Navbar
 const FuturisticAppBar = styled(AppBar)(({ isTargetPage, isScrolled }) => ({
-  background: isTargetPage && !isScrolled
-    ? "linear-gradient(90deg, rgba(15, 32, 39, 0.8) 0%, rgba(32, 58, 67, 0.8) 50%, rgba(44, 83, 100, 0.8) 100%)"
-    : "linear-gradient(90deg, #0F2027 0%, #203A43 50%, #2C5364 100%)",
+  background:
+    isTargetPage && !isScrolled
+      ? "linear-gradient(90deg, rgba(15, 32, 39, 0.8) 0%, rgba(32, 58, 67, 0.8) 50%, rgba(44, 83, 100, 0.8) 100%)"
+      : "linear-gradient(90deg, #0F2027 0%, #203A43 50%, #2C5364 100%)",
   boxShadow: "0 0 15px rgba(0, 212, 255, 0.5)",
   padding: "0",
   animation: `${glow} 2s infinite`,
@@ -132,25 +133,27 @@ const NeonHoverEffect = styled("span")(({ active }) => ({
   transition: "width 0.4s ease-in-out",
 }));
 
-const FuturisticButton = styled(Button)(({ isTargetPage, isScrolled, active }) => ({
-  color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
-  fontSize: "0.9rem",
-  fontWeight: "500",
-  textTransform: "none",
-  fontFamily: "'Orbitron', sans-serif",
-  position: "relative",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  gap: "1px",
-  padding: "0.5rem 0.55rem",
-  transition: "transform 0.3s ease, text-shadow 0.3s ease",
-  "&:hover": {
-    backgroundColor: "transparent",
-    transform: "scale(1.1)",
-    textShadow: "0 0 4px #00D4FF",
-  },
-}));
+const FuturisticButton = styled(Button)(
+  ({ isTargetPage, isScrolled, active }) => ({
+    color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+    fontSize: "0.9rem",
+    fontWeight: "500",
+    textTransform: "none",
+    fontFamily: "'Orbitron', sans-serif",
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "1px",
+    padding: "0.5rem 0.55rem",
+    transition: "transform 0.3s ease, text-shadow 0.3s ease",
+    "&:hover": {
+      backgroundColor: "transparent",
+      transform: "scale(1.1)",
+      textShadow: "0 0 4px #00D4FF",
+    },
+  })
+);
 
 const DropdownButton = styled(FuturisticButton)(({ isOpen }) => ({
   display: "flex",
@@ -170,8 +173,8 @@ const DropdownButton = styled(FuturisticButton)(({ isOpen }) => ({
 
 const PortalButton = styled(Button)(({ isScrolled }) => ({
   background: isScrolled
-  ? "linear-gradient(45deg, #1a9fd9, #24b24c)"
-  : "linear-gradient(45deg, #24b24c , #1a9fd9 )",
+    ? "linear-gradient(45deg, #1a9fd9, #24b24c)"
+    : "linear-gradient(45deg, #24b24c , #1a9fd9 )",
   color: "#FFFFFF",
   fontSize: "0.9rem",
   fontWeight: "500",
@@ -278,28 +281,31 @@ const SLNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const [selectedCountry, setSelectedCountry] = useState(() => {
-    const currentPath = location.pathname.split('/')[1] || '';
-    return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
+    const currentPath = location.pathname.split("/")[1] || "";
+    return (
+      countries.find((country) => country.route === `/${currentPath}`) ||
+      countries.find((country) => country.name === "Sri Lanka")
+    );
   });
 
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
-    location.pathname === '/SL' ||
-    location.pathname === '/SL/solution' ||
-    location.pathname === '/SL/vendors' ||
-    location.pathname === '/SL/contact' ||
-    location.pathname === '/SL/events' ||
-    location.pathname === '/SL/workshops' ||
-    location.pathname === '/SL/technical-support' ||
-    location.pathname === '/SL/professional-services' ||
-    location.pathname === '/SL/trainings' ||
-    location.pathname === '/SL/blog' ||
-    location.pathname === '/SL/press-&-media' ||
-    location.pathname === '/SL/global-coverage' ||
-    location.pathname === '/SL/leadership' ||
-    location.pathname === '/SL/careers' ||
-    location.pathname === '/SL/about';
+    location.pathname === "/SL" ||
+    location.pathname === "/SL/solution" ||
+    location.pathname === "/SL/vendors" ||
+    location.pathname === "/SL/contact" ||
+    location.pathname === "/SL/events" ||
+    location.pathname === "/SL/workshops" ||
+    location.pathname === "/SL/technical-support" ||
+    location.pathname === "/SL/professional-services" ||
+    location.pathname === "/SL/trainings" ||
+    location.pathname === "/SL/blog" ||
+    location.pathname === "/SL/press-&-media" ||
+    location.pathname === "/SL/global-coverage" ||
+    location.pathname === "/SL/leadership" ||
+    location.pathname === "/SL/careers" ||
+    location.pathname === "/SL/about";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -311,8 +317,10 @@ const SLNavbar = () => {
   }, []);
 
   useEffect(() => {
-    const currentPath = location.pathname.split('/')[1] || '';
-    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Sri Lanka");
+    const currentPath = location.pathname.split("/")[1] || "";
+    const matchedCountry =
+      countries.find((country) => country.route === `/${currentPath}`) ||
+      countries.find((country) => country.name === "Sri Lanka");
     setSelectedCountry(matchedCountry);
   }, [location.pathname]);
 
@@ -324,9 +332,11 @@ const SLNavbar = () => {
   const handleEventsClose = () => setEventsAnchorEl(null);
   const handleEventsClick = (event) => setEventsAnchorEl(event.currentTarget);
 
-  const handleServicesHover = (event) => setServicesAnchorEl(event.currentTarget);
+  const handleServicesHover = (event) =>
+    setServicesAnchorEl(event.currentTarget);
   const handleServicesClose = () => setServicesAnchorEl(null);
-  const handleServicesClick = (event) => setServicesAnchorEl(event.currentTarget);
+  const handleServicesClick = (event) =>
+    setServicesAnchorEl(event.currentTarget);
 
   const handleNewsHover = (event) => setNewsAnchorEl(event.currentTarget);
   const handleNewsClose = () => setNewsAnchorEl(null);
@@ -350,9 +360,20 @@ const SLNavbar = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <FuturisticAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
+        <FuturisticAppBar
+          position="fixed"
+          isTargetPage={isTargetPage}
+          isScrolled={isScrolled}
+        >
           <FuturisticToolbar>
-            <Link to="/SL" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
+            <Link
+              to="/SL"
+              style={{
+                padding: "10px 0 10px 10px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <motion.img
                 src={isTargetPage && !isScrolled ? image1 : image2}
                 alt="CONNEX Logo"
@@ -371,7 +392,8 @@ const SLNavbar = () => {
                     <MenuIcon
                       sx={{
                         fontSize: 30,
-                        color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                        color:
+                          isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
                         textShadow: "0 0 5px #00D4FF",
                       }}
                     />
@@ -398,31 +420,83 @@ const SLNavbar = () => {
                           flexDirection: "column",
                         }}
                       >
-                        <Box sx={{ display: "flex", justifyContent: "flex-end", padding: 2 }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "flex-end",
+                            padding: 2,
+                          }}
+                        >
                           <IconButton onClick={() => setDrawerOpen(false)}>
-                            <CloseIcon sx={{ color: "#FFFFFF", textShadow: "0 0 5px #00D4FF" }} />
+                            <CloseIcon
+                              sx={{
+                                color: "#FFFFFF",
+                                textShadow: "0 0 5px #00D4FF",
+                              }}
+                            />
                           </IconButton>
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
-                          <ListItem component={Link} to="/SL/solution" onClick={() => setDrawerOpen(false)}>
-                            <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          <ListItem
+                            component={Link}
+                            to="/SL/solution"
+                            onClick={() => setDrawerOpen(false)}
+                          >
+                            <ListItemText
+                              primary="Solutions"
+                              primaryTypographyProps={{
+                                style: {
+                                  color: "#E0E0E0",
+                                  fontFamily: "'Orbitron', sans-serif",
+                                },
+                              }}
+                            />
                           </ListItem>
-                          <ListItem component={Link} to="/SL/vendors" onClick={() => setDrawerOpen(false)}>
-                            <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          <ListItem
+                            component={Link}
+                            to="/SL/vendors"
+                            onClick={() => setDrawerOpen(false)}
+                          >
+                            <ListItemText
+                              primary="Vendors"
+                              primaryTypographyProps={{
+                                style: {
+                                  color: "#E0E0E0",
+                                  fontFamily: "'Orbitron', sans-serif",
+                                },
+                              }}
+                            />
                           </ListItem>
 
                           <ListItem
                             button
-                            onClick={() => setEventsSubmenuOpen(!eventsSubmenuOpen)}
-                            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                            onClick={() =>
+                              setEventsSubmenuOpen(!eventsSubmenuOpen)
+                            }
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
                           >
                             <MobileNavLinkContainer>
                               <ListItemText
                                 primary="Events & Webinars"
-                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                                primaryTypographyProps={{
+                                  style: {
+                                    color: "#E0E0E0",
+                                    fontFamily: "'Orbitron', sans-serif",
+                                    fontWeight: "600",
+                                  },
+                                }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/SL/events' || location.pathname === '/SL/workshops'} />
+                              <MobileNeonHoverEffect
+                                active={
+                                  location.pathname === "/SL/events" ||
+                                  location.pathname === "/SL/workshops"
+                                }
+                              />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -430,7 +504,11 @@ const SLNavbar = () => {
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={eventsSubmenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse
+                            in={eventsSubmenuOpen}
+                            timeout="auto"
+                            unmountOnExit
+                          >
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
@@ -438,34 +516,64 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Events" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Events"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/workshops"
+                                to="/SL/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Workshops" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Workshops"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                             </List>
                           </Collapse>
 
                           <ListItem
                             button
-                            onClick={() => setServicesSubmenuOpen(!servicesSubmenuOpen)}
-                            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                            onClick={() =>
+                              setServicesSubmenuOpen(!servicesSubmenuOpen)
+                            }
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
                           >
                             <MobileNavLinkContainer>
                               <ListItemText
                                 primary="Services"
-                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                                primaryTypographyProps={{
+                                  style: {
+                                    color: "#E0E0E0",
+                                    fontFamily: "'Orbitron', sans-serif",
+                                    fontWeight: "600",
+                                  },
+                                }}
                               />
                               <MobileNeonHoverEffect
                                 active={
-                                  location.pathname === '/SL/technical-support' ||
-                                  location.pathname === '/SL/professional-services' ||
-                                  location.pathname === '/SL/trainings'
+                                  location.pathname ===
+                                    "/SL/technical-support" ||
+                                  location.pathname ===
+                                    "/SL/professional-services" ||
+                                  location.pathname === "/SL/trainings"
                                 }
                               />
                             </MobileNavLinkContainer>
@@ -475,23 +583,43 @@ const SLNavbar = () => {
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={servicesSubmenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse
+                            in={servicesSubmenuOpen}
+                            timeout="auto"
+                            unmountOnExit
+                          >
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/SL/technical-support"
+                                to="/SL/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Technical Support" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Technical Support"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/professional-services"
+                                to="/SL/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Professional Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Professional Services"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
@@ -499,7 +627,15 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Trainings" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Trainings"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                             </List>
                           </Collapse>
@@ -507,11 +643,21 @@ const SLNavbar = () => {
                           <ListItem
                             button
                             onClick={() => setNewsSubmenuOpen(!newsSubmenuOpen)}
-                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
                           >
                             <ListItemText
                               primary="News"
-                              primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                              primaryTypographyProps={{
+                                style: {
+                                  color: "#E0E0E0",
+                                  fontFamily: "'Orbitron', sans-serif",
+                                  fontWeight: "600",
+                                },
+                              }}
                             />
                             {newsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -519,7 +665,11 @@ const SLNavbar = () => {
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={newsSubmenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse
+                            in={newsSubmenuOpen}
+                            timeout="auto"
+                            unmountOnExit
+                          >
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
@@ -527,27 +677,55 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Blogs" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Blogs"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/press-&-media"
+                                to="/SL/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Press & Media" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Press & Media"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                             </List>
                           </Collapse>
 
                           <ListItem
                             button
-                            onClick={() => setAboutSubmenuOpen(!aboutSubmenuOpen)}
-                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                            onClick={() =>
+                              setAboutSubmenuOpen(!aboutSubmenuOpen)
+                            }
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
                           >
                             <ListItemText
                               primary="About Us"
-                              primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                              primaryTypographyProps={{
+                                style: {
+                                  color: "#E0E0E0",
+                                  fontFamily: "'Orbitron', sans-serif",
+                                  fontWeight: "600",
+                                },
+                              }}
                             />
                             {aboutSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -555,7 +733,11 @@ const SLNavbar = () => {
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={aboutSubmenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse
+                            in={aboutSubmenuOpen}
+                            timeout="auto"
+                            unmountOnExit
+                          >
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
@@ -563,7 +745,15 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="About Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="About Us"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
@@ -571,7 +761,15 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Global Coverage" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Global Coverage"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
@@ -579,7 +777,15 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Leadership" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Leadership"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
@@ -587,7 +793,15 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Careers" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Careers"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                               <ListItem
                                 component={Link}
@@ -595,25 +809,71 @@ const SLNavbar = () => {
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText
+                                  primary="Contact Us"
+                                  primaryTypographyProps={{
+                                    style: {
+                                      color: "#E0E0E0",
+                                      fontFamily: "'Orbitron', sans-serif",
+                                    },
+                                  }}
+                                />
                               </ListItem>
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/SL/portal" onClick={() => setDrawerOpen(false)}>
-                            <ListItemText primary="Portal Login" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          <ListItem
+                            component={Link}
+                            to="/SL/portal"
+                            onClick={() => setDrawerOpen(false)}
+                          >
+                            <ListItemText
+                              primary="Portal Login"
+                              primaryTypographyProps={{
+                                style: {
+                                  color: "#E0E0E0",
+                                  fontFamily: "'Orbitron', sans-serif",
+                                },
+                              }}
+                            />
                           </ListItem>
 
                           <ListItem
                             button
-                            onClick={() => setCountriesSubmenuOpen(!countriesSubmenuOpen)}
-                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                            onClick={() =>
+                              setCountriesSubmenuOpen(!countriesSubmenuOpen)
+                            }
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
                           >
-                            <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.5rem",
+                              }}
+                            >
+                              <img
+                                src={selectedCountry.flag}
+                                alt={`${selectedCountry.name} Flag`}
+                                style={{
+                                  width: "30px",
+                                  height: "30px",
+                                  borderRadius: "2px",
+                                }}
+                              />
                               <ListItemText
                                 primary="Countries"
-                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
+                                primaryTypographyProps={{
+                                  style: {
+                                    color: "#E0E0E0",
+                                    fontFamily: "'Orbitron', sans-serif",
+                                    fontWeight: "600",
+                                  },
+                                }}
                               />
                             </Box>
                             {countriesSubmenuOpen ? (
@@ -622,17 +882,29 @@ const SLNavbar = () => {
                               <ExpandMore sx={{ color: "#00D4FF" }} />
                             )}
                           </ListItem>
-                          <Collapse in={countriesSubmenuOpen} timeout="auto" unmountOnExit>
+                          <Collapse
+                            in={countriesSubmenuOpen}
+                            timeout="auto"
+                            unmountOnExit
+                          >
                             <List
                               component="div"
                               disablePadding
                               sx={{
                                 maxHeight: "250px",
-                                overflowY: countries.length > 5 ? "auto" : "hidden",
+                                overflowY:
+                                  countries.length > 5 ? "auto" : "hidden",
                                 "&::-webkit-scrollbar": { width: "4px" },
-                                "&::-webkit-scrollbar-track": { background: "rgba(15, 32, 39, 0.8)" },
-                                "&::-webkit-scrollbar-thumb": { background: "#00D4FF", borderRadius: "3px" },
-                                "&::-webkit-scrollbar-thumb:hover": { background: "#0288D1" },
+                                "&::-webkit-scrollbar-track": {
+                                  background: "rgba(15, 32, 39, 0.8)",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                  background: "#00D4FF",
+                                  borderRadius: "3px",
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                  background: "#0288D1",
+                                },
                               }}
                             >
                               {countries.map((country) => (
@@ -641,17 +913,37 @@ const SLNavbar = () => {
                                   sx={{ pl: 4, py: 1 }}
                                   onClick={() => handleCountrySelect(country)}
                                 >
-                                  <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
+                                  <img
+                                    src={country.flag}
+                                    alt={`${country.name} Flag`}
+                                    style={{
+                                      marginRight: "10px",
+                                      width: "30px",
+                                      height: "30px",
+                                      borderRadius: "2px",
+                                    }}
+                                  />
                                   <ListItemText
                                     primary={country.name}
-                                    primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }}
+                                    primaryTypographyProps={{
+                                      style: {
+                                        color: "#E0E0E0",
+                                        fontFamily: "'Orbitron', sans-serif",
+                                      },
+                                    }}
                                   />
                                 </ListItem>
                               ))}
                             </List>
                           </Collapse>
 
-                          <Divider sx={{ my: 1, background: "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))" }} />
+                          <Divider
+                            sx={{
+                              my: 1,
+                              background:
+                                "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))",
+                            }}
+                          />
                         </List>
                       </motion.div>
                     )}
@@ -668,7 +960,9 @@ const SLNavbar = () => {
                   isScrolled={isScrolled}
                 >
                   Solutions
-                  <NeonHoverEffect active={location.pathname === "/SL/solution"} />
+                  <NeonHoverEffect
+                    active={location.pathname === "/SL/solution"}
+                  />
                 </FuturisticButton>
 
                 <FuturisticButton
@@ -679,7 +973,9 @@ const SLNavbar = () => {
                   isScrolled={isScrolled}
                 >
                   Vendors
-                  <NeonHoverEffect active={location.pathname === "/SL/vendors"} />
+                  <NeonHoverEffect
+                    active={location.pathname === "/SL/vendors"}
+                  />
                 </FuturisticButton>
 
                 <div
@@ -688,23 +984,46 @@ const SLNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/SL/events" || location.pathname === "/SL/workshops"}
+                    active={
+                      location.pathname === "/SL/events" ||
+                      location.pathname === "/SL/workshops"
+                    }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
                     onClick={handleEventsClick}
                   >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.2rem",
+                        }}
+                      >
                         Events & Webinars
                         <ExpandMore
                           sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                            color:
+                              isTargetPage && !isScrolled
+                                ? "#E0E0E0"
+                                : "#FFFFFF",
                             textShadow: "0 0 5px #00D4FF",
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/SL/events" || location.pathname === "/SL/workshops"} />
+                      <NeonHoverEffect
+                        active={
+                          location.pathname === "/SL/events" ||
+                          location.pathname === "/SL/workshops"
+                        }
+                      />
                     </Box>
                   </DropdownButton>
 
@@ -718,10 +1037,18 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/SL/events">
+                    <FuturisticMenuItem
+                      onClick={handleEventsClose}
+                      component={Link}
+                      to="/SL/events"
+                    >
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/SL/workshops">
+                    <FuturisticMenuItem
+                      onClick={handleEventsClose}
+                      component={Link}
+                      to="/SL/"
+                    >
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -743,12 +1070,27 @@ const SLNavbar = () => {
                     isOpen={Boolean(servicesAnchorEl)}
                     onClick={handleServicesClick}
                   >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.2rem",
+                        }}
+                      >
                         Services
                         <ExpandMore
                           sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                            color:
+                              isTargetPage && !isScrolled
+                                ? "#E0E0E0"
+                                : "#FFFFFF",
                             textShadow: "0 0 5px #00D4FF",
                           }}
                         />
@@ -773,13 +1115,25 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/technical-support">
+                    <FuturisticMenuItem
+                      onClick={handleServicesClose}
+                      component={Link}
+                      to="/SL/"
+                    >
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/professional-services">
+                    <FuturisticMenuItem
+                      onClick={handleServicesClose}
+                      component={Link}
+                      to="/SL/"
+                    >
                       Professional Services
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/SL/trainings">
+                    <FuturisticMenuItem
+                      onClick={handleServicesClose}
+                      component={Link}
+                      to="/SL/trainings"
+                    >
                       Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -791,23 +1145,46 @@ const SLNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/SL/blog" || location.pathname === "/SL/press-&-media"}
+                    active={
+                      location.pathname === "/SL/blog" ||
+                      location.pathname === "/SL/press-&-media"
+                    }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
                     onClick={handleNewsClick}
                   >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.2rem",
+                        }}
+                      >
                         News
                         <ExpandMore
                           sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                            color:
+                              isTargetPage && !isScrolled
+                                ? "#E0E0E0"
+                                : "#FFFFFF",
                             textShadow: "0 0 5px #00D4FF",
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/SL/blog" || location.pathname === "/SL/press-&-media"} />
+                      <NeonHoverEffect
+                        active={
+                          location.pathname === "/SL/blog" ||
+                          location.pathname === "/SL/press-&-media"
+                        }
+                      />
                     </Box>
                   </DropdownButton>
 
@@ -821,10 +1198,18 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/SL/blog">
+                    <FuturisticMenuItem
+                      onClick={handleNewsClose}
+                      component={Link}
+                      to="/SL/blog"
+                    >
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/SL/press-&-media">
+                    <FuturisticMenuItem
+                      onClick={handleNewsClose}
+                      component={Link}
+                      to="/SL/"
+                    >
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -848,12 +1233,27 @@ const SLNavbar = () => {
                     isOpen={Boolean(aboutAnchorEl)}
                     onClick={handleAboutClick}
                   >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.2rem",
+                        }}
+                      >
                         About Us
                         <ExpandMore
                           sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                            color:
+                              isTargetPage && !isScrolled
+                                ? "#E0E0E0"
+                                : "#FFFFFF",
                             textShadow: "0 0 5px #00D4FF",
                           }}
                         />
@@ -880,19 +1280,39 @@ const SLNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/about">
+                    <FuturisticMenuItem
+                      onClick={handleAboutClose}
+                      component={Link}
+                      to="/SL/about"
+                    >
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/global-coverage">
+                    <FuturisticMenuItem
+                      onClick={handleAboutClose}
+                      component={Link}
+                      to="/SL/global-coverage"
+                    >
                       Global Coverage
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/leadership">
+                    <FuturisticMenuItem
+                      onClick={handleAboutClose}
+                      component={Link}
+                      to="/SL/leadership"
+                    >
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/careers">
+                    <FuturisticMenuItem
+                      onClick={handleAboutClose}
+                      component={Link}
+                      to="/SL/careers"
+                    >
                       Careers
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/SL/contact">
+                    <FuturisticMenuItem
+                      onClick={handleAboutClose}
+                      component={Link}
+                      to="/SL/contact"
+                    >
                       Contact Us
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -909,13 +1329,36 @@ const SLNavbar = () => {
                     isScrolled={isScrolled}
                     isOpen={Boolean(countryAnchorEl)}
                   >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "25px", height: "25px", borderRadius: "2px" }} />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <img
+                          src={selectedCountry.flag}
+                          alt={`${selectedCountry.name} Flag`}
+                          style={{
+                            width: "25px",
+                            height: "25px",
+                            borderRadius: "2px",
+                          }}
+                        />
                         Countries
                         <ExpandMore
                           sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
+                            color:
+                              isTargetPage && !isScrolled
+                                ? "#E0E0E0"
+                                : "#FFFFFF",
                             textShadow: "0 0 5px #00D4FF",
                           }}
                         />
@@ -946,7 +1389,16 @@ const SLNavbar = () => {
                         key={country.name}
                         onClick={() => handleCountrySelect(country)}
                       >
-                        <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
+                        <img
+                          src={country.flag}
+                          alt={`${country.name} Flag`}
+                          style={{
+                            marginRight: "10px",
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "2px",
+                          }}
+                        />
                         {country.name}
                       </FuturisticMenuItem>
                     ))}
