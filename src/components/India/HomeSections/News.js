@@ -140,9 +140,9 @@ const NewsSection = () => {
     },
   ];
 
-  // Handler to navigate to /kh/blog
+  // Handler to navigate to /in/blog
   const handleExploreMoreClick = () => {
-    navigate('/kh/blog');
+    navigate('/in/blog');
   };
 
   return (
