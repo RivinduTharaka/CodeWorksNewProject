@@ -455,7 +455,7 @@ const SLNavbar = () => {
                           </ListItem>
                           <ListItem
                             component={Link}
-                            to="/SL/vendors"
+                            to PED="/SL/vendors"
                             onClick={() => setDrawerOpen(false)}
                           >
                             <ListItemText
@@ -528,7 +528,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/"
+                                to="/SL"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -591,7 +591,7 @@ const SLNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/SL/"
+                                to="/SL"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -607,7 +607,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/"
+                                to="/SL"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -689,7 +689,7 @@ const SLNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/SL/"
+                                to="/SL"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -866,7 +866,7 @@ const SLNavbar = () => {
                                 }}
                               />
                               <ListItemText
-                                primary="Countries"
+                                primary={selectedCountry.name}
                                 primaryTypographyProps={{
                                   style: {
                                     color: "#E0E0E0",
@@ -1047,7 +1047,7 @@ const SLNavbar = () => {
                     <FuturisticMenuItem
                       onClick={handleEventsClose}
                       component={Link}
-                      to="/SL/"
+                      to="/SL"
                     >
                       Workshops
                     </FuturisticMenuItem>
@@ -1118,14 +1118,14 @@ const SLNavbar = () => {
                     <FuturisticMenuItem
                       onClick={handleServicesClose}
                       component={Link}
-                      to="/SL/"
+                      to="/SL"
                     >
                       Technical Support
                     </FuturisticMenuItem>
                     <FuturisticMenuItem
                       onClick={handleServicesClose}
                       component={Link}
-                      to="/SL/"
+                      to="/SL"
                     >
                       Professional Services
                     </FuturisticMenuItem>
@@ -1208,7 +1208,7 @@ const SLNavbar = () => {
                     <FuturisticMenuItem
                       onClick={handleNewsClose}
                       component={Link}
-                      to="/SL/"
+                      to="/SL"
                     >
                       Press & Media
                     </FuturisticMenuItem>
@@ -1347,12 +1347,12 @@ const SLNavbar = () => {
                           src={selectedCountry.flag}
                           alt={`${selectedCountry.name} Flag`}
                           style={{
-                            width: "25px",
-                            height: "25px",
+                            width: "30px",
+                            height: "30px",
                             borderRadius: "2px",
                           }}
                         />
-                        Countries
+                        {selectedCountry.name}
                         <ExpandMore
                           sx={{
                             color:
