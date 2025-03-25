@@ -198,7 +198,73 @@ import MuWhyUs from './components/Mauritius/AboutUs/WhyUs/WhyUs';
 import { MuBlogs } from './components/Mauritius/News/Blogs/Blogs';
 import MuPortal from './components/Mauritius/Portal/Portal';
 
-// Layouts for Global, Australia, Bangladesh, Brunei, Sri Lanka, Cambodia, Maldives, and Mauritius
+// Nepal Components
+import NplNavbar from './components/Nepal/Navbar';
+import NplFooter from './components/Nepal/Footer';
+import NplHome from './components/Nepal/Home';
+import NplAboutUs from './components/Nepal/About';
+import NplServices from './components/Nepal/Services';
+import NplService01 from './components/Nepal/Service01';
+import NplService02 from './components/Nepal/Service02';
+import NplContactUs from './components/Nepal/ContactUs';
+import NplSolutions from './components/Nepal/Solution/Solutions';
+import NplVendor from './components/Nepal/Vendors/vendor';
+import NplHistorySection from './components/Nepal/AboutUs/History/HistorySection';
+import NplLeadership from './components/Nepal/AboutUs/LeaderShip/Leadership';
+import NplGlobalCoverage from './components/Nepal/AboutUs/GlobalCoverage/GlobalCoverage';
+import NplEventsNews from './components/Nepal/Evnt/EventsNews/EventsNews';
+import NplTrainings from './components/Nepal/Servicess/Trainings/Trainings';
+import NplBlogDetails from './components/Nepal/News/Blogs/BlogDetails';
+import NplRegisterEvent from './components/Nepal/Evnt/EventsNews/RegisterEvent';
+import NplWhyUs from './components/Nepal/AboutUs/WhyUs/WhyUs';
+import { NplBlogs } from './components/Nepal/News/Blogs/Blogs';
+import NplPortal from './components/Nepal/Portal/Portal';
+
+// New Zealand Components
+import NzNavbar from './components/NewZealand/Navbar';
+import NzFooter from './components/NewZealand/Footer';
+import NzHome from './components/NewZealand/Home';
+import NzAboutUs from './components/NewZealand/About';
+import NzServices from './components/NewZealand/Services';
+import NzService01 from './components/NewZealand/Service01';
+import NzService02 from './components/NewZealand/Service02';
+import NzContactUs from './components/NewZealand/ContactUs';
+import NzSolutions from './components/NewZealand/Solution/Solutions';
+import NzVendor from './components/NewZealand/Vendors/vendor';
+import NzHistorySection from './components/NewZealand/AboutUs/History/HistorySection';
+import NzLeadership from './components/NewZealand/AboutUs/LeaderShip/Leadership';
+import NzGlobalCoverage from './components/NewZealand/AboutUs/GlobalCoverage/GlobalCoverage';
+import NzEventsNews from './components/NewZealand/Evnt/EventsNews/EventsNews';
+import NzTrainings from './components/NewZealand/Servicess/Trainings/Trainings';
+import NzBlogDetails from './components/NewZealand/News/Blogs/BlogDetails';
+import NzRegisterEvent from './components/NewZealand/Evnt/EventsNews/RegisterEvent';
+import NzWhyUs from './components/NewZealand/AboutUs/WhyUs/WhyUs';
+import { NzBlogs } from './components/NewZealand/News/Blogs/Blogs';
+import NzPortal from './components/NewZealand/Portal/Portal';
+
+// Singapore Components
+import SgNavbar from './components/Singapore/Navbar';
+import SgFooter from './components/Singapore/Footer';
+import SgHome from './components/Singapore/Home';
+import SgAboutUs from './components/Singapore/About';
+import SgServices from './components/Singapore/Services';
+import SgService01 from './components/Singapore/Service01';
+import SgService02 from './components/Singapore/Service02';
+import SgContactUs from './components/Singapore/ContactUs';
+import SgSolutions from './components/Singapore/Solution/Solutions';
+import SgVendor from './components/Singapore/Vendors/vendor';
+import SgHistorySection from './components/Singapore/AboutUs/History/HistorySection';
+import SgLeadership from './components/Singapore/AboutUs/LeaderShip/Leadership';
+import SgGlobalCoverage from './components/Singapore/AboutUs/GlobalCoverage/GlobalCoverage';
+import SgEventsNews from './components/Singapore/Evnt/EventsNews/EventsNews';
+import SgTrainings from './components/Singapore/Servicess/Trainings/Trainings';
+import SgBlogDetails from './components/Singapore/News/Blogs/BlogDetails';
+import SgRegisterEvent from './components/Singapore/Evnt/EventsNews/RegisterEvent';
+import SgWhyUs from './components/Singapore/AboutUs/WhyUs/WhyUs';
+import { SgBlogs } from './components/Singapore/News/Blogs/Blogs';
+import SgPortal from './components/Singapore/Portal/Portal';
+
+// Layouts for Global, Australia, Bangladesh, Brunei, Sri Lanka, Cambodia, Maldives, Mauritius, Nepal, New Zealand, and Singapore
 const GlobalLayout = ({ children }) => (
   <>
     <Navbar />
@@ -268,6 +334,30 @@ const MauritiusLayout = ({ children }) => (
     <MuNavbar />
     {children}
     <MuFooter />
+  </>
+);
+
+const NepalLayout = ({ children }) => (
+  <>
+    <NplNavbar />
+    {children}
+    <NplFooter />
+  </>
+);
+
+const NewZealandLayout = ({ children }) => (
+  <>
+    <NzNavbar />
+    {children}
+    <NzFooter />
+  </>
+);
+
+const SingaporeLayout = ({ children }) => (
+  <>
+    <SgNavbar />
+    {children}
+    <SgFooter />
   </>
 );
 
@@ -453,6 +543,66 @@ const App = () => {
         <Route path="/mu/events/register/:id" element={<MauritiusLayout><MuRegisterEvent /></MauritiusLayout>} />
         <Route path="/mu/why-us" element={<MauritiusLayout><MuWhyUs /></MauritiusLayout>} />
         <Route path="/mu/portal" element={<MauritiusLayout><MuPortal /></MauritiusLayout>} />
+
+        {/* Nepal Routes */}
+        <Route path="/npl" element={<NepalLayout><NplHome /></NepalLayout>} />
+        <Route path="/npl/about" element={<NepalLayout><NplAboutUs /></NepalLayout>} />
+        <Route path="/npl/services" element={<NepalLayout><NplServices /></NepalLayout>} />
+        <Route path="/npl/service01" element={<NepalLayout><NplService01 /></NepalLayout>} />
+        <Route path="/npl/service02" element={<NepalLayout><NplService02 /></NepalLayout>} />
+        <Route path="/npl/contact" element={<NepalLayout><NplContactUs /></NepalLayout>} />
+        <Route path="/npl/solution" element={<NepalLayout><NplSolutions /></NepalLayout>} />
+        <Route path="/npl/vendors" element={<NepalLayout><NplVendor /></NepalLayout>} />
+        <Route path="/npl/history" element={<NepalLayout><NplHistorySection /></NepalLayout>} />
+        <Route path="/npl/leadership" element={<NepalLayout><NplLeadership /></NepalLayout>} />
+        <Route path="/npl/global-coverage" element={<NepalLayout><NplGlobalCoverage /></NepalLayout>} />
+        <Route path="/npl/blog" element={<NepalLayout><NplBlogs /></NepalLayout>} />
+        <Route path="/npl/events" element={<NepalLayout><NplEventsNews /></NepalLayout>} />
+        <Route path="/npl/trainings" element={<NepalLayout><NplTrainings /></NepalLayout>} />
+        <Route path="/npl/blog/:title" element={<NepalLayout><NplBlogDetails /></NepalLayout>} />
+        <Route path="/npl/events/register/:id" element={<NepalLayout><NplRegisterEvent /></NepalLayout>} />
+        <Route path="/npl/why-us" element={<NepalLayout><NplWhyUs /></NepalLayout>} />
+        <Route path="/npl/portal" element={<NepalLayout><NplPortal /></NepalLayout>} />
+
+        {/* New Zealand Routes */}
+        <Route path="/nz" element={<NewZealandLayout><NzHome /></NewZealandLayout>} />
+        <Route path="/nz/about" element={<NewZealandLayout><NzAboutUs /></NewZealandLayout>} />
+        <Route path="/nz/services" element={<NewZealandLayout><NzServices /></NewZealandLayout>} />
+        <Route path="/nz/service01" element={<NewZealandLayout><NzService01 /></NewZealandLayout>} />
+        <Route path="/nz/service02" element={<NewZealandLayout><NzService02 /></NewZealandLayout>} />
+        <Route path="/nz/contact" element={<NewZealandLayout><NzContactUs /></NewZealandLayout>} />
+        <Route path="/nz/solution" element={<NewZealandLayout><NzSolutions /></NewZealandLayout>} />
+        <Route path="/nz/vendors" element={<NewZealandLayout><NzVendor /></NewZealandLayout>} />
+        <Route path="/nz/history" element={<NewZealandLayout><NzHistorySection /></NewZealandLayout>} />
+        <Route path="/nz/leadership" element={<NewZealandLayout><NzLeadership /></NewZealandLayout>} />
+        <Route path="/nz/global-coverage" element={<NewZealandLayout><NzGlobalCoverage /></NewZealandLayout>} />
+        <Route path="/nz/blog" element={<NewZealandLayout><NzBlogs /></NewZealandLayout>} />
+        <Route path="/nz/events" element={<NewZealandLayout><NzEventsNews /></NewZealandLayout>} />
+        <Route path="/nz/trainings" element={<NewZealandLayout><NzTrainings /></NewZealandLayout>} />
+        <Route path="/nz/blog/:title" element={<NewZealandLayout><NzBlogDetails /></NewZealandLayout>} />
+        <Route path="/nz/events/register/:id" element={<NewZealandLayout><NzRegisterEvent /></NewZealandLayout>} />
+        <Route path="/nz/why-us" element={<NewZealandLayout><NzWhyUs /></NewZealandLayout>} />
+        <Route path="/nz/portal" element={<NewZealandLayout><NzPortal /></NewZealandLayout>} />
+
+        {/* Singapore Routes */}
+        <Route path="/sg" element={<SingaporeLayout><SgHome /></SingaporeLayout>} />
+        <Route path="/sg/about" element={<SingaporeLayout><SgAboutUs /></SingaporeLayout>} />
+        <Route path="/sg/services" element={<SingaporeLayout><SgServices /></SingaporeLayout>} />
+        <Route path="/sg/service01" element={<SingaporeLayout><SgService01 /></SingaporeLayout>} />
+        <Route path="/sg/service02" element={<SingaporeLayout><SgService02 /></SingaporeLayout>} />
+        <Route path="/sg/contact" element={<SingaporeLayout><SgContactUs /></SingaporeLayout>} />
+        <Route path="/sg/solution" element={<SingaporeLayout><SgSolutions /></SingaporeLayout>} />
+        <Route path="/sg/vendors" element={<SingaporeLayout><SgVendor /></SingaporeLayout>} />
+        <Route path="/sg/history" element={<SingaporeLayout><SgHistorySection /></SingaporeLayout>} />
+        <Route path="/sg/leadership" element={<SingaporeLayout><SgLeadership /></SingaporeLayout>} />
+        <Route path="/sg/global-coverage" element={<SingaporeLayout><SgGlobalCoverage /></SingaporeLayout>} />
+        <Route path="/sg/blog" element={<SingaporeLayout><SgBlogs /></SingaporeLayout>} />
+        <Route path="/sg/events" element={<SingaporeLayout><SgEventsNews /></SingaporeLayout>} />
+        <Route path="/sg/trainings" element={<SingaporeLayout><SgTrainings /></SingaporeLayout>} />
+        <Route path="/sg/blog/:title" element={<SingaporeLayout><SgBlogDetails /></SingaporeLayout>} />
+        <Route path="/sg/events/register/:id" element={<SingaporeLayout><SgRegisterEvent /></SingaporeLayout>} />
+        <Route path="/sg/why-us" element={<SingaporeLayout><SgWhyUs /></SingaporeLayout>} />
+        <Route path="/sg/portal" element={<SingaporeLayout><SgPortal /></SingaporeLayout>} />
       </Routes>
     </Router>
   );
