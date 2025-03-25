@@ -448,7 +448,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/workshops"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -485,7 +485,7 @@ const Navbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/technical-support"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -493,7 +493,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/professional-services"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -537,7 +537,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/press-&-media"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -590,7 +590,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/careers"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -720,7 +720,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/workshops">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -772,10 +772,10 @@ const Navbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/technical-support">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/">
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/professional-services">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/">
                       Professional Services
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/trainings">
@@ -790,7 +790,7 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/blog" || location.pathname === "/press-&-media"}
+                    active={location.pathname === "/blog" || location.pathname === "/"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
@@ -806,7 +806,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/"} />
                     </Box>
                   </DropdownButton>
 
@@ -823,7 +823,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/blog">
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/press-&-media">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/">
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -840,7 +840,7 @@ const Navbar = () => {
               
                       location.pathname === "/global-coverage" ||
                       location.pathname === "/leadership" ||
-                      location.pathname === "/careers"
+                      location.pathname === "/"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -889,7 +889,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/careers">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/">
                       Careers
                     </FuturisticMenuItem>
                   </FuturisticMenu>
