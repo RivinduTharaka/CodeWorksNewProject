@@ -261,7 +261,7 @@ const MobileNeonHoverEffect = styled("span")(({ active }) => ({
   marginTop: "2px",
 }));
 
-const KHNavbar = () => {
+const INNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
@@ -969,4 +969,4 @@ const KHNavbar = () => {
   );
 };
 
-export default KHNavbar;
+export default INNavbar;
