@@ -285,21 +285,21 @@ const KHNavbar = () => {
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
-    location.pathname === '/kh' ||
-    location.pathname === '/kh/solution' ||
-    location.pathname === '/kh/vendors' ||
-    location.pathname === '/kh/contact' ||
-    location.pathname === '/kh/events' ||
-    location.pathname === '/kh/workshops' ||
-    location.pathname === '/kh/technical-support' ||
-    location.pathname === '/kh/professional-services' ||
-    location.pathname === '/kh/trainings' ||
-    location.pathname === '/kh/blog' ||
-    location.pathname === '/kh/press-&-media' ||
-    location.pathname === '/kh/global-coverage' ||
-    location.pathname === '/kh/leadership' ||
-    location.pathname === '/kh/careers' ||
-    location.pathname === '/kh/about';
+    location.pathname === '/sg' ||
+    location.pathname === '/sg/solution' ||
+    location.pathname === '/sg/vendors' ||
+    location.pathname === '/sg/contact' ||
+    location.pathname === '/sg/events' ||
+    location.pathname === '/sg/workshops' ||
+    location.pathname === '/sg/technical-support' ||
+    location.pathname === '/sg/professional-services' ||
+    location.pathname === '/sg/trainings' ||
+    location.pathname === '/sg/blog' ||
+    location.pathname === '/sg/press-&-media' ||
+    location.pathname === '/sg/global-coverage' ||
+    location.pathname === '/sg/leadership' ||
+    location.pathname === '/sg/careers' ||
+    location.pathname === '/sg/about';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -352,7 +352,7 @@ const KHNavbar = () => {
       >
         <FuturisticAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
           <FuturisticToolbar>
-            <Link to="/kh" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
+            <Link to="/sg" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
               <motion.img
                 src={isTargetPage && !isScrolled ? image1 : image2}
                 alt="CONNEX Logo"
@@ -405,10 +405,10 @@ const KHNavbar = () => {
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
-                          <ListItem component={Link} to="/kh/solution" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/sg/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
-                          <ListItem component={Link} to="/kh/vendors" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/sg/vendors" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -422,7 +422,7 @@ const KHNavbar = () => {
                                 primary="Events & Webinars"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/kh/events' || location.pathname === '/kh/workshops'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/sg/events' || location.pathname === '/sg/workshops'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -434,7 +434,7 @@ const KHNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/kh/events"
+                                to="/sg/events"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -442,7 +442,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh"
+                                to="/sg"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -463,9 +463,9 @@ const KHNavbar = () => {
                               />
                               <MobileNeonHoverEffect
                                 active={
-                                  location.pathname === '/kh/technical-support' ||
-                                  location.pathname === '/kh/professional-services' ||
-                                  location.pathname === '/kh/trainings'
+                                  location.pathname === '/sg/technical-support' ||
+                                  location.pathname === '/sg/professional-services' ||
+                                  location.pathname === '/sg/trainings'
                                 }
                               />
                             </MobileNavLinkContainer>
@@ -479,7 +479,7 @@ const KHNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/kh"
+                                to="/sg"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -487,7 +487,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh"
+                                to="/sg"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -495,7 +495,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/trainings"
+                                to="/sg/trainings"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -523,7 +523,7 @@ const KHNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/kh/blog"
+                                to="/sg/blog"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -531,7 +531,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh"
+                                to="/sg"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -559,7 +559,7 @@ const KHNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/kh/about"
+                                to="/sg/about"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -567,7 +567,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/global-coverage"
+                                to="/sg/global-coverage"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -575,7 +575,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/leadership"
+                                to="/sg/leadership"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -583,7 +583,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/careers"
+                                to="/sg/careers"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -591,7 +591,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/contact"
+                                to="/sg/contact"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -600,7 +600,7 @@ const KHNavbar = () => {
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/kh/portal" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/sg/portal" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Portal Login" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -662,24 +662,24 @@ const KHNavbar = () => {
               <ButtonContainer>
                 <FuturisticButton
                   component={Link}
-                  to="/kh/solution"
-                  active={location.pathname === "/kh/solution"}
+                  to="/sg/solution"
+                  active={location.pathname === "/sg/solution"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Solutions
-                  <NeonHoverEffect active={location.pathname === "/kh/solution"} />
+                  <NeonHoverEffect active={location.pathname === "/sg/solution"} />
                 </FuturisticButton>
 
                 <FuturisticButton
                   component={Link}
-                  to="/kh/vendors"
-                  active={location.pathname === "/kh/vendors"}
+                  to="/sg/vendors"
+                  active={location.pathname === "/sg/vendors"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Vendors
-                  <NeonHoverEffect active={location.pathname === "/kh/vendors"} />
+                  <NeonHoverEffect active={location.pathname === "/sg/vendors"} />
                 </FuturisticButton>
 
                 <div
@@ -688,7 +688,7 @@ const KHNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/kh/events" || location.pathname === "/kh/workshops"}
+                    active={location.pathname === "/sg/events" || location.pathname === "/sg/workshops"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -704,7 +704,7 @@ const KHNavbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/kh/events" || location.pathname === "/kh/workshops"} />
+                      <NeonHoverEffect active={location.pathname === "/sg/events" || location.pathname === "/sg/workshops"} />
                     </Box>
                   </DropdownButton>
 
@@ -718,10 +718,10 @@ const KHNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh/events">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/sg/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/sg">
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -734,9 +734,9 @@ const KHNavbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/kh/technical-support" ||
-                      location.pathname === "/kh/professional-services" ||
-                      location.pathname === "/kh/trainings"
+                      location.pathname === "/sg/technical-support" ||
+                      location.pathname === "/sg/professional-services" ||
+                      location.pathname === "/sg/trainings"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -755,9 +755,9 @@ const KHNavbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/kh/technical-support" ||
-                          location.pathname === "/kh/professional-services" ||
-                          location.pathname === "/kh/trainings"
+                          location.pathname === "/sg/technical-support" ||
+                          location.pathname === "/sg/professional-services" ||
+                          location.pathname === "/sg/trainings"
                         }
                       />
                     </Box>
@@ -773,13 +773,13 @@ const KHNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/sg">
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/sg">
                       Professional Services
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/trainings">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/sg/trainings">
                       Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -791,7 +791,7 @@ const KHNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/kh/blog" || location.pathname === "/kh/press-&-media"}
+                    active={location.pathname === "/sg/blog" || location.pathname === "/sg/press-&-media"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
@@ -807,7 +807,7 @@ const KHNavbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/kh/blog" || location.pathname === "/kh/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/sg/blog" || location.pathname === "/sg/press-&-media"} />
                     </Box>
                   </DropdownButton>
 
@@ -821,10 +821,10 @@ const KHNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh/blog">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/sg/blog">
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/sg">
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -837,11 +837,11 @@ const KHNavbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/kh/about" ||
-                      location.pathname === "/kh/global-coverage" ||
-                      location.pathname === "/kh/leadership" ||
-                      location.pathname === "/kh/careers" ||
-                      location.pathname === "/kh/contact"
+                      location.pathname === "/sg/about" ||
+                      location.pathname === "/sg/global-coverage" ||
+                      location.pathname === "/sg/leadership" ||
+                      location.pathname === "/sg/careers" ||
+                      location.pathname === "/sg/contact"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -860,11 +860,11 @@ const KHNavbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/kh/about" ||
-                          location.pathname === "/kh/global-coverage" ||
-                          location.pathname === "/kh/leadership" ||
-                          location.pathname === "/kh/careers" ||
-                          location.pathname === "/kh/contact"
+                          location.pathname === "/sg/about" ||
+                          location.pathname === "/sg/global-coverage" ||
+                          location.pathname === "/sg/leadership" ||
+                          location.pathname === "/sg/careers" ||
+                          location.pathname === "/sg/contact"
                         }
                       />
                     </Box>
@@ -880,19 +880,19 @@ const KHNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/about">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/sg/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/global-coverage">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/sg/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/leadership">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/sg/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/careers">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/sg/careers">
                       Careers
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/contact">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/sg/contact">
                       Contact Us
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -955,7 +955,7 @@ const KHNavbar = () => {
 
                 <PortalButton 
                   component={Link} 
-                  to="/kh/portal" 
+                  to="/sg/portal" 
                   isScrolled={isScrolled}
                 >
                   Portal Login
