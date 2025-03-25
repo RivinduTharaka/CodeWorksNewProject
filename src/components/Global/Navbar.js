@@ -41,6 +41,8 @@ import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
 import thailandFlag from '../../assets/image/flag/thailand.png';
 import uaeFlag from '../../assets/image/flag/uae.png';
 import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // Added New Zealand flag
+import malaysiaFlag from '../../assets/image/flag/malaysia.png';
+
 
 // Updated Country Flags Array with specified routes (matching SLNavbar)
 const countries = [
@@ -50,6 +52,7 @@ const countries = [
   { name: "Brunei", flag: bruneiFlag, route: "/brn" },
   { name: "Cambodia", flag: cambodiaFlag, route: "/kh" },
   { name: "India", flag: indiaFlag, route: "/in" },
+  { name: "Malaysia", flag: malaysiaFlag, route: "/my" },
   { name: "Maldives", flag: maldivesFlag, route: "/mv" },
   { name: "Mauritius", flag: mauritiusFlag, route: "/mu" },
   { name: "Nepal", flag: nepalFlag, route: "/npl" },
