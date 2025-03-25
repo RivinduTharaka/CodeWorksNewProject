@@ -42,7 +42,7 @@ import thailandFlag from '../../assets/image/flag/thailand.png';
 import uaeFlag from '../../assets/image/flag/uae.png';
 import newZealandFlag from '../../assets/image/flag/new-zealand (1).png'; // Added New Zealand flag
 import malaysiaFlag from '../../assets/image/flag/malaysia.png';
-
+import bhutanFlag from '../../assets/image/flag/bhutan.png';
 
 // Updated Country Flags Array with specified routes (matching SLNavbar)
 const countries = [
@@ -61,6 +61,8 @@ const countries = [
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
   { name: "Thailand", flag: thailandFlag, route: "/th" },
   { name: "UAE", flag: uaeFlag, route: "/uae" },
+  { name: "Bhutan", flag: bhutanFlag, route: "/bt" },
+
 ];
 
 // Define Futuristic Theme

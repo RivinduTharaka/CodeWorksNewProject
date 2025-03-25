@@ -42,6 +42,7 @@ import sriLankaFlag from '../../assets/image/flag/sri-lanka.png';
 import thailandFlag from '../../assets/image/flag/thailand.png';
 import uaeFlag from '../../assets/image/flag/uae.png';
 import malaysiaFlag from '../../assets/image/flag/malaysia.png';
+import bhutanFlag from '../../assets/image/flag/bhutan.png';
 
 // Country Flags Array with routes
 const countries = [
@@ -60,6 +61,8 @@ const countries = [
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
   { name: "Thailand", flag: thailandFlag, route: "/th" },
   { name: "UAE", flag: uaeFlag, route: "/uae" },
+  { name: "Bhutan", flag: bhutanFlag, route: "/bt" },
+
 ];
 
 // Define Futuristic Theme
