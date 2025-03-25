@@ -22,6 +22,28 @@ import BlogDetails from './components/Global/News/Blogs/BlogDetails';
 import RegisterEvent from './components/Global/Evnt/EventsNews/RegisterEvent';
 import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 
+// Australia Components
+import AUNavbar from './components/Australia/Navbar';
+import AUFooter from './components/Australia/Footer';
+import AUHome from './components/Australia/Home';
+import AUAboutUs from './components/Australia/About';
+import AUServices from './components/Australia/Services';
+import AUService01 from './components/Australia/Service01';
+import AUService02 from './components/Australia/Service02';
+import AUContactUs from './components/Australia/ContactUs';
+import AUSolutions from './components/Australia/Solution/Solutions';
+import AUVendor from './components/Australia/Vendors/vendor';
+import AUHistorySection from './components/Australia/AboutUs/History/HistorySection';
+import AULeadership from './components/Australia/AboutUs/LeaderShip/Leadership';
+import AUGlobalCoverage from './components/Australia/AboutUs/GlobalCoverage/GlobalCoverage';
+import AUEventsNews from './components/Australia/Evnt/EventsNews/EventsNews';
+import AUTrainings from './components/Australia/Servicess/Trainings/Trainings';
+import AUBlogDetails from './components/Australia/News/Blogs/BlogDetails';
+import AURegisterEvent from './components/Australia/Evnt/EventsNews/RegisterEvent';
+import AUWhyUs from './components/Australia/AboutUs/WhyUs/WhyUs';
+import { AUBlogs } from './components/Australia/News/Blogs/Blogs';
+import AUPortal from './components/Australia/Portal/Portal';
+
 // Sri Lanka Components
 import SLNavbar from './components/SriLanka/Navbar';
 import SLFooter from './components/SriLanka/Footer';
@@ -66,12 +88,20 @@ import CamWhyUs from './components/Cambodia/AboutUs/WhyUs/WhyUs';
 import { CamBlogs } from './components/Cambodia/News/Blogs/Blogs';
 import CamPortal from './components/Cambodia/Portal/Portal';
 
-// Layouts for Global, Sri Lanka, and Cambodia
+// Layouts for Global, Australia, Sri Lanka, and Cambodia
 const GlobalLayout = ({ children }) => (
   <>
     <Navbar />
     {children}
     <Footer />
+  </>
+);
+
+const AustraliaLayout = ({ children }) => (
+  <>
+    <AUNavbar />
+    {children}
+    <AUFooter />
   </>
 );
 
@@ -113,6 +143,26 @@ const App = () => {
         <Route path="/blog/:title" element={<GlobalLayout><BlogDetails /></GlobalLayout>} />
         <Route path="/events/register/:id" element={<GlobalLayout><RegisterEvent /></GlobalLayout>} />
         <Route path="/why-us" element={<GlobalLayout><WhyUs /></GlobalLayout>} />
+
+        {/* Australia Routes */}
+        <Route path="/au" element={<AustraliaLayout><AUHome /></AustraliaLayout>} />
+        <Route path="/au/about" element={<AustraliaLayout><AUAboutUs /></AustraliaLayout>} />
+        <Route path="/au/services" element={<AustraliaLayout><AUServices /></AustraliaLayout>} />
+        <Route path="/au/service01" element={<AustraliaLayout><AUService01 /></AustraliaLayout>} />
+        <Route path="/au/service02" element={<AustraliaLayout><AUService02 /></AustraliaLayout>} />
+        <Route path="/au/contact" element={<AustraliaLayout><AUContactUs /></AustraliaLayout>} />
+        <Route path="/au/solution" element={<AustraliaLayout><AUSolutions /></AustraliaLayout>} />
+        <Route path="/au/vendors" element={<AustraliaLayout><AUVendor /></AustraliaLayout>} />
+        <Route path="/au/history" element={<AustraliaLayout><AUHistorySection /></AustraliaLayout>} />
+        <Route path="/au/leadership" element={<AustraliaLayout><AULeadership /></AustraliaLayout>} />
+        <Route path="/au/global-coverage" element={<AustraliaLayout><AUGlobalCoverage /></AustraliaLayout>} />
+        <Route path="/au/blog" element={<AustraliaLayout><AUBlogs /></AustraliaLayout>} />
+        <Route path="/au/events" element={<AustraliaLayout><AUEventsNews /></AustraliaLayout>} />
+        <Route path="/au/trainings" element={<AustraliaLayout><AUTrainings /></AustraliaLayout>} />
+        <Route path="/au/blog/:title" element={<AustraliaLayout><AUBlogDetails /></AustraliaLayout>} />
+        <Route path="/au/events/register/:id" element={<AustraliaLayout><AURegisterEvent /></AustraliaLayout>} />
+        <Route path="/au/why-us" element={<AustraliaLayout><AUWhyUs /></AustraliaLayout>} />
+        <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
