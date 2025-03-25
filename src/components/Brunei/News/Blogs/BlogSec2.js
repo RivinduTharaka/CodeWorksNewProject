@@ -187,7 +187,7 @@ const BlogSec2 = () => {
                       alignItems: "center",
                       gap: "8px",
                     }}
-                    onClick={() => navigate(`/kh/blog/${blog.title}`, { state: { blog } })}
+                    onClick={() => navigate(`/brn/blog/${blog.title}`, { state: { blog } })}
                   >
                     Read More →
                   </Button>

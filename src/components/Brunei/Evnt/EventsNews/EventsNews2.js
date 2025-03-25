@@ -192,7 +192,7 @@ function EventsNews2() {
   }, []);
 
   const handleRegisterClick = (event) => {
-    navigate(`/kh/events/register/${event.id}`, { state: { event } });
+    navigate(`/brn/events/register/${event.id}`, { state: { event } });
   };
 
   return (
