@@ -13,7 +13,7 @@ const Solutions = forwardRef((_, ref) => {
   const navigate = useNavigate(); // Initialize the navigate function
 
   const handleButtonClick = () => {
-    navigate("/kh/solution"); // Navigate to the desired route
+    navigate("/th/solution"); // Navigate to the desired route
   };
 
   const theme = useTheme();
