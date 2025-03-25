@@ -49,6 +49,7 @@ const countries = [
   { name: "Connex Global", flag: globalFlag, route: "/" },
   { name: "Australia", flag: australiaFlag, route: "/au" },
   { name: "Bangladesh", flag: bangladeshFlag, route: "/bgd" },
+  { name: "Bhutan", flag: bhutanFlag, route: "/bt" },
   { name: "Brunei", flag: bruneiFlag, route: "/brn" },
   { name: "Cambodia", flag: cambodiaFlag, route: "/kh" },
   { name: "India", flag: indiaFlag, route: "/in" },

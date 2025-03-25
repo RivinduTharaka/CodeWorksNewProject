@@ -48,6 +48,8 @@ const countries = [
   { name: "Connex Global", flag: globalFlag, route: "/" },
   { name: "Australia", flag: australiaFlag, route: "/au" },
   { name: "Bangladesh", flag: bangladeshFlag, route: "/bgd" },
+  { name: "Bhutan", flag: bhutanFlag, route: "/bt" },
+
   { name: "Brunei", flag: bruneiFlag, route: "/brn" },
   { name: "Cambodia", flag: cambodiaFlag, route: "/kh" },
   { name: "India", flag: indiaFlag, route: "/in" },
@@ -60,7 +62,6 @@ const countries = [
   { name: "Singapore", flag: singaporeFlag, route: "/sg" },
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
   { name: "Thailand", flag: thailandFlag, route: "/th" },
-  { name: "UAE", flag: uaeFlag, route: "/uae" },
 ];
 
 // Define Futuristic Theme
