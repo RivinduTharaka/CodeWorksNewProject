@@ -88,6 +88,28 @@ import BrnWhyUs from './components/Brunei/AboutUs/WhyUs/WhyUs';
 import { BrnBlogs } from './components/Brunei/News/Blogs/Blogs';
 import BrnPortal from './components/Brunei/Portal/Portal';
 
+// India Components
+import InNavbar from './components/India/Navbar';
+import InFooter from './components/India/Footer';
+import InHome from './components/India/Home';
+import InAboutUs from './components/India/About';
+import InServices from './components/India/Services';
+import InService01 from './components/India/Service01';
+import InService02 from './components/India/Service02';
+import InContactUs from './components/India/ContactUs';
+import InSolutions from './components/India/Solution/Solutions';
+import InVendor from './components/India/Vendors/vendor';
+import InHistorySection from './components/India/AboutUs/History/HistorySection';
+import InLeadership from './components/India/AboutUs/LeaderShip/Leadership';
+import InGlobalCoverage from './components/India/AboutUs/GlobalCoverage/GlobalCoverage';
+import InEventsNews from './components/India/Evnt/EventsNews/EventsNews';
+import InTrainings from './components/India/Servicess/Trainings/Trainings';
+import InBlogDetails from './components/India/News/Blogs/BlogDetails';
+import InRegisterEvent from './components/India/Evnt/EventsNews/RegisterEvent';
+import InWhyUs from './components/India/AboutUs/WhyUs/WhyUs';
+import { InBlogs } from './components/India/News/Blogs/Blogs';
+import InPortal from './components/India/Portal/Portal';
+
 // Sri Lanka Components
 import SLNavbar from './components/SriLanka/Navbar';
 import SLFooter from './components/SriLanka/Footer';
@@ -165,6 +187,15 @@ const BruneiLayout = ({ children }) => (
   </>
 );
 
+const IndiaLayout = ({ children }) => (
+  <>
+    <InNavbar />
+    {children}
+    <InFooter />
+  </>
+);
+
+
 const SriLankaLayout = ({ children }) => (
   <>
     <SLNavbar />
@@ -225,7 +256,6 @@ const App = () => {
         <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
         {/* Bangladesh Routes */}
-        {/* B Routes */}
         <Route path="/bgd" element={<BangladeshLayout><BgdHome /></BangladeshLayout>} />
         <Route path="/bgd/about" element={<BangladeshLayout><BgdAboutUs /></BangladeshLayout>} />
         <Route path="/bgd/services" element={<BangladeshLayout><BgdServices /></BangladeshLayout>} />
@@ -264,6 +294,26 @@ const App = () => {
         <Route path="/brn/events/register/:id" element={<BruneiLayout><BrnRegisterEvent /></BruneiLayout>} />
         <Route path="/brn/why-us" element={<BruneiLayout><BrnWhyUs /></BruneiLayout>} />
         <Route path="/brn/portal" element={<BruneiLayout><BrnPortal /></BruneiLayout>} />
+
+        {/* India Routes */}
+        <Route path="/In" element={<IndiaLayout><InHome /></IndiaLayout>} />
+        <Route path="/In/about" element={<IndiaLayout><InAboutUs /></IndiaLayout>} />
+        <Route path="/In/services" element={<IndiaLayout><InServices /></IndiaLayout>} />
+        <Route path="/In/service01" element={<IndiaLayout><InService01 /></IndiaLayout>} />
+        <Route path="/In/service02" element={<IndiaLayout><InService02 /></IndiaLayout>} />
+        <Route path="/In/contact" element={<IndiaLayout><InContactUs /></IndiaLayout>} />
+        <Route path="/In/solution" element={<IndiaLayout><InSolutions /></IndiaLayout>} />
+        <Route path="/In/vendors" element={<IndiaLayout><InVendor /></IndiaLayout>} />
+        <Route path="/In/history" element={<IndiaLayout><InHistorySection /></IndiaLayout>} />
+        <Route path="/In/leadership" element={<IndiaLayout><InLeadership /></IndiaLayout>} />
+        <Route path="/In/global-coverage" element={<IndiaLayout><InGlobalCoverage /></IndiaLayout>} />
+        <Route path="/In/blog" element={<IndiaLayout><InBlogs /></IndiaLayout>} />
+        <Route path="/In/events" element={<IndiaLayout><InEventsNews /></IndiaLayout>} />
+        <Route path="/In/trainings" element={<IndiaLayout><InTrainings /></IndiaLayout>} />
+        <Route path="/In/blog/:title" element={<IndiaLayout><InBlogDetails /></IndiaLayout>} />
+        <Route path="/In/events/register/:id" element={<IndiaLayout><InRegisterEvent /></IndiaLayout>} />
+        <Route path="/In/why-us" element={<IndiaLayout><InWhyUs /></IndiaLayout>} />
+        <Route path="/In/portal" element={<IndiaLayout><InPortal /></IndiaLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
