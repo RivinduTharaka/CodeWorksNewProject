@@ -196,24 +196,24 @@ const App = () => {
         <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
         {/* B Routes */}
-        <Route path="/bgd" element={<BangladeshLayout><AUHome /></BangladeshLayout>} />
-        <Route path="/bgd/about" element={<BangladeshLayout><AUAboutUs /></BangladeshLayout>} />
-        <Route path="/bgd/services" element={<BangladeshLayout><AUServices /></BangladeshLayout>} />
-        <Route path="/bgd/service01" element={<BangladeshLayout><AUService01 /></BangladeshLayout>} />
-        <Route path="/bgd/service02" element={<BangladeshLayout><AUService02 /></BangladeshLayout>} />
-        <Route path="/bgd/contact" element={<BangladeshLayout><AUContactUs /></BangladeshLayout>} />
-        <Route path="/bgd/solution" element={<BangladeshLayout><AUSolutions /></BangladeshLayout>} />
-        <Route path="/bgd/vendors" element={<BangladeshLayout><AUVendor /></BangladeshLayout>} />
-        <Route path="/bgd/history" element={<BangladeshLayout><AUHistorySection /></BangladeshLayout>} />
-        <Route path="/bgd/leadership" element={<BangladeshLayout><AULeadership /></BangladeshLayout>} />
-        <Route path="/bgd/global-coverage" element={<BangladeshLayout><AUGlobalCoverage /></BangladeshLayout>} />
-        <Route path="/bgd/blog" element={<BangladeshLayout><AUBlogs /></BangladeshLayout>} />
-        <Route path="/bgd/events" element={<BangladeshLayout><AUEventsNews /></BangladeshLayout>} />
-        <Route path="/bgd/trainings" element={<BangladeshLayout><AUTrainings /></BangladeshLayout>} />
-        <Route path="/bgd/blog/:title" element={<BangladeshLayout><AUBlogDetails /></BangladeshLayout>} />
-        <Route path="/bgd/events/register/:id" element={<BangladeshLayout><AURegisterEvent /></BangladeshLayout>} />
-        <Route path="/bgd/why-us" element={<BangladeshLayout><AUWhyUs /></BangladeshLayout>} />
-        <Route path="/bgd/portal" element={<BangladeshLayout><AUPortal /></BangladeshLayout>} />
+        <Route path="/bgd" element={<BangladeshLayout><Home /></BangladeshLayout>} />
+        <Route path="/bgd/about" element={<BangladeshLayout><BgdAboutUs /></BangladeshLayout>} />
+        <Route path="/bgd/services" element={<BangladeshLayout><BgdServices /></BangladeshLayout>} />
+        <Route path="/bgd/service01" element={<BangladeshLayout><BgdService01 /></BangladeshLayout>} />
+        <Route path="/bgd/service02" element={<BangladeshLayout><BgdService02 /></BangladeshLayout>} />
+        <Route path="/bgd/contact" element={<BangladeshLayout><BgdContactUs /></BangladeshLayout>} />
+        <Route path="/bgd/solution" element={<BangladeshLayout><BgdSolutions /></BangladeshLayout>} />
+        <Route path="/bgd/vendors" element={<BangladeshLayout><BgdVendor /></BangladeshLayout>} />
+        <Route path="/bgd/history" element={<BangladeshLayout><BgdHistorySection /></BangladeshLayout>} />
+        <Route path="/bgd/leadership" element={<BangladeshLayout><BgdLeadership /></BangladeshLayout>} />
+        <Route path="/bgd/global-coverage" element={<BangladeshLayout><BgdGlobalCoverage /></BangladeshLayout>} />
+        <Route path="/bgd/blog" element={<BangladeshLayout><BgdBlogs /></BangladeshLayout>} />
+        <Route path="/bgd/events" element={<BangladeshLayout><BgdEventsNews /></BangladeshLayout>} />
+        <Route path="/bgd/trainings" element={<BangladeshLayout><BgdTrainings /></BangladeshLayout>} />
+        <Route path="/bgd/blog/:title" element={<BangladeshLayout><BgdBlogDetails /></BangladeshLayout>} />
+        <Route path="/bgd/events/register/:id" element={<BangladeshLayout><BgdRegisterEvent /></BangladeshLayout>} />
+        <Route path="/bgd/why-us" element={<BangladeshLayout><BgdWhyUs /></BangladeshLayout>} />
+        <Route path="/bgd/portal" element={<BangladeshLayout><BgdPortal /></BangladeshLayout>} />
 
         {/* Sri Lanka Routes */}
         <Route path="/SL" element={<SriLankaLayout><SLHome /></SriLankaLayout>} />
