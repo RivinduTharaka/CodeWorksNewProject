@@ -442,7 +442,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/workshops"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -479,7 +479,7 @@ const KHNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/kh/technical-support"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -487,7 +487,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/professional-services"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -531,7 +531,7 @@ const KHNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/kh/press-&-media"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -723,7 +723,7 @@ const KHNavbar = () => {
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh/workshops">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh">
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -775,10 +775,10 @@ const KHNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/technical-support">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh">
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/professional-services">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh">
                       Professional Services
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/trainings">
@@ -826,7 +826,7 @@ const KHNavbar = () => {
                     <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh/blog">
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh/press-&-media">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh">
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
