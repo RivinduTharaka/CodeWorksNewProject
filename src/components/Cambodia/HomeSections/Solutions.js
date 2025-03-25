@@ -1,13 +1,19 @@
 import React, { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Typography, Button, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 const Solutions = forwardRef((_, ref) => {
   const navigate = useNavigate(); // Initialize the navigate function
 
   const handleButtonClick = () => {
-    navigate("SL/solution"); // Navigate to the desired route
+    navigate("/kh/solution"); // Navigate to the desired route
   };
 
   const theme = useTheme();
@@ -28,7 +34,16 @@ const Solutions = forwardRef((_, ref) => {
         fontFamily: "'Poppins', sans-serif",
       }}
     >
-      <Container maxWidth="lg" sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, flexWrap: "wrap" }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          flexWrap: "wrap",
+        }}
+      >
         {/* Left Content */}
         <Box sx={{ flex: 1, minWidth: 300 }}>
           <Typography
@@ -40,7 +55,7 @@ const Solutions = forwardRef((_, ref) => {
               color: "white",
             }}
           >
-            A value-driven  <br /> global leader in <br />
+            A value-driven <br /> global leader in <br />
             <span style={{ color: "#000000" }}>technology ecosystem</span>
           </Typography>
         </Box>
@@ -56,9 +71,9 @@ const Solutions = forwardRef((_, ref) => {
               color: "white",
             }}
           >
-            Driving innovation and trust with Revolutionary advancements/ Next-generation solutions,
-            seamless integration and expert-driven value to empower businesses and shape a smarter,
-            connected future.
+            Driving innovation and trust with Revolutionary advancements/
+            Next-generation solutions, seamless integration and expert-driven
+            value to empower businesses and shape a smarter, connected future.
           </Typography>
           <Button
             onClick={handleButtonClick}
