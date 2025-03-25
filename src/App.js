@@ -225,6 +225,7 @@ const App = () => {
         <Route path="/au/portal" element={<AustraliaLayout><AUPortal /></AustraliaLayout>} />
 
         {/* Bangladesh Routes */}
+        {/* B Routes */}
         <Route path="/bgd" element={<BangladeshLayout><BgdHome /></BangladeshLayout>} />
         <Route path="/bgd/about" element={<BangladeshLayout><BgdAboutUs /></BangladeshLayout>} />
         <Route path="/bgd/services" element={<BangladeshLayout><BgdServices /></BangladeshLayout>} />
