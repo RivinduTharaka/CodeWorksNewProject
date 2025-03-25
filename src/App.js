@@ -264,7 +264,51 @@ import SgWhyUs from './components/Singapore/AboutUs/WhyUs/WhyUs';
 import { SgBlogs } from './components/Singapore/News/Blogs/Blogs';
 import SgPortal from './components/Singapore/Portal/Portal';
 
-// Layouts for Global, Australia, Bangladesh, Brunei, Sri Lanka, Cambodia, Maldives, Mauritius, Nepal, New Zealand, and Singapore
+// Thailand Components
+import ThNavbar from './components/Thailand/Navbar';
+import ThFooter from './components/Thailand/Footer';
+import ThHome from './components/Thailand/Home';
+import ThAboutUs from './components/Thailand/About';
+import ThServices from './components/Thailand/Services';
+import ThService01 from './components/Thailand/Service01';
+import ThService02 from './components/Thailand/Service02';
+import ThContactUs from './components/Thailand/ContactUs';
+import ThSolutions from './components/Thailand/Solution/Solutions';
+import ThVendor from './components/Thailand/Vendors/vendor';
+import ThHistorySection from './components/Thailand/AboutUs/History/HistorySection';
+import ThLeadership from './components/Thailand/AboutUs/LeaderShip/Leadership';
+import ThGlobalCoverage from './components/Thailand/AboutUs/GlobalCoverage/GlobalCoverage';
+import ThEventsNews from './components/Thailand/Evnt/EventsNews/EventsNews';
+import ThTrainings from './components/Thailand/Servicess/Trainings/Trainings';
+import ThBlogDetails from './components/Thailand/News/Blogs/BlogDetails';
+import ThRegisterEvent from './components/Thailand/Evnt/EventsNews/RegisterEvent';
+import ThWhyUs from './components/Thailand/AboutUs/WhyUs/WhyUs';
+import { ThBlogs } from './components/Thailand/News/Blogs/Blogs';
+import ThPortal from './components/Thailand/Portal/Portal';
+
+// UAE Components
+import AeNavbar from './components/UAE/Navbar';
+import AeFooter from './components/UAE/Footer';
+import AeHome from './components/UAE/Home';
+import AeAboutUs from './components/UAE/About';
+import AeServices from './components/UAE/Services';
+import AeService01 from './components/UAE/Service01';
+import AeService02 from './components/UAE/Service02';
+import AeContactUs from './components/UAE/ContactUs';
+import AeSolutions from './components/UAE/Solution/Solutions';
+import AeVendor from './components/UAE/Vendors/vendor';
+import AeHistorySection from './components/UAE/AboutUs/History/HistorySection';
+import AeLeadership from './components/UAE/AboutUs/LeaderShip/Leadership';
+import AeGlobalCoverage from './components/UAE/AboutUs/GlobalCoverage/GlobalCoverage';
+import AeEventsNews from './components/UAE/Evnt/EventsNews/EventsNews';
+import AeTrainings from './components/UAE/Servicess/Trainings/Trainings';
+import AeBlogDetails from './components/UAE/News/Blogs/BlogDetails';
+import AeRegisterEvent from './components/UAE/Evnt/EventsNews/RegisterEvent';
+import AeWhyUs from './components/UAE/AboutUs/WhyUs/WhyUs';
+import { AeBlogs } from './components/UAE/News/Blogs/Blogs';
+import AePortal from './components/UAE/Portal/Portal';
+
+// Layouts for all countries
 const GlobalLayout = ({ children }) => (
   <>
     <Navbar />
@@ -358,6 +402,22 @@ const SingaporeLayout = ({ children }) => (
     <SgNavbar />
     {children}
     <SgFooter />
+  </>
+);
+
+const ThailandLayout = ({ children }) => (
+  <>
+    <ThNavbar />
+    {children}
+    <ThFooter />
+  </>
+);
+
+const UAELayout = ({ children }) => (
+  <>
+    <AeNavbar />
+    {children}
+    <AeFooter />
   </>
 );
 
@@ -603,6 +663,46 @@ const App = () => {
         <Route path="/sg/events/register/:id" element={<SingaporeLayout><SgRegisterEvent /></SingaporeLayout>} />
         <Route path="/sg/why-us" element={<SingaporeLayout><SgWhyUs /></SingaporeLayout>} />
         <Route path="/sg/portal" element={<SingaporeLayout><SgPortal /></SingaporeLayout>} />
+
+        {/* Thailand Routes */}
+        <Route path="/th" element={<ThailandLayout><ThHome /></ThailandLayout>} />
+        <Route path="/th/about" element={<ThailandLayout><ThAboutUs /></ThailandLayout>} />
+        <Route path="/th/services" element={<ThailandLayout><ThServices /></ThailandLayout>} />
+        <Route path="/th/service01" element={<ThailandLayout><ThService01 /></ThailandLayout>} />
+        <Route path="/th/service02" element={<ThailandLayout><ThService02 /></ThailandLayout>} />
+        <Route path="/th/contact" element={<ThailandLayout><ThContactUs /></ThailandLayout>} />
+        <Route path="/th/solution" element={<ThailandLayout><ThSolutions /></ThailandLayout>} />
+        <Route path="/th/vendors" element={<ThailandLayout><ThVendor /></ThailandLayout>} />
+        <Route path="/th/history" element={<ThailandLayout><ThHistorySection /></ThailandLayout>} />
+        <Route path="/th/leadership" element={<ThailandLayout><ThLeadership /></ThailandLayout>} />
+        <Route path="/th/global-coverage" element={<ThailandLayout><ThGlobalCoverage /></ThailandLayout>} />
+        <Route path="/th/blog" element={<ThailandLayout><ThBlogs /></ThailandLayout>} />
+        <Route path="/th/events" element={<ThailandLayout><ThEventsNews /></ThailandLayout>} />
+        <Route path="/th/trainings" element={<ThailandLayout><ThTrainings /></ThailandLayout>} />
+        <Route path="/th/blog/:title" element={<ThailandLayout><ThBlogDetails /></ThailandLayout>} />
+        <Route path="/th/events/register/:id" element={<ThailandLayout><ThRegisterEvent /></ThailandLayout>} />
+        <Route path="/th/why-us" element={<ThailandLayout><ThWhyUs /></ThailandLayout>} />
+        <Route path="/th/portal" element={<ThailandLayout><ThPortal /></ThailandLayout>} />
+
+        {/* UAE Routes */}
+        <Route path="/uae" element={<UAELayout><AeHome /></UAELayout>} />
+        <Route path="/uae/about" element={<UAELayout><AeAboutUs /></UAELayout>} />
+        <Route path="/uae/services" element={<UAELayout><AeServices /></UAELayout>} />
+        <Route path="/uae/service01" element={<UAELayout><AeService01 /></UAELayout>} />
+        <Route path="/uae/service02" element={<UAELayout><AeService02 /></UAELayout>} />
+        <Route path="/uae/contact" element={<UAELayout><AeContactUs /></UAELayout>} />
+        <Route path="/uae/solution" element={<UAELayout><AeSolutions /></UAELayout>} />
+        <Route path="/uae/vendors" element={<UAELayout><AeVendor /></UAELayout>} />
+        <Route path="/uae/history" element={<UAELayout><AeHistorySection /></UAELayout>} />
+        <Route path="/uae/leadership" element={<UAELayout><AeLeadership /></UAELayout>} />
+        <Route path="/uae/global-coverage" element={<UAELayout><AeGlobalCoverage /></UAELayout>} />
+        <Route path="/uae/blog" element={<UAELayout><AeBlogs /></UAELayout>} />
+        <Route path="/uae/events" element={<UAELayout><AeEventsNews /></UAELayout>} />
+        <Route path="/uae/trainings" element={<UAELayout><AeTrainings /></UAELayout>} />
+        <Route path="/uae/blog/:title" element={<UAELayout><AeBlogDetails /></UAELayout>} />
+        <Route path="/uae/events/register/:id" element={<UAELayout><AeRegisterEvent /></UAELayout>} />
+        <Route path="/uae/why-us" element={<UAELayout><AeWhyUs /></UAELayout>} />
+        <Route path="/uae/portal" element={<UAELayout><AePortal /></UAELayout>} />
       </Routes>
     </Router>
   );
