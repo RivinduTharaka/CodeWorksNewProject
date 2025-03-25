@@ -261,7 +261,7 @@ const MobileNeonHoverEffect = styled("span")(({ active }) => ({
   marginTop: "2px",
 }));
 
-const BrnNavbar = () => {
+const KHNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
@@ -279,27 +279,27 @@ const BrnNavbar = () => {
 
   const [selectedCountry, setSelectedCountry] = useState(() => {
     const currentPath = location.pathname.split('/')[1] || '';
-    return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Brunei");
+    return countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Cambodia");
   });
 
   const isMobile = useMediaQuery("(max-width:950px)");
 
   const isTargetPage =
-    location.pathname === '/brn' ||
-    location.pathname === '/brn/solution' ||
-    location.pathname === '/brn/vendors' ||
-    location.pathname === '/brn/contact' ||
-    location.pathname === '/brn/events' ||
-    location.pathname === '/brn/workshops' ||
-    location.pathname === '/brn/technical-support' ||
-    location.pathname === '/brn/professional-services' ||
-    location.pathname === '/brn/trainings' ||
-    location.pathname === '/brn/blog' ||
-    location.pathname === '/brn/press-&-media' ||
-    location.pathname === '/brn/global-coverage' ||
-    location.pathname === '/brn/leadership' ||
-    location.pathname === '/brn/careers' ||
-    location.pathname === '/brn/about';
+    location.pathname === '/kh' ||
+    location.pathname === '/kh/solution' ||
+    location.pathname === '/kh/vendors' ||
+    location.pathname === '/kh/contact' ||
+    location.pathname === '/kh/events' ||
+    location.pathname === '/kh/workshops' ||
+    location.pathname === '/kh/technical-support' ||
+    location.pathname === '/kh/professional-services' ||
+    location.pathname === '/kh/trainings' ||
+    location.pathname === '/kh/blog' ||
+    location.pathname === '/kh/press-&-media' ||
+    location.pathname === '/kh/global-coverage' ||
+    location.pathname === '/kh/leadership' ||
+    location.pathname === '/kh/careers' ||
+    location.pathname === '/kh/about';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -312,7 +312,7 @@ const BrnNavbar = () => {
 
   useEffect(() => {
     const currentPath = location.pathname.split('/')[1] || '';
-    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Brunei");
+    const matchedCountry = countries.find(country => country.route === `/${currentPath}`) || countries.find(country => country.name === "Cambodia");
     setSelectedCountry(matchedCountry);
   }, [location.pathname]);
 
@@ -352,7 +352,7 @@ const BrnNavbar = () => {
       >
         <FuturisticAppBar position="fixed" isTargetPage={isTargetPage} isScrolled={isScrolled}>
           <FuturisticToolbar>
-            <Link to="/brn" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
+            <Link to="/kh" style={{ padding: "10px 0 10px 10px", display: "flex", alignItems: "center" }}>
               <motion.img
                 src={isTargetPage && !isScrolled ? image1 : image2}
                 alt="CONNEX Logo"
@@ -405,10 +405,10 @@ const BrnNavbar = () => {
                         </Box>
 
                         <List sx={{ padding: "0 1.5rem" }}>
-                          <ListItem component={Link} to="/brn/solution" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/kh/solution" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Solutions" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
-                          <ListItem component={Link} to="/brn/vendors" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/kh/vendors" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -422,7 +422,7 @@ const BrnNavbar = () => {
                                 primary="Events & Webinars"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/brn/events' || location.pathname === '/brn/workshops'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/kh/events' || location.pathname === '/kh/workshops'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -434,7 +434,7 @@ const BrnNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/brn/events"
+                                to="/kh/events"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -442,7 +442,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/workshops"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -463,9 +463,9 @@ const BrnNavbar = () => {
                               />
                               <MobileNeonHoverEffect
                                 active={
-                                  location.pathname === '/brn/technical-support' ||
-                                  location.pathname === '/brn/professional-services' ||
-                                  location.pathname === '/brn/trainings'
+                                  location.pathname === '/kh/technical-support' ||
+                                  location.pathname === '/kh/professional-services' ||
+                                  location.pathname === '/kh/trainings'
                                 }
                               />
                             </MobileNavLinkContainer>
@@ -479,7 +479,7 @@ const BrnNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/brn/technical-support"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -487,7 +487,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/professional-services"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -495,7 +495,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/trainings"
+                                to="/kh/trainings"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -523,7 +523,7 @@ const BrnNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/brn/blog"
+                                to="/kh/blog"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -531,7 +531,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/press-&-media"
+                                to="/kh"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -559,7 +559,7 @@ const BrnNavbar = () => {
                             <List component="div" disablePadding>
                               <ListItem
                                 component={Link}
-                                to="/brn/about"
+                                to="/kh/about"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -567,7 +567,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/global-coverage"
+                                to="/kh/global-coverage"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -575,7 +575,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/leadership"
+                                to="/kh/leadership"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -583,7 +583,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/careers"
+                                to="/kh/careers"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -591,7 +591,7 @@ const BrnNavbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/brn/contact"
+                                to="/kh/contact"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -600,7 +600,7 @@ const BrnNavbar = () => {
                             </List>
                           </Collapse>
 
-                          <ListItem component={Link} to="/brn/portal" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/kh/portal" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Portal Login" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -610,7 +610,7 @@ const BrnNavbar = () => {
                             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                           >
                             <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "20px", borderRadius: "2px" }} />
+                              <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
                               <ListItemText
                                 primary={selectedCountry.name}
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
@@ -651,7 +651,7 @@ const BrnNavbar = () => {
                             </List>
                           </Collapse>
 
-                          <Divider sx={{ my: 1, background: "linear-gradient(90deg, #00D4FF, rgb(20, 153, 58))" }} />
+                          <Divider sx={{ my: 1, background: "linear-gradient(90deg,rgb(217, 232, 235), rgb(213, 238, 220))" }} />
                         </List>
                       </motion.div>
                     )}
@@ -662,24 +662,24 @@ const BrnNavbar = () => {
               <ButtonContainer>
                 <FuturisticButton
                   component={Link}
-                  to="/brn/solution"
-                  active={location.pathname === "/brn/solution"}
+                  to="/kh/solution"
+                  active={location.pathname === "/kh/solution"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Solutions
-                  <NeonHoverEffect active={location.pathname === "/brn/solution"} />
+                  <NeonHoverEffect active={location.pathname === "/kh/solution"} />
                 </FuturisticButton>
 
                 <FuturisticButton
                   component={Link}
-                  to="/brn/vendors"
-                  active={location.pathname === "/brn/vendors"}
+                  to="/kh/vendors"
+                  active={location.pathname === "/kh/vendors"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
                   Vendors
-                  <NeonHoverEffect active={location.pathname === "/brn/vendors"} />
+                  <NeonHoverEffect active={location.pathname === "/kh/vendors"} />
                 </FuturisticButton>
 
                 <div
@@ -688,7 +688,7 @@ const BrnNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/brn/events" || location.pathname === "/brn/workshops"}
+                    active={location.pathname === "/kh/events" || location.pathname === "/kh/workshops"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -704,7 +704,7 @@ const BrnNavbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/brn/events" || location.pathname === "/brn/workshops"} />
+                      <NeonHoverEffect active={location.pathname === "/kh/events" || location.pathname === "/kh/workshops"} />
                     </Box>
                   </DropdownButton>
 
@@ -718,10 +718,10 @@ const BrnNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/brn/events">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh/events">
                       Events | Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/brn/workshops">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/kh">
                       Workshops
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -734,9 +734,9 @@ const BrnNavbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/brn/technical-support" ||
-                      location.pathname === "/brn/professional-services" ||
-                      location.pathname === "/brn/trainings"
+                      location.pathname === "/kh/technical-support" ||
+                      location.pathname === "/kh/professional-services" ||
+                      location.pathname === "/kh/trainings"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -755,9 +755,9 @@ const BrnNavbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/brn/technical-support" ||
-                          location.pathname === "/brn/professional-services" ||
-                          location.pathname === "/brn/trainings"
+                          location.pathname === "/kh/technical-support" ||
+                          location.pathname === "/kh/professional-services" ||
+                          location.pathname === "/kh/trainings"
                         }
                       />
                     </Box>
@@ -773,13 +773,13 @@ const BrnNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/brn/technical-support">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh">
                       Technical Support
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/brn/professional-services">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh">
                       Professional Services
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/brn/trainings">
+                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/kh/trainings">
                       Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -791,7 +791,7 @@ const BrnNavbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/brn/blog" || location.pathname === "/brn/press-&-media"}
+                    active={location.pathname === "/kh/blog" || location.pathname === "/kh/press-&-media"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(newsAnchorEl)}
@@ -807,7 +807,7 @@ const BrnNavbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/brn/blog" || location.pathname === "/brn/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/kh/blog" || location.pathname === "/kh/press-&-media"} />
                     </Box>
                   </DropdownButton>
 
@@ -821,10 +821,10 @@ const BrnNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/brn/blog">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh/blog">
                       Blogs
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/brn/press-&-media">
+                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/kh">
                       Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -837,11 +837,11 @@ const BrnNavbar = () => {
                 >
                   <DropdownButton
                     active={
-                      location.pathname === "/brn/about" ||
-                      location.pathname === "/brn/global-coverage" ||
-                      location.pathname === "/brn/leadership" ||
-                      location.pathname === "/brn/careers" ||
-                      location.pathname === "/brn/contact"
+                      location.pathname === "/kh/about" ||
+                      location.pathname === "/kh/global-coverage" ||
+                      location.pathname === "/kh/leadership" ||
+                      location.pathname === "/kh/careers" ||
+                      location.pathname === "/kh/contact"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -860,11 +860,11 @@ const BrnNavbar = () => {
                       </Box>
                       <NeonHoverEffect
                         active={
-                          location.pathname === "/brn/about" ||
-                          location.pathname === "/brn/global-coverage" ||
-                          location.pathname === "/brn/leadership" ||
-                          location.pathname === "/brn/careers" ||
-                          location.pathname === "/brn/contact"
+                          location.pathname === "/kh/about" ||
+                          location.pathname === "/kh/global-coverage" ||
+                          location.pathname === "/kh/leadership" ||
+                          location.pathname === "/kh/careers" ||
+                          location.pathname === "/kh/contact"
                         }
                       />
                     </Box>
@@ -880,19 +880,19 @@ const BrnNavbar = () => {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/brn/about">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/about">
                       About Us
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/brn/global-coverage">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/brn/leadership">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/brn/careers">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/careers">
                       Careers
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/brn/contact">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/kh/contact">
                       Contact Us
                     </FuturisticMenuItem>
                   </FuturisticMenu>
@@ -911,7 +911,7 @@ const BrnNavbar = () => {
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "25px", height: "15px", borderRadius: "2px" }} />
+                        <img src={selectedCountry.flag} alt={`${selectedCountry.name} Flag`} style={{ width: "30px", height: "30px", borderRadius: "2px" }} />
                         {selectedCountry.name}
                         <ExpandMore
                           sx={{
@@ -946,7 +946,7 @@ const BrnNavbar = () => {
                         key={country.name}
                         onClick={() => handleCountrySelect(country)}
                       >
-                        <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "20px", borderRadius: "2px" }} />
+                        <img src={country.flag} alt={`${country.name} Flag`} style={{ marginRight: "10px", width: "30px", height: "30px", borderRadius: "2px" }} />
                         {country.name}
                       </FuturisticMenuItem>
                     ))}
@@ -955,7 +955,7 @@ const BrnNavbar = () => {
 
                 <PortalButton 
                   component={Link} 
-                  to="/brn/portal" 
+                  to="/kh/portal" 
                   isScrolled={isScrolled}
                 >
                   Portal Login
@@ -969,4 +969,4 @@ const BrnNavbar = () => {
   );
 };
 
-export default BrnNavbar;
+export default KHNavbar;
