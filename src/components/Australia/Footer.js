@@ -127,7 +127,7 @@ const Footer = () => {
         {/* Copyright Notice */}
         <Box textAlign="center">
           <Typography variant="body2">
-            © {new Date().getFullYear()} Connex360. All Rights Reserved.
+            © {new Date().getFullYear()} Connex CodeWorks (Pvt) Ltd . All Rights Reserved.
           </Typography>
         </Box>
       </Container>
