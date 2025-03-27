@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import RoomIcon from '@mui/icons-material/Room';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2';
 
 // Import images
 import trainingImage1 from '../../../../assets/image/download (1).jpg';
@@ -176,7 +176,7 @@ const ModalDetails = styled(Box)({
 const ModalDetailText = styled(Typography)(({ theme }) => ({
   fontSize: '1rem',
   color: theme.palette.text.primary,
-  marginBottom: '8px', // Added margin for spacing between lines
+  marginBottom: '8px',
   [theme.breakpoints.down('sm')]: {
     fontSize: '0.85rem',
   },
@@ -257,6 +257,7 @@ function Trainings2() {
           date: "Mar 17, 2025",
           duration: "4 Days",
           sessionTime: "9:00 AM - 5:00 PM",
+          seats: 20,
           description: "This training provides an in-depth understanding of configuring advanced Web Application Firewalls (WAF) to protect against sophisticated cyber threats. Hands-on labs included.",
         },
         {
@@ -270,6 +271,7 @@ function Trainings2() {
           date: "Mar 17, 2025",
           duration: "4 Days",
           sessionTime: "9:00 AM - 5:00 PM",
+          seats: 15,
           description: "Explore advanced Fortinet security solutions with expert-led sessions, focusing on firewall configuration and network security optimization.",
         },
         {
@@ -283,6 +285,7 @@ function Trainings2() {
           date: "Mar 17, 2025",
           duration: "4 Days",
           sessionTime: "9:00 AM - 5:00 PM",
+          seats: 25,
           description: "A foundational course covering network security basics, including protocols, encryption, and threat detection techniques.",
         },
         {
@@ -296,6 +299,7 @@ function Trainings2() {
           date: "Mar 17, 2025",
           duration: "4 Days",
           sessionTime: "9:00 AM - 5:00 PM",
+          seats: 18,
           description: "Learn to identify, analyze, and mitigate cybersecurity threats using real-world scenarios and advanced analytical tools.",
         },
       ];
@@ -305,7 +309,7 @@ function Trainings2() {
   }, []);
 
   const handleOpenModal = (training) => {
-    console.log("Selected Training:", training); // Debug log to check data
+    console.log("Selected Training:", training);
     setSelectedTraining(training);
     setOpenModal(true);
     setFormData({
@@ -471,17 +475,20 @@ function Trainings2() {
             <ModalDetailText>
               Daily Session Time: {selectedTraining?.sessionTime || 'Not specified'}
             </ModalDetailText>
+            <ModalDetailText>
+              Seats Available: {selectedTraining?.seats || 'N/A'}
+            </ModalDetailText>
             <hr />
             {/* Form Fields */}
             <Box sx={{ mt: 2 }}>
-              <FormLabel>First Name:<span className="required"> *</span></FormLabel>
+              <FormLabel>Name:<span className="required"> *</span></FormLabel>
               <CustomInput
                 fullWidth
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 error={!!formErrors.name}
-                placeholder="Enter your first name"
+                placeholder="Enter your name"
               />
               {formErrors.name && <Typography color="error">{formErrors.name}</Typography>}
 
@@ -511,8 +518,6 @@ function Trainings2() {
                   {formErrors.contactNumber && <Typography color="error">{formErrors.contactNumber}</Typography>}
                 </Box>
               </Box>
-
-
 
               <FormLabel>Email:</FormLabel>
               <CustomInput
