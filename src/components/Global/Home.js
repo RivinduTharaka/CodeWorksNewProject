@@ -10,11 +10,11 @@ import Ecosystem from './HomeSections/TechnologyEcosystem';
 import Vendor from './HomeSections/OurVendors';
 import News from './HomeSections/News';
 import Solutions from './HomeSections/Solutions';
-
+import AutoLogin from '../../services/AutoLogin';
 // Import Material-UI Icons
 import { Public, BusinessCenter, School, Handshake, CalendarToday, Group, Store, People } from '@mui/icons-material';
 import ContactHome from './HomeSections/ContactHome';
-
+import {selectData} from '../../services/dataService';
 
 // Who We Are Section Styling
 const WhoWeAreSection = styled(Box)({
@@ -172,6 +172,8 @@ const CountAnimation = ({ start, end, suffix }) => {
   });
 
   useEffect(() => {
+    const data= selectData('countries',{is_active:true});
+      console.log(data);
     if (inView) {
       let startVal = start;
       const duration = 2000;
@@ -184,12 +186,14 @@ const CountAnimation = ({ start, end, suffix }) => {
         }
       }, stepTime);
     }
+
   }, [inView, start, end]);
 
 
 
   return (
     <div ref={ref}>
+      
       <StatsText>{count}{suffix}</StatsText>
     </div>
   );
@@ -198,6 +202,9 @@ const CountAnimation = ({ start, end, suffix }) => {
 
 
 const Home = () => {
+
+
+
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when the component mounts
   }, []);
@@ -205,7 +212,9 @@ const Home = () => {
   return (
     <>
       {/* Hero Section */}
+      <AutoLogin/>
       <HeroSection>
+        
         <VideoBackground autoPlay loop muted playsInline>
           <source src={hero} type="video/mp4" />
         </VideoBackground>

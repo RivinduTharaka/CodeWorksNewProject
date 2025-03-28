@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import worldMapImage from "../../../../assets/image/Global-presence/GlobalCoverage.jpg"; 
+import worldMapImage from "../../../../assets/image/Global-presence/GlobalCoverage.jpg";
 
 const TwoColumns = styled(Box)(({ theme }) => ({
   display: "flex",

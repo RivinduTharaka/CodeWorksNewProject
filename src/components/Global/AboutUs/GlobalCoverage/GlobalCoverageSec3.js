@@ -201,7 +201,9 @@ const GlobalCoverageSec3 = () => {
   ];
 
   return (
+    
     <SectionContainer>
+      
       {regionData.map((region) => (
         <RegionContainer key={region.region}>
           <RegionHeader>{region.region}</RegionHeader>

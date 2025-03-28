@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "@mui/material/styles";
 import video from "../../../../assets/video/CNXBackgropund.mp4";
 
+
 const GlobalCoverageSec1 = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
