@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   Box,
   Typography,
@@ -7,6 +7,7 @@ import {
   CardContent,
   Link,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import {
@@ -14,6 +15,8 @@ import {
   LocationOnOutlined,
   PhoneOutlined,
 } from "@mui/icons-material";
+import { selectData } from '../../../../services/dataService';
+import AutoLogin from '../../../../services/AutoLogin';
 
 // Styled Components
 const SectionContainer = styled(Box)(({ theme }) => ({
@@ -39,7 +42,7 @@ const RegionContainer = styled(Box)(({ theme }) => ({
 }));
 
 const RegionHeader = styled(Typography)(({ theme }) => ({
-  fontSize: "clamp(2rem, 5vw, 3rem)", // Responsive font size
+  fontSize: "clamp(2rem, 5vw, 3rem)",
   fontWeight: 700,
   color: "#00aaff",
   textAlign: "left",
@@ -68,7 +71,7 @@ const CountryCard = styled(Card)(({ theme }) => ({
   flexDirection: "column",
   transition: "transform 0.2s ease-in-out",
   "&:hover": {
-    transform: "scale(1.02)", // Slight zoom effect on hover
+    transform: "scale(1.02)",
   },
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(1.5),
@@ -80,9 +83,9 @@ const CardContentStyled = styled(CardContent)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  minHeight: "300px", // Increased to accommodate longer content
+  minHeight: "300px",
   [theme.breakpoints.down("sm")]: {
-    minHeight: "280px", // Slightly smaller on mobile
+    minHeight: "280px",
   },
 }));
 
@@ -101,8 +104,7 @@ const IconTextRow = ({ icon, text }) => (
         fontWeight: 400,
         fontFamily: "Montserrat, Arial, sans-serif",
         lineHeight: 1.6,
-        // color: "#b5c4c7",
-        overflowWrap: "break-word", // Ensure long text wraps
+        overflowWrap: "break-word",
       }}
     >
       {text}
@@ -110,147 +112,168 @@ const IconTextRow = ({ icon, text }) => (
   </Box>
 );
 
+// Simple in-memory cache for API responses
+const apiCache = new Map();
+const countryCache = new Map(); // Cache for country names
+
 const GlobalCoverageSec3 = () => {
-  const regionData = [
-    {
-      region: "Asia",
-      countries: [
-        {
-          name: "Sri Lanka",
-          address: "286, R A De Mal Mawatha, Colombo 3, Sri Lanka 00300",
-          phone: "+94 114 693 355",
-          contactUrl: "https://www.connexit.biz/SL/ContactUs",
-        },
-        {
-          name: "Cambodia",
-          address: `11F-12, Morgan Tower, Sopheakmongkul Street, Village 14, Sangkat Tonle Bassac, Khan Chamkarmon, Phnom Penh, Cambodia`,
-          phone: "+85586677044",
-          contactUrl: "https://www.connexit.biz/kh/ContactUs",
-        },
-        {
-          name: "Singapore",
-          address: "60, Paya Lebar Road, #06-39, Paya Lebar Square, Singapore 409051",
-          phone: "+6567278910",
-          contactUrl: "https://www.connexit.biz/SG/ContactUs",
-        },
-        {
-          name: "Brunei",
-          address: `Unit B20, Block B, First Floor, Bangunan HABZA, Simpang 150, Kg Kiulap, Bandar Seri Begawan BE1518, Negara Brunei Darussalam`,
-          phone: "+673 223 3575",
-          contactUrl: "https://www.connexit.biz/BRN/ContactUs",
-        },
-        {
-          name: "Thailand",
-          address: `184/79, Forum Tower Building, 17th Floor, Ratchadaphisek Road, Huai Khwang, Bangkok 10310`,
-          phone: "+66612700590",
-          contactUrl: "https://www.connexit.biz/TH/ContactUs",
-        },
-        {
-          name: "India",
-          address: `220 3rd Double Rd Domlur Indiranagar, 2nd Phase, Domlur Bangalore North Bangalore KA 560071, India`,
-          phone: "+91 789 933 9059",
-          contactUrl: "https://www.connexit.biz/IN/ContactUs",
-        },
-        {
-          name: "Nepal",
-          address: "Baluwatar-4, Kathmandu, Nepal",
-          phone: "+977-9841592542",
-          contactUrl: "https://www.connexit.biz/NPL/ContactUs",
-        },
-      ],
-    },
-    {
-      region: "Oceania",
-      countries: [
-        {
-          name: "Australia",
-          address: "14 Alwyn Crescent, Glenwood NSW 2767",
-          phone: "+61 406 125 445",
-          contactUrl: "https://www.connexit.biz/AU/ContactUs",
-        },
-        {
-          name: "New Zealand",
-          address: "Plimmer Towers, 2-6 Glimmer Terrace, Wellington, 6011",
-          phone: "0226892981",
-          contactUrl: "https://www.connexit.co.nz/ContactUs",
-        },
-      ],
-    },
-    {
-      region: "Middle East",
-      countries: [
-        {
-          name: "Dubai",
-          address: `P.O. BOX: 410714, Office 10, 806, 8th Floor, Opal Tower, Business Bay, Dubai, UAE`,
-          phone: "+4 424 9988",
-          contactUrl: "https://www.connexit.biz/UAE/ContactUs",
-        },
-      ],
-    },
-    {
-      region: "Africa",
-      countries: [
-        {
-          name: "Mauritius",
-          address: `Office C-03, Ebene Junction, Ebene, Quatre Bornes, Mauritius`,
-          phone: "+23 05 942 8354",
-          contactUrl: "https://www.connexit.biz/MU/ContactUs",
-        },
-      ],
-    },
-  ];
+  const [regionData, setRegionData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch country name by country_id with caching
+  const fetchCountryName = useCallback(async (countryId) => {
+    // Check if the country name is already in the cache
+    if (countryCache.has(countryId)) {
+      return countryCache.get(countryId);
+    }
+
+    try {
+      const countryResponse = await selectData('countries', { id: countryId, is_active: true });
+      const countryName = countryResponse.data && countryResponse.data.length > 0
+        ? countryResponse.data[0].name
+        : "Unknown Country";
+      countryCache.set(countryId, countryName); // Cache the country name
+      return countryName;
+    } catch (error) {
+      console.error(`Failed to fetch country name for country_id ${countryId}:`, error);
+      return "Unknown Country";
+    }
+  }, []);
+
+  // Memoize fetchData to prevent unnecessary re-renders
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    const cacheKey = 'global_coverage_data';
+
+    // Check if the data is already in the cache
+    if (apiCache.has(cacheKey)) {
+      const cachedData = apiCache.get(cacheKey);
+      setRegionData(cachedData);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Step 1: Fetch active regions
+      const regionsResponse = await selectData('regions', { is_active: true });
+
+      if (!regionsResponse.data || regionsResponse.data.length === 0) {
+        setRegionData([]);
+        setLoading(false);
+        return;
+      }
+
+      // Step 2: Fetch active global offices for each region and map country names
+      const formattedRegions = await Promise.all(
+        regionsResponse.data.map(async (region) => {
+          const officesResponse = await selectData('global_offices', {
+            region_id: region.id,
+            is_active: true,
+          });
+
+          // Map offices to the required format, fetching country names
+          const countries = await Promise.all(
+            (officesResponse.data || []).map(async (office) => {
+              const countryName = await fetchCountryName(office.country_id);
+              return {
+                name: countryName,
+                address: office.address,
+                phone: office.contact_number,
+                contactUrl: office.contact_form_link,
+              };
+            })
+          );
+
+          return {
+            region: region.name,
+            countries,
+          };
+        })
+      );
+
+      // Filter out regions with no countries
+      const filteredRegions = formattedRegions.filter(region => region.countries.length > 0);
+
+      // Cache the formatted data
+      apiCache.set(cacheKey, filteredRegions);
+      setRegionData(filteredRegions);
+    } catch (error) {
+      console.error('Failed to fetch global coverage data:', error);
+      setRegionData([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchCountryName]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // Memoize the rendering of region and country cards
+  const regionCards = useMemo(() => {
+    return regionData.map((region) => (
+      <RegionContainer key={region.region}>
+        <RegionHeader>{region.region}</RegionHeader>
+        <Grid container spacing={2} justifyContent="flex-start" alignItems="stretch">
+          {region.countries.map((country) => (
+            <Grid item key={country.name} xs={12} sm={6} md={4}>
+              <CountryCard>
+                <CardContentStyled>
+                  <Box>
+                    <Typography
+                      variant="h5"
+                      fontWeight={700}
+                      gutterBottom
+                      sx={{ color: "#00aaff", fontSize: "1.5rem" }}
+                    >
+                      {country.name}
+                    </Typography>
+                    <IconTextRow
+                      icon={<LocationOnOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
+                      text={country.address}
+                    />
+                    <IconTextRow
+                      icon={<PhoneOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
+                      text={country.phone}
+                    />
+                    <IconTextRow
+                      icon={<EmailOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
+                      text={
+                        <Link
+                          href={country.contactUrl}
+                          target="_blank"
+                          underline="hover"
+                          sx={{ color: "#00aaff", fontSize: "0.95rem" }}
+                        >
+                          Contact Us Form
+                        </Link>
+                      }
+                    />
+                  </Box>
+                  <Divider sx={{ borderColor: "#b5c4c7", marginTop: theme => theme.spacing(1) }} />
+                </CardContentStyled>
+              </CountryCard>
+            </Grid>
+          ))}
+        </Grid>
+      </RegionContainer>
+    ));
+  }, [regionData]);
 
   return (
-    
     <SectionContainer>
-      
-      {regionData.map((region) => (
-        <RegionContainer key={region.region}>
-          <RegionHeader>{region.region}</RegionHeader>
-          <Grid container spacing={2} justifyContent="flex-start" alignItems="stretch">
-            {region.countries.map((country) => (
-              <Grid item key={country.name} xs={12} sm={6} md={4}>
-                <CountryCard>
-                  <CardContentStyled>
-                    <Box>
-                      <Typography
-                        variant="h5"
-                        fontWeight={700}
-                        gutterBottom
-                        sx={{ color: "#00aaff", fontSize: "1.5rem" }}
-                      >
-                        {country.name}
-                      </Typography>
-                      <IconTextRow
-                        icon={<LocationOnOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
-                        text={country.address}
-                      />
-                      <IconTextRow
-                        icon={<PhoneOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
-                        text={country.phone}
-                      />
-                      <IconTextRow
-                        icon={<EmailOutlined sx={{ color: "#b5c4c7", fontSize: "1.2rem" }} />}
-                        text={
-                          <Link
-                            href={country.contactUrl}
-                            target="_blank"
-                            underline="hover"
-                            sx={{ color: "#00aaff", fontSize: "0.95rem" }}
-                          >
-                            Contact Us Form
-                          </Link>
-                        }
-                      />
-                    </Box>
-                    <Divider sx={{ borderColor: "#b5c4c7", marginTop: theme => theme.spacing(1) }} />
-                  </CardContentStyled>
-                </CountryCard>
-              </Grid>
-            ))}
-          </Grid>
-        </RegionContainer>
-      ))}
+      <AutoLogin/>
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : regionData.length === 0 ? (
+        <Typography variant="h6" align="center" color="textSecondary">
+          No global coverage data available.
+        </Typography>
+      ) : (
+        regionCards
+      )}
     </SectionContainer>
   );
 };
