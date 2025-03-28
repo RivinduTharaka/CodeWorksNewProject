@@ -543,7 +543,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/"
+                                to="/blog"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -812,7 +812,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/"} />
+                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/blog"} />
                     </Box>
                   </DropdownButton>
 
