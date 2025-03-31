@@ -16,6 +16,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 import ReactCountryFlag from 'react-country-flag'; // Import for country flags
+import { insertData } from '../../../../services/dataService'; // Import the insertData function
 
 // Reuse the same theme with premium adjustments
 const theme = createTheme({
@@ -71,6 +72,37 @@ const countries = [
   { name: 'France', code: 'FR', dialCode: '+33' },
 ];
 
+// Function to insert registration data into the database
+const submitToDatabase = async (data) => {
+  try {
+    const registrationData = {
+      title: data.title,
+      full_name: data.name,
+      designation: data.designation,
+      company_name: data.companyName,
+      email: data.email,
+      country_code: data.countryCode,
+      contact_number: data.contactNumber,
+      country_id: countries.find((country) => country.name === data.country)?.code || 'US', // Map country name to country_id (code)
+      city: data.city,
+      event_id: data.eventId,
+      attendance_timestamp: null, // Default value as per the table
+      is_attendance_marked: 0, // Default value as per the table
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current timestamp in MySQL format
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current timestamp in MySQL format
+    };
+
+    const response = await insertData('event_registrations', registrationData);
+    if (response.message === 'Data inserted successfully') {
+      return { success: true, message: 'Registration successful!' };
+    } else {
+      throw new Error('Failed to register. Please try again.');
+    }
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+};
+
 function RegisterEvent() {
   const { id } = useParams();
   const location = useLocation();
@@ -87,6 +119,9 @@ function RegisterEvent() {
     country: 'United States', // Default country
     city: '',
   });
+
+  // State for form errors
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -106,24 +141,77 @@ function RegisterEvent() {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+
+    // Clear error for the field being edited
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.title) errors.title = 'Title is required';
+    if (!formData.name) errors.name = 'Name is required';
+    if (!formData.designation) errors.designation = 'Designation is required';
+    if (!formData.companyName) errors.companyName = 'Company name is required';
+    if (!formData.email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Email is invalid';
+    }
+    if (!formData.contactNumber) {
+      errors.contactNumber = 'Contact number is required';
+    } else if (!/^\d+$/.test(formData.contactNumber)) {
+      errors.contactNumber = 'Contact number must contain only digits';
+    } else if (formData.contactNumber.length < 8) {
+      errors.contactNumber = 'Contact number must be at least 8 digits';
+    } else if (formData.contactNumber.length > 15) {
+      errors.contactNumber = 'Contact number cannot exceed 15 digits';
+    }
+    if (!formData.country) errors.country = 'Country is required';
+    if (!formData.city) errors.city = 'City is required';
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleContactNumberChange = (e) => {
+    const { name, value } = e.target;
+    // Only allow numeric input
+    if (/^\d*$/.test(value)) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      if (formErrors[name]) {
+        setFormErrors((prev) => ({ ...prev, [name]: '' }));
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateForm()) {
+      return;
+    }
+
     if (event.remainingSeats === '0' || event.remainingSeats === 'Unlimited') {
       if (event.remainingSeats !== 'Unlimited') {
-        Swal.fire({
+        await Swal.fire({
           icon: 'error',
           title: 'No Seats are currently available',
           showConfirmButton: false,
           timer: 1500,
+          didOpen: () => {
+            const popup = Swal.getPopup();
+            if (popup) {
+              popup.style.zIndex = '1500';
+            }
+          },
         });
         return;
       }
     }
 
-    Swal.fire({
+    await Swal.fire({
       icon: 'info',
       title: 'Submitting...',
       text: 'Please wait while your registration is being processed.',
@@ -131,30 +219,32 @@ function RegisterEvent() {
       showConfirmButton: false,
       didOpen: () => {
         Swal.showLoading();
+        const popup = Swal.getPopup();
+        if (popup) {
+          popup.style.zIndex = '1500';
+        }
       },
     });
 
     try {
-      const response = await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          const isSuccess = Math.random() > 0.2;
-          if (isSuccess) {
-            resolve({ success: true });
-          } else {
-            reject(new Error('Submission failed'));
+      const response = await submitToDatabase({ ...formData, eventId: id });
+
+      await Swal.fire({
+        icon: response.success ? 'success' : 'error',
+        title: response.success ? 'Success!' : 'Error!',
+        text: response.message,
+        confirmButtonText: response.success ? 'OK' : 'Try Again',
+        timer: response.success ? 3000 : undefined,
+        timerProgressBar: response.success,
+        didOpen: () => {
+          const popup = Swal.getPopup();
+          if (popup) {
+            popup.style.zIndex = '1500';
           }
-        }, 2000);
+        },
       });
 
-      Swal.close();
-
       if (response.success) {
-        Swal.fire({
-          title: 'Submitted Successfully!',
-          icon: 'success',
-          draggable: true,
-        });
-
         setFormData({
           title: '',
           name: '',
@@ -166,10 +256,21 @@ function RegisterEvent() {
           country: 'United States',
           city: '',
         });
+        window.location.reload();
       }
     } catch (error) {
-      Swal.close();
-      alert('Failed to submit the form.');
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'An unexpected error occurred. Please try again.',
+        confirmButtonText: 'Try Again',
+        didOpen: () => {
+          const popup = Swal.getPopup();
+          if (popup) {
+            popup.style.zIndex = '1500';
+          }
+        },
+      });
     }
   };
 
@@ -272,13 +373,14 @@ function RegisterEvent() {
 
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                      <FormControl fullWidth>
+                      <FormControl fullWidth error={!!formErrors.title}>
                         <InputLabel sx={{ fontWeight: 500 }}>Title</InputLabel>
                         <Select name="title" value={formData.title} onChange={handleChange} label="Title" required>
                           <MenuItem value="Mr">Mr</MenuItem>
                           <MenuItem value="Ms">Ms</MenuItem>
                           <MenuItem value="Mrs">Mrs</MenuItem>
                         </Select>
+                        {formErrors.title && <Typography color="error">{formErrors.title}</Typography>}
                       </FormControl>
                     </Grid>
 
@@ -291,6 +393,8 @@ function RegisterEvent() {
                         onChange={handleChange}
                         placeholder="Enter your name"
                         required
+                        error={!!formErrors.name}
+                        helperText={formErrors.name}
                         InputLabelProps={{ style: { fontWeight: 500 } }}
                       />
                     </Grid>
@@ -304,6 +408,8 @@ function RegisterEvent() {
                         onChange={handleChange}
                         placeholder="Enter your designation"
                         required
+                        error={!!formErrors.designation}
+                        helperText={formErrors.designation}
                         InputLabelProps={{ style: { fontWeight: 500 } }}
                       />
                     </Grid>
@@ -317,6 +423,8 @@ function RegisterEvent() {
                         onChange={handleChange}
                         placeholder="Enter your company name"
                         required
+                        error={!!formErrors.companyName}
+                        helperText={formErrors.companyName}
                         InputLabelProps={{ style: { fontWeight: 500 } }}
                       />
                     </Grid>
@@ -331,6 +439,8 @@ function RegisterEvent() {
                         onChange={handleChange}
                         placeholder="Enter your email"
                         required
+                        error={!!formErrors.email}
+                        helperText={formErrors.email}
                         InputLabelProps={{ style: { fontWeight: 500 } }}
                       />
                     </Grid>
@@ -379,16 +489,19 @@ function RegisterEvent() {
                         name="contactNumber"
                         type="tel"
                         value={formData.contactNumber}
-                        onChange={handleChange}
+                        onChange={handleContactNumberChange}
                         placeholder="Enter your contact number"
                         required
+                        error={!!formErrors.contactNumber}
+                        helperText={formErrors.contactNumber}
+                        inputProps={{ maxLength: 15 }}
                         InputLabelProps={{ style: { fontWeight: 500 } }}
                       />
                     </Grid>
 
                     {/* Country Dropdown */}
                     <Grid item xs={12}>
-                      <FormControl fullWidth>
+                      <FormControl fullWidth error={!!formErrors.country}>
                         <InputLabel sx={{ fontWeight: 500 }}>Country</InputLabel>
                         <Select
                           name="country"
@@ -403,6 +516,7 @@ function RegisterEvent() {
                             </MenuItem>
                           ))}
                         </Select>
+                        {formErrors.country && <Typography color="error">{formErrors.country}</Typography>}
                       </FormControl>
                     </Grid>
 
@@ -415,6 +529,8 @@ function RegisterEvent() {
                         onChange={handleChange}
                         placeholder="Enter your city"
                         required
+                        error={!!formErrors.city}
+                        helperText={formErrors.city}
                         InputLabelProps={{ style: { fontWeight: 500 } }}
                       />
                     </Grid>

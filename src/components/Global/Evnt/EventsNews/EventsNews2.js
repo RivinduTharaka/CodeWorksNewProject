@@ -1,16 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Container, Button, Grid, Card, CardContent, CardMedia } from '@mui/material';
-import { styled } from '@mui/system'; // Ensure this is imported
+import { styled } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
-// Import images
-import zeroTrustImage from '../../../../assets/image/Dilshan_Silva.jpg';
-import fortinetEventImage from '../../../../assets/image/Shamal.jpg';
-import fortinetEventImage1 from '../../../../assets/image/aboutsec3.jpg';
-import fortinetEventImage2 from '../../../../assets/image/p7.jpg';
+import { selectData } from '../../../../services/dataService'; // Assuming this is your API service
+import API_URL from '../../../../flieapi'; // Base API URL for image fetching
 import arrowImage from '../../../../assets/image/down-arrow.png';
+
+// In-memory cache for images and API data
+const imageCache = new Map();
+const apiCache = new Map();
+
+// Construct full image URL
+const constructImageUrl = (filePath) => {
+  if (!filePath) return 'https://via.placeholder.com/300x200?text=No+Image';
+  const cleanedFilePath = filePath.replace(/^\/+/, '');
+  return `${API_URL}/${cleanedFilePath}`;
+};
+
+// Fetch image with caching
+const fetchImage = async (filePath) => {
+  const imageUrl = constructImageUrl(filePath);
+  if (imageCache.has(imageUrl)) return imageCache.get(imageUrl);
+
+  try {
+    const response = await fetch(imageUrl);
+    if (response.ok) {
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      imageCache.set(imageUrl, objectUrl);
+      return objectUrl;
+    } else {
+      return 'https://via.placeholder.com/300x200?text=Image+Not+Found';
+    }
+  } catch {
+    return 'https://via.placeholder.com/300x200?text=Image+Not+Found';
+  }
+};
 
 // Theme setup
 const theme = createTheme({
@@ -71,7 +98,6 @@ const ArrowImage = styled('img')({
 });
 
 const EventCard = styled(Card)({
-
   width: { xs: '100%', sm: 345 },
   height: 550,
   display: "flex",
@@ -144,56 +170,61 @@ const cardVariants = {
 // Main Component
 function EventsNews2() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true); // State for loading status
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const mockData = [
-        {
-          id: 1,
-          title: "Zero Trust Webinar by Connex Experts",
-          image: zeroTrustImage,
-          date: "Ongoing",
-          time: "On Demand",
-          mode: "Online",
-          remainingSeats: "Unlimited",
-          description: "ON DEMAND Ransomware, Malware, Zero Trust, Endpoint protection – Discover secure solutions through engaging talks, but in English only [...]",
-        },
-        {
-          id: 2,
-          title: "Unlock New Revenue Streams with Fortinet",
-          image: fortinetEventImage,
-          date: "Ongoing",
-          time: "On Demand",
-          mode: "Online",
-          remainingSeats: "Unlimited",
-          description: "Fortinet’s security fabric solutions are proven to expand market opportunities [...]",
-        },
-        {
-          id: 3,
-          title: "Unlock New Revenue Streams with Fortinet",
-          image: fortinetEventImage1,
-          date: "Ongoing",
-          time: "On Demand",
-          mode: "Online",
-          remainingSeats: "Unlimited",
-          description: "Fortinet’s security fabric solutions are proven to expand market opportunities [...]",
-        },
-        {
-          id: 4,
-          title: "Unlock New Revenue Streams with Fortinet",
-          image: fortinetEventImage2,
-          date: "Ongoing",
-          time: "On Demand",
-          mode: "Online",
-          remainingSeats: "Unlimited",
-          description: "Fortinet’s security fabric solutions are proven to expand market opportunities [...]",
-        },
-      ];
-      setEvents(mockData);
-    };
-    fetchEvents();
+  // Fetch events from the database
+  const fetchEvents = useCallback(async () => {
+    setLoading(true);
+    const cacheKey = 'events';
+
+    // Check if data is already in cache
+    if (apiCache.has(cacheKey)) {
+      setEvents(apiCache.get(cacheKey));
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Fetch events where is_active is true
+      const eventsResponse = await selectData('events', {
+        is_active: true,
+      });
+
+      if (!eventsResponse.data?.length) {
+        setEvents([]);
+        setLoading(false);
+        return;
+      }
+
+      // Format the events and fetch their images
+      const formattedEvents = await Promise.all(
+        eventsResponse.data.map(async (event) => ({
+          id: event.id,
+          title: event.title || 'Untitled Event',
+          image: await fetchImage(event.image), // Fetch image with caching
+          date: event.date || 'N/A',
+          time: event.time || 'N/A',
+          mode: event.mode || 'N/A',
+          remainingSeats: event.remaining_seats || 'N/A',
+          description: event.description || 'No description available',
+        }))
+      );
+
+      // Cache the result and update state
+      apiCache.set(cacheKey, formattedEvents);
+      setEvents(formattedEvents);
+    } catch (error) {
+      setEvents([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  // Fetch events on component mount
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
   const handleRegisterClick = (event) => {
     navigate(`/events/register/${event.id}`, { state: { event } });
@@ -216,7 +247,11 @@ function EventsNews2() {
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Grid container spacing={4} justifyContent="center">
-          {events.length > 0 ? (
+          {loading ? (
+            <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
+              Loading events...
+            </Typography>
+          ) : events.length > 0 ? (
             events.map((event, index) => (
               <Grid item xs={12} sm={6} md={4} key={event.id}>
                 <motion.div
@@ -228,7 +263,6 @@ function EventsNews2() {
                   <EventCard>
                     <Box sx={{ position: "relative" }}>
                       <EventMedia component="img" image={event.image} alt={event.title} />
-                      <Box sx={{ /* Overlay styles unchanged */ }}></Box>
                     </Box>
                     <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
                       <EventTitle>{event.title}</EventTitle>
@@ -249,7 +283,7 @@ function EventsNews2() {
             ))
           ) : (
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-              Loading events...
+              No events available at this time.
             </Typography>
           )}
         </Grid>

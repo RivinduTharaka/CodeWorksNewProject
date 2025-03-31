@@ -9,6 +9,7 @@ import { selectData, insertData } from '../../../../services/dataService'; // As
 import API_URL from '../../../../flieapi'; // Base API URL for image fetching
 import arrowImage from '../../../../assets/image/down-arrow.png';
 import f5Logo from '../../../../assets/image/download (1).jpg';
+import AutoLogin from '../../../../services/AutoLogin'; // Assuming this is your AutoLogin service
 
 // In-memory cache for images
 const imageCache = new Map();
@@ -443,6 +444,7 @@ function Trainings2() {
 
   return (
     <ThemeProvider theme={theme}>
+      <AutoLogin />
       <HeroSection>
         <Container maxWidth="lg">
           <Title variant="h1">Training Programs at Connex Information Technologies</Title>
