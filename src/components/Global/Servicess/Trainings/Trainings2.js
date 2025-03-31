@@ -254,7 +254,7 @@ const submitToDatabase = async (data) => {
     };
 
     const response = await insertData('training_session_registrations', registrationData);
-console.log('Registration Response:', response);
+// console.log('Registration Response:', response);
     if (response.message === 'Data inserted successfully') {
       return { success: true, message: 'Registration successful!' };
     } else {
@@ -303,7 +303,7 @@ function Trainings2() {
         country_id: 3,
         is_active: true,
       });
-      console.log('Formatted trainingSessionsResponse:', trainingSessionsResponse);
+      // console.log('Formatted trainingSessionsResponse:', trainingSessionsResponse);
       if (!trainingSessionsResponse.data?.length) {
         setTrainings([]);
         setLoading(false);
@@ -328,14 +328,14 @@ function Trainings2() {
         }))
       );
 
-      console.log('Formatted Trainings:', formattedTrainings);
+      // console.log('Formatted Trainings:', formattedTrainings);
       
 
       // Step 3: Cache the result and update state
       apiCache.set(cacheKey, formattedTrainings);
       setTrainings(formattedTrainings);
     } catch (error) {
-      console.error('Failed to fetch trainings:', error);
+      // console.error('Failed to fetch trainings:', error);
       setTrainings([]);
     } finally {
       setLoading(false);
@@ -348,7 +348,7 @@ function Trainings2() {
   }, [fetchTrainings]);
 
   const handleOpenModal = (training) => {
-    console.log("Selected Training:", training);
+    // console.log("Selected Training:", training);
     setSelectedTraining(training);
     setOpenModal(true);
     setFormData({
