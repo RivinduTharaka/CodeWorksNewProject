@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { selectData } from '../../../services/dataService';
 import API_URL from '../../../flieapi';
+import AutoLogin from '../../../services/AutoLogin';
 
 // In-memory cache
 const imageCache = new Map();
@@ -163,6 +164,7 @@ function VendorSlider() {
 
   return (
     <SectionContainer>
+      <AutoLogin />
       <Typography
         variant="h1"
         sx={{
