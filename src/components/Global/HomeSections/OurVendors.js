@@ -119,12 +119,13 @@ const ExploreButton = styled(Button)(({ theme }) => ({
 const carouselSettings = {
   dots: false,
   infinite: true,
-  speed: 2500,
+  speed: 500,
   slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 2000,
   arrows: false,
+  pauseOnHover: false, // Disable pausing on hover
   responsive: [
     {
       breakpoint: 1024,
