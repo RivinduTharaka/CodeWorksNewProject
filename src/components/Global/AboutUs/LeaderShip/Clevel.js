@@ -62,14 +62,6 @@ const designationMap = {
   CEO: { full: 'Chief Executive Officer', shortCode: 'CEO' },
 };
 
-// Fallback data
-const fallbackLeaders = [
-  { id: 'fallback-1', name: 'Shamal Aberathne', designation: 'CMOdd', shortCode: 'CMO', image: leader1Image, linkedin: 'https://linkedin.com/in/johndoe' },
-  { id: 'fallback-2', name: 'Rohan Samaraweera', designation: 'CTO', shortCode: 'CTO', image: leader2Image, linkedin: 'https://linkedin.com/in/janesmith' },
-  { id: 'fallback-3', name: 'Eranga Wickramasinghe', designation: 'CFO', shortCode: 'CFO', image: leader3Image, linkedin: 'https://linkedin.com/in/ravipatel' },
-  { id: 'fallback-4', name: 'Dilshan De Silva', designation: 'COO', shortCode: 'COO', image: leader4Image, linkedin: 'https://linkedin.com/in/annamueller' },
-  { id: 'fallback-5', name: 'Suresh Wijesinghe', designation: 'CEO', shortCode: 'CEO', image: leader5Image, linkedin: 'https://linkedin.com/in/hirotanaka' },
-];
 
 // Styled Components with Responsive Adjustments
 const SectionContainer = styled(Box)(({ theme }) => ({
@@ -295,14 +287,12 @@ const ConnexITBoardLeaders = () => {
         setLeaders(formattedLeaders);
       } else {
         console.log('No leaders found, using fallback');
-        apiCache.set(cacheKey, fallbackLeaders);
-        setLeaders(fallbackLeaders);
+    
       }
     } catch (error) {
       console.error('Failed to fetch leaders data:', error);
       console.log('Error occurred, using fallback');
-      apiCache.set(cacheKey, fallbackLeaders);
-      setLeaders(fallbackLeaders);
+     
     } finally {
       setLoading(false);
     }
