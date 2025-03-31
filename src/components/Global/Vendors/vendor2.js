@@ -7,25 +7,22 @@ import 'slick-carousel/slick/slick-theme.css';
 import { selectData } from '../../../services/dataService';
 import API_URL from '../../../flieapi';
 
-// In-memory cache for images and API responses
+// In-memory cache
 const imageCache = new Map();
 const apiCache = new Map();
 
-// Helper function to construct the full URL for images
+// Construct full image URL
 const constructImageUrl = (filePath) => {
   if (!filePath) return 'https://via.placeholder.com/300x150?text=No+Image';
-  const baseUrl = `${API_URL}`;
   const cleanedFilePath = filePath.replace(/^\/+/, "");
-  const fullUrl = `${baseUrl}/${cleanedFilePath}`;
-  return fullUrl;
+  return `${API_URL}/${cleanedFilePath}`;
 };
 
-// Helper function to fetch image with caching
+// Fetch image with caching
 const fetchImage = async (filePath) => {
   const imageUrl = constructImageUrl(filePath);
-  if (imageCache.has(imageUrl)) {
-    return imageCache.get(imageUrl);
-  }
+  if (imageCache.has(imageUrl)) return imageCache.get(imageUrl);
+
   try {
     const response = await fetch(imageUrl);
     if (response.ok) {
@@ -34,11 +31,9 @@ const fetchImage = async (filePath) => {
       imageCache.set(imageUrl, objectUrl);
       return objectUrl;
     } else {
-      console.error("Failed to fetch image:", response.statusText);
       return 'https://via.placeholder.com/300x150?text=Image+Not+Found';
     }
-  } catch (error) {
-    console.error("Error fetching image:", error);
+  } catch {
     return 'https://via.placeholder.com/300x150?text=Image+Not+Found';
   }
 };
@@ -47,7 +42,6 @@ const fetchImage = async (filePath) => {
 const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
   padding: theme.spacing(4, 0),
-  position: 'relative',
 }));
 
 const SliderContainer = styled(Box)(({ theme }) => ({
@@ -62,8 +56,7 @@ const SliderContainer = styled(Box)(({ theme }) => ({
 
 const VendorImage = styled('img')(({ theme }) => ({
   width: '100%',
-  height: '150px', // Fixed height for all images
-  objectFit: 'contain', // Maintains aspect ratio while fitting within dimensions
+  objectFit: 'contain',
   cursor: 'pointer',
   maxWidth: '300px',
   margin: '0 auto',
@@ -75,104 +68,82 @@ const VendorImage = styled('img')(({ theme }) => ({
   },
 }));
 
-// Slider Settings
-const sliderSettingsRightToLeft = {
+// Dynamic slider settings based on direction and vendor count
+const getSliderSettings = (index, vendorCountInRow) => ({
   dots: false,
-  infinite: true,
+  infinite: vendorCountInRow > 1,
   speed: 10500,
-  slidesToShow: 5,
+  slidesToShow: vendorCountInRow,
   slidesToScroll: 1,
-  autoplay: true,
+  autoplay: vendorCountInRow > 1,
   autoplaySpeed: 0,
   cssEase: 'linear',
-  rtl: true,
+  rtl: index % 2 === 0,
   arrows: false,
   responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 3 } },
-    { breakpoint: 768, settings: { slidesToShow: 2 } },
-    { breakpoint: 480, settings: { slidesToShow: 1 } },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: Math.min(3, vendorCountInRow),
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: Math.min(2, vendorCountInRow),
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
   ],
-};
-
-const sliderSettingsLeftToRight = {
-  dots: false,
-  infinite: true,
-  speed: 10500,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 0,
-  cssEase: 'linear',
-  rtl: false,
-  arrows: false,
-  responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 3 } },
-    { breakpoint: 768, settings: { slidesToShow: 2 } },
-    { breakpoint: 480, settings: { slidesToShow: 1 } },
-  ],
-};
+});
 
 function VendorSlider() {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch vendors from the database
   const fetchVendors = useCallback(async () => {
     setLoading(true);
     const cacheKey = 'vendors_country_3';
 
     if (apiCache.has(cacheKey)) {
-      const cachedData = apiCache.get(cacheKey);
-      console.log('Using cached vendors data:', cachedData);
-      setVendors(cachedData);
+      setVendors(apiCache.get(cacheKey));
       setLoading(false);
       return;
     }
 
     try {
-      // Step 1: Fetch vendor_countries entries for country_id = 3 and is_active = 1
       const vendorCountriesResponse = await selectData('vendor_countries', { country_id: 3, is_active: 1 });
-      console.log('Vendor Countries Response:', vendorCountriesResponse.data);
 
-      if (!vendorCountriesResponse.data || !vendorCountriesResponse.data.length) {
-        console.log('No vendors found for country_id 3');
+      if (!vendorCountriesResponse.data?.length) {
         setVendors([]);
         setLoading(false);
         return;
       }
 
-      // Step 2: Extract unique vendor_ids
       const vendorIds = [...new Set(vendorCountriesResponse.data.map(entry => entry.vendor_id))];
-      console.log('Unique Vendor IDs:', vendorIds);
-
-      // Step 3: Fetch vendors where id is in vendorIds and is_active = 1
       const vendorsResponse = await selectData('vendors', { id: vendorIds, is_active: 1 });
-      console.log('Vendors Response:', vendorsResponse.data);
 
-      if (!vendorsResponse.data || !vendorsResponse.data.length) {
-        console.log('No active vendors found');
+      if (!vendorsResponse.data?.length) {
         setVendors([]);
         setLoading(false);
         return;
       }
 
-      // Step 4: Fetch images in parallel and format vendor data
       const formattedVendors = await Promise.all(
-        vendorsResponse.data.map(async (vendor) => {
-          const imageUrl = await fetchImage(vendor.logo_link);
-          return {
-            id: vendor.id,
-            name: vendor.name,
-            website: vendor.website,
-            logo: imageUrl,
-          };
-        })
+        vendorsResponse.data.map(async (vendor) => ({
+          id: vendor.id,
+          name: vendor.name,
+          website: vendor.website,
+          logo: await fetchImage(vendor.logo_link),
+        }))
       );
 
-      // Step 5: Deduplicate formattedVendors based on id
-      const uniqueVendors = Array.from(new Map(formattedVendors.map(vendor => [vendor.id, vendor])).values());
-      console.log('Formatted Unique Vendors:', uniqueVendors);
-
+      const uniqueVendors = Array.from(new Map(formattedVendors.map(v => [v.id, v])).values());
       apiCache.set(cacheKey, uniqueVendors);
       setVendors(uniqueVendors);
     } catch (error) {
@@ -187,14 +158,8 @@ function VendorSlider() {
     fetchVendors();
   }, [fetchVendors]);
 
-  // Calculate the number of sliders needed (5 vendors per slider)
   const vendorsPerSlider = 5;
   const totalSliders = Math.ceil(vendors.length / vendorsPerSlider);
-
-  // Function to get the slider settings based on index (alternate direction)
-  const getSliderSettings = (index) => {
-    return index % 2 === 0 ? sliderSettingsRightToLeft : sliderSettingsLeftToRight;
-  };
 
   return (
     <SectionContainer>
@@ -208,16 +173,11 @@ function VendorSlider() {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           textAlign: 'center',
-          letterSpacing: '-0.5px',
-          textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          transition: 'all 0.3s ease-in-out',
-          '&:hover': {
-            textShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
-          },
         }}
       >
         Our Vendors
       </Typography>
+
       <Typography
         variant="body1"
         sx={{
@@ -226,8 +186,6 @@ function VendorSlider() {
           fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' },
           textAlign: 'center',
           px: { xs: 2, sm: 0 },
-          fontFamily: 'Lato, sans-serif',
-          lineHeight: 1.8,
           maxWidth: '800px',
           margin: '0 auto',
           position: 'relative',
@@ -240,7 +198,6 @@ function VendorSlider() {
             width: '60px',
             height: '2px',
             background: 'linear-gradient(90deg, #4a4a4a, #1a1a1a)',
-            borderRadius: '2px',
           },
         }}
       >
@@ -264,7 +221,7 @@ function VendorSlider() {
             return (
               <React.Fragment key={sliderIndex}>
                 <SliderContainer>
-                  <Slider {...getSliderSettings(sliderIndex)}>
+                  <Slider {...getSliderSettings(sliderIndex, currentVendors.length)}>
                     {currentVendors.map((vendor, index) => (
                       <Box key={vendor.id} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <VendorImage
