@@ -1,21 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import { selectData } from '../../../services/dataService'; // Assuming this is your API service
+import API_URL from '../../../flieapi'; // Base API URL for image fetching
 
-// Import your vendor images (replace with your actual image paths)
-import Vendor1 from '../../../assets/image/download (1).jpg';
-import Vendor2 from '../../../assets/image/download (2).jpg';
-import Vendor3 from '../../../assets/image/download (3).jpg';
-import Vendor4 from '../../../assets/image/download (4).jpg';
-import Vendor5 from '../../../assets/image/download (5).jpg';
+// In-memory cache for images
+const imageCache = new Map();
+const apiCache = new Map();
 
-// Vendor images array
-const vendors = [Vendor1, Vendor2, Vendor3, Vendor4, Vendor5];
+// Construct full image URL
+const constructImageUrl = (filePath) => {
+  if (!filePath) return 'https://via.placeholder.com/200x100?text=No+Image';
+  const cleanedFilePath = filePath.replace(/^\/+/, '');
+  return `${API_URL}/${cleanedFilePath}`;
+};
+
+// Fetch image with caching
+const fetchImage = async (filePath) => {
+  const imageUrl = constructImageUrl(filePath);
+  if (imageCache.has(imageUrl)) return imageCache.get(imageUrl);
+
+  try {
+    const response = await fetch(imageUrl);
+    if (response.ok) {
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      imageCache.set(imageUrl, objectUrl);
+      return objectUrl;
+    } else {
+      return 'https://via.placeholder.com/200x100?text=Image+Not+Found';
+    }
+  } catch {
+    return 'https://via.placeholder.com/200x100?text=Image+Not+Found';
+  }
+};
 
 // Styled Components
 const SectionContainer = styled(Box)(({ theme }) => ({
@@ -126,6 +149,77 @@ const carouselSettings = {
 
 const OurVendors = () => {
   const navigate = useNavigate(); // Hook for navigation
+  const [vendors, setVendors] = useState([]); // State to store fetched vendors
+  const [loading, setLoading] = useState(true); // State for loading status
+
+  // Fetch vendors from the database
+  const fetchVendors = useCallback(async () => {
+    setLoading(true);
+    const cacheKey = 'vendors_country_3';
+
+    // Check if data is already in cache
+    if (apiCache.has(cacheKey)) {
+      setVendors(apiCache.get(cacheKey));
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Step 1: Fetch vendor IDs for country_id 3 from vendor_countries table
+      const vendorCountriesResponse = await selectData('vendor_countries', {
+        country_id: 3,
+        is_active: 1,
+      });
+
+      if (!vendorCountriesResponse.data?.length) {
+        setVendors([]);
+        setLoading(false);
+        return;
+      }
+
+      // Step 2: Extract unique vendor IDs
+      const vendorIds = [...new Set(vendorCountriesResponse.data.map((entry) => entry.vendor_id))];
+
+      // Step 3: Fetch vendor details from vendors table
+      const vendorsResponse = await selectData('vendors', {
+        id: vendorIds,
+        is_active: 1,
+      });
+
+      if (!vendorsResponse.data?.length) {
+        setVendors([]);
+        setLoading(false);
+        return;
+      }
+
+      // Step 4: Format vendors and fetch their logos
+      const formattedVendors = await Promise.all(
+        vendorsResponse.data.map(async (vendor) => ({
+          id: vendor.id,
+          name: vendor.name,
+          website: vendor.website,
+          logo: await fetchImage(vendor.logo_link), // Fetch image with caching
+        }))
+      );
+
+      // Step 5: Ensure uniqueness of vendors by ID
+      const uniqueVendors = Array.from(new Map(formattedVendors.map((v) => [v.id, v])).values());
+
+      // Step 6: Cache the result and update state
+      apiCache.set(cacheKey, uniqueVendors);
+      setVendors(uniqueVendors);
+    } catch (error) {
+      console.error('Failed to fetch vendors:', error);
+      setVendors([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Fetch vendors on component mount
+  useEffect(() => {
+    fetchVendors();
+  }, [fetchVendors]);
 
   return (
     <SectionContainer>
@@ -138,13 +232,23 @@ const OurVendors = () => {
 
         {/* Vendor Carousel */}
         <CarouselContainer>
-          <Slider {...carouselSettings}>
-            {vendors.map((vendor, index) => (
-              <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <VendorImage src={vendor} alt={`Vendor ${index + 1}`} />
-              </Box>
-            ))}
-          </Slider>
+          {loading ? (
+            <Typography variant="body1" align="center" color="textSecondary">
+              Loading vendors...
+            </Typography>
+          ) : vendors.length === 0 ? (
+            <Typography variant="body1" align="center" color="textSecondary">
+              No vendors available for this country.
+            </Typography>
+          ) : (
+            <Slider {...carouselSettings}>
+              {vendors.map((vendor, index) => (
+                <Box key={vendor.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <VendorImage src={vendor.logo} alt={vendor.name || `Vendor ${index + 1}`} />
+                </Box>
+              ))}
+            </Slider>
+          )}
         </CarouselContainer>
         <div style={{ marginTop: '40px' }}></div>
 
