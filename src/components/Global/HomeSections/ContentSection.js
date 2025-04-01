@@ -25,14 +25,14 @@ const WhoweareSection = ({ ref }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
-    console.log("Step: WhoweareSection - Component mounted, setting up IntersectionObserver");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          console.log("Step: IntersectionObserver - Section is visible");
+          // console.log("Step: IntersectionObserver - Section is visible");
           setIsVisible(true);
         } else {
-          console.log("Step: IntersectionObserver - Section is not visible");
+          // console.log("Step: IntersectionObserver - Section is not visible");
           setIsVisible(false);
         }
       },
@@ -42,31 +42,31 @@ const WhoweareSection = ({ ref }) => {
     );
 
     if (sectionRef.current) {
-      console.log("Step: IntersectionObserver - Observing sectionRef");
+      // console.log("Step: IntersectionObserver - Observing sectionRef");
       observer.observe(sectionRef.current);
     }
 
     return () => {
       if (sectionRef.current) {
-        console.log("Step: IntersectionObserver - Cleaning up observer");
+        // console.log("Step: IntersectionObserver - Cleaning up observer");
         observer.unobserve(sectionRef.current);
       }
     };
   }, []);
 
   useEffect(() => {
-    console.log("Step: WhoweareSection - Fetching stats data for country_id = 3");
+    // console.log("Step: WhoweareSection - Fetching stats data for country_id = 3");
     const fetchStats = async () => {
       setLoading(true);
       setError(null);
       try {
-        console.log("Step: fetchStats - Calling selectData for country_stats");
+        // console.log("Step: fetchStats - Calling selectData for country_stats");
         const response = await selectData('country_stats', { country_id: 3, is_active: 1 });
-        console.log("Step: fetchStats - API response", response);
+        // console.log("Step: fetchStats - API response", response);
 
         if (response.data && response.data.length > 0) {
           const data = response.data[0]; // Assuming one record for country_id = 3
-          console.log("Step: fetchStats - Data received", data);
+          // console.log("Step: fetchStats - Data received", data);
           setStats({
             founded_year: data.founded_year || "2014", // Fallback if null
             partners: data.partners ? `${data.partners}+` : "70+", // Add "+" for display
@@ -75,14 +75,14 @@ const WhoweareSection = ({ ref }) => {
             employees: data.employees ? `${data.employees}+` : "350+",
           });
         } else {
-          console.log("Step: fetchStats - No data found for country_id = 3");
+          // console.log("Step: fetchStats - No data found for country_id = 3");
           setError("No stats found for this country.");
         }
       } catch (err) {
-        console.log("Step: fetchStats - Error fetching data", err);
+        // console.log("Step: fetchStats - Error fetching data", err);
         setError("Failed to fetch stats. Using default values.");
       } finally {
-        console.log("Step: fetchStats - Fetching complete, setting loading to false");
+        // console.log("Step: fetchStats - Fetching complete, setting loading to false");
         setLoading(false);
       }
     };
