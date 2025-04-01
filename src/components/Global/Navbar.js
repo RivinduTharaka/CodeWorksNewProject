@@ -825,7 +825,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/careers">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/">
                       Careers
                     </FuturisticMenuItem>
                   </FuturisticMenu>

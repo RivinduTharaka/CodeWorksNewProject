@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Typography, TextField, Checkbox, Button, FormControlLabel, Grid } from '@mui/material';
 import Swal from 'sweetalert2'; // Import SweetAlert2
 import ReCAPTCHA from 'react-google-recaptcha'; // Import reCAPTCHA
+import AutoLogin from '../../../services/AutoLogin'; // Adjust the import path as necessary
+import { insertData } from '../../../services/dataService';
+// import { toast } from 'react-toastify'; 
 
 function Contact2() {
   // State for form data
@@ -10,11 +13,11 @@ function Contact2() {
     lastName: '',
     email: '',
     company: '',
-    country: '',
-    contactNumber: '', // Added Contact Number field
+    country_name: '',
+    contactNumber: '',
     message: '',
     privacyAccepted: false,
-    recaptchaToken: null, // Store reCAPTCHA token
+    recaptchaToken: null,
   });
 
   // State for validation errors
@@ -60,8 +63,8 @@ function Contact2() {
     if (!formData.company.trim()) {
       newErrors.company = 'Company name is required';
     }
-    if (!formData.country.trim()) {
-      newErrors.country = 'Country is required';
+    if (!formData.country_name.trim()) { // Changed from country to country_name
+      newErrors.country_name = 'Country is required'; // Updated key to match formData
     }
     if (!formData.contactNumber.trim()) {
       newErrors.contactNumber = 'Contact number is required';
@@ -113,56 +116,70 @@ function Contact2() {
     });
 
     try {
-      // Simulate API call (replace with actual API call to your database)
-      const response = await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          // Simulate success (80% chance) or failure (20% chance)
-          const isSuccess = Math.random() > 0.2;
-          if (isSuccess) {
-            resolve({ success: true });
-          } else {
-            reject(new Error('Submission failed'));
-          }
-        }, 2000); // Simulate 2-second delay
-      });
+      // Prepare data for database insertion
+      const messageData = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email_address: formData.email,
+        company: formData.company,
+        country_id: 3, // Set to 3 for the global site
+        contact_number: formData.contactNumber,
+        message: formData.message,
+        country_name: formData.country_name,
+      };
+
+      // Insert data into the database
+      await insertData('messages', messageData);
 
       // Close the loading alert
       Swal.close();
 
       // Show success alert
-      if (response.success) {
-        Swal.fire({
-          title: "Success!",
-          text: "Your details have been successfully submitted!",
-          icon: "success",
-          draggable: true,
-        });
+      Swal.fire({
+        title: "Success!",
+        text: "Your details have been successfully submitted!",
+        icon: "success",
+        draggable: true,
+      });
 
-        // Reset form after successful submission
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          company: '',
-          country: '',
-          contactNumber: '', // Reset Contact Number
-          message: '',
-          privacyAccepted: false,
-          recaptchaToken: null,
-        });
-        setErrors({});
-      }
+      // Optionally show a toast notification
+      // toast.success('Contact form submitted successfully!');
+
+      // Reset form after successful submission
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        company: '',
+        country_name: '',
+        contactNumber: '',
+        message: '',
+        privacyAccepted: false,
+        recaptchaToken: null,
+      });
+      setErrors({});
     } catch (error) {
       // Close the loading alert
       Swal.close();
 
       // Show failure alert
-      alert('Failed to submit the form.');
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to submit the form. Please try again later.",
+        icon: "error",
+        draggable: true,
+      });
+
+      // Optionally show a toast notification
+      // toast.error('Failed to submit the form.');
+      console.error('Error submitting form:', error);
     }
   };
 
   return (
     <div className="contact-container">
+      <AutoLogin />
+
       <div className="contact-row">
         {/* Left Column */}
         <div className="contact-column">
@@ -177,8 +194,9 @@ function Contact2() {
               mb: 2,
             }}
           >
-            Let us know how we can assist you
-          </Typography> 
+            Your needs, our expertise
+            Let’s connect!
+          </Typography>
           <Typography
             variant="body1"
             sx={{
@@ -190,7 +208,8 @@ function Contact2() {
               mb: 4,
             }}
           >
-            Whether you need a quote, advice, want to become a partner, or want to take advantage of our global services, we are here to help.
+            Need a solution? We’ve got you covered! Connect with us, and let’s innovate, integrate, and
+            elevate your success together.
           </Typography>
         </div>
 
@@ -298,14 +317,14 @@ function Contact2() {
               <Grid item xs={12} md={6}>
                 <TextField
                   label="Country*"
-                  name="country"
-                  value={formData.country}
+                  name="country_name"
+                  value={formData.country_name}
                   onChange={handleChange}
                   variant="outlined"
                   fullWidth
                   required
-                  error={!!errors.country}
-                  helperText={errors.country}
+                  error={!!errors.country_name} // Updated to country_name
+                  helperText={errors.country_name} // Updated to country_name
                   sx={{
                     '& .MuiInputBase-input': { color: '#0D47A1' },
                     '& .MuiInputLabel-root': { color: '#006400' },

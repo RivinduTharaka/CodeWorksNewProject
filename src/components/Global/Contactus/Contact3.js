@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 // Import your map image (adjust the path/name as needed)
 import MapImage from '../../../assets/image/map.png'; // Add your map image file
+import AutoLogin from '../../../services/AutoLogin'; // Adjust the import path as necessary
 
 function Contact3() {
     return (
@@ -19,6 +20,8 @@ function Contact3() {
                 paddingRight: { xs: 0, md: 20 }, // No padding on mobile, padding on desktop
             }}
         >
+        <AutoLogin/>
+
             {/* Left Column - 30% width */}
             <Box
                 sx={{
