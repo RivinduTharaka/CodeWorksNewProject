@@ -63,7 +63,6 @@ const countries = [
   { name: "Thailand", flag: thailandFlag, route: "/th" },
   { name: "UAE", flag: uaeFlag, route: "/uae" },
   { name: "Bhutan", flag: bhutanFlag, route: "/bt" },
-
 ];
 
 // Define Futuristic Theme
@@ -275,13 +274,11 @@ const Navbar = () => {
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [eventsAnchorEl, setEventsAnchorEl] = useState(null);
   const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
-  const [newsAnchorEl, setNewsAnchorEl] = useState(null);
   const [countryAnchorEl, setCountryAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [countriesSubmenuOpen, setCountriesSubmenuOpen] = useState(false);
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
   const [servicesSubmenuOpen, setServicesSubmenuOpen] = useState(false);
-  const [newsSubmenuOpen, setNewsSubmenuOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   
@@ -339,10 +336,6 @@ const Navbar = () => {
   const handleServicesHover = (event) => setServicesAnchorEl(event.currentTarget);
   const handleServicesClose = () => setServicesAnchorEl(null);
   const handleServicesClick = (event) => setServicesAnchorEl(event.currentTarget);
-
-  const handleNewsHover = (event) => setNewsAnchorEl(event.currentTarget);
-  const handleNewsClose = () => setNewsAnchorEl(null);
-  const handleNewsClick = (event) => setNewsAnchorEl(event.currentTarget);
 
   const handleCountryHover = (event) => setCountryAnchorEl(event.currentTarget);
   const handleCountryClose = () => setCountryAnchorEl(null);
@@ -434,7 +427,7 @@ const Navbar = () => {
                                 primary="Events & Webinars"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/workshops'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/workshops' || location.pathname === '/blog' || location.pathname === '/press-&-media'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -459,6 +452,22 @@ const Navbar = () => {
                                 onClick={() => setDrawerOpen(false)}
                               >
                                 <ListItemText primary="Workshops" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/blog"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="Blogs" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="Press & Media" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
                             </List>
                           </Collapse>
@@ -518,42 +527,6 @@ const Navbar = () => {
 
                           <ListItem
                             button
-                            onClick={() => setNewsSubmenuOpen(!newsSubmenuOpen)}
-                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                          >
-                            <ListItemText
-                              primary="News"
-                              primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
-                            />
-                            {newsSubmenuOpen ? (
-                              <ExpandLess sx={{ color: "#00D4FF" }} />
-                            ) : (
-                              <ExpandMore sx={{ color: "#00D4FF" }} />
-                            )}
-                          </ListItem>
-                          <Collapse in={newsSubmenuOpen} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                              <ListItem
-                                component={Link}
-                                to="/blog"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Blogs" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem
-                                component={Link}
-                                to="/blog"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Press & Media" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                            </List>
-                          </Collapse>
-
-                          <ListItem
-                            button
                             onClick={() => setAboutSubmenuOpen(!aboutSubmenuOpen)}
                             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                           >
@@ -577,7 +550,6 @@ const Navbar = () => {
                               >
                                 <ListItemText primary="About Us" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
-                              
                               <ListItem
                                 component={Link}
                                 to="/global-coverage"
@@ -693,7 +665,7 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/events" || location.pathname === "/workshops"}
+                    active={location.pathname === "/events" || location.pathname === "/workshops" || location.pathname === "/blog" || location.pathname === "/press-&-media"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -709,7 +681,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/workshops"} />
+                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/workshops" || location.pathname === "/blog" || location.pathname === "/press-&-media"} />
                     </Box>
                   </DropdownButton>
 
@@ -728,6 +700,12 @@ const Navbar = () => {
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
                       Workshops
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/blog">
+                      Blogs
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
+                      Press & Media
                     </FuturisticMenuItem>
                   </FuturisticMenu>
                 </div>
@@ -791,51 +769,6 @@ const Navbar = () => {
                 </div>
 
                 <div
-                  onMouseEnter={handleNewsHover}
-                  onMouseLeave={handleNewsClose}
-                  style={{ position: "relative" }}
-                >
-                  <DropdownButton
-                    active={location.pathname === "/blog" || location.pathname === "/"}
-                    isTargetPage={isTargetPage}
-                    isScrolled={isScrolled}
-                    isOpen={Boolean(newsAnchorEl)}
-                    onClick={handleNewsClick}
-                  >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-                        News
-                        <ExpandMore
-                          sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
-                            textShadow: "0 0 5px #00D4FF",
-                          }}
-                        />
-                      </Box>
-                      <NeonHoverEffect active={location.pathname === "/blog" || location.pathname === "/blog"} />
-                    </Box>
-                  </DropdownButton>
-
-                  <FuturisticMenu
-                    id="news-menu"
-                    anchorEl={newsAnchorEl}
-                    keepMounted
-                    open={Boolean(newsAnchorEl)}
-                    onClose={handleNewsClose}
-                    disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
-                  >
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/blog">
-                      Blogs
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleNewsClose} component={Link} to="/">
-                      Press & Media
-                    </FuturisticMenuItem>
-                  </FuturisticMenu>
-                </div>
-
-                <div
                   onMouseEnter={handleAboutHover}
                   onMouseLeave={handleAboutClose}
                   style={{ position: "relative" }}
@@ -843,10 +776,9 @@ const Navbar = () => {
                   <DropdownButton
                     active={
                       location.pathname === "/about" ||
-              
                       location.pathname === "/global-coverage" ||
                       location.pathname === "/leadership" ||
-                      location.pathname === "/"
+                      location.pathname === "/careers"
                     }
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
@@ -866,7 +798,6 @@ const Navbar = () => {
                       <NeonHoverEffect
                         active={
                           location.pathname === "/about" ||
-                        
                           location.pathname === "/global-coverage" ||
                           location.pathname === "/leadership" ||
                           location.pathname === "/careers"
@@ -888,14 +819,13 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/about">
                       About Us
                     </FuturisticMenuItem>
-                   
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/global-coverage">
                       Global Coverage
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/careers">
                       Careers
                     </FuturisticMenuItem>
                   </FuturisticMenu>

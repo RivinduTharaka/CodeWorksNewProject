@@ -247,6 +247,7 @@ function EventsNews2() {
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Grid container spacing={4} justifyContent="center">
+          
           {loading ? (
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
               Loading events...
