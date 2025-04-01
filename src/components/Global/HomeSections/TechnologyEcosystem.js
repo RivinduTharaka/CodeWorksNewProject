@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
 import CNXBackgropund from '../../../assets/video/CNXBackgropund.mp4';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom'; // Add this import
 
 // Scroll Animation Variants
 const fadeInVariants = {
@@ -112,6 +113,11 @@ const TrainButton = styled(motion(Button))(({ theme }) => ({
 const TechnologyEcosystem = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate(); // Add this hook
+
+  const handleUpskillClick = () => {
+    navigate('/trainings'); // Navigate to the trainings page
+  };
 
   return (
     <SectionContainer>
@@ -150,6 +156,7 @@ const TechnologyEcosystem = () => {
               whileHover="hover"
               whileTap="tap"
               viewport={{ once: true }}
+              onClick={handleUpskillClick} // Add the onClick handler
             >
               Upskill Today
             </TrainButton>
