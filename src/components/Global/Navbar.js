@@ -62,7 +62,7 @@ const countries = [
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
   { name: "Thailand", flag: thailandFlag, route: "/th" },
   { name: "UAE", flag: uaeFlag, route: "/uae" },
-  { name: "Bhutan", flag: bhutanFlag, route: "/bt" },
+  
 ];
 
 // Define Futuristic Theme
