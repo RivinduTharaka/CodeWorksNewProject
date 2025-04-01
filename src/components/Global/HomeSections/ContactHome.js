@@ -63,8 +63,8 @@ function ContactHome() {
     if (!formData.company.trim()) {
       newErrors.company = 'Company name is required';
     }
-    if (!formData.country_name.trim()) { // Changed from country to country_name
-      newErrors.country_name = 'Country is required'; // Updated key to match formData
+    if (!formData.country_name.trim()) {
+      newErrors.country_name = 'Country is required';
     }
     if (!formData.contactNumber.trim()) {
       newErrors.contactNumber = 'Contact number is required';
@@ -323,8 +323,8 @@ function ContactHome() {
                   variant="outlined"
                   fullWidth
                   required
-                  error={!!errors.country_name} // Updated to country_name
-                  helperText={errors.country_name} // Updated to country_name
+                  error={!!errors.country_name}
+                  helperText={errors.country_name}
                   sx={{
                     '& .MuiInputBase-input': { color: '#0D47A1' },
                     '& .MuiInputLabel-root': { color: '#006400' },
@@ -426,16 +426,16 @@ function ContactHome() {
                 <Button
                   type="submit"
                   sx={{
-                    background: '#0c4a93',
+                    background: 'linear-gradient(45deg, #24b24c, #1a9fd9)', // Updated background
                     color: '#ffffff',
-                    padding: '12px 40px',
-                    fontSize: '1rem',
+                    padding: '5px 35px',
+                    fontSize: '1.2rem',
                     fontWeight: 600,
                     borderRadius: '4px',
                     textTransform: 'none',
                     fontFamily: 'Poppins, sans-serif',
                     '&:hover': {
-                      background: '#1B0EA2',
+                      background: 'linear-gradient(45deg, #1a9fd9, #24b24c)', // Optional: Reverse gradient on hover
                     },
                   }}
                 >
