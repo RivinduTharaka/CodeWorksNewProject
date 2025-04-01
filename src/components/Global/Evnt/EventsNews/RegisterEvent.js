@@ -527,7 +527,7 @@ function RegisterEvent() {
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
-                        placeholder="Enter your city"
+                        placeholder="Enter your city" 
                         required
                         error={!!formErrors.city}
                         helperText={formErrors.city}

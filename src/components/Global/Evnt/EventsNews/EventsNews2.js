@@ -173,10 +173,10 @@ function EventsNews2() {
   const [loading, setLoading] = useState(true); // State for loading status
   const navigate = useNavigate();
 
-  // Fetch events from the database
+  // Fetch events from the database for country_id = 3
   const fetchEvents = useCallback(async () => {
     setLoading(true);
-    const cacheKey = 'events';
+    const cacheKey = 'events_country_3'; // Cache key for country-specific data
 
     // Check if data is already in cache
     if (apiCache.has(cacheKey)) {
@@ -186,8 +186,24 @@ function EventsNews2() {
     }
 
     try {
-      // Fetch events where is_active is true
+      // Step 1: Fetch event_ids from event_countries where country_id = 3 and is_active = true
+      const eventCountriesResponse = await selectData('event_countries', {
+        country_id: 3,
+        is_active: true,
+      });
+
+      if (!eventCountriesResponse.data?.length) {
+        setEvents([]);
+        setLoading(false);
+        return;
+      }
+
+      // Step 2: Extract event_ids
+      const eventIds = eventCountriesResponse.data.map((entry) => entry.event_id);
+
+      // Step 3: Fetch events from the events table where id is in eventIds and is_active = true
       const eventsResponse = await selectData('events', {
+        id: eventIds, // Filter events by the list of event_ids
         is_active: true,
       });
 
@@ -197,7 +213,7 @@ function EventsNews2() {
         return;
       }
 
-      // Format the events and fetch their images
+      // Step 4: Format the events and fetch their images
       const formattedEvents = await Promise.all(
         eventsResponse.data.map(async (event) => ({
           id: event.id,
@@ -215,6 +231,7 @@ function EventsNews2() {
       apiCache.set(cacheKey, formattedEvents);
       setEvents(formattedEvents);
     } catch (error) {
+      console.error('Failed to fetch events:', error);
       setEvents([]);
     } finally {
       setLoading(false);
@@ -247,7 +264,6 @@ function EventsNews2() {
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Grid container spacing={4} justifyContent="center">
-          
           {loading ? (
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
               Loading events...
@@ -284,7 +300,7 @@ function EventsNews2() {
             ))
           ) : (
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-              No events available at this time.
+              No events available for this country.
             </Typography>
           )}
         </Grid>
