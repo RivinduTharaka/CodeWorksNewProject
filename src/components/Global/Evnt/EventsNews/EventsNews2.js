@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { selectData } from '../../../../services/dataService'; // Assuming this is your API service
 import API_URL from '../../../../flieapi'; // Base API URL for image fetching
 import arrowImage from '../../../../assets/image/down-arrow.png';
+import AutoLogin from '../../../../services/AutoLogin';
 
 // In-memory cache for images and API data
 const imageCache = new Map();
@@ -249,6 +250,7 @@ function EventsNews2() {
 
   return (
     <ThemeProvider theme={theme}>
+      <AutoLogin /> {/* Auto-login component */}
       <HeroSection>
         <Container maxWidth="lg">
           <Title variant="h1">Events at Connex Information Technologies</Title>

@@ -15,8 +15,8 @@ import {
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
-import ReactCountryFlag from 'react-country-flag'; // Import for country flags
-import { insertData } from '../../../../services/dataService'; // Import the insertData function
+import ReactCountryFlag from 'react-country-flag';
+import { insertData } from '../../../../services/dataService';
 
 // Reuse the same theme with premium adjustments
 const theme = createTheme({
@@ -74,6 +74,7 @@ const countries = [
 
 // Function to insert registration data into the database
 const submitToDatabase = async (data) => {
+  console.log('Step: submitToDatabase - Preparing registration data', data);
   try {
     const registrationData = {
       title: data.title,
@@ -83,7 +84,7 @@ const submitToDatabase = async (data) => {
       email: data.email,
       country_code: data.countryCode,
       contact_number: data.contactNumber,
-      country_id: countries.find((country) => country.name === data.country)?.code || 'US', // Map country name to country_id (code)
+      country_id: 3, // Hardcoded to 3 for global events
       city: data.city,
       event_id: data.eventId,
       attendance_timestamp: null, // Default value as per the table
@@ -92,21 +93,31 @@ const submitToDatabase = async (data) => {
       updated_at: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current timestamp in MySQL format
     };
 
+    console.log('Step: submitToDatabase - Registration data prepared', registrationData);
+
     const response = await insertData('event_registrations', registrationData);
+    console.log('Step: submitToDatabase - API response', response);
+
     if (response.message === 'Data inserted successfully') {
+      console.log('Step: submitToDatabase - Success');
       return { success: true, message: 'Registration successful!' };
     } else {
+      console.log('Step: submitToDatabase - Failed with response message', response.message);
       throw new Error('Failed to register. Please try again.');
     }
   } catch (error) {
+    console.log('Step: submitToDatabase - Error occurred', error.message);
     return { success: false, message: error.message };
   }
 };
 
 function RegisterEvent() {
-  const { id } = useParams();
+  const { id } = useParams(); // Get the event ID from the URL
   const location = useLocation();
-  const event = location.state?.event;
+  const event = location.state?.event; // Event data passed via state
+
+  console.log('Step: RegisterEvent - Component mounted with event ID', id);
+  console.log('Step: RegisterEvent - Event data from location.state', event);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -124,31 +135,35 @@ function RegisterEvent() {
   const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
+    console.log('Step: useEffect - Scrolling to top');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    console.log('Step: handleChange - Input changed', { name, value });
+
     if (name === 'countryCode') {
-      // Find the first country that matches the selected country code
       const selectedCountry = countries.find((country) => country.dialCode === value);
+      console.log('Step: handleChange - Country code selected, updating country', selectedCountry);
       setFormData((prev) => ({
         ...prev,
         countryCode: value,
-        country: selectedCountry ? selectedCountry.name : prev.country, // Update country if found
+        country: selectedCountry ? selectedCountry.name : prev.country,
       }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear error for the field being edited
     if (formErrors[name]) {
+      console.log('Step: handleChange - Clearing error for field', name);
       setFormErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
 
   const validateForm = () => {
+    console.log('Step: validateForm - Starting form validation');
     const errors = {};
     if (!formData.title) errors.title = 'Title is required';
     if (!formData.name) errors.name = 'Name is required';
@@ -171,30 +186,44 @@ function RegisterEvent() {
     if (!formData.country) errors.country = 'Country is required';
     if (!formData.city) errors.city = 'City is required';
 
+    console.log('Step: validateForm - Validation errors', errors);
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
   const handleContactNumberChange = (e) => {
     const { name, value } = e.target;
-    // Only allow numeric input
+    console.log('Step: handleContactNumberChange - Contact number input', { name, value });
+
     if (/^\d*$/.test(value)) {
+      console.log('Step: handleContactNumberChange - Valid numeric input, updating state');
       setFormData((prev) => ({ ...prev, [name]: value }));
       if (formErrors[name]) {
+        console.log('Step: handleContactNumberChange - Clearing error for contact number');
         setFormErrors((prev) => ({ ...prev, [name]: '' }));
       }
+    } else {
+      console.log('Step: handleContactNumberChange - Invalid input, not numeric');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Step: handleSubmit - Form submitted', formData);
 
-    if (!validateForm()) {
+    const isValid = validateForm();
+    console.log('Step: handleSubmit - Form validation result', isValid);
+
+    if (!isValid) {
+      console.log('Step: handleSubmit - Form validation failed, stopping submission');
       return;
     }
 
-    if (event.remainingSeats === '0' || event.remainingSeats === 'Unlimited') {
-      if (event.remainingSeats !== 'Unlimited') {
+    // Check for remaining seats
+    console.log('Step: handleSubmit - Checking remaining seats', event.remaining_seats);
+    if (event.remaining_seats === '0' || event.remaining_seats === 'Unlimited') {
+      if (event.remaining_seats !== 'Unlimited') {
+        console.log('Step: handleSubmit - No seats available, showing error');
         await Swal.fire({
           icon: 'error',
           title: 'No Seats are currently available',
@@ -209,8 +238,11 @@ function RegisterEvent() {
         });
         return;
       }
+      console.log('Step: handleSubmit - Unlimited seats, proceeding');
     }
 
+    // Show loading alert
+    console.log('Step: handleSubmit - Showing loading alert');
     await Swal.fire({
       icon: 'info',
       title: 'Submitting...',
@@ -227,8 +259,11 @@ function RegisterEvent() {
     });
 
     try {
+      console.log('Step: handleSubmit - Submitting to database');
       const response = await submitToDatabase({ ...formData, eventId: id });
+      console.log('Step: handleSubmit - Database submission response', response);
 
+      console.log('Step: handleSubmit - Showing response alert');
       await Swal.fire({
         icon: response.success ? 'success' : 'error',
         title: response.success ? 'Success!' : 'Error!',
@@ -245,6 +280,7 @@ function RegisterEvent() {
       });
 
       if (response.success) {
+        console.log('Step: handleSubmit - Registration successful, resetting form');
         setFormData({
           title: '',
           name: '',
@@ -256,9 +292,11 @@ function RegisterEvent() {
           country: 'United States',
           city: '',
         });
+        console.log('Step: handleSubmit - Reloading page');
         window.location.reload();
       }
     } catch (error) {
+      console.log('Step: handleSubmit - Unexpected error during submission', error);
       await Swal.fire({
         icon: 'error',
         title: 'Error!',
@@ -275,6 +313,7 @@ function RegisterEvent() {
   };
 
   if (!event) {
+    console.log('Step: RegisterEvent - Event not found, rendering error message');
     return (
       <Container sx={{ py: 12 }}>
         <Typography variant="h6" sx={{ textAlign: 'center', mt: 5, color: theme.palette.text.secondary }}>
@@ -284,6 +323,7 @@ function RegisterEvent() {
     );
   }
 
+  console.log('Step: RegisterEvent - Rendering form with event data', event);
   return (
     <ThemeProvider theme={theme}>
       <Container sx={{ py: 15, background: 'linear-gradient(180deg, #F5F6FA 0%, #FFFFFF 100%)' }}>
@@ -345,7 +385,7 @@ function RegisterEvent() {
                     <strong>Mode:</strong> {event.mode}
                   </Typography>
                   <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
-                    <strong>Remaining Seats:</strong> {event.remainingSeats}
+                    <strong>Remaining Seats:</strong> {event.remaining_seats}
                   </Typography>
                 </Box>
               </motion.div>
@@ -527,7 +567,7 @@ function RegisterEvent() {
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
-                        placeholder="Enter your city" 
+                        placeholder="Enter your city"
                         required
                         error={!!formErrors.city}
                         helperText={formErrors.city}
