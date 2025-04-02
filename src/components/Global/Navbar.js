@@ -409,7 +409,7 @@ const Navbar = () => {
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
-                          <ListItem component={Link} to="/services" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -443,7 +443,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/webinars"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -459,7 +459,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/press-&-media"
+                                to="/"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -612,8 +612,8 @@ const Navbar = () => {
 
                 <FuturisticButton
                   component={Link}
-                  to="/services"
-                  active={location.pathname === "/services"}
+                  to="/"
+                  active={location.pathname === "/"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}
                 >
@@ -660,13 +660,13 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
                       Events
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/webinars">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
                       Webinars
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/trainings">
                       Workshops & Trainings
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/press-&-media">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
                       News & Press Media
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/blog">
