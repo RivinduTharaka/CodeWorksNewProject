@@ -30,23 +30,23 @@ const Solutions = forwardRef((_, ref) => {
     >
       <Container maxWidth="lg" sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, flexWrap: "wrap" }}>
         {/* Left Content */}
-        <Box sx={{ flex: 1, minWidth: 300 }}>
+        <Box sx={{ flex: 1, minWidth: 260 }}>
           <Typography
             variant={isMobile ? "h4" : "h1"}
             sx={{
-              fontSize: { xs: "2.5rem", md: "3.5rem" },
+              fontSize: { xs: "2.2rem", md: "3.5rem" },
               fontWeight: "bold",
               lineHeight: 1.2,
               color: "white",
             }}
           >
             A value-driven  <br /> global leader in <br />
-            <span style={{ color: "#000000" }}>technology ecosystem</span>
+            <span style={{ color: "rgb(78, 233, 58)" }}>technology ecosystem</span>
           </Typography>
         </Box>
 
         {/* Right Content */}
-        <Box sx={{ flex: 1, minWidth: 300 }}>
+        <Box sx={{ flex: 1, minWidth: 280 }}>
           <Typography
             variant={isMobile ? "body2" : "body1"}
             sx={{
