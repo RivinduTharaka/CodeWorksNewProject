@@ -128,22 +128,22 @@ const LeaderCard = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     width: '200px', // Fixed width for mobile
-    height: '280px', // Fixed height for mobile
+    height: '300px', // Fixed height for mobile
   },
 }));
 
 const LeaderImage = styled(Avatar)(({ theme }) => ({
   width: '100%',
-  height: '45%',
+  height: '50%',
   objectFit: 'cover',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
   borderBottom: '1px solid rgba(13, 71, 161, 0.1)',
   [theme.breakpoints.down('md')]: {
-    height: '40%',
+    height: '50%',
   },
   [theme.breakpoints.down('sm')]: {
-    height: '35%',
+    height: '55%',
   },
 }));
 

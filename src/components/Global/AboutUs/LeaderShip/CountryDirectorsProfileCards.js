@@ -57,13 +57,17 @@ const fetchImage = async (filePath, fallbackImage) => {
   }
 };
 
-// Styled Components (unchanged)
+// Styled Components (updated to keep fixed height for cards)
 const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
   padding: theme.spacing(8, 0),
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(4, 0),
+    minHeight: 'auto',
+  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -89,6 +93,7 @@ const Description = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(6),
   [theme.breakpoints.down('sm')]: {
     fontSize: '1rem',
+    marginBottom: theme.spacing(3),
   },
 }));
 
@@ -97,8 +102,8 @@ const DirectorCard = styled(Box)(({ theme }) => ({
   cursor: 'pointer',
   borderRadius: '16px',
   overflow: 'hidden',
-  height: '400px',
-  width: '250px',
+  height: '400px', // Fixed height for all screen sizes
+  width: '250px', // Fixed width, but we'll adjust width for smaller screens
   transition: 'all 0.4s ease-in-out',
   border: '1px solid rgba(13, 71, 161, 0.2)',
   background: 'linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%)',
@@ -106,11 +111,17 @@ const DirectorCard = styled(Box)(({ theme }) => ({
     transform: 'translateY(-6px) scale(1.02)',
     borderColor: theme.palette.primary.main,
   },
+  [theme.breakpoints.down('md')]: {
+    width: '220px', // Adjust width for tablets
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '200px', // Adjust width for mobile
+  },
 }));
 
 const DirectorImage = styled(Avatar)(({ theme }) => ({
   width: '100%',
-  height: '200px',
+  height: '200px', // Fixed height for all screen sizes
   objectFit: 'cover',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
@@ -129,6 +140,10 @@ const CountryFlag = styled(Avatar)(({ theme }) => ({
     '25%': { transform: 'rotate(2deg)' },
     '75%': { transform: 'rotate(-2deg)' },
   },
+  [theme.breakpoints.down('sm')]: {
+    width: '32px',
+    height: '24px',
+  },
 }));
 
 const LinkedInIconButton = styled(IconButton)(({ theme }) => ({
@@ -143,6 +158,11 @@ const LinkedInIconButton = styled(IconButton)(({ theme }) => ({
   '&:hover': {
     backgroundColor: '#0288D1',
   },
+  [theme.breakpoints.down('sm')]: {
+    top: '8px',
+    right: '8px',
+    padding: theme.spacing(0.4),
+  },
 }));
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
@@ -155,60 +175,75 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
   '& .slick-list': {
     margin: theme.spacing(0, -1),
   },
+  [theme.breakpoints.down('md')]: {
+    '& .slick-slide': {
+      padding: theme.spacing(0, 0.5),
+    },
+    '& .slick-list': {
+      margin: theme.spacing(0, -0.5),
+    },
+  },
+  [theme.breakpoints.down('sm')]: {
+    '& .slick-slide': {
+      padding: theme.spacing(0, 0.3),
+    },
+    '& .slick-list': {
+      margin: theme.spacing(0, -0.3),
+    },
+  },
 }));
 
-// Slider settings
-// Slider settings (updated for faster autoplay)
-const sliderSettings = {
-  infinite: true,
-  autoplay: true, // <-- Enable autoplay
-  speed: 300, // <-- Speed of transition (ms)
-  slidesToShow: 4,
+// Slider settings (unchanged from previous modification)
+const getSliderSettings = (itemCount) => ({
+  infinite: itemCount > 1,
+  speed: 1700,
+  slidesToShow: Math.min(itemCount, 4),
   slidesToScroll: 1,
-  autoplaySpeed: 1500, // <-- Time between transitions (ms)
+  autoplay: itemCount > 1,
+  autoplaySpeed: 1500,
   arrows: false,
-  centerPadding: '0px',
+  centerMode: true,
+  centerPadding: '10px',
   responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: Math.min(itemCount, 3),
+        centerPadding: '20px',
+      },
+    },
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 2,
-        centerPadding: '0px',
+        slidesToShow: Math.min(itemCount, 2),
+        centerPadding: '15px',
       },
     },
     {
       breakpoint: 768,
       settings: {
         slidesToShow: 1,
-        centerPadding: '0px',
+        centerPadding: '10px',
       },
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
-        centerPadding: '0px',
+        centerPadding: '5px',
       },
     },
   ],
-};
-
-
-// Fallback data
-// const fallbackDirectors = [
-//   { name: 'Shamal Aberathne', designation: 'Country Director', country: 'USA', image: director1Image, countryFlag: usaFlag, linkedin: 'https://linkedin.com/in/johndoe' },
-// ];
+});
 
 const CountryDirectorsProfileCards = () => {
   const [directors, setDirectors] = useState([]);
-  const [countriesMap, setCountriesMap] = useState({}); // Map of country_id to country name
+  const [countriesMap, setCountriesMap] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // Fetch countries data to create a mapping of country_id to name
   const fetchCountriesData = useCallback(async () => {
     const cacheKey = 'countries_data';
 
-    // Check if the data is already in the cache
     if (apiCache.has(cacheKey)) {
       const cachedData = apiCache.get(cacheKey);
       console.log('Using cached countries data:', cachedData);
@@ -216,14 +251,12 @@ const CountryDirectorsProfileCards = () => {
     }
 
     try {
-      // Fetch all countries (filtering for is_active: 1 to match the database)
       const response = await selectData('countries', { is_active: 1 });
       console.log('Countries API Response:', response);
 
       if (response.data && response.data.length > 0) {
-        // Create a mapping of country_id to name
         const countryMap = response.data.reduce((map, country) => {
-          map[country.id] = country.name; // Use 'name' as per the countries table
+          map[country.id] = country.name;
           return map;
         }, {});
         apiCache.set(cacheKey, countryMap);
@@ -242,11 +275,9 @@ const CountryDirectorsProfileCards = () => {
     setLoading(true);
     const cacheKey = 'directors_data';
 
-    // Fetch countries data first
     const countryMap = await fetchCountriesData();
     setCountriesMap(countryMap);
 
-    // Check if the directors data is already in the cache
     if (apiCache.has(cacheKey)) {
       const cachedData = apiCache.get(cacheKey);
       console.log('Using cached directors data:', cachedData);
@@ -256,24 +287,21 @@ const CountryDirectorsProfileCards = () => {
     }
 
     try {
-      // Fetch data from the 'directors' table where is_active is true
       const response = await selectData('directors', { is_active: 1 });
       console.log('Directors API Response:', response);
 
-      // Check if data exists
       if (response.data && response.data.length > 0) {
         const formattedDirectors = await Promise.all(
           response.data.map(async (director) => {
             const directorImageUrl = await fetchImage(director.director_image, director1Image);
             const countryFlagUrl = await fetchImage(director.country_flag_image, usaFlag);
 
-            // Map country_id to country name using the countryMap
             const countryName = countryMap[director.country_id] || 'Unknown Country';
 
             return {
               name: director.director_name || 'Unknown Director',
               designation: director.director_designation || 'Country Director',
-              country: countryName, // Use the country name instead of country_id
+              country: countryName,
               image: directorImageUrl,
               countryFlag: countryFlagUrl,
               linkedin: director.linkedin_link || 'https://linkedin.com',
@@ -286,14 +314,10 @@ const CountryDirectorsProfileCards = () => {
         setDirectors(formattedDirectors);
       } else {
         console.log('No directors found, using fallback');
-        // apiCache.set(cacheKey, fallbackDirectors);
-        // setDirectors(fallbackDirectors);
       }
     } catch (error) {
       console.error('Failed to fetch directors data:', error);
       console.log('Error occurred, using fallback');
-      // apiCache.set(cacheKey, fallbackDirectors); 
-      // setDirectors(fallbackDirectors);
     } finally {
       setLoading(false);
     }
@@ -304,6 +328,8 @@ const CountryDirectorsProfileCards = () => {
   }, [fetchDirectorsData]);
 
   console.log('Directors State:', directors);
+
+  const sliderSettings = useMemo(() => getSliderSettings(directors.length), [directors.length]);
 
   const directorsContent = useMemo(() => {
     if (directors.length === 0) {
@@ -317,7 +343,7 @@ const CountryDirectorsProfileCards = () => {
     }
 
     return (
-      <CarouselContainer sx={{ p: 5 }}>
+      <CarouselContainer sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
         <Slider {...sliderSettings}>
           {directors.map((director, index) => (
             <Box key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -336,7 +362,7 @@ const CountryDirectorsProfileCards = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    height: '200px',
+                    height: '200px', // Fixed height for the content area
                   }}
                 >
                   <Fade in timeout={500}>
@@ -365,7 +391,7 @@ const CountryDirectorsProfileCards = () => {
                         color="#666"
                         sx={{ fontFamily: 'Poppins, sans-serif', mt: 0.5 }}
                       >
-                        {director.country} {/* Now displays the country name */}
+                        {director.country}
                       </Typography>
                     </Box>
                   </Fade>
@@ -387,7 +413,7 @@ const CountryDirectorsProfileCards = () => {
         </Slider>
       </CarouselContainer>
     );
-  }, [directors]);
+  }, [directors, sliderSettings]);
 
   return (
     <SectionContainer>
