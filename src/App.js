@@ -15,10 +15,10 @@ import Vendor from './components/Global/Vendors/vendor';
 import HistorySection from './components/Global/AboutUs/History/HistorySection';
 import Leadership from './components/Global/AboutUs/LeaderShip/Leadership';
 import GlobalCoverage from './components/Global/AboutUs/GlobalCoverage/GlobalCoverage';
-import { Blogs } from './components/Global/News/Blogs/Blogs';
+import { Blogs } from './components/Global/Explore/Blogs/Blogs';
 import EventsNews from './components/Global/Explore/EventsNews/EventsNews';
 import Trainings from './components/Global/Explore/Trainings/Trainings';
-import BlogDetails from './components/Global/News/Blogs/BlogDetails';
+import BlogDetails from './components/Global/Explore/Blogs/BlogDetails';
 import RegisterEvent from './components/Global/Explore/EventsNews/RegisterEvent';
 import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 
