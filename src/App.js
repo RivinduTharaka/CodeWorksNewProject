@@ -6,9 +6,7 @@ import Navbar from './components/Global/Navbar';
 import Footer from './components/Global/Footer';
 import Home from './components/Global/Home';
 import AboutUs from './components/Global/About';
-import Services from './components/Global/Services';
-import Service01 from './components/Global/Service01';
-import Service02 from './components/Global/Service02';
+import Services from './components/Global/Servicess/Services';
 import ContactUs from './components/Global/ContactUs';
 import Solutions from './components/Global/Solution/Solutions';
 import Vendor from './components/Global/Vendors/vendor';
@@ -489,8 +487,6 @@ const App = () => {
         <Route path="/" element={<GlobalLayout><Home /></GlobalLayout>} />
         <Route path="/about" element={<GlobalLayout><AboutUs /></GlobalLayout>} />
         <Route path="/services" element={<GlobalLayout><Services /></GlobalLayout>} />
-        <Route path="/service01" element={<GlobalLayout><Service01 /></GlobalLayout>} />
-        <Route path="/service02" element={<GlobalLayout><Service02 /></GlobalLayout>} />
         <Route path="/contact" element={<GlobalLayout><ContactUs /></GlobalLayout>} />
         <Route path="/solution" element={<GlobalLayout><Solutions /></GlobalLayout>} />
         <Route path="/vendors" element={<GlobalLayout><Vendor /></GlobalLayout>} />
