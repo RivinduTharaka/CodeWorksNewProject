@@ -294,8 +294,7 @@ const Navbar = () => {
     location.pathname === '/contact' ||
     location.pathname === '/events' ||
     location.pathname === '/webinars' ||
-    location.pathname === '/workshops' ||
-    location.pathname === '/trainings' || 
+    location.pathname === '/trainings' || // Updated to trainings
     location.pathname === '/services' ||  
     location.pathname === '/blog' ||
     location.pathname === '/press-&-media' ||
@@ -424,7 +423,7 @@ const Navbar = () => {
                                 primary="Explore"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/webinars' || location.pathname === '/workshops' || location.pathname === '/trainings' || location.pathname === '/press-&-media' || location.pathname === '/blog'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/webinars' || location.pathname === '/trainings' || location.pathname === '/press-&-media' || location.pathname === '/blog'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -452,7 +451,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/workshops"
+                                to="/trainings"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -628,7 +627,7 @@ const Navbar = () => {
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/events" || location.pathname === "/webinars" || location.pathname === "/workshops" || location.pathname === "/trainings" || location.pathname === "/press-&-media" || location.pathname === "/blog"}
+                    active={location.pathname === "/events" || location.pathname === "/webinars" || location.pathname === "/trainings" || location.pathname === "/press-&-media" || location.pathname === "/blog"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -644,7 +643,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/webinars" || location.pathname === "/workshops" || location.pathname === "/trainings" || location.pathname === "/press-&-media" || location.pathname === "/blog"} />
+                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/webinars" || location.pathname === "/trainings" || location.pathname === "/press-&-media" || location.pathname === "/blog"} />
                     </Box>
                   </DropdownButton>
 
@@ -664,7 +663,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/webinars">
                       Webinars
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/workshops">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/trainings">
                       Workshops & Trainings
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/press-&-media">
