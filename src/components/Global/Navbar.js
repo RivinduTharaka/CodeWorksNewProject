@@ -62,7 +62,6 @@ const countries = [
   { name: "Sri Lanka", flag: sriLankaFlag, route: "/SL" },
   { name: "Thailand", flag: thailandFlag, route: "/th" },
   { name: "UAE", flag: uaeFlag, route: "/uae" },
-  
 ];
 
 // Define Futuristic Theme
@@ -273,12 +272,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [eventsAnchorEl, setEventsAnchorEl] = useState(null);
-  const [servicesAnchorEl, setServicesAnchorEl] = useState(null);
   const [countryAnchorEl, setCountryAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [countriesSubmenuOpen, setCountriesSubmenuOpen] = useState(false);
   const [eventsSubmenuOpen, setEventsSubmenuOpen] = useState(false);
-  const [servicesSubmenuOpen, setServicesSubmenuOpen] = useState(false);
   const [aboutSubmenuOpen, setAboutSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   
@@ -296,10 +293,10 @@ const Navbar = () => {
     location.pathname === '/vendors' ||
     location.pathname === '/contact' ||
     location.pathname === '/events' ||
+    location.pathname === '/webinars' ||
     location.pathname === '/workshops' ||
-    location.pathname === '/technical-support' ||
-    location.pathname === '/professional-services' ||
-    location.pathname === '/trainings' ||
+    location.pathname === '/trainings' || 
+    location.pathname === '/services' ||  
     location.pathname === '/blog' ||
     location.pathname === '/press-&-media' ||
     location.pathname === '/global-coverage' ||
@@ -332,10 +329,6 @@ const Navbar = () => {
   const handleEventsHover = (event) => setEventsAnchorEl(event.currentTarget);
   const handleEventsClose = () => setEventsAnchorEl(null);
   const handleEventsClick = (event) => setEventsAnchorEl(event.currentTarget);
-
-  const handleServicesHover = (event) => setServicesAnchorEl(event.currentTarget);
-  const handleServicesClose = () => setServicesAnchorEl(null);
-  const handleServicesClick = (event) => setServicesAnchorEl(event.currentTarget);
 
   const handleCountryHover = (event) => setCountryAnchorEl(event.currentTarget);
   const handleCountryClose = () => setCountryAnchorEl(null);
@@ -417,6 +410,10 @@ const Navbar = () => {
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
+                          <ListItem component={Link} to="/services" onClick={() => setDrawerOpen(false)}>
+                            <ListItemText primary="Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                          </ListItem>
+
                           <ListItem
                             button
                             onClick={() => setEventsSubmenuOpen(!eventsSubmenuOpen)}
@@ -424,10 +421,10 @@ const Navbar = () => {
                           >
                             <MobileNavLinkContainer>
                               <ListItemText
-                                primary="Events & Webinars"
+                                primary="Explore"
                                 primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
                               />
-                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/workshops' || location.pathname === '/blog' || location.pathname === '/press-&-media'} />
+                              <MobileNeonHoverEffect active={location.pathname === '/events' || location.pathname === '/webinars' || location.pathname === '/workshops' || location.pathname === '/trainings' || location.pathname === '/press-&-media' || location.pathname === '/blog'} />
                             </MobileNavLinkContainer>
                             {eventsSubmenuOpen ? (
                               <ExpandLess sx={{ color: "#00D4FF" }} />
@@ -447,11 +444,27 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/"
+                                to="/webinars"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
-                                <ListItemText primary="Workshops" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                                <ListItemText primary="Webinars" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/workshops"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="Workshops & Trainings" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
+                              </ListItem>
+                              <ListItem
+                                component={Link}
+                                to="/press-&-media"
+                                sx={{ pl: 4, py: 1 }}
+                                onClick={() => setDrawerOpen(false)}
+                              >
+                                <ListItemText primary="News & Press Media" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
                               <ListItem
                                 component={Link}
@@ -460,67 +473,6 @@ const Navbar = () => {
                                 onClick={() => setDrawerOpen(false)}
                               >
                                 <ListItemText primary="Blogs" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem
-                                component={Link}
-                                to="/"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Press & Media" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                            </List>
-                          </Collapse>
-
-                          <ListItem
-                            button
-                            onClick={() => setServicesSubmenuOpen(!servicesSubmenuOpen)}
-                            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-                          >
-                            <MobileNavLinkContainer>
-                              <ListItemText
-                                primary="Services"
-                                primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif", fontWeight: "600" } }}
-                              />
-                              <MobileNeonHoverEffect
-                                active={
-                                  location.pathname === '/technical-support' ||
-                                  location.pathname === '/professional-services' ||
-                                  location.pathname === '/trainings'
-                                }
-                              />
-                            </MobileNavLinkContainer>
-                            {servicesSubmenuOpen ? (
-                              <ExpandLess sx={{ color: "#00D4FF" }} />
-                            ) : (
-                              <ExpandMore sx={{ color: "#00D4FF" }} />
-                            )}
-                          </ListItem>
-                          <Collapse in={servicesSubmenuOpen} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                              <ListItem
-                                component={Link}
-                                to="/"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Technical Support" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem
-                                component={Link}
-                                to="/"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Professional Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
-                              </ListItem>
-                              <ListItem
-                                component={Link}
-                                to="/trainings"
-                                sx={{ pl: 4, py: 1 }}
-                                onClick={() => setDrawerOpen(false)}
-                              >
-                                <ListItemText primary="Trainings" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                               </ListItem>
                             </List>
                           </Collapse>
@@ -568,7 +520,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/"
+                                to="/careers"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -659,13 +611,24 @@ const Navbar = () => {
                   <NeonHoverEffect active={location.pathname === "/vendors"} />
                 </FuturisticButton>
 
+                <FuturisticButton
+                  component={Link}
+                  to="/services"
+                  active={location.pathname === "/services"}
+                  isTargetPage={isTargetPage}
+                  isScrolled={isScrolled}
+                >
+                  Services
+                  <NeonHoverEffect active={location.pathname === "/services"} />
+                </FuturisticButton>
+
                 <div
                   onMouseEnter={handleEventsHover}
                   onMouseLeave={handleEventsClose}
                   style={{ position: "relative" }}
                 >
                   <DropdownButton
-                    active={location.pathname === "/events" || location.pathname === "/workshops" || location.pathname === "/blog" || location.pathname === "/press-&-media"}
+                    active={location.pathname === "/events" || location.pathname === "/webinars" || location.pathname === "/workshops" || location.pathname === "/trainings" || location.pathname === "/press-&-media" || location.pathname === "/blog"}
                     isTargetPage={isTargetPage}
                     isScrolled={isScrolled}
                     isOpen={Boolean(eventsAnchorEl)}
@@ -673,7 +636,7 @@ const Navbar = () => {
                   >
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-                        Events & Webinars
+                        Explore
                         <ExpandMore
                           sx={{
                             color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
@@ -681,7 +644,7 @@ const Navbar = () => {
                           }}
                         />
                       </Box>
-                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/workshops" || location.pathname === "/blog" || location.pathname === "/press-&-media"} />
+                      <NeonHoverEffect active={location.pathname === "/events" || location.pathname === "/webinars" || location.pathname === "/workshops" || location.pathname === "/trainings" || location.pathname === "/press-&-media" || location.pathname === "/blog"} />
                     </Box>
                   </DropdownButton>
 
@@ -696,74 +659,19 @@ const Navbar = () => {
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                   >
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/events">
-                      Events | Webinars
+                      Events
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
-                      Workshops
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/webinars">
+                      Webinars
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/workshops">
+                      Workshops & Trainings
+                    </FuturisticMenuItem>
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/press-&-media">
+                      News & Press Media
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/blog">
                       Blogs
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
-                      Press & Media
-                    </FuturisticMenuItem>
-                  </FuturisticMenu>
-                </div>
-
-                <div
-                  onMouseEnter={handleServicesHover}
-                  onMouseLeave={handleServicesClose}
-                  style={{ position: "relative" }}
-                >
-                  <DropdownButton
-                    active={
-                      location.pathname === "/technical-support" ||
-                      location.pathname === "/professional-services" ||
-                      location.pathname === "/trainings"
-                    }
-                    isTargetPage={isTargetPage}
-                    isScrolled={isScrolled}
-                    isOpen={Boolean(servicesAnchorEl)}
-                    onClick={handleServicesClick}
-                  >
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-                        Services
-                        <ExpandMore
-                          sx={{
-                            color: isTargetPage && !isScrolled ? "#E0E0E0" : "#FFFFFF",
-                            textShadow: "0 0 5px #00D4FF",
-                          }}
-                        />
-                      </Box>
-                      <NeonHoverEffect
-                        active={
-                          location.pathname === "/technical-support" ||
-                          location.pathname === "/professional-services" ||
-                          location.pathname === "/trainings"
-                        }
-                      />
-                    </Box>
-                  </DropdownButton>
-
-                  <FuturisticMenu
-                    id="services-menu"
-                    anchorEl={servicesAnchorEl}
-                    keepMounted
-                    open={Boolean(servicesAnchorEl)}
-                    onClose={handleServicesClose}
-                    disableScrollLock
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
-                  >
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/">
-                      Technical Support
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/">
-                      Professional Services
-                    </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleServicesClose} component={Link} to="/trainings">
-                      Trainings
                     </FuturisticMenuItem>
                   </FuturisticMenu>
                 </div>
@@ -825,7 +733,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/leadership">
                       Leadership
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/">
+                    <FuturisticMenuItem onClick={handleAboutClose} component={Link} to="/careers">
                       Careers
                     </FuturisticMenuItem>
                   </FuturisticMenu>
