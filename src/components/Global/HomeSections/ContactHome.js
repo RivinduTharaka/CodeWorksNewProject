@@ -4,7 +4,6 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 import ReCAPTCHA from 'react-google-recaptcha'; // Import reCAPTCHA
 import AutoLogin from '../../../services/AutoLogin'; // Adjust the import path as necessary
 import { insertData } from '../../../services/dataService';
-// import { toast } from 'react-toastify'; 
 
 function ContactHome() {
   // State for form data
@@ -142,9 +141,6 @@ function ContactHome() {
         draggable: true,
       });
 
-      // Optionally show a toast notification
-      // toast.success('Contact form submitted successfully!');
-
       // Reset form after successful submission
       setFormData({
         firstName: '',
@@ -170,8 +166,6 @@ function ContactHome() {
         draggable: true,
       });
 
-      // Optionally show a toast notification
-      // toast.error('Failed to submit the form.');
       console.error('Error submitting form:', error);
     }
   };
@@ -409,9 +403,9 @@ function ContactHome() {
               </Grid>
 
               {/* reCAPTCHA */}
-              <Grid item xs={12}>
+              <Grid item xs={12} className="recaptcha-container">
                 <ReCAPTCHA
-                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Replace with your actual Site Key
+                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                   onChange={handleRecaptchaChange}
                 />
                 {errors.recaptcha && (
@@ -426,7 +420,7 @@ function ContactHome() {
                 <Button
                   type="submit"
                   sx={{
-                    background: 'linear-gradient(45deg, #24b24c, #1a9fd9)', // Updated background
+                    background: 'linear-gradient(45deg, #24b24c, #1a9fd9)',
                     color: '#ffffff',
                     padding: '5px 35px',
                     fontSize: '1.2rem',
@@ -435,7 +429,7 @@ function ContactHome() {
                     textTransform: 'none',
                     fontFamily: 'Poppins, sans-serif',
                     '&:hover': {
-                      background: 'linear-gradient(45deg, #1a9fd9, #24b24c)', // Optional: Reverse gradient on hover
+                      background: 'linear-gradient(45deg, #1a9fd9, #24b24c)',
                     },
                   }}
                 >
@@ -450,7 +444,7 @@ function ContactHome() {
       <style jsx>{`
         .contact-container {
           padding: 20px;
-          max-width: 1200px;
+          max-width: 1000px;
           margin: 0 auto;
         }
 
@@ -467,9 +461,27 @@ function ContactHome() {
           border-radius: 8px;
         }
 
+        .recaptcha-container {
+          display: flex;
+        
+        }
+
         @media (max-width: 768px) {
           .contact-column {
             flex: 100%;
+          }
+        }
+
+        @media (max-width: 375px) {
+          .recaptcha-container {
+            display: flex;
+            
+            transform-origin: center;
+          }
+
+          .recaptcha-container > div {
+            transform: scale(0.8); /* Scale down the reCAPTCHA to 80% of its original size */
+        
           }
         }
       `}</style>
