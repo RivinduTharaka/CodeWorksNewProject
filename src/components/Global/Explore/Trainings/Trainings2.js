@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import { selectData, insertData } from '../../../../services/dataService'; // Assuming these are your API services
 import API_URL from '../../../../flieapi'; // Base API URL for image fetching
 import arrowImage from '../../../../assets/image/down-arrow.png';
-import f5Logo from '../../../../assets/image/download (1).jpg';
 import AutoLogin from '../../../../services/AutoLogin'; // Assuming this is your AutoLogin service
 
 // In-memory cache for images
@@ -174,6 +173,7 @@ const ModalHeader = styled(Box)({
 const ModalLogo = styled('img')({
   width: '40px',
   height: '40px',
+  objectFit: 'cover', // Ensures the image fits well within the dimensions
 });
 
 const ModalTitle = styled(Typography)(({ theme }) => ({
@@ -255,7 +255,6 @@ const submitToDatabase = async (data) => {
     };
 
     const response = await insertData('training_session_registrations', registrationData);
-// console.log('Registration Response:', response);
     if (response.message === 'Data inserted successfully') {
       return { success: true, message: 'Registration successful!' };
     } else {
@@ -264,7 +263,6 @@ const submitToDatabase = async (data) => {
   } catch (error) {
     return { success: false, message: error.message };
   }
-
 };
 
 // Main Component
@@ -304,7 +302,6 @@ function Trainings2() {
         country_id: 3,
         is_active: true,
       });
-      // console.log('Formatted trainingSessionsResponse:', trainingSessionsResponse);
       if (!trainingSessionsResponse.data?.length) {
         setTrainings([]);
         setLoading(false);
@@ -329,14 +326,10 @@ function Trainings2() {
         }))
       );
 
-      // console.log('Formatted Trainings:', formattedTrainings);
-      
-
       // Step 3: Cache the result and update state
       apiCache.set(cacheKey, formattedTrainings);
       setTrainings(formattedTrainings);
     } catch (error) {
-      // console.error('Failed to fetch trainings:', error);
       setTrainings([]);
     } finally {
       setLoading(false);
@@ -349,7 +342,6 @@ function Trainings2() {
   }, [fetchTrainings]);
 
   const handleOpenModal = (training) => {
-    // console.log("Selected Training:", training);
     setSelectedTraining(training);
     setOpenModal(true);
     setFormData({
@@ -499,7 +491,7 @@ function Trainings2() {
       <Modal open={openModal} onClose={handleCloseModal}>
         <ModalContent>
           <ModalHeader>
-            <ModalLogo src={f5Logo} alt="F5 Logo" />
+            <ModalLogo src={selectedTraining?.image || 'https://via.placeholder.com/40?text=No+Image'} alt={selectedTraining?.title || 'Training Logo'} />
             <ModalTitle>{selectedTraining?.title || 'Training Title'}</ModalTitle>
           </ModalHeader>
           <Box>
