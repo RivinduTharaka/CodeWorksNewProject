@@ -14,7 +14,7 @@ const constructImageUrl = (filePath) => {
   return `${API_URL}/${cleanedFilePath}`;
 };
 
-// Fetch image with caching (similar to Trainings2)
+// Fetch image with caching
 const fetchImage = async (filePath) => {
   const imageUrl = constructImageUrl(filePath);
   try {
@@ -105,22 +105,20 @@ function Contact3() {
     return address.split(',').map((line) => line.trim());
   };
 
-  // Fixed dimensions for the map image
-  const MAP_IMAGE_WIDTH = 800; // Fixed width in pixels
-  const MAP_IMAGE_HEIGHT = MAP_IMAGE_WIDTH / (10233 / 5615); // Maintain aspect ratio (10233 / 5615 ≈ 1.82)
+  // Aspect ratio for the map image (10233 / 5615 ≈ 1.82)
+  const ASPECT_RATIO = 10233 / 5615;
 
   return (
     <Box
       sx={{
         display: 'flex',
-        minHeight: '95vh',
+        minHeight: { xs: 'auto', md: '95vh' }, // Auto height on mobile, 95vh on desktop
         background: 'linear-gradient(135deg, rgb(1, 87, 38), #070054)',
         color: 'white',
         fontFamily: 'Arial, sans-serif',
         boxSizing: 'border-box',
         flexDirection: { xs: 'column', md: 'row' }, // Stack on mobile, row on desktop
-        paddingLeft: { xs: 0, md: 20 }, // No padding on mobile, padding on desktop
-        paddingRight: { xs: 0, md: 20 }, // No padding on mobile, padding on desktop
+        padding: { xs: 2, sm: 4, md: 6, lg: 8 }, // Responsive padding
       }}
     >
       <AutoLogin />
@@ -129,15 +127,22 @@ function Contact3() {
       <Box
         sx={{
           width: { xs: '100%', md: '40%' }, // Full width on mobile, 40% on desktop
-          padding: 2,
+          padding: { xs: 2, sm: 3, md: 4 }, // Responsive padding
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'flex-start', // Align text to the left
+          alignItems: { xs: 'center', md: 'flex-start' }, // Center on mobile, left-align on desktop
+          textAlign: { xs: 'center', md: 'left' }, // Center text on mobile, left-align on desktop
         }}
       >
         {loading ? (
-          <Typography variant="body1" sx={{ color: 'white' }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'white',
+              fontSize: { xs: '1rem', md: '1.2rem' }, // Responsive font size
+            }}
+          >
             Loading office data...
           </Typography>
         ) : officeData ? (
@@ -147,12 +152,19 @@ function Contact3() {
               gutterBottom
               sx={{
                 fontWeight: 'bold',
-                fontSize: '3.5rem',
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem', lg: '3.5rem' }, // Responsive font size
               }}
             >
               {officeData.countryName}
             </Typography>
-            <Typography variant="body1" sx={{ mb: 5, fontSize: '1.2rem' }}>
+            <Typography
+              variant="body1"
+              sx={{
+                mb: { xs: 3, md: 5 }, // Responsive margin-bottom
+                fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' }, // Responsive font size
+                lineHeight: 1.5,
+              }}
+            >
               {formatAddress(officeData.address).map((line, index) => (
                 <span key={index}>
                   {line}
@@ -160,7 +172,13 @@ function Contact3() {
                 </span>
               ))}
             </Typography>
-            <Typography variant="body2" sx={{ mb: 1 }}>
+            <Typography
+              variant="body2"
+              sx={{
+                mb: 1,
+                fontSize: { xs: '0.9rem', sm: '0.95rem', md: '1rem' }, // Responsive font size
+              }}
+            >
               Tel: {officeData.contactNumber}
             </Typography>
             <Button
@@ -177,16 +195,23 @@ function Contact3() {
                   backgroundColor: 'transparent',
                 },
                 textTransform: 'none',
-                padding: '8px 16px',
+                padding: { xs: '6px 12px', sm: '7px 14px', md: '8px 16px' }, // Responsive padding
                 borderWidth: 2,
                 marginTop: 2,
+                fontSize: { xs: '0.9rem', sm: '0.95rem', md: '1rem' }, // Responsive font size
               }}
             >
               Get Directions
             </Button>
           </>
         ) : (
-          <Typography variant="body1" sx={{ color: 'white' }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'white',
+              fontSize: { xs: '1rem', md: '1.2rem' }, // Responsive font size
+            }}
+          >
             No office data available for this country.
           </Typography>
         )}
@@ -196,14 +221,21 @@ function Contact3() {
       <Box
         sx={{
           width: { xs: '100%', md: '60%' },
-          mt: { xs: 5, md: 0 }, // Margin top on mobile, no margin on desktop
+          mt: { xs: 3, md: 0 }, // Reduced margin-top on mobile
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: { xs: 2, md: 0 }, // Add padding on mobile to avoid edge-to-edge
         }}
       >
         {loading ? (
-          <Typography variant="body1" sx={{ color: 'white' }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'white',
+              fontSize: { xs: '1rem', md: '1.2rem' }, // Responsive font size
+            }}
+          >
             Loading map...
           </Typography>
         ) : officeData ? (
@@ -212,14 +244,22 @@ function Contact3() {
             src={officeData.mapImage}
             alt="Location Map"
             sx={{
-              width: MAP_IMAGE_WIDTH, // Fixed width
-              height: MAP_IMAGE_HEIGHT, // Fixed height based on aspect ratio
+              width: { xs: '100%', sm: '90%', md: '80%', lg: 800 }, // Responsive width
+              maxWidth: '100%', // Ensure it doesn't overflow the container
+              height: 'auto', // Let height adjust based on aspect ratio
+              aspectRatio: ASPECT_RATIO, // Maintain aspect ratio (10233 / 5615 ≈ 1.82)
               objectFit: 'contain', // Ensure the image fits without distortion
-              padding: 2,
+              padding: { xs: 1, md: 2 }, // Responsive padding
             }}
           />
         ) : (
-          <Typography variant="body1" sx={{ color: 'white' }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'white',
+              fontSize: { xs: '1rem', md: '1.2rem' }, // Responsive font size
+            }}
+          >
             No map available.
           </Typography>
         )}

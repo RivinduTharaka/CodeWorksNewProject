@@ -4,7 +4,6 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 import ReCAPTCHA from 'react-google-recaptcha'; // Import reCAPTCHA
 import AutoLogin from '../../../services/AutoLogin'; // Adjust the import path as necessary
 import { insertData } from '../../../services/dataService';
-// import { toast } from 'react-toastify'; 
 
 function Contact2() {
   // State for form data
@@ -63,8 +62,8 @@ function Contact2() {
     if (!formData.company.trim()) {
       newErrors.company = 'Company name is required';
     }
-    if (!formData.country_name.trim()) { // Changed from country to country_name
-      newErrors.country_name = 'Country is required'; // Updated key to match formData
+    if (!formData.country_name.trim()) {
+      newErrors.country_name = 'Country is required';
     }
     if (!formData.contactNumber.trim()) {
       newErrors.contactNumber = 'Contact number is required';
@@ -142,9 +141,6 @@ function Contact2() {
         draggable: true,
       });
 
-      // Optionally show a toast notification
-      // toast.success('Contact form submitted successfully!');
-
       // Reset form after successful submission
       setFormData({
         firstName: '',
@@ -170,8 +166,6 @@ function Contact2() {
         draggable: true,
       });
 
-      // Optionally show a toast notification
-      // toast.error('Failed to submit the form.');
       console.error('Error submitting form:', error);
     }
   };
@@ -323,8 +317,8 @@ function Contact2() {
                   variant="outlined"
                   fullWidth
                   required
-                  error={!!errors.country_name} // Updated to country_name
-                  helperText={errors.country_name} // Updated to country_name
+                  error={!!errors.country_name}
+                  helperText={errors.country_name}
                   sx={{
                     '& .MuiInputBase-input': { color: '#0D47A1' },
                     '& .MuiInputLabel-root': { color: '#006400' },
@@ -409,9 +403,9 @@ function Contact2() {
               </Grid>
 
               {/* reCAPTCHA */}
-              <Grid item xs={12}>
+              <Grid item xs={12} className="recaptcha-container">
                 <ReCAPTCHA
-                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Replace with your actual Site Key
+                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                   onChange={handleRecaptchaChange}
                 />
                 {errors.recaptcha && (
@@ -426,16 +420,16 @@ function Contact2() {
                 <Button
                   type="submit"
                   sx={{
-                    background: '#0c4a93',
+                    background: 'linear-gradient(45deg, #24b24c, #1a9fd9)',
                     color: '#ffffff',
-                    padding: '12px 40px',
-                    fontSize: '1rem',
+                    padding: '5px 35px',
+                    fontSize: '1.2rem',
                     fontWeight: 600,
                     borderRadius: '4px',
                     textTransform: 'none',
                     fontFamily: 'Poppins, sans-serif',
                     '&:hover': {
-                      background: '#1B0EA2',
+                      background: 'linear-gradient(45deg, #1a9fd9, #24b24c)',
                     },
                   }}
                 >
@@ -449,7 +443,7 @@ function Contact2() {
 
       <style jsx>{`
         .contact-container {
-          padding: 20px;
+        padding: 20px;
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -467,9 +461,27 @@ function Contact2() {
           border-radius: 8px;
         }
 
+        .recaptcha-container {
+          display: flex;
+        
+        }
+
         @media (max-width: 768px) {
           .contact-column {
             flex: 100%;
+          }
+        }
+
+        @media (max-width: 375px) {
+          .recaptcha-container {
+            display: flex;
+            
+            transform-origin: center;
+          }
+
+          .recaptcha-container > div {
+            transform: scale(0.8); /* Scale down the reCAPTCHA to 80% of its original size */
+        
           }
         }
       `}</style>
