@@ -16,10 +16,10 @@ import HistorySection from './components/Global/AboutUs/History/HistorySection';
 import Leadership from './components/Global/AboutUs/LeaderShip/Leadership';
 import GlobalCoverage from './components/Global/AboutUs/GlobalCoverage/GlobalCoverage';
 import { Blogs } from './components/Global/News/Blogs/Blogs';
-import EventsNews from './components/Global/Evnt/EventsNews/EventsNews';
-import Trainings from './components/Global/Servicess/Trainings/Trainings';
+import EventsNews from './components/Global/Explore/EventsNews/EventsNews';
+import Trainings from './components/Global/Explore/Trainings/Trainings';
 import BlogDetails from './components/Global/News/Blogs/BlogDetails';
-import RegisterEvent from './components/Global/Evnt/EventsNews/RegisterEvent';
+import RegisterEvent from './components/Global/Explore/EventsNews/RegisterEvent';
 import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 
 // Australia Components
