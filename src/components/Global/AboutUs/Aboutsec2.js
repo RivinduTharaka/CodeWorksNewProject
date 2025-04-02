@@ -1,7 +1,11 @@
 import React from 'react';
-import { Box, Typography, Container, Button } from '@mui/material';
+import { Box, Typography, Container, Button, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 function Aboutsec2() {
+  const theme = useTheme();
+  const isBelow400px = useMediaQuery(theme.breakpoints.down(400)); // Detect screens below 400px
+
   return (
     <Box sx={{ py: 10, px: 3 }}>
       <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
@@ -9,7 +13,7 @@ function Aboutsec2() {
         {/* Left Section - Creative Text */}
         <Box sx={{ flex: 1 }}>
           <Typography
-            variant="h1"
+            variant={isBelow400px ? 'h2' : 'h1'} // Change variant to h2 for screens below 400px
             component="h1"
             sx={{
               fontWeight: 'bold',
@@ -55,7 +59,7 @@ function Aboutsec2() {
               },
             }}
           >
-           CONNEX GLOBAL
+            CONNEX GLOBAL
           </Button>
         </Box>
 
