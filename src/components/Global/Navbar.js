@@ -459,7 +459,7 @@ const Navbar = () => {
                               </ListItem>
                               <ListItem
                                 component={Link}
-                                to="/"
+                                to="/press-&-media"
                                 sx={{ pl: 4, py: 1 }}
                                 onClick={() => setDrawerOpen(false)}
                               >
@@ -666,7 +666,7 @@ const Navbar = () => {
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/trainings">
                       Workshops & Trainings
                     </FuturisticMenuItem>
-                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/">
+                    <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/press-&-media">
                       News & Press Media
                     </FuturisticMenuItem>
                     <FuturisticMenuItem onClick={handleEventsClose} component={Link} to="/blog">

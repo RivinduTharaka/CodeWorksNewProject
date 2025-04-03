@@ -19,6 +19,7 @@ import Trainings from './components/Global/Explore/Trainings/Trainings';
 import BlogDetails from './components/Global/Explore/Blogs/BlogDetails';
 import RegisterEvent from './components/Global/Explore/EventsNews/RegisterEvent';
 import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
+import  PressAndMedia  from './components/Global/Explore/PressAndMedia/PressAndMedia1';
 
 // Australia Components
 import AUNavbar from './components/Australia/Navbar';
@@ -499,6 +500,7 @@ const App = () => {
         <Route path="/blog/:title" element={<GlobalLayout><BlogDetails /></GlobalLayout>} />
         <Route path="/events/register/:id" element={<GlobalLayout><RegisterEvent /></GlobalLayout>} />
         <Route path="/why-us" element={<GlobalLayout><WhyUs /></GlobalLayout>} />
+        <Route path="/press-&-media" element={<GlobalLayout><PressAndMedia /></GlobalLayout>} />
 
         {/* Australia Routes */}
         <Route path="/au" element={<AustraliaLayout><AUHome /></AustraliaLayout>} />
