@@ -214,7 +214,6 @@ function EventsNews2() {
       apiCache.set(cacheKey, formattedEvents);
       setEvents(formattedEvents);
     } catch (error) {
-      console.error('Failed to fetch events:', error);
       setEvents([]);
     } finally {
       setLoading(false);
