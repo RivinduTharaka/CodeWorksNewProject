@@ -243,20 +243,7 @@ function RegisterEvent() {
 
     // Show loading alert
     console.log('Step: handleSubmit - Showing loading alert');
-    await Swal.fire({
-      icon: 'info',
-      title: 'Submitting...',
-      text: 'Please wait while your registration is being processed.',
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      didOpen: () => {
-        Swal.showLoading();
-        const popup = Swal.getPopup();
-        if (popup) {
-          popup.style.zIndex = '1500';
-        }
-      },
-    });
+    
 
     try {
       console.log('Step: handleSubmit - Submitting to database');
