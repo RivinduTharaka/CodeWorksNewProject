@@ -52,29 +52,11 @@ const theme = createTheme({
 // Styled Components
 const HeroSection = styled(Box)({
   backgroundColor: '#f5f7fa',
-  padding: '100px 0 60px',
+  padding: '50px ',
   textAlign: 'center',
 });
 
-const Title = styled(Typography)({
-  fontSize: '2.5rem',
-  fontWeight: 600,
-  background: "linear-gradient(135deg, rgb(1, 87, 38), #070054)",
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  color: 'transparent',
-  marginBottom: '1rem',
-});
 
-const Subtitle = styled(Typography)({
-  fontSize: '1.2rem',
-  background: "linear-gradient(135deg, rgb(1, 87, 38), #070054)",
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  color: 'transparent',
-  maxWidth: '800px',
-  margin: '0 auto 2rem',
-});
 
 const CustomButton = styled(Button)({
   backgroundColor: "#102166",
@@ -253,10 +235,7 @@ function EventsNews2() {
       <AutoLogin /> {/* Auto-login component */}
       <HeroSection>
         <Container maxWidth="lg">
-          <Title variant="h1">Events at Connex Information Technologies</Title>
-          <Subtitle variant="h2">
-            Unmissable events with unforgettable experiences – join us to connect, innovate, and grow with industry pioneers.
-          </Subtitle>
+    
           <CustomButton>
             Reserve Your Spot
             <ArrowImage src={arrowImage} alt="Scroll down arrow" />
