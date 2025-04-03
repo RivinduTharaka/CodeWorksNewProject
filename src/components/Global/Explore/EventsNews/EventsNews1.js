@@ -95,9 +95,9 @@ const EventsNews1 = () => {
       </VideoBackground>
       <Container maxWidth="lg">
         <ContentWrapper>
-          <Title>Unmissable events with unforgettable experiences.</Title>
+          <Title>Connex Information Technologies Events  </Title>
           <Description>
-            Join us to connect, innovate, and grow with industry pioneers at Connex Information Technologies.
+          Beyond the agenda — experiences that stay with you.
           </Description>
         </ContentWrapper>
       </Container>
