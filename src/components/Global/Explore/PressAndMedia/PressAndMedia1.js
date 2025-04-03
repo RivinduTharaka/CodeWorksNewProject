@@ -1,8 +1,13 @@
 import React from 'react'
+import PressAndMedia2 from './PressAndMedia2'
 
 function PressAndMedia1() {
   return (
-    <div>PressAndMedia1</div>
+    <>
+      <PressAndMedia2 />
+
+
+    </>
   )
 }
 
