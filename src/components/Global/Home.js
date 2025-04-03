@@ -11,14 +11,12 @@ import Vendor from './HomeSections/OurVendors';
 import News from './HomeSections/News';
 import Solutions from './HomeSections/Solutions';
 import AutoLogin from '../../services/AutoLogin';
-// Import Material-UI Icons
 import { Public, BusinessCenter, School, Handshake, CalendarToday, Group, Store, People } from '@mui/icons-material';
 import ContactHome from './HomeSections/ContactHome';
-import {selectData} from '../../services/dataService';
+import { selectData } from '../../services/dataService';
 
 // Who We Are Section Styling
 const WhoWeAreSection = styled(Box)({
- 
   padding: '5rem 0',
   textAlign: 'center',
 });
@@ -34,10 +32,9 @@ const SectionTitle = styled(Typography)({
 
 // Styled Icon Card
 const IconCard = styled(Card)({
-  cursor:'pointer',
-  // backgroundColor: '#E3F2FD',
-  outline:'1px solid rgb(19, 114, 183)',
-boxShadow:'none',
+  cursor: 'pointer',
+  outline: '1px solid rgb(19, 114, 183)',
+  boxShadow: 'none',
   borderRadius: '12px',
   padding: '1.5rem',
   textAlign: 'center',
@@ -63,7 +60,6 @@ const StatsLabel = styled(Typography)({
 
 // Premium Content Styling
 const PremiumContent = styled(Box)({
-
   borderRadius: '12px',
   padding: '2rem',
   textAlign: 'left',
@@ -87,19 +83,16 @@ const PremiumDescription = styled(Typography)({
 
 // Hero Section Styling
 const HeroSection = styled(Box)({
-  
-  // borderRadius:'20px',
   position: 'relative',
-  // width: '98%',
   height: '88vh',
   overflow: 'hidden',
-  margin:'auto',
+  margin: 'auto',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
   color: '#ffffff',
-  mt:100,
+  mt: 100,
 });
 
 // Overlay for Better Text Readability
@@ -142,27 +135,41 @@ const TextContainer = styled(Container)({
   zIndex: 2,
 });
 
-const MainText = styled(Typography)({
+// Responsive MainText with reduced font size for mobile
+const MainText = styled(Typography)(({ theme }) => ({
   fontSize: '2.6rem',
   fontWeight: '700',
   color: '#ffffff',
   animation: `${fadeIn} 1s ease-in-out`,
-});
+  [theme.breakpoints.down('md')]: {
+    fontSize: '1.8rem', // Reduced font size for screens below 768px
+  },
+}));
 
-const SubText = styled(Typography)({
+// Responsive SubText with reduced font size for mobile
+const SubText = styled(Typography)(({ theme }) => ({
   fontSize: '1.1rem',
   fontWeight: '400',
   color: '#ffffff',
   marginTop: '0.5rem',
   animation: `${fadeIn} 2s ease-in-out`,
-});
+  [theme.breakpoints.down('md')]: {
+    fontSize: '0.9rem', // Reduced font size for screens below 768px
+  },
+}));
 
-const TypewriterText = styled(Typography)({
-  fontSize: '2.8rem',
-  fontWeight: '700',
+// Responsive TypewriterText with reduced font size for mobile
+const TypewriterText = styled(Typography)(({ theme }) => ({
+  fontSize: '2.8rem', // Default font size for larger screens
+  fontWeight: '400',
   color: '#ffffff',
   marginBottom: '1rem',
-});
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2rem', // Reduced font size for screens below 768px
+  },[theme.breakpoints.down('sm')]: {
+    fontSize: '1.2rem', // Reduced font size for screens below 768px
+  }
+}));
 
 const CountAnimation = ({ start, end, suffix }) => {
   const [count, setCount] = useState(start);
@@ -172,8 +179,8 @@ const CountAnimation = ({ start, end, suffix }) => {
   });
 
   useEffect(() => {
-    const data= selectData('countries',{is_active:true});
-      console.log(data);
+    const data = selectData('countries', { is_active: true });
+    console.log(data);
     if (inView) {
       let startVal = start;
       const duration = 2000;
@@ -186,25 +193,19 @@ const CountAnimation = ({ start, end, suffix }) => {
         }
       }, stepTime);
     }
-
   }, [inView, start, end]);
-
-
 
   return (
     <div ref={ref}>
-      
-      <StatsText>{count}{suffix}</StatsText>
+      <StatsText>
+        {count}
+        {suffix}
+      </StatsText>
     </div>
   );
 };
 
-
-
 const Home = () => {
-
-
-
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when the component mounts
   }, []);
@@ -212,9 +213,8 @@ const Home = () => {
   return (
     <>
       {/* Hero Section */}
-      <AutoLogin/>
+      <AutoLogin />
       <HeroSection>
-        
         <VideoBackground autoPlay loop muted playsInline>
           <source src={hero} type="video/mp4" />
         </VideoBackground>
@@ -233,26 +233,22 @@ const Home = () => {
           </TypewriterText>
 
           <MainText>
-          Driving Innovation, Amplifying Value - Globally Trusted 
-          Technology Distributor 
+            Driving Innovation, Amplifying Value - Globally Trusted Technology Distributor
           </MainText>
 
           <SubText>
-          Connecting the World Through Reliable Distribution 
+            Connecting the World Through Reliable Distribution
           </SubText>
         </TextContainer>
       </HeroSection>
 
-      {/* Who We Are Section */}
-
-    <WhoWeAre/>
-    <News/>
-    <Solutions/>
-    <Vendor/>
-    <Ecosystem/>
-    <ContactHome/>
-
-   
+      {/* Other Sections */}
+      <WhoWeAre />
+      <News />
+      <Solutions />
+      <Vendor />
+      <Ecosystem />
+      <ContactHome />
     </>
   );
 };
