@@ -199,7 +199,7 @@ const WhoweareSection = ({ ref }) => {
                     variant={isMobile ? "body2" : "body1"}
                     sx={{ fontWeight: 600, color: "#ffffff" }}
                   >
-                    {stats.partners} <br /> Global Partners
+                    {stats.partners} <br /> Channel Partners
                   </Typography>
                 </Box>
               </Grid>
