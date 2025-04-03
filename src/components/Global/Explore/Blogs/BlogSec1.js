@@ -94,8 +94,8 @@ const BlogSec1 = () => {
       </VideoBackground>
       <Container maxWidth="lg">
         <ContentWrapper>
-          <Title>Connex Blog</Title>
-          <Description>Transforming Knowledge into Action.</Description>
+          <Title>Insights. Ideas. <br/> Innovation — The Connex Blog. </Title>
+          
         </ContentWrapper>
       </Container>
     </SectionContainer>

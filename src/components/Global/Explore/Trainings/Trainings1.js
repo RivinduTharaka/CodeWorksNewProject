@@ -94,11 +94,8 @@ function Trainings1() {
       </VideoBackground>
       <Container maxWidth="lg">
         <ContentWrapper>
-          <Title>Connex Training Center</Title>
-          <Description>
-            Elevate your skills and expertise with our cutting-edge training sessions 
-            designed for professionals at all levels.
-          </Description>
+          <Title>Focused. Interactive.<br/> Built for tech professionals. </Title>
+       
         </ContentWrapper>
       </Container>
     </SectionContainer>
