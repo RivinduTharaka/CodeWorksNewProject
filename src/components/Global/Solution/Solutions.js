@@ -234,11 +234,9 @@ const Solutions = () => {
                 textShadow: '1px 1px 3px rgba(0, 0, 0, 0.3)', // Subtle shadow for readability
               }}
             >
-              We deliver more than just solutions—we offer a partnership built on trust, expertise, and innovation.
-              Our cutting-edge security technologies and tailored networking services protect your assets, streamline operations,
-              and ensure compliance with global standards. Whether it’s fortifying your endpoints, securing your network,
-              or managing identities, we provide scalable, reliable, and cost-effective options that grow with your business.
-              Choose us to stay ahead of threats and empower your success.
+              As a next-gen value-added distributor (VAD), Connex is your strategic enabler in the digital economy. We go beyond product fulfillment — delivering intelligent, integrated solutions that accelerate your innovation cycle and extend your competitive edge.
+              <br/>
+              Our ecosystem connects you with best-in-class technologies, deep technical expertise, and mission-critical support — all built for scale, agility, and speed.
             </Typography>
           </Container>
         </Box>

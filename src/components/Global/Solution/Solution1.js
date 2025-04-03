@@ -95,9 +95,9 @@ const Solution1 = () => {
       </VideoBackground>
       <Container maxWidth="lg">
         <ContentWrapper>
-          <Title>World-Leading <br/> Digital Infrastructure Solutions</Title>
+          <Title>Future-Ready <br/> IT Solutions for a Connected World </Title>
           <Description>
-            Security is paramount, but 'trust' is more than this. No trust. No transformation.
+          Empowering partners with bold technology and smarter distribution at every step. 
           </Description>
         </ContentWrapper>
       </Container>

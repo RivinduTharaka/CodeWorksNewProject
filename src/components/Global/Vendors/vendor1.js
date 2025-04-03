@@ -90,8 +90,8 @@ function Vendor1() {
         <source src={clip} type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
-      <Title>World-leading <br/> network of vendors</Title>
-      <Subtitle>High-performance, trusted technology. Cybersecurity. Cloud. Unified Comms.</Subtitle>
+      <Title>Your connection to a global network of trusted,  <br/>high-performance technology providers.</Title>
+      <Subtitle>Trusted by Top Vendors. Powered by Partnership. </Subtitle>
     </SectionContainer>
   );
 }

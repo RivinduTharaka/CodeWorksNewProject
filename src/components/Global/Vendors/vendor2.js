@@ -203,7 +203,7 @@ function VendorSlider() {
           },
         }}
       >
-        Select a country to see our network of vendors in your local territory or view our globally managed vendors below
+      Explore our vendor ecosystem by selecting your country or discover our global vendor partnerships below. 
       </Typography>
 
       <Container maxWidth="lg">
