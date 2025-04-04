@@ -444,7 +444,7 @@ function Trainings2() {
             Elevate your skills with transformative training – join us to connect, learn, and grow with industry experts.
           </Subtitle>
           <CustomButton>
-            Enroll Now
+            Register Now
             <ArrowImage src={arrowImage} alt="Scroll down arrow" />
           </CustomButton>
         </Container>
@@ -472,7 +472,7 @@ function Trainings2() {
                     <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
                       <TrainingTitle>{training.title}</TrainingTitle>
                       <RegisterButton onClick={() => handleOpenModal(training)}>
-                        Enroll Now →
+                        Register Now →
                       </RegisterButton>
                     </CardContent>
                   </TrainingCard>

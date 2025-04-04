@@ -21,6 +21,7 @@ import RegisterEvent from './components/Global/Explore/EventsNews/RegisterEvent'
 import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 import  PressAndMedia  from './components/Global/Explore/PressAndMedia/PressAndMedia1';
 import  PressDetail  from './components/Global/Explore/PressAndMedia/PressDetails';
+import  Webinars  from './components/Global/Explore/Webinars/Webinars1';
 
 
 // Australia Components
@@ -499,6 +500,7 @@ const App = () => {
         <Route path="/blog" element={<GlobalLayout><Blogs /></GlobalLayout>} />
         <Route path="/events" element={<GlobalLayout><EventsNews /></GlobalLayout>} />
         <Route path="/trainings" element={<GlobalLayout><Trainings /></GlobalLayout>} />
+        <Route path="/webinars" element={<GlobalLayout><Webinars /></GlobalLayout>} />
         <Route path="/blog/:title" element={<GlobalLayout><BlogDetails /></GlobalLayout>} />
         <Route path="/events/register/:id" element={<GlobalLayout><RegisterEvent /></GlobalLayout>} />
         <Route path="/why-us" element={<GlobalLayout><WhyUs /></GlobalLayout>} />
