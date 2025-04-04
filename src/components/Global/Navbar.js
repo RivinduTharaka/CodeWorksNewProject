@@ -409,7 +409,7 @@ const Navbar = () => {
                             <ListItemText primary="Vendors" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
-                          <ListItem component={Link} to="/" onClick={() => setDrawerOpen(false)}>
+                          <ListItem component={Link} to="/services" onClick={() => setDrawerOpen(false)}>
                             <ListItemText primary="Services" primaryTypographyProps={{ style: { color: "#E0E0E0", fontFamily: "'Orbitron', sans-serif" } }} />
                           </ListItem>
 
@@ -612,7 +612,7 @@ const Navbar = () => {
 
                 <FuturisticButton
                   component={Link}
-                  to="/"
+                  to="/services"
                   active={location.pathname === "/"}
                   isTargetPage={isTargetPage}
                   isScrolled={isScrolled}

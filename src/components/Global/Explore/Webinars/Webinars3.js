@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Typography, Container, Button, Grid, Card, CardContent, CardMedia, Modal, Input } from '@mui/material';
+import { Box, Typography, Container, Button, Grid, Card, CardContent, CardMedia, Modal, Input, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { styled } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import RoomIcon from '@mui/icons-material/Room';
 import Swal from 'sweetalert2';
-import { selectData, insertData } from '../../../../services/dataService'; // Assuming these are your API services
-import API_URL from '../../../../flieapi'; // Base API URL for image fetching
+import { selectData, insertData } from '../../../../services/dataService';
+import API_URL from '../../../../flieapi';
 import arrowImage from '../../../../assets/image/down-arrow.png';
-import AutoLogin from '../../../../services/AutoLogin'; // Assuming this is your AutoLogin service
+import AutoLogin from '../../../../services/AutoLogin';
 
 // In-memory cache for images
 const imageCache = new Map();
@@ -99,7 +99,7 @@ const ArrowImage = styled('img')({
   objectFit: 'contain',
 });
 
-const TrainingCard = styled(Card)({
+const WebinarCard = styled(Card)({
   width: { xs: '100%', sm: 345 },
   height: 380,
   display: "flex",
@@ -111,13 +111,13 @@ const TrainingCard = styled(Card)({
   transition: 'transform 0.3s, box-shadow 0.3s',
 });
 
-const TrainingMedia = styled(CardMedia)({
+const WebinarMedia = styled(CardMedia)({
   width: '100%',
   height: 260,
   padding: '8px',
 });
 
-const TrainingTitle = styled(Typography)({
+const WebinarTitle = styled(Typography)({
   fontSize: '1.25rem',
   fontWeight: 600,
   color: theme.palette.text.primary,
@@ -173,7 +173,7 @@ const ModalHeader = styled(Box)({
 const ModalLogo = styled('img')({
   width: '40px',
   height: '40px',
-  objectFit: 'cover', // Ensures the image fits well within the dimensions
+  objectFit: 'cover',
 });
 
 const ModalTitle = styled(Typography)(({ theme }) => ({
@@ -242,19 +242,20 @@ const cardVariants = {
 const submitToDatabase = async (data) => {
   try {
     const registrationData = {
+      webinar_id: data.webinarId,
+      title: data.title, // Add the title field to the registration data
       full_name: data.name,
       company_name: data.companyName,
-      phone_no: data.contactNumber,
+      contact_number: data.contactNumber,
       email: data.email,
       designation: data.designation,
-      country_id: 3, // Assuming country_id 3 for "global"
-      training_session_id: data.trainingId,
-      is_attendance_marked: 0, // Default value as per the table
-      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current timestamp in MySQL format
-      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current timestamp in MySQL format
+      country_id: 3, // Global site
+      is_attendance_marked: 0, // Default value
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
     };
 
-    const response = await insertData('training_session_registrations', registrationData);
+    const response = await insertData('webinar_registrations', registrationData);
     if (response.message === 'Data inserted successfully') {
       return { success: true, message: 'Registration successful!' };
     } else {
@@ -267,13 +268,14 @@ const submitToDatabase = async (data) => {
 
 // Main Component
 function Webinars3() {
-  const [trainings, setTrainings] = useState([]);
+  const [webinars, setWebinars] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [selectedTraining, setSelectedTraining] = useState(null);
-  const [loading, setLoading] = useState(true); // State for loading status
+  const [selectedWebinar, setSelectedWebinar] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // State for form inputs
   const [formData, setFormData] = useState({
+    title: '', // Add title field
     name: '',
     email: '',
     contactNumber: '',
@@ -284,67 +286,83 @@ function Webinars3() {
   // State for form errors
   const [formErrors, setFormErrors] = useState({});
 
-  // Fetch trainings from the database
-  const fetchTrainings = useCallback(async () => {
+  // Fetch webinars from the database
+  const fetchWebinars = useCallback(async () => {
     setLoading(true);
-    const cacheKey = 'trainings_country_3';
+    const cacheKey = 'webinars_country_3';
 
     // Check if data is already in cache
     if (apiCache.has(cacheKey)) {
-      setTrainings(apiCache.get(cacheKey));
+      setWebinars(apiCache.get(cacheKey));
       setLoading(false);
       return;
     }
 
     try {
-      // Step 1: Fetch training sessions for country_id 3
-      const trainingSessionsResponse = await selectData('training_sessions', {
+      // Step 1: Fetch webinars where country_id = 3 and is_active = true
+      const webinarCountriesResponse = await selectData('webinar_countries', {
         country_id: 3,
         is_active: true,
       });
-      if (!trainingSessionsResponse.data?.length) {
-        setTrainings([]);
+
+      if (!webinarCountriesResponse.data?.length) {
+        setWebinars([]);
         setLoading(false);
         return;
       }
 
-      // Step 2: Format the training sessions and fetch their images
-      const formattedTrainings = await Promise.all(
-        trainingSessionsResponse.data.map(async (training) => ({
-          id: training.id,
-          title: training.title,
-          image: await fetchImage(training.image), // Fetch image with caching
-          subject: training.subject || 'Subject to interest',
-          language: training.language || 'English',
-          location: training.location || 'N/A',
-          mode: training.mode || 'N/A',
-          date: training.start_date || 'N/A',
-          duration: training.duration || 'N/A',
-          sessionTime: training.daily_session_time || 'Not specified',
-          seats: training.remaining_seat_count || 0, // Use remaining_seat_count for available seats
-          description: training.description || 'No description available',
+      // Step 2: Extract webinar_ids
+      const webinarIds = webinarCountriesResponse.data.map(entry => entry.webinar_id);
+
+      // Step 3: Fetch webinars where id is in webinarIds and is_active = true
+      const webinarsResponse = await selectData('webinars', {
+        id: webinarIds,
+        is_active: true,
+      });
+
+      if (!webinarsResponse.data?.length) {
+        setWebinars([]);
+        setLoading(false);
+        return;
+      }
+
+      // Step 4: Format the webinars and fetch their images
+      const formattedWebinars = await Promise.all(
+        webinarsResponse.data.map(async (webinar) => ({
+          id: webinar.id,
+          title: webinar.title,
+          description: webinar.description || 'No description available',
+          image: await fetchImage(webinar.image),
+          date: webinar.date || 'N/A',
+          start_time: webinar.start_time || 'N/A',
+          end_time: webinar.end_time || 'N/A',
+          language: webinar.language || 'English',
+          status: webinar.status || 'Scheduled',
+          mode: webinar.mode || 'Online',
         }))
       );
 
-      // Step 3: Cache the result and update state
-      apiCache.set(cacheKey, formattedTrainings);
-      setTrainings(formattedTrainings);
+      // Step 5: Cache the result and update state
+      apiCache.set(cacheKey, formattedWebinars);
+      setWebinars(formattedWebinars);
     } catch (error) {
-      setTrainings([]);
+      console.error('Failed to fetch webinars:', error);
+      setWebinars([]);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  // Fetch trainings on component mount
+  // Fetch webinars on component mount
   useEffect(() => {
-    fetchTrainings();
-  }, [fetchTrainings]);
+    fetchWebinars();
+  }, [fetchWebinars]);
 
-  const handleOpenModal = (training) => {
-    setSelectedTraining(training);
+  const handleOpenModal = (webinar) => {
+    setSelectedWebinar(webinar);
     setOpenModal(true);
     setFormData({
+      title: '', // Reset title field
       name: '',
       email: '',
       contactNumber: '',
@@ -356,7 +374,7 @@ function Webinars3() {
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setSelectedTraining(null);
+    setSelectedWebinar(null);
   };
 
   const handleInputChange = (e) => {
@@ -369,6 +387,7 @@ function Webinars3() {
 
   const validateForm = () => {
     const errors = {};
+    if (!formData.title) errors.title = 'Title is required'; // Validate title field
     if (!formData.name) errors.name = 'Name is required';
     if (!formData.email) {
       errors.email = 'Email is required';
@@ -382,11 +401,11 @@ function Webinars3() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleRegisterClick = async (training) => {
+  const handleRegisterClick = async (webinar) => {
     if (validateForm()) {
       handleCloseModal();
       try {
-        const response = await submitToDatabase({ ...formData, trainingId: training.id });
+        const response = await submitToDatabase({ ...formData, webinarId: webinar.id });
         if (response.success) {
           await Swal.fire({
             icon: 'success',
@@ -439,9 +458,9 @@ function Webinars3() {
       <AutoLogin />
       <HeroSection>
         <Container maxWidth="lg">
-          <Title variant="h1">Training Programs at Connex Information Technologies</Title>
+          <Title variant="h1">Webinar Programs at Connex Information Technologies</Title>
           <Subtitle variant="h2">
-            Elevate your skills with transformative training – join us to connect, learn, and grow with industry experts.
+            Join our webinars to connect, learn, and grow with industry experts.
           </Subtitle>
           <CustomButton>
             Register Now
@@ -454,80 +473,105 @@ function Webinars3() {
         <Grid container spacing={4} justifyContent="center">
           {loading ? (
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-              Loading trainings...
+              Loading webinars...
             </Typography>
-          ) : trainings.length > 0 ? (
-            trainings.map((training, index) => (
-              <Grid item xs={12} sm={6} md={4} key={training.id}>
+          ) : webinars.length > 0 ? (
+            webinars.map((webinar, index) => (
+              <Grid item xs={12} sm={6} md={4} key={webinar.id}>
                 <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={cardVariants}
                   transition={{ delay: index * 0.2 }}
                 >
-                  <TrainingCard>
+                  <WebinarCard>
                     <Box sx={{ position: "relative", height: '260px' }}>
-                      <TrainingMedia component="img" image={training.image} alt={training.title} />
+                      <WebinarMedia component="img" image={webinar.image} alt={webinar.title} />
                     </Box>
                     <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
-                      <TrainingTitle>{training.title}</TrainingTitle>
-                      <RegisterButton onClick={() => handleOpenModal(training)}>
-                       Register Now →
+                      <WebinarTitle>{webinar.title}</WebinarTitle>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mt: 1 }}>
+                        Date: {webinar.date}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                        Time: {webinar.start_time} - {webinar.end_time}
+                      </Typography>
+                      <RegisterButton onClick={() => handleOpenModal(webinar)}>
+                        Register Now →
                       </RegisterButton>
                     </CardContent>
-                  </TrainingCard>
+                  </WebinarCard>
                 </motion.div>
               </Grid>
             ))
           ) : (
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-              No trainings available for this country.
+              No webinars available for this country.
             </Typography>
           )}
         </Grid>
       </Container>
 
-      {/* Modal for Training Details */}
+      {/* Modal for Webinar Details */}
       <Modal open={openModal} onClose={handleCloseModal}>
         <ModalContent>
           <ModalHeader>
-            <ModalLogo src={selectedTraining?.image || 'https://via.placeholder.com/40?text=No+Image'} alt={selectedTraining?.title || 'Training Logo'} />
-            <ModalTitle>{selectedTraining?.title || 'Training Title'}</ModalTitle>
+            <ModalLogo src={selectedWebinar?.image || 'https://via.placeholder.com/40?text=No+Image'} alt={selectedWebinar?.title || 'Webinar Logo'} />
+            <ModalTitle>{selectedWebinar?.title || 'Webinar Title'}</ModalTitle>
           </ModalHeader>
           <Box>
-            <ModalDescription>{selectedTraining?.description || 'No description available'}</ModalDescription>
-            <ModalDetailText sx={{ mb: 1 }}>{selectedTraining?.subject || 'Subject not specified'}</ModalDetailText>
+            <ModalDescription>{selectedWebinar?.description || 'No description available'}</ModalDescription>
             <ModalDetails>
               <RoomIcon sx={{ fontSize: '20px', color: theme.palette.text.primary }} />
               <ModalDetailText>
-                {selectedTraining?.language || 'N/A'} – {selectedTraining?.location || 'N/A'} – {selectedTraining?.mode || 'N/A'}
+                {selectedWebinar?.language || 'N/A'} – {selectedWebinar?.mode || 'N/A'}
               </ModalDetailText>
             </ModalDetails>
             <ModalDetailText>
-              Start Date: {selectedTraining?.date || 'N/A'}
+              Date: {selectedWebinar?.date || 'N/A'}
             </ModalDetailText>
             <ModalDetailText>
-              Duration: {selectedTraining?.duration || 'N/A'}
+              Time: {selectedWebinar?.start_time || 'N/A'} - {selectedWebinar?.end_time || 'N/A'}
             </ModalDetailText>
             <ModalDetailText>
-              Daily Session Time: {selectedTraining?.sessionTime || 'Not specified'}
-            </ModalDetailText>
-            <ModalDetailText>
-              Seats Available: {selectedTraining?.seats || 'N/A'}
+              Status: {selectedWebinar?.status || 'N/A'}
             </ModalDetailText>
             <hr />
             {/* Form Fields */}
             <Box sx={{ mt: 2 }}>
-              <FormLabel>Name:<span className="required"> *</span></FormLabel>
-              <CustomInput
-                fullWidth
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                error={!!formErrors.name}
-                placeholder="Enter your name"
-              />
-              {formErrors.name && <Typography color="error">{formErrors.name}</Typography>}
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                <Box sx={{ flex: 1, minWidth: '120px' }}>
+                  <FormLabel>Title:<span className="required"> *</span></FormLabel>
+                  <FormControl fullWidth error={!!formErrors.title}>
+                    <InputLabel id="title-label">Select Title</InputLabel>
+                    <Select
+                      labelId="title-label"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleInputChange}
+                      label="Select Title"
+                    >
+                      <MenuItem value="">Select</MenuItem>
+                      <MenuItem value="Mr">Mr</MenuItem>
+                      <MenuItem value="Mrs">Mrs</MenuItem>
+                      <MenuItem value="Ms">Ms</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {formErrors.title && <Typography color="error">{formErrors.title}</Typography>}
+                </Box>
+                <Box sx={{ flex: 2, minWidth: '200px' }}>
+                  <FormLabel>Name:<span className="required"> *</span></FormLabel>
+                  <CustomInput
+                    fullWidth
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    error={!!formErrors.name}
+                    placeholder="Enter your name"
+                  />
+                  {formErrors.name && <Typography color="error">{formErrors.name}</Typography>}
+                </Box>
+              </Box>
 
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 2 }}>
                 <Box sx={{ flex: 1, minWidth: '200px' }}>
@@ -595,7 +639,7 @@ function Webinars3() {
               Close
             </Button>
             <Button
-              onClick={() => handleRegisterClick(selectedTraining)}
+              onClick={() => handleRegisterClick(selectedWebinar)}
               variant="contained"
               sx={{
                 backgroundColor: "#102166",
