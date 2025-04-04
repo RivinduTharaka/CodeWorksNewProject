@@ -158,8 +158,7 @@ const PressAndMedia3 = () => {
           <Card
             sx={{
               width: "100%",
-              height: "100%",
-              margin: "auto",
+              height: isMobile ? 450 : 500, // Fixed height for the card
               display: "flex",
               flexDirection: "column",
               position: "relative",
@@ -203,36 +202,34 @@ const PressAndMedia3 = () => {
               </Box>
             </Box>
 
-            <CardContent sx={{ flexGrow: 1, textAlign: "center", p: isMobile ? 2 : 3 }}>
-              <Typography
-                gutterBottom
-                variant="h6"
-                fontWeight="bold"
-                sx={{ color: "#0D47A1", fontSize: "1.2rem" }}
-              >
-                {truncateText(media.title, 60)}
-              </Typography>
+            <CardContent
+              sx={{
+                flexGrow: 1,
+                textAlign: "center",
+                p: isMobile ? 2 : 3,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                overflow: "hidden", // Handle overflow if content is too long
+              }}
+            >
+              <Box>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  fontWeight="bold"
+                  sx={{ color: "#0D47A1", fontSize: "1.2rem" }}
+                >
+                  {truncateText(media.title, 50)}
+                </Typography>
 
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 1 }}>
-                {truncateText(media.short_description, 120)}
-              </Typography>
-
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "text.secondary",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                {truncateText(media.long_description, 100)}
-              </Typography>
+                <Typography variant="body2" sx={{ color: "text.secondary", mb: 1 }}>
+                  {truncateText(media.short_description, 100)}
+                </Typography>
+              </Box>
             </CardContent>
 
-            <CardActions sx={{ pb: 2, justifyContent: "space-between", px: 2 }}>
+            <CardActions sx={{ pb: 2, justifyContent: "space-between", px: 2, mt: "auto" }}>
               <Button
                 size="small"
                 sx={{
@@ -304,10 +301,10 @@ const PressAndMedia3 = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant="h4" fontWeight="bold" gutterBottom>
-                {truncateText(latestEvent.title, 60)} {/* Apply character limit to title */}
+                {truncateText(latestEvent.title, 60)}
               </Typography>
               <Typography variant="body1" sx={{ mb: 2 }}>
-                {truncateText(latestEvent.short_description, 320)} {/* Apply character limit to short description */}
+                {truncateText(latestEvent.short_description, 250)}
               </Typography>
               <Box sx={{ mb: 2 }}>
                 <Button

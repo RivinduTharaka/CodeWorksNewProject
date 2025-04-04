@@ -41,6 +41,10 @@ const fetchImage = async (filePath) => {
   }
 };
 
+// Helper to truncate text (used for title)
+const truncateText = (text, maxLength = 50) =>
+  text.length <= maxLength ? text : text.substring(0, maxLength) + '...';
+
 // Theme setup
 const theme = createTheme({
   palette: {
@@ -99,17 +103,21 @@ const ArrowImage = styled('img')({
   objectFit: 'contain',
 });
 
-const TrainingCard = styled(Card)({
+const TrainingCard = styled(Card)(({ theme }) => ({
   width: { xs: '100%', sm: 345 },
-  height: 380,
+  height: 420, // Increased height from 380px to 420px
   display: "flex",
   flexDirection: "column",
   position: "relative",
-  maxHeight: 380,
+  maxHeight: 420, // Updated maxHeight to match the new height
   maxWidth: { xs: '100%', sm: 345 },
   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   transition: 'transform 0.3s, box-shadow 0.3s',
-});
+  [theme.breakpoints.down('sm')]: {
+    height: 400, // Slightly smaller height for mobile screens
+    maxHeight: 400,
+  },
+}));
 
 const TrainingMedia = styled(CardMedia)({
   width: '100%',
@@ -469,8 +477,21 @@ function Trainings2() {
                     <Box sx={{ position: "relative", height: '260px' }}>
                       <TrainingMedia component="img" image={training.image} alt={training.title} />
                     </Box>
-                    <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
-                      <TrainingTitle>{training.title}</TrainingTitle>
+                    <CardContent
+                      sx={{
+                        flexGrow: 1,
+                        backgroundColor: '#f5f7fa',
+                        position: 'relative',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        overflow: 'hidden', // Handle overflow if content is too long
+                      }}
+                    >
+                      <Box>
+                        <TrainingTitle>{truncateText(training.title, 50)}</TrainingTitle> {/* Added character limit */}
+                      </Box>
                       <RegisterButton onClick={() => handleOpenModal(training)}>
                         Register Now →
                       </RegisterButton>

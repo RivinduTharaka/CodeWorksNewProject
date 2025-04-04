@@ -46,6 +46,10 @@ const fetchImage = async (filePath) => {
   }
 };
 
+// Helper to truncate text (used for title and description)
+const truncateText = (text, maxLength = 100) =>
+  text.length <= maxLength ? text : text.substring(0, maxLength) + '...';
+
 const BlogSec2 = () => {
   const [blogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
@@ -124,8 +128,7 @@ const BlogSec2 = () => {
             sx={{
               width: "100%",
               maxWidth: isMobile ? "100%" : 380,
-              height: 500,
-              margin: "auto",
+              height: isMobile ? 450 : 500, // Fixed height for the card
               display: "flex",
               flexDirection: "column",
               position: "relative",
@@ -138,9 +141,9 @@ const BlogSec2 = () => {
             }}
           >
             {/* Article Image with Overlay */}
-            <Box sx={{ position: "relative" }}>
+            <Box sx={{ position: "relative", height: isMobile ? 200 : 250 }}>
               <CardMedia
-                sx={{ height: isMobile ? 200 : 250 }}
+                sx={{ height: "100%" }}
                 image={blog.image}
                 title={blog.title}
                 component="img"
@@ -183,32 +186,44 @@ const BlogSec2 = () => {
             </Box>
 
             {/* Card Content */}
-            <CardContent sx={{ flexGrow: 1, textAlign: "center", p: isMobile ? 2 : 3 }}>
-              <Typography
-                gutterBottom
-                variant="h6"
-                fontWeight="bold"
-                sx={{ color: "#0D47A1", fontSize: "1.2rem" }}
-              >
-                {blog.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "text.secondary",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                {blog.description}
-              </Typography>
+            <CardContent
+              sx={{
+                flexGrow: 1,
+                textAlign: "center",
+                p: isMobile ? 2 : 3,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                overflow: "hidden", // Handle overflow if content is too long
+              }}
+            >
+              <Box>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  fontWeight="bold"
+                  sx={{ color: "#0D47A1", fontSize: "1.2rem" }}
+                >
+                  {truncateText(blog.title, 50)} {/* Limit title to 50 characters */}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "text.secondary",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
+                  {blog.description}
+                </Typography>
+              </Box>
             </CardContent>
 
             {/* Card Actions */}
-            <CardActions sx={{ pb: 2 }}>
+            <CardActions sx={{ pb: 2, mt: "auto", justifyContent: "center" }}>
               <Button
                 size="small"
                 sx={{ color: "#3669A6", fontWeight: "bold", px: 3, display: "flex", alignItems: "center", gap: "8px" }}

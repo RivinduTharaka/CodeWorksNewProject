@@ -102,7 +102,7 @@ const PressDetails = () => {
       const formattedMedia = {
         id: pressItem.id,
         title: pressItem.title,
-        short_description: pressItem.short_description,
+        short_description: pressItem.short_description, // Already included, but ensuring it's clear
         long_description: pressItem.long_description,
         image: imageUrl,
         posted_date: pressItem.posted_date,
@@ -178,8 +178,16 @@ const PressDetails = () => {
           />
         </Box>
 
-        {/* Content */}
-        <Typography variant="body1" sx={{ mt: 3, lineHeight: 1.8 }}>
+        {/* Short Description */}
+        <Typography variant="body1" sx={{ mt: 3, lineHeight: 1.8, fontStyle: 'italic', color: 'text.secondary' }}>
+          {media.short_description}
+        </Typography>
+
+        {/* Gap between Short and Long Description */}
+        <Box sx={{ my: 3 }} /> {/* Adds vertical spacing between short and long description */}
+
+        {/* Long Description */}
+        <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
           {media.long_description}
         </Typography>
 
