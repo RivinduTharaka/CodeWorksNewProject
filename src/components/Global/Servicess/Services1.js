@@ -95,9 +95,9 @@ const Services1 = () => {
       </VideoBackground>
       <Container maxWidth="lg">
         <ContentWrapper>
-          <Title>Live. Interactive. Insightful. <br/> Your front row to innovation  </Title>
+          <Title>Consulting & Professional Services</Title>
           <Description>
-          
+          Your Future. Our Focus. Together, We Scale. 
           </Description>
         </ContentWrapper>
       </Container>
