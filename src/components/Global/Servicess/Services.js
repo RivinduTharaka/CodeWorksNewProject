@@ -2,6 +2,7 @@ import React from 'react'
 import Services1 from './Services1'
 import Services2 from './Services2'
 import { useEffect } from "react";
+import Services3 from './Services3';
 
 function Services() {
    useEffect(() => {
@@ -11,6 +12,7 @@ function Services() {
     <>
     <Services1/>
     <Services2/>
+    <Services3/>
     
     
     
