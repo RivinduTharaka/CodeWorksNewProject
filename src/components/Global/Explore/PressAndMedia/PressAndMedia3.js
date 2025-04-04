@@ -304,10 +304,10 @@ const PressAndMedia3 = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant="h4" fontWeight="bold" gutterBottom>
-                {latestEvent.title}
+                {truncateText(latestEvent.title, 60)} {/* Apply character limit to title */}
               </Typography>
               <Typography variant="body1" sx={{ mb: 2 }}>
-                {latestEvent.short_description}
+                {truncateText(latestEvent.short_description, 320)} {/* Apply character limit to short description */}
               </Typography>
               <Box sx={{ mb: 2 }}>
                 <Button
