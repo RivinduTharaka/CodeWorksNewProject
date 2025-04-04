@@ -114,8 +114,8 @@ const TrainingCard = styled(Card)(({ theme }) => ({
   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   transition: 'transform 0.3s, box-shadow 0.3s',
   [theme.breakpoints.down('sm')]: {
-    height: 400, // Slightly smaller height for mobile screens
-    maxHeight: 400,
+    height: 450, // Slightly smaller height for mobile screens
+    maxHeight: 450,
   },
 }));
 

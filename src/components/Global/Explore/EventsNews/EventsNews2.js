@@ -40,6 +40,10 @@ const fetchImage = async (filePath) => {
   }
 };
 
+// Helper to truncate text (used for title)
+const truncateText = (text, maxLength = 50) =>
+  text.length <= maxLength ? text : text.substring(0, maxLength) + '...';
+
 // Theme setup
 const theme = createTheme({
   palette: {
@@ -52,11 +56,9 @@ const theme = createTheme({
 // Styled Components
 const HeroSection = styled(Box)({
   backgroundColor: '#f5f7fa',
-  padding: '50px ',
+  padding: '50px',
   textAlign: 'center',
 });
-
-
 
 const CustomButton = styled(Button)({
   backgroundColor: "#102166",
@@ -80,13 +82,13 @@ const ArrowImage = styled('img')({
   objectFit: 'contain',
 });
 
-const EventCard = styled(Card)({
+const EventCard = styled(Card)(({ theme }) => ({
   width: { xs: '100%', sm: 345 },
-  height: 550,
+  height: 580, // Increased height from 550px to 580px
   display: "flex",
   flexDirection: "column",
   position: "relative",
-  maxHeight: 550,
+  maxHeight: 580, // Updated maxHeight to match the new height
   maxWidth: { xs: '100%', sm: 345 },
   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   transition: 'transform 0.3s, box-shadow 0.3s',
@@ -94,7 +96,11 @@ const EventCard = styled(Card)({
     // transform: 'scale(1.03)',
     // boxShadow: '0 8px 20px rgba(5, 43, 85, 0.2)',
   },
-});
+  [theme.breakpoints.down('sm')]: {
+    height: 560, // Slightly smaller height for mobile screens
+    maxHeight: 560,
+  },
+}));
 
 const EventMedia = styled(CardMedia)({
   height: 260,
@@ -234,7 +240,6 @@ function EventsNews2() {
       <AutoLogin /> {/* Auto-login component */}
       <HeroSection>
         <Container maxWidth="lg">
-    
           <CustomButton>
             Reserve Your Spot
             <ArrowImage src={arrowImage} alt="Scroll down arrow" />
@@ -258,17 +263,30 @@ function EventsNews2() {
                   transition={{ delay: index * 0.2 }}
                 >
                   <EventCard>
-                    <Box sx={{ position: "relative" }}>
+                    <Box sx={{ position: "relative", height: '260px' }}>
                       <EventMedia component="img" image={event.image} alt={event.title} />
                     </Box>
-                    <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
-                      <EventTitle>{event.title}</EventTitle>
-                      <EventDescription>{truncateDescription(event.description, 100)}</EventDescription>
+                    <CardContent
+                      sx={{
+                        flexGrow: 1,
+                        backgroundColor: '#f5f7fa',
+                        position: 'relative',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        overflow: 'hidden', // Handle overflow if content is too long
+                      }}
+                    >
                       <Box>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Date: {event.date}</EventDetails>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Time: {event.time}</EventDetails>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Mode: {event.mode}</EventDetails>
-                        <EventDetails sx={{ color: theme.palette.text.secondary }}>Seats: {event.remainingSeats}</EventDetails>
+                        <EventTitle>{truncateText(event.title, 50)}</EventTitle> {/* Added character limit */}
+                        <EventDescription>{truncateDescription(event.description, 100)}</EventDescription>
+                        <Box>
+                          <EventDetails sx={{ color: theme.palette.text.secondary }}>Date: {event.date}</EventDetails>
+                          <EventDetails sx={{ color: theme.palette.text.secondary }}>Time: {event.time}</EventDetails>
+                          <EventDetails sx={{ color: theme.palette.text.secondary }}>Mode: {event.mode}</EventDetails>
+                          <EventDetails sx={{ color: theme.palette.text.secondary }}>Seats: {event.remainingSeats}</EventDetails>
+                        </Box>
                       </Box>
                       <RegisterButton onClick={() => handleRegisterClick(event)}>
                         Register to Attend →

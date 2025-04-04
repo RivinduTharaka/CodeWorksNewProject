@@ -41,6 +41,10 @@ const fetchImage = async (filePath) => {
   }
 };
 
+// Helper to truncate text (used for title)
+const truncateText = (text, maxLength = 50) =>
+  text.length <= maxLength ? text : text.substring(0, maxLength) + '...';
+
 // Theme setup
 const theme = createTheme({
   palette: {
@@ -99,17 +103,21 @@ const ArrowImage = styled('img')({
   objectFit: 'contain',
 });
 
-const WebinarCard = styled(Card)({
+const WebinarCard = styled(Card)(({ theme }) => ({
   width: { xs: '100%', sm: 345 },
-  height: 380,
+  height: 420, // Increased height from 380px to 420px
   display: "flex",
   flexDirection: "column",
   position: "relative",
-  maxHeight: 380,
+  maxHeight: 420, // Updated maxHeight to match the new height
   maxWidth: { xs: '100%', sm: 345 },
   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   transition: 'transform 0.3s, box-shadow 0.3s',
-});
+  [theme.breakpoints.down('sm')]: {
+    height: 500, // Slightly smaller height for mobile screens
+    maxHeight: 500,
+  },
+}));
 
 const WebinarMedia = styled(CardMedia)({
   width: '100%',
@@ -488,14 +496,27 @@ function Webinars3() {
                     <Box sx={{ position: "relative", height: '260px' }}>
                       <WebinarMedia component="img" image={webinar.image} alt={webinar.title} />
                     </Box>
-                    <CardContent sx={{ flexGrow: 1, backgroundColor: '#f5f7fa', position: 'relative', p: 2 }}>
-                      <WebinarTitle>{webinar.title}</WebinarTitle>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mt: 1 }}>
-                        Date: {webinar.date}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
-                        Time: {webinar.start_time} - {webinar.end_time}
-                      </Typography>
+                    <CardContent
+                      sx={{
+                        flexGrow: 1,
+                        backgroundColor: '#f5f7fa',
+                        position: 'relative',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        overflow: 'hidden', // Handle overflow if content is too long
+                      }}
+                    >
+                      <Box>
+                        <WebinarTitle>{truncateText(webinar.title, 50)}</WebinarTitle> {/* Added character limit */}
+                        <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mt: 1 }}>
+                          Date: {webinar.date}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                          Time: {webinar.start_time} - {webinar.end_time}
+                        </Typography>
+                      </Box>
                       <RegisterButton onClick={() => handleOpenModal(webinar)}>
                         Register Now →
                       </RegisterButton>
@@ -540,7 +561,7 @@ function Webinars3() {
             {/* Form Fields */}
             <Box sx={{ mt: 2 }}>
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                <Box sx={{ flex: 1, minWidth: '120px' }}>
+                <Box sx={{ flex: 1, minWidth: '90px' }}>
                   <FormLabel>Title:<span className="required"> *</span></FormLabel>
                   <FormControl fullWidth error={!!formErrors.title}>
                     <InputLabel id="title-label">Select Title</InputLabel>
@@ -600,7 +621,7 @@ function Webinars3() {
                 </Box>
               </Box>
 
-              <FormLabel>Email:</FormLabel>
+              <FormLabel  sx={{ mt: 2 }}>Email:</FormLabel>
               <CustomInput
                 fullWidth
                 name="email"
@@ -611,7 +632,7 @@ function Webinars3() {
               />
               {formErrors.email && <Typography color="error">{formErrors.email}</Typography>}
 
-              <FormLabel>Designation:</FormLabel>
+              <FormLabel  sx={{ mt: 2 }}>Designation:</FormLabel>
               <CustomInput
                 fullWidth
                 name="designation"
