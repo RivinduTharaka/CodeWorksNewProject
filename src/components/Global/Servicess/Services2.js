@@ -16,26 +16,16 @@ const theme = createTheme({
 // Styled Components
 const PageWrapper = styled(Box)({
   backgroundColor: '#f5f5f5', // White background for the entire page
-  minHeight: '30vh', // Ensure the wrapper takes up the full viewport height
+  minHeight: '10vh', // Ensure the wrapper takes up the full viewport height
 });
 
 const HeroSection = styled(Box)({
  
-  padding: '70px 0 60px',
+  padding: '70px',
   textAlign: 'center',
   color: '#fff', // White text color for contrast against the dark gradient
 });
 
-const Title = styled(Typography)({
-  fontSize: '2.5rem',
-  fontWeight: 600,
-  background: 'linear-gradient(45deg, #0D47A1, #006400)', // Specified gradient for the title text
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  color: 'transparent',
-  marginBottom: '1rem',
-  textTransform: 'uppercase', // Match the uppercase style in the image
-});
 
 const Subtitle = styled(Typography)({
   fontSize: '1.2rem',
