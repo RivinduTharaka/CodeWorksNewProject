@@ -16,7 +16,7 @@ const theme = createTheme({
 // Styled Components
 const PageWrapper = styled(Box)({
   backgroundColor: '#fff', // White background for the entire page
-  minHeight: '50vh', // Ensure the wrapper takes up the full viewport height
+  minHeight: '40vh', // Ensure the wrapper takes up the full viewport height
 });
 
 const HeroSection = styled(Box)({
@@ -85,17 +85,12 @@ function Services2() {
       <PageWrapper>
         <HeroSection>
           <Container maxWidth="lg">
-            <Title variant="h1">
-              Attraction with Acceleration
-            </Title>
+            
             <Subtitle variant="h2">
-              Marketing is the art and science of communicating value and engineering customer response. Our global team has the skills and expertise to help the channel to attract, retain and accelerate new business with cost effective campaigns.
+            At Connex, we provide comprehensive consulting and professional services designed to add significant value at every stage of the customer journey—from initial pre-sales consultations to seamless implementation and fully managed services. 
             </Subtitle>
-            <Description>
-              We cover all aspects from strategic development to tactical execution, from messages and stories to media planning and prospect engagement. Our suite of value-creating marketing services enable the channel to accelerate opportunity and turn strategy into reality.
-            </Description>
-            <CustomButton>
-              Learn More
+           
+            <CustomButton>    
               <ArrowImage src={arrowImage} alt="Scroll down arrow" />
             </CustomButton>
           </Container>
