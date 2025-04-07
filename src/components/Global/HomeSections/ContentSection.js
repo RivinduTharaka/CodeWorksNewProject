@@ -90,7 +90,7 @@ const WhoweareSection = ({ ref }) => {
     fetchStats();
   }, []);
 
-  console.log("Step: WhoweareSection - Rendering component", { loading, error, stats });
+  // console.log("Step: WhoweareSection - Rendering component", { loading, error, stats });
 
   return (
     <Box

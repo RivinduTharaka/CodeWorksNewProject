@@ -21,7 +21,7 @@ const constructImageUrl = (filePath) => {
   // Remove any leading slashes and invalid characters, and handle local paths
   const cleanedFilePath = filePath.replace(/^\/+/, '').replace(/^C:\\.*\\Main-Back.*$/i, '');
   const fullUrl = `${baseUrl}/${cleanedFilePath}`;
-  console.log(`Constructed image URL: ${fullUrl}`); // Debug log
+ 
   return fullUrl;
 };
 
@@ -74,7 +74,7 @@ const Solutions = () => {
     try {
       // Step 1: Fetch main_pillar_countries entries for country_id = 3 and is_active = true
       const pillarCountriesResponse = await selectData('main_pillar_countries', { country_id: 3, is_active: true });
-      console.log('pillarCountriesResponse:', pillarCountriesResponse);
+
 
       if (!pillarCountriesResponse.data || pillarCountriesResponse.data.length === 0) {
         setPillars([]);
@@ -87,7 +87,6 @@ const Solutions = () => {
 
       // Step 3: Fetch pillars where id is in pillarIds and is_active = true
       const pillarsResponse = await selectData('main_pillars', { id: pillarIds, is_active: true });
-      console.log('pillarsResponse:', pillarsResponse);
 
       if (!pillarsResponse.data || pillarsResponse.data.length === 0) {
         setPillars([]);
@@ -100,7 +99,7 @@ const Solutions = () => {
         pillarsResponse.data.map(async (pillar) => {
           // Fetch subpillars for the current main_pillar_id
           const subPillarsResponse = await selectData('sub_pillars', { main_pillar_id: pillar.id, is_active: true });
-          console.log(`subPillarsResponse for pillar ${pillar.id}:`, subPillarsResponse);
+
 
           // Format subpillars as subCategories, including sub_pillar_id
           const subCategories = subPillarsResponse.data?.map(subPillar => ({

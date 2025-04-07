@@ -37,7 +37,7 @@ const fetchImage = async (filePath) => {
     }
     return 'https://via.placeholder.com/380x250?text=Image+Not+Found';
   } catch (error) {
-    console.error("Error fetching image:", error);
+    // console.error("Error fetching image:", error);
     return 'https://via.placeholder.com/380x250?text=Image+Not+Found';
   }
 };

@@ -34,7 +34,7 @@ const constructImageUrl = (filePath) => {
     .replace(/^C:\\.*\\Main-Back.*$/i, '') // Remove local paths
     .replace(/^.*\\uploads\\/i, 'uploads/'); // Extract the uploads path if present
   const fullUrl = `${baseUrl}/${cleanedFilePath}`;
-  console.log(`Constructed vendor logo URL: ${fullUrl}`); // Debug log
+ 
   return fullUrl;
 };
 
@@ -112,7 +112,7 @@ const PillarModal = ({ open, onClose, pillar }) => {
       try {
         // Step 1: Fetch vendor_sub_pillars entries for the selected sub_pillar_id
         const vendorSubPillarsResponse = await selectData('vendor_sub_pillars', { sub_pillar_id: selectedSubCategory.id, is_active: true });
-        console.log('vendorSubPillarsResponse:', vendorSubPillarsResponse);
+     
 
         if (!vendorSubPillarsResponse.data || vendorSubPillarsResponse.data.length === 0) {
           setVendors([]);
@@ -125,7 +125,7 @@ const PillarModal = ({ open, onClose, pillar }) => {
 
         // Step 3: Fetch vendors where id is in vendorIds and is_active = true
         const vendorsResponse = await selectData('vendors', { id: vendorIds, is_active: true });
-        console.log('vendorsResponse:', vendorsResponse);
+     
 
         if (!vendorsResponse.data || vendorsResponse.data.length === 0) {
           setVendors([]);
