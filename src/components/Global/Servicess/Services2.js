@@ -15,8 +15,8 @@ const theme = createTheme({
 
 // Styled Components
 const PageWrapper = styled(Box)({
-  backgroundColor: '#fff', // White background for the entire page
-  minHeight: '40vh', // Ensure the wrapper takes up the full viewport height
+  backgroundColor: '#f5f5f5', // White background for the entire page
+  minHeight: '30vh', // Ensure the wrapper takes up the full viewport height
 });
 
 const HeroSection = styled(Box)({
@@ -90,9 +90,9 @@ function Services2() {
             At Connex, we provide comprehensive consulting and professional services designed to add significant value at every stage of the customer journey—from initial pre-sales consultations to seamless implementation and fully managed services. 
             </Subtitle>
            
-            <CustomButton>    
+            {/* <CustomButton>    
               <ArrowImage src={arrowImage} alt="Scroll down arrow" />
-            </CustomButton>
+            </CustomButton> */}
           </Container>
         </HeroSection>
       </PageWrapper>

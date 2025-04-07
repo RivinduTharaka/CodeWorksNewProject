@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Box, Typography, Container, Grid, Button, CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
-import { motion } from 'framer-motion';
+import { color, motion } from 'framer-motion';
 import { ArrowForward } from '@mui/icons-material';
 import { selectData } from '../../../services/dataService';
 import API_URL from '../../../flieapi';
@@ -133,7 +133,9 @@ const MoreNewsButton = styled(Button)({
   textTransform: 'none',
   fontFamily: 'Poppins, sans-serif',
   '&:hover': {
-    color: '#004d00',
+  color: '#ffffff',
+  backgroundColor: '#006400',
+
   },
 });
 

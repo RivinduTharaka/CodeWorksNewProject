@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
-import bgvideo from '../../../assets/video/tech.mp4';
+import bgvideo from '../../../assets/video/CNXBackgropund.mp4';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
   position: 'relative', // Needed for video positioning
