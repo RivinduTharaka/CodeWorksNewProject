@@ -246,13 +246,11 @@ const CountryDirectorsProfileCards = () => {
 
     if (apiCache.has(cacheKey)) {
       const cachedData = apiCache.get(cacheKey);
-      console.log('Using cached countries data:', cachedData);
       return cachedData;
     }
 
     try {
       const response = await selectData('countries', { is_active: 1 });
-      console.log('Countries API Response:', response);
 
       if (response.data && response.data.length > 0) {
         const countryMap = response.data.reduce((map, country) => {
@@ -280,7 +278,7 @@ const CountryDirectorsProfileCards = () => {
 
     if (apiCache.has(cacheKey)) {
       const cachedData = apiCache.get(cacheKey);
-      console.log('Using cached directors data:', cachedData);
+     
       setDirectors(cachedData);
       setLoading(false);
       return;
@@ -288,7 +286,7 @@ const CountryDirectorsProfileCards = () => {
 
     try {
       const response = await selectData('directors', { is_active: 1 });
-      console.log('Directors API Response:', response);
+
 
       if (response.data && response.data.length > 0) {
         const formattedDirectors = await Promise.all(
@@ -309,7 +307,7 @@ const CountryDirectorsProfileCards = () => {
           })
         );
 
-        console.log('Formatted Directors:', formattedDirectors);
+       
         apiCache.set(cacheKey, formattedDirectors);
         setDirectors(formattedDirectors);
       } else {
@@ -317,7 +315,6 @@ const CountryDirectorsProfileCards = () => {
       }
     } catch (error) {
       console.error('Failed to fetch directors data:', error);
-      console.log('Error occurred, using fallback');
     } finally {
       setLoading(false);
     }
@@ -327,7 +324,6 @@ const CountryDirectorsProfileCards = () => {
     fetchDirectorsData();
   }, [fetchDirectorsData]);
 
-  console.log('Directors State:', directors);
 
   const sliderSettings = useMemo(() => getSliderSettings(directors.length), [directors.length]);
 

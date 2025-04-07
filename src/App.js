@@ -10,7 +10,6 @@ import Services from './components/Global/Servicess/Services';
 import ContactUs from './components/Global/ContactUs';
 import Solutions from './components/Global/Solution/Solutions';
 import Vendor from './components/Global/Vendors/vendor';
-import HistorySection from './components/Global/AboutUs/History/HistorySection';
 import Leadership from './components/Global/AboutUs/LeaderShip/Leadership';
 import GlobalCoverage from './components/Global/AboutUs/GlobalCoverage/GlobalCoverage';
 import { Blogs } from './components/Global/Explore/Blogs/Blogs';
@@ -47,7 +46,6 @@ const App = () => {
         <Route path="/contact" element={<GlobalLayout><ContactUs /></GlobalLayout>} />
         <Route path="/solution" element={<GlobalLayout><Solutions /></GlobalLayout>} />
         <Route path="/vendors" element={<GlobalLayout><Vendor /></GlobalLayout>} />
-        <Route path="/history" element={<GlobalLayout><HistorySection /></GlobalLayout>} />
         <Route path="/leadership" element={<GlobalLayout><Leadership /></GlobalLayout>} />
         <Route path="/global-coverage" element={<GlobalLayout><GlobalCoverage /></GlobalLayout>} />
         <Route path="/blog" element={<GlobalLayout><Blogs /></GlobalLayout>} />

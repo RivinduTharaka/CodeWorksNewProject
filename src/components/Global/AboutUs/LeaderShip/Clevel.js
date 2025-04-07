@@ -246,7 +246,6 @@ const ConnexITBoardLeaders = () => {
 
     if (apiCache.has(cacheKey)) {
       const cachedData = apiCache.get(cacheKey);
-      console.log('Using cached leaders data:', cachedData);
       setLeaders(cachedData);
       setLoading(false);
       return;
@@ -254,13 +253,13 @@ const ConnexITBoardLeaders = () => {
 
     try {
       const response = await selectData('management_team', { is_active: 1 });
-      console.log('Leaders API Response:', response);
+  
 
       if (response.data && response.data.length > 0) {
         const uniqueLeaders = Array.from(
           new Map(response.data.map((leader) => [leader.id, leader])).values()
         );
-        console.log('Unique Leaders after deduplication:', uniqueLeaders);
+       
 
         const formattedLeaders = await Promise.all(
           uniqueLeaders.map(async (leader) => {
@@ -282,7 +281,7 @@ const ConnexITBoardLeaders = () => {
           })
         );
 
-        console.log('Formatted Leaders:', formattedLeaders);
+      
         apiCache.set(cacheKey, formattedLeaders);
         setLeaders(formattedLeaders);
       } else {
@@ -302,7 +301,6 @@ const ConnexITBoardLeaders = () => {
     fetchLeadersData();
   }, [fetchLeadersData]);
 
-  console.log('Leaders State:', leaders);
 
   const sliderSettings = useMemo(() => getSliderSettings(leaders.length), [leaders.length]);
 
@@ -321,7 +319,7 @@ const ConnexITBoardLeaders = () => {
       <CarouselContainer sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
         <Slider {...sliderSettings}>
           {leaders.map((leader) => {
-            console.log('Rendering leader:', leader);
+          
             return (
               <Box key={leader.id} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <LeaderCard>
