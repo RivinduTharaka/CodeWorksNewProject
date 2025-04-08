@@ -38,13 +38,13 @@ const Title = styled('div')(({ theme }) => ({
     fontSize: '4rem', // Large screens (1200px - 1536px)
   },
   [theme.breakpoints.down('lg')]: {
-    fontSize: '4rem', // Medium screens (900px - 1200px)
+    fontSize: '3.5rem', // Medium screens (900px - 1200px)
   },
   [theme.breakpoints.down('md')]: {
-    fontSize: '3.5rem', // Tablets (600px - 900px)
+    fontSize: '3.2rem', // Tablets (600px - 900px)
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: '3rem', // Mobile (0px - 600px)
+    fontSize: '1.8rem', // Mobile (0px - 600px)
   },
   '@keyframes fadeInSlideUp': {
     '0%': {

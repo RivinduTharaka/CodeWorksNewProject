@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 
-// Styled Components
+// Styled Components (unchanged)
 const LeftColumn = styled(Box)(({ theme }) => ({
-  backgroundColor: "#001F3F", // Dark Blue background
+  backgroundColor: "#001F3F",
   color: "white",
   display: "flex",
   flexDirection: "column",
@@ -13,8 +14,8 @@ const LeftColumn = styled(Box)(({ theme }) => ({
   padding: "60px",
   height: "60vh",
   [theme.breakpoints.down('md')]: {
-    height: "auto", // Adjust height for smaller screens
-    padding: "40px", // Reduced padding for mobile
+    height: "auto",
+    padding: "40px",
   },
 }));
 
@@ -30,24 +31,22 @@ const RightColumn = styled(Box)(({ theme }) => ({
   borderTop: "2px solid black",
   borderBottom: "2px solid black",
   [theme.breakpoints.down('md')]: {
-    height: "auto", // Adjust height for smaller screens
-    padding: "40px", // Reduced padding for mobile
+    height: "auto",
+    padding: "40px",
   },
 }));
 
-// Gradient Title (Updated Colors)
 const GradientText = styled(Typography)(({ theme }) => ({
   fontSize: "32px",
   fontWeight: "bold",
-  background: "linear-gradient(90deg, #1a9fd9, #24b24c)", // Updated gradient
+  background: "linear-gradient(90deg, #1a9fd9, #24b24c)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   [theme.breakpoints.down('md')]: {
-    fontSize: "24px", // Adjust font size for mobile
+    fontSize: "24px",
   },
 }));
 
-// Styled Button
 const CustomButton = styled(Button)(({ theme }) => ({
   marginTop: "20px",
   border: "2px solid #24b24c",
@@ -61,26 +60,39 @@ const CustomButton = styled(Button)(({ theme }) => ({
     color: "white",
   },
   [theme.breakpoints.down('md')]: {
-    fontSize: "14px", // Adjust button text size for mobile
-    padding: "8px 16px", // Adjust padding for mobile
+    fontSize: "14px",
+    padding: "8px 16px",
   },
 }));
 
 function Aboutsec3() {
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  // Handler functions for button clicks
+  const handleLeadershipClick = () => {
+    navigate("/leadership");
+  };
+
+  const handleCareersClick = () => {
+    navigate("/careers");
+  };
+
   return (
     <Grid container spacing={0}>
       {/* Left Column */}
       <Grid item xs={12} md={6}>
         <LeftColumn>
-          <GradientText variant="h4" >Our Leadership</GradientText>
+          <GradientText variant="h4">Our Leadership</GradientText>
           <Typography variant="body1" sx={{ mt: 4, color: "white", textAlign: "justify" }}>
             At <strong>Connex Information Technologies</strong>, our leadership team drives innovation, excellence, and transformation in the IT sector.
             With a wealth of industry experience, we empower businesses with cutting-edge digital solutions, ensuring long-term growth and technological advancement.
           </Typography>
-          <CustomButton variant="outlined">Meet Our Leaders</CustomButton>
-          {/* <Typography variant="body2" sx={{ mt: 2, fontWeight: "bold", color: "white" }}>
-            #WeAreConnex
-          </Typography> */}
+          <CustomButton 
+            variant="outlined" 
+            onClick={handleLeadershipClick} // Add click handler
+          >
+            Meet Our Leaders
+          </CustomButton>
         </LeftColumn>
       </Grid>
 
@@ -91,7 +103,13 @@ function Aboutsec3() {
           <Typography variant="body1" sx={{ mt: 4, textAlign: "justify" }}>
             Explore a world of opportunities and be part of a fast-growing company that values talent, innovation, and teamwork. Grow with us and make an impact in a dynamic, forward-thinking environment.
           </Typography>
-          <CustomButton variant="outlined" sx={{ mt: 4 }}>JOBHUB</CustomButton>
+          <CustomButton 
+            variant="outlined" 
+            sx={{ mt: 4 }}
+            onClick={handleCareersClick} // Add click handler
+          >
+            Hireme
+          </CustomButton>
         </RightColumn>
       </Grid>
     </Grid>
