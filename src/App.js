@@ -21,6 +21,7 @@ import WhyUs from './components/Global/AboutUs/WhyUs/WhyUs';
 import  PressAndMedia  from './components/Global/Explore/PressAndMedia/PressAndMedia1';
 import  PressDetail  from './components/Global/Explore/PressAndMedia/PressDetails';
 import  Webinars  from './components/Global/Explore/Webinars/Webinars1';
+import Resources from './components/Global/Resources/Resources';
 
 
 
@@ -57,6 +58,7 @@ const App = () => {
         <Route path="/why-us" element={<GlobalLayout><WhyUs /></GlobalLayout>} />
         <Route path="/press-&-media" element={<GlobalLayout><PressAndMedia /></GlobalLayout>} />
         <Route path="/press-&-media/:id" element={<GlobalLayout><PressDetail/></GlobalLayout>} />
+        <Route path="/resources" element={<GlobalLayout><Resources /></GlobalLayout>} />
        
       </Routes>
     </Router>
