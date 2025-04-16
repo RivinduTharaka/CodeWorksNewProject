@@ -31,17 +31,14 @@ const categories = [
 const resourcesData = {
   'Corporate Profile': {
     title: 'Our Corporate Journey',
-    description: 'Discover our mission, values, and global presence.',
     image: ZeroTrustImg
   },
   'Product Catalogue': {
     title: 'Complete Product Catalogue',
-    description: 'Explore our entire range of solutions and products.',
     image: WhitepaperImg
   },
   'Product Line Card': {
     title: 'Product Line Overview',
-    description: 'A quick glance at our product lineup and categories.',
     image: InfographicImg
   }
 };
