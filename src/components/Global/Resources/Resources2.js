@@ -18,8 +18,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // ✅ Import Images
 import ZeroTrustImg from '../../../assets/image/ImageBrocher.jpg';
-import WhitepaperImg from '../../../assets/image/OIP (1).jpg';
-import ThreatReportImg from '../../../assets/image/Dilshan_Silva.jpg';
+import WhitepaperImg from '../../../assets/image/Catelog.jpg';
 import InfographicImg from '../../../assets/image/ImageBrocher.jpg';
 
 const categories = [
